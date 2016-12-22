@@ -1,0 +1,11 @@
+F:\School\Code\CSharpServer\HRAM-SNUServer\sl.model\bin\Debug\sl.model.dll
+F:\School\Code\CSharpServer\HRAM-SNUServer\sl.model\bin\Debug\sl.model.pdb
+F:\School\Code\CSharpServer\HRAM-SNUServer\sl.model\bin\Debug\Core.Config.dll
+F:\School\Code\CSharpServer\HRAM-SNUServer\sl.model\bin\Debug\Newtonsoft.Json.dll
+F:\School\Code\CSharpServer\HRAM-SNUServer\sl.model\bin\Debug\PetaPoco.dll
+F:\School\Code\CSharpServer\HRAM-SNUServer\sl.model\bin\Debug\sl.extension.dll
+F:\School\Code\CSharpServer\HRAM-SNUServer\sl.model\bin\Debug\sl.extension.pdb
+F:\School\Code\CSharpServer\HRAM-SNUServer\sl.model\bin\Debug\Newtonsoft.Json.xml
+F:\School\Code\CSharpServer\HRAM-SNUServer\sl.model\obj\Debug\sl.model.csprojResolveAssemblyReference.cache
+F:\School\Code\CSharpServer\HRAM-SNUServer\sl.model\obj\Debug\sl.model.dll
+F:\School\Code\CSharpServer\HRAM-SNUServer\sl.model\obj\Debug\sl.model.pdb

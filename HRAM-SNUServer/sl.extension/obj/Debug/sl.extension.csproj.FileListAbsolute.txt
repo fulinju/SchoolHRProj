@@ -1,0 +1,7 @@
+F:\School\Code\CSharpServer\HRAM-SNUServer\sl.extension\bin\Debug\sl.extension.dll
+F:\School\Code\CSharpServer\HRAM-SNUServer\sl.extension\bin\Debug\sl.extension.pdb
+F:\School\Code\CSharpServer\HRAM-SNUServer\sl.extension\bin\Debug\sl.common.dll
+F:\School\Code\CSharpServer\HRAM-SNUServer\sl.extension\bin\Debug\sl.common.pdb
+F:\School\Code\CSharpServer\HRAM-SNUServer\sl.extension\obj\Debug\sl.extension.csprojResolveAssemblyReference.cache
+F:\School\Code\CSharpServer\HRAM-SNUServer\sl.extension\obj\Debug\sl.extension.dll
+F:\School\Code\CSharpServer\HRAM-SNUServer\sl.extension\obj\Debug\sl.extension.pdb

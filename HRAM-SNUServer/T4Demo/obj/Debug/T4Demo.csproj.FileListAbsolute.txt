@@ -1,0 +1,5 @@
+F:\School\Code\CSharpServer\HRAM-SNUServer\T4Demo\bin\Debug\T4Demo.exe.config
+F:\School\Code\CSharpServer\HRAM-SNUServer\T4Demo\bin\Debug\T4Demo.exe
+F:\School\Code\CSharpServer\HRAM-SNUServer\T4Demo\bin\Debug\T4Demo.pdb
+F:\School\Code\CSharpServer\HRAM-SNUServer\T4Demo\obj\Debug\T4Demo.exe
+F:\School\Code\CSharpServer\HRAM-SNUServer\T4Demo\obj\Debug\T4Demo.pdb
