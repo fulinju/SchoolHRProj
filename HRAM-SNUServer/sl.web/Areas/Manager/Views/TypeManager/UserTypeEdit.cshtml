@@ -1,0 +1,30 @@
+﻿@using sl.model
+@using sl.extension
+
+@model T_UserType
+@{
+    ViewBag.Title = "编辑用户类型";
+    Layout = "~/Areas/Manager/Views/Shared/ManagerLayout.cshtml";
+}
+<form class="validate" method="post" autocomplete="off" action="" enctype="multipart/form-data">
+    <div class="easyui-panel" title='&nbsp;' collapsible="true">
+        <table class="msgtable">
+            <tr>
+                <th>
+                    用户类型ID：
+                </th>
+                <td>
+                    @Html.InputFor(m => m.A_LoginTypeID)
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 130px">
+                    账户类型名称：
+                </th>
+                <td>
+                    @Html.InputFor(m => m.A_LoginTypeValue)
+            </tr>
+     
+        </table>
+    </div>
+</form>

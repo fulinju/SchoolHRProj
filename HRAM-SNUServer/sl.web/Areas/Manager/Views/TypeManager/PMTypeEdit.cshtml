@@ -1,0 +1,30 @@
+﻿@using sl.model
+@using sl.extension
+
+@model T_PMType
+@{
+    ViewBag.Title = "编辑发布类型";
+    Layout = "~/Areas/Manager/Views/Shared/ManagerLayout.cshtml";
+}
+<form class="validate" method="post" autocomplete="off" action="" enctype="multipart/form-data">
+    <div class="easyui-panel" title='&nbsp;' collapsible="true">
+        <table class="msgtable">
+            <tr>
+                <th>
+                    发布类型ID：
+                </th>
+                <td>
+                    @Html.InputFor(m => m.PM_TypeID)
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 130px">
+                    发布类型名称：
+                </th>
+                <td>
+                    @Html.InputFor(m => m.PM_TypeValue)
+            </tr>
+
+        </table>
+    </div>
+</form>

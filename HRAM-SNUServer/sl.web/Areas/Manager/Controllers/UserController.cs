@@ -14,6 +14,9 @@ using PetaPoco.Orm;
 
 namespace sl.web.Areas.Manager.Controllers
 {
+    /// <summary>
+    /// 用户管理的Controller
+    /// </summary>
     public class UserController : BaseManagerController
     {
         //
@@ -31,7 +34,7 @@ namespace sl.web.Areas.Manager.Controllers
         }
 
         #region 查询
-        public ActionResult GetJsonUsersList(string a_loginname = "")
+        public ActionResult GetUsersList(string a_loginname = "")
         {
             Sql where = Condition.Builder.Like("A_LoginName", a_loginname).Create();
             return CommonPageList<T_User>(where);
@@ -83,7 +86,7 @@ namespace sl.web.Areas.Manager.Controllers
                 {
                     if (TryUpdateModel(load))
                     {
-                        if (!oldPwd.Equals(m.A_Password)) //密码有改动
+                        if (!oldPwd.Equals(m.A_Password)) //密码有改动,调用MD5加密
                         {
                             string passwordMd5 = Security.MD5Encrypt(load.A_Password);
                             load.A_Password = passwordMd5;

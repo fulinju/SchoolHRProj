@@ -1,7 +1,63 @@
-﻿
+﻿@using sl.model
+@using sl.extension
+
+@model T_User
 @{
-    ViewBag.Title = "UsersEdit";
+    ViewBag.Title = "编辑用户信息";
+    Layout = "~/Areas/Manager/Views/Shared/ManagerLayout.cshtml";
 }
+<form class="validate" method="post" autocomplete="off" action="" enctype="multipart/form-data">
+    <div class="easyui-panel" title='&nbsp;' collapsible="true">
+        <table class="msgtable">
+            <tr>
+                <th>
+                    登录名：
+                </th>
+                <td>
+                    @Html.InputFor(m => m.A_LoginName)
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 130px">
+                    账户类型：
+                </th>
+                <td>
+                    @Html.DropDownListFor(m => m.A_LoginTypeID, UtilsBind.UserTypes())
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 130px">
+                    用户昵称：
+                </th>
+                <td>
+                    @Html.InputFor(m => m.A_UserName)
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 130px">
+                    密码：
+                </th>
+                <td>
+                    @Html.InputFor(m => m.A_Password, new { type = "password" })
+                </td>
+            </tr>
 
-<h2>UsersEdit</h2>
-
+            <tr>
+                <th style="width: 130px">
+                    联系电话：
+                </th>
+                <td>
+                    @Html.InputFor(m => m.A_Phone)
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 130px">
+                    邮箱：
+                </th>
+                <td>
+                    @Html.InputFor(m => m.A_MaiBox)
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>

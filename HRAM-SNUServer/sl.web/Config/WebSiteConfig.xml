@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-16"?>
+<WebSiteConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Id>0</Id>
+  <Phone>123</Phone>
+  <Logo>/Images/Home/logo.png</Logo>
+  <ImgMaxHeight>0</ImgMaxHeight>
+  <ImgMaxWidth>0</ImgMaxWidth>
+  <ThumbnailWidth>0</ThumbnailWidth>
+  <ThumbnailHeight>0</ThumbnailHeight>
+  <WaterMarkType>0</WaterMarkType>
+  <AttachSaveType>1</AttachSaveType>
+  <AttachImgSize>0</AttachImgSize>
+  <WatermarkPosition>9</WatermarkPosition>
+</WebSiteConfig>

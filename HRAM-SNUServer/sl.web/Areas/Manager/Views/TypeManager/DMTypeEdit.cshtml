@@ -1,0 +1,30 @@
+﻿@using sl.model
+@using sl.extension
+
+@model T_DMType
+@{
+    ViewBag.Title = "编辑下载类型";
+    Layout = "~/Areas/Manager/Views/Shared/ManagerLayout.cshtml";
+}
+<form class="validate" method="post" autocomplete="off" action="" enctype="multipart/form-data">
+    <div class="easyui-panel" title='&nbsp;' collapsible="true">
+        <table class="msgtable">
+            <tr>
+                <th>
+                    下载类型ID：
+                </th>
+                <td>
+                    @Html.InputFor(m => m.DM_TypeID, new{type="number"})
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 130px">
+                    下载类型名称：
+                </th>
+                <td>
+                    @Html.InputFor(m => m.DM_TypeValue)
+            </tr>
+
+        </table>
+    </div>
+</form>

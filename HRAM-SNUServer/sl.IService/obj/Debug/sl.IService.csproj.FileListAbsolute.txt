@@ -9,3 +9,14 @@ F:\School\Code\CSharpServer\HRAM-SNUServer\sl.IService\bin\Debug\Newtonsoft.Json
 F:\School\Code\CSharpServer\HRAM-SNUServer\sl.IService\obj\Debug\sl.IService.csprojResolveAssemblyReference.cache
 F:\School\Code\CSharpServer\HRAM-SNUServer\sl.IService\obj\Debug\sl.IService.dll
 F:\School\Code\CSharpServer\HRAM-SNUServer\sl.IService\obj\Debug\sl.IService.pdb
+C:\Code\CSharpServer\SchoolHRProj\HRAM-SNUServer\sl.IService\bin\Debug\sl.IService.dll
+C:\Code\CSharpServer\SchoolHRProj\HRAM-SNUServer\sl.IService\bin\Debug\sl.IService.pdb
+C:\Code\CSharpServer\SchoolHRProj\HRAM-SNUServer\sl.IService\bin\Debug\PetaPoco.dll
+C:\Code\CSharpServer\SchoolHRProj\HRAM-SNUServer\sl.IService\bin\Debug\sl.model.dll
+C:\Code\CSharpServer\SchoolHRProj\HRAM-SNUServer\sl.IService\bin\Debug\Core.Config.dll
+C:\Code\CSharpServer\SchoolHRProj\HRAM-SNUServer\sl.IService\bin\Debug\Newtonsoft.Json.dll
+C:\Code\CSharpServer\SchoolHRProj\HRAM-SNUServer\sl.IService\bin\Debug\sl.model.pdb
+C:\Code\CSharpServer\SchoolHRProj\HRAM-SNUServer\sl.IService\bin\Debug\Newtonsoft.Json.xml
+C:\Code\CSharpServer\SchoolHRProj\HRAM-SNUServer\sl.IService\obj\Debug\sl.IService.csprojResolveAssemblyReference.cache
+C:\Code\CSharpServer\SchoolHRProj\HRAM-SNUServer\sl.IService\obj\Debug\sl.IService.dll
+C:\Code\CSharpServer\SchoolHRProj\HRAM-SNUServer\sl.IService\obj\Debug\sl.IService.pdb

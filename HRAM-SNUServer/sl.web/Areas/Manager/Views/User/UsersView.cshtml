@@ -1,7 +1,69 @@
-﻿
+﻿@using sl.extension
 @{
-    ViewBag.Title = "UsersView";
+    ViewBag.Title = "用户管理";
+    Layout = "~/Areas/Manager/Views/Shared/ManagerLayout.cshtml";
 }
 
-<h2>UsersView</h2>
+<div id="toolbar">
+    <fieldset>
+        <legend>信息查询</legend>
+        <form id="searchForm" action="GetUsersList" method="post">
+            <table>
+                <tr>
+                    <td>
+                        登录名：
+                    </td>
+                    <td>
+                        @Html.Input("a_loginname")
+                    </td>
+                    <td>
+                        @Html.EasyuiLinkButtonForSearch("user_dg", "searchForm")
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </fieldset>
+    <table>
+        <tr>
+            <td>
+                @Html.EasyuiLinkButtonForAdd("user_dg", "添加用户", Url.Action("UsersEdit"), 700, 400)
+            </td>
+            <td>
+                <div class="datagrid-btn-separator">
+                </div>
+            </td>
+            <td>
+                @Html.EasyuiLinkButtonForEdit("user_dg", "修改用户", Url.Action("UsersEdit"), 700, 400)
+            </td>
+            <td>
+                <div class="datagrid-btn-separator">
+                </div>
+            </td>
+            <td>
+                @Html.EasyuiLinkButtonForDel("user_dg", Url.Action("UsersDel"))
+            </td>
+            <td>
+                <div class="datagrid-btn-separator">
+                </div>
+            </td>
+            <td>
+                @Html.EasyuiLinkButtonForReload("user_dg")
+            </td>
+        </tr>
+    </table>
+</div>
+<table id="user_dg"></table>
+
+<script type="text/javascript">
+    var url = '@Url.Action("GetUsersList")';
+    var columns = [[
+                    { field: 'a_loginname', title: '登录名', width: '10%', sortable: true },
+                    { field: 'a_logintypeid', title: '类型ID', width: '10%', sortable: true },
+                    { field: 'a_password', title: '密码', width: '20%' },
+                    { field: 'a_username', title: '用户名', width: '12%', sortable: true },
+                    { field: 'a_phone', title: '联系电话', width: '20%', sortable: true },
+                    { field: 'a_maibox', title: '邮箱', width: '25%', sortable: true }    
+    ]];
+    initGrid("user_dg", url, "pk_id", "pk_id", columns, true, false);
+</script>
 

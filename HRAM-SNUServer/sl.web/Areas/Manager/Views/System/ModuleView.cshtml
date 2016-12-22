@@ -1,0 +1,81 @@
+﻿@using sl.extension
+@{
+    ViewBag.Title = "系统模块管理";
+    Layout = "~/Areas/Manager/Views/Shared/ManagerLayout.cshtml";
+    
+}
+
+<table id="module_dg"></table>
+<div id="toolbar">
+    <table>
+        <tr>
+            <td>
+                @Html.EasyuiLinkButtonForAdd("module_dg", "添加模块", Url.Action("ModuleAdd"), 700, 400)
+        </td>
+        <td>
+            <div class="datagrid-btn-separator">
+            </div>
+        </td>
+        <td>
+            @Html.EasyuiLinkButtonForEdit("module_dg", "修改模块", Url.Action("ModuleAdd"), 700, 400)
+        </td>
+        <td>
+            <div class="datagrid-btn-separator">
+            </div>
+        </td>
+        <td>
+            @Html.EasyuiLinkButtonForDel("module_dg", Url.Action("ModuleDelete"))
+        </td>
+        <td>
+            <div class="datagrid-btn-separator">
+            </div>
+        </td>
+
+        <td>
+            <div class="datagrid-btn-separator">
+            </div>
+        </td>
+        <td>
+            @Html.EasyuiLinkButtonForReload("module_dg")
+        </td>
+    </tr>
+</table>
+</div>
+<script type="text/javascript">
+    var url = '@Url.Action("ModuleList")';
+    var columns = [[
+        { field: 'ModuleName', title: '菜单名称', width: '15%' },
+        { field: 'ModuleController', title: '控制器', width: '15%' },
+        { field: 'IsVisible', title: '是否显示', width: '5%',
+            formatter: function (value) {
+                if (value)
+                    return "显示";
+                else
+                    return "隐藏";
+            }
+        },
+        { field: 'IsMenu', title: '是否为菜单', width: '5%',
+            formatter: function (value) {
+                if (value)
+                    return "菜单";
+                else
+                    return "模块";
+            }
+        },
+        { field: 'IsDeleted', title: '删除状态', width: '5%',
+            formatter: function (value) {
+                if (value)
+                    return "删除";
+                else
+                    return "正常";
+            }
+        },
+        { field: 'ModuleIcon', title: '图标', width: '10%', formatter: function (val) {
+            return stringFormat('<img src="{0}" width="20" height="20"/>', val);
+        }
+        },
+        { field: 'ModuleLinkUrl', title: '菜单链接地址', width: '20%' }
+    ]];
+    initTreeGrid("module_dg", url, '权限模块列表', 'ModuleID', 'ModuleName', columns);
+</script>
+

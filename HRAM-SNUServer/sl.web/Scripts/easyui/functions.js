@@ -1,12 +1,13 @@
-﻿var grid;
+﻿//封装的EasyUI通用方法
+var grid;
 
-$(function () {
-    $("#btnSearch").click(function () {
-        grid.datagrid({ queryParams: form2Json("searchForm") });
-    });
-    //$(".validate").form('disableValidation');
-    $("#btnReload").on("click", reload);
-});
+//$(function () {
+//    $("#btnSearch").click(function () {
+//        grid.datagrid({ queryParams: form2Json("searchForm") });
+//    });
+//    //$(".validate").form('disableValidation');
+//    $("#btnReload").on("click", reload);
+//});
 
 function SingleUpload(repath, uppath, iswater, isThumbnail) {
     var url = "/upload/singleupload.html";
@@ -62,18 +63,28 @@ function form2Json(id) {
     return json;
 }
 
-function reload() {
-    grid.datagrid("reload");
+//function reload() {
+//    grid.datagrid("reload");
+//}
+
+
+function Reload(dgid) {
+    $("#" + dgid).datagrid("reload");
 }
 
-function newPage(title, url, width, height, btnText) {
+function Search(dgid, formid) {
+    $("#"+dgid).datagrid({ queryParams: form2Json(formid) });
+}
+
+//添加修改的页面
+function newPage(dgid,title, url, width, height, btnText) {
     var buttons = null;
     if (btnText != "-1") {
         buttons = [{
             text: btnText || '保 存',
             iconCls: 'ext-icon-accept',
             handler: function () {
-                dialog.find('iframe').get(0).contentWindow.submitForm(dialog, grid, parent.$);
+                dialog.find('iframe').get(0).contentWindow.submitForm(dialog, $("#" + dgid), parent.$);
             }
         }, {
             text: '取 消',
@@ -90,12 +101,14 @@ function newPage(title, url, width, height, btnText) {
         width: width || 800,
         height: height || 600,
         onClose: function () {
-            $("#dg").datagrid('load').datagrid('clearSelections').datagrid('clearChecked');
+            $("#"+dgid).datagrid('load').datagrid('clearSelections').datagrid('clearChecked');
             dialog.dialog('destroy');
         },
         buttons: buttons
     });
 }
+
+
 function submitForm($dialog, $grid, $pjq) {
     var form = $('.validate');
     form.validInput(function (r) {
@@ -123,8 +136,8 @@ function submitForm($dialog, $grid, $pjq) {
 }
 
 
-function Delete(url) {
-    var row = $("#dg").datagrid("getSelections");
+function Delete(dgid, url) {
+    var row = $("#"+dgid).datagrid("getSelections");
     if (row.length < 1) {
         parent.$.messager.alert("提示!", "请选择一条记录!", "info");
         return;
@@ -133,9 +146,9 @@ function Delete(url) {
             if (r) {
                 $.post(url, { model: JSON.stringify(row) }, function (data) {
                     if (data.state == "1") {
-                        grid.datagrid('reload').datagrid('clearSelections').datagrid('clearChecked'); ; ;
+                        $("#" + dgid).datagrid('reload').datagrid('clearSelections').datagrid('clearChecked');;;
                         try {
-                            grid.treegrid('reload').treegrid('clearSelections').treegrid('clearChecked');
+                            $("#" + dgid).treegrid('reload').treegrid('clearSelections').treegrid('clearChecked');
                         } catch (e) { }
                     } else {
                         $.messager.alert('错误', data.message);
@@ -146,7 +159,9 @@ function Delete(url) {
     }
 }
 
-function edit(title, url, width, height, btnText) {
+
+//重构Edit
+function edit(dgid,title, url, width, height, btnText) {
     var buttons = null;
     if (btnText != "-1") {
         buttons = [{
@@ -154,7 +169,7 @@ function edit(title, url, width, height, btnText) {
             text: btnText || '保 存',
             iconCls: 'ext-icon-accept',
             handler: function () {
-                dialog.find('iframe').get(0).contentWindow.submitForm(dialog, grid, parent.$);
+                dialog.find('iframe').get(0).contentWindow.submitForm(dialog, $("#" + dgid), parent.$);
             }
         }, {
             text: '取 消',
@@ -164,13 +179,13 @@ function edit(title, url, width, height, btnText) {
             }
         }];
     }
-    var rows = $("#dg").datagrid("getSelections");
+    var rows = $("#" + dgid).datagrid("getSelections");
     if (rows.length != 1) {
         parent.$.messager.alert("提示!", "请选择一条记录!", "info");
         return;
     }
 
-    var id = $(".datagrid-view1 .datagrid-btable").find("tr[class*='datagrid-row-selected']").find("td[style*='none']").text();
+    var id = getId();
     if (id) {
         var dialog = parent.sy.modalDialog({
             title: "&nbsp;" + title,
@@ -179,19 +194,23 @@ function edit(title, url, width, height, btnText) {
             width: width || 700,
             height: height || 500,
             onClose: function () {
-                $("#dg").datagrid("reload").datagrid('clearSelections').datagrid('clearChecked');
+                $("#" + dgid).datagrid("reload").datagrid('clearSelections').datagrid('clearChecked');
             },
             buttons: buttons
         });
-
+    } else {
+        alert("id not found please check you initGrid()")
     }
 }
+
 function getId() {
     var id = $(".datagrid-view1 .datagrid-btable").find("tr[class*='datagrid-row-selected']").find("td[style*='none']").text();
     return id || -1;
 }
-function initGrid(url, idField, sortName, columns, remoteSort, singleSelect, title) {
-    grid = $("#dg").datagrid({
+
+//重构initGrid
+function initGrid(dgid, url, idField, sortName, columns, remoteSort, singleSelect, title) {
+    grid = $("#" + dgid).datagrid({
         title: title || '列表',
         height: 450,
         fit: true,
@@ -211,12 +230,13 @@ function initGrid(url, idField, sortName, columns, remoteSort, singleSelect, tit
         frozenColumns: [[
                     { field: 'ck', checkbox: true, width: '5%' },
                     { field: idField, title: '编号', hidden: true }
-                ]],
+        ]],
         columns: columns
     });
 }
-function initTreeGrid(url, title, idField, treeField, columns) {
-    grid = $("#dg").treegrid({
+
+function initTreeGrid(dgid,url, title, idField, treeField, columns) {
+    grid = $("#"+dgid).treegrid({
         title: title || '列表',
         method: "post",
         border: false,

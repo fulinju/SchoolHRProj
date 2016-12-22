@@ -12,4 +12,9 @@ namespace sl.web.ui
             this.message = message;
         }
     }
+
+    public class JsonTipHelper
+    {
+        public static string ErrorJsonTip = "0";//错误的state
+    }
 }

@@ -1,0 +1,23 @@
+﻿@using sl.model
+@using sl.extension
+
+@model T_Member
+@{
+    ViewBag.Title = "编辑会员信息";
+    Layout = "~/Areas/Manager/Views/Shared/ManagerLayout.cshtml";
+}
+<form class="validate" method="post" autocomplete="off" action="" enctype="multipart/form-data">
+    <div class="easyui-panel" title='&nbsp;' collapsible="true">
+        <table class="msgtable">
+            <tr>
+                <th>
+                    登录名：
+                </th>
+                <td>
+                    @Html.InputFor(m => m.A_LoginName)
+                </td>
+            </tr>
+            
+        </table>
+    </div>
+</form>

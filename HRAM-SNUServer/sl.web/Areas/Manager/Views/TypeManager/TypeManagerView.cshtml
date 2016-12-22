@@ -1,0 +1,215 @@
+﻿@using sl.model
+@using sl.extension
+
+@model TypeModels
+@{
+    ViewBag.Title = "类型管理";
+    Layout = "~/Areas/Manager/Views/Shared/ManagerLayout.cshtml";
+}
+
+<style type="text/css">
+    html, body {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+    }
+
+    .datainp {
+        width: 200px;
+        height: 30px;
+        border: 1px #A5D2EC solid;
+    }
+
+    .wicon {
+        background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAQCAYAAADj5tSrAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAwNi8xNS8xNGnF/oAAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzVxteM2AAAAoElEQVQ4jWPceOnNfwYqAz9dYRQ+E7UtwAaGjyUsDAyYYUgJ2HT5LXZLcEmSCnA6duOlN///////H0bDALl8dPH/////Z8FuNW6Qtvw2nL3lyjsGBgYGhlmRqnj1kGwJuqHIlhJlCXq8EOITEsdqCXLEbbr8FisfFkTo+vBZRFZwERNEFFkCiw90nxJtCalxQmzegltCzVyP1RJq5HZ8AABuNZr0628DMwAAAABJRU5ErkJggg==");
+        background-repeat: no-repeat;
+        background-position: right center;
+    }
+</style>
+<body>
+    <div class="easyui-layout" style="width: 100%; height: 100%; overflow: hidden; margin: 0; padding: 0;">
+
+        <div region="west" split="true" title="发布类型" style="padding: 5px; width: 33% ;height:60%">
+            <fieldset>
+                <legend>信息查询</legend>
+                <form id="searchPMType" action="GetJsonMenuSearchResult" method="post">
+                    <table>
+                        <tr>
+                            <td>
+                                发布类型：
+                            </td>
+                            <td>
+                                @Html.InputFor(m => m.pmType.PM_TypeValue)
+                            </td>
+                            <td>
+                                @Html.EasyuiLinkButtonForSearch("pmtype_dg", "searchPMType")
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </fieldset>
+
+            <table>
+                <tr>
+                    <td>
+                        @Html.EasyuiLinkButtonForAdd("pmtype_dg", "添加用户类型", Url.Action("PMTypeEdit"), 700, 400)
+                    </td>
+                    <td>
+                        <div class="datagrid-btn-separator">
+                        </div>
+                    </td>
+                    <td>
+                        @Html.EasyuiLinkButtonForEdit("pmtype_dg", "修改用户类型", Url.Action("PMTypeEdit"), 700, 400)
+                    </td>
+                    <td>
+                        <div class="datagrid-btn-separator">
+                        </div>
+                    </td>
+                    <td>
+                        @Html.EasyuiLinkButtonForDel("pmtype_dg", Url.Action("PMTypesDel"))
+                    </td>
+                    <td>
+                        <div class="datagrid-btn-separator">
+                        </div>
+                    </td>
+                    <td>
+                        @Html.EasyuiLinkButtonForReload("pmtype_dg")
+                    </td>
+                </tr>
+            </table>
+            <table id="pmtype_dg"></table>
+        </div>
+
+        <div region="center" title="用户类型" style="padding: 5px; width: 33%; height: 60%">
+            <fieldset>
+                <legend>信息查询</legend>
+                <form id="searchUserType" action="GetJsonMenuSearchResult" method="post">
+                    <table>
+                        <tr>
+                            <td>
+                                用户类型：
+                            </td>
+                            <td>
+                                @Html.InputFor(m => m.userType.A_LoginTypeValue)
+                            </td>
+                            <td>
+                                @Html.EasyuiLinkButtonForSearch("usertype_dg", "searchUserType")
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </fieldset>
+
+            <table>
+                <tr>
+                    <td>
+                        @Html.EasyuiLinkButtonForAdd("usertype_dg", "添加用户类型", Url.Action("UserTypeEdit"), 700, 400)
+                    </td>
+                    <td>
+                        <div class="datagrid-btn-separator">
+                        </div>
+                    </td>
+                    <td>
+                        @Html.EasyuiLinkButtonForEdit("usertype_dg", "修改用户类型", Url.Action("UserTypeEdit"), 700, 400)
+                    </td>
+                    <td>
+                        <div class="datagrid-btn-separator">
+                        </div>
+                    </td>
+                    <td>
+                        @Html.EasyuiLinkButtonForDel("usertype_dg", Url.Action("UserTypesDel"))
+                    </td>
+                    <td>
+                        <div class="datagrid-btn-separator">
+                        </div>
+                    </td>
+                    <td>
+                        @Html.EasyuiLinkButtonForReload("usertype_dg")
+                    </td>
+                </tr>
+            </table>
+            <table id="usertype_dg"></table>
+        </div>
+
+        <div region="east" split="true" title="下载类型" style="padding: 5px; width: 33% ;height:60%">
+            <fieldset>
+                <legend>信息查询</legend>
+                <form id="searchDMType" action="GetJsonMenuSearchResult" method="post">
+                    <table>
+                        <tr>
+                            <td>
+                                下载类型：
+                            </td>
+                            <td>
+                                @Html.InputFor(m => m.dmType.DM_TypeValue)
+                            </td>
+                            <td>
+                                @Html.EasyuiLinkButtonForSearch("dmtype_dg", "searchDMType")
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </fieldset>
+
+            <table>
+                <tr>
+                    <td>
+                        @Html.EasyuiLinkButtonForAdd("dmtype_dg", "添加下载类型", Url.Action("DMTypeEdit"), 700, 400)
+                    </td>
+                    <td>
+                        <div class="datagrid-btn-separator">
+                        </div>
+                    </td>
+                    <td>
+                        @Html.EasyuiLinkButtonForEdit("dmtype_dg", "修改下载类型", Url.Action("DMTypeEdit"), 700, 400)
+                    </td>
+                    <td>
+                        <div class="datagrid-btn-separator">
+                        </div>
+                    </td>
+                    <td>
+                        @Html.EasyuiLinkButtonForDel("dmtype_dg", Url.Action("DMTypesDel"))
+                    </td>
+                    <td>
+                        <div class="datagrid-btn-separator">
+                        </div>
+                    </td>
+                    <td>
+                        @Html.EasyuiLinkButtonForReload("dmtype_dg")
+                    </td>
+                </tr>
+            </table>
+            <table id="dmtype_dg"></table>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    var url = '@Url.Action("GetPMTypes")';
+    var columns = [[
+                        { field: 'pm_typeid', title: '发布类型ID', width: '20%', sortable: true },
+                        { field: 'pm_typevalue', title: '发布类型', width: '20%', sortable: true }
+    ]];
+    initGrid('pmtype_dg', url, "pk_id", "pk_id", columns, true, false); //不排序
+</script>
+
+<script type="text/javascript">
+    var url = '@Url.Action("GetUserTypes")';
+    var columns = [[
+                        { field: 'a_logintypeid', title: '用户类型ID', width: '20%', sortable: true },
+                        { field: 'a_logintypevalue', title: '用户类型', width: '20%', sortable: true }
+    ]];
+    initGrid('usertype_dg', url, "pk_id", "pk_id", columns, true, false); //不排序
+</script>
+
+
+<script type="text/javascript">
+    var url = '@Url.Action("GetDMTypes")';
+    var columns = [[
+                        { field: 'dm_typeid', title: '下载类型ID', width: '20%', sortable: true },
+                        { field: 'dm_typevalue', title: '下载类型', width: '20%', sortable: true }
+    ]];
+    initGrid('dmtype_dg', url, "pk_id", "pk_id", columns, true, false); //不排序
+</script>

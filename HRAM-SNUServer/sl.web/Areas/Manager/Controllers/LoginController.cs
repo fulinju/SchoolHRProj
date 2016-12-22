@@ -46,7 +46,6 @@ namespace sl.web.Areas.Manager.Controllers
                 return Json(new JsonTip("0", errormessage));
             }
 
-
             ITUserService service = DIContainer.Resolve<ITUserService>();
             string passwordMd5 = Security.MD5Encrypt(loginPwd);
 
@@ -62,7 +61,7 @@ namespace sl.web.Areas.Manager.Controllers
                 return Json(new JsonTip("0", errormessage));
             }
 
-            if (!manager.A_LoginTypeID.Equals("0001"))
+            if (!manager.A_LoginTypeID.Equals(ConstantData.AdminTypeCode))
             {
                 errormessage = "该用户不是管理员";
             }

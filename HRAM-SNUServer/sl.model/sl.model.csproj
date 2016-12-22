@@ -52,8 +52,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\WebSiteConfig.cs" />
+    <Compile Include="model\TypeModels.cs" />
+    <Compile Include="model\T_DMType.cs" />
+    <Compile Include="model\T_Member.cs" />
+    <Compile Include="model\T_PMType.cs" />
     <Compile Include="model\T_SysModule.cs" />
     <Compile Include="model\T_User.cs" />
+    <Compile Include="model\T_UserType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

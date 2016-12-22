@@ -3,3 +3,9 @@ F:\School\Code\CSharpServer\HRAM-SNUServer\T4Demo\bin\Debug\T4Demo.exe
 F:\School\Code\CSharpServer\HRAM-SNUServer\T4Demo\bin\Debug\T4Demo.pdb
 F:\School\Code\CSharpServer\HRAM-SNUServer\T4Demo\obj\Debug\T4Demo.exe
 F:\School\Code\CSharpServer\HRAM-SNUServer\T4Demo\obj\Debug\T4Demo.pdb
+C:\Code\CSharpServer\SchoolHRProj\HRAM-SNUServer\T4Demo\bin\Debug\T4Demo.exe.config
+C:\Code\CSharpServer\SchoolHRProj\HRAM-SNUServer\T4Demo\bin\Debug\T4Demo.exe
+C:\Code\CSharpServer\SchoolHRProj\HRAM-SNUServer\T4Demo\bin\Debug\T4Demo.pdb
+C:\Code\CSharpServer\SchoolHRProj\HRAM-SNUServer\T4Demo\obj\Debug\T4Demo.csprojResolveAssemblyReference.cache
+C:\Code\CSharpServer\SchoolHRProj\HRAM-SNUServer\T4Demo\obj\Debug\T4Demo.exe
+C:\Code\CSharpServer\SchoolHRProj\HRAM-SNUServer\T4Demo\obj\Debug\T4Demo.pdb
