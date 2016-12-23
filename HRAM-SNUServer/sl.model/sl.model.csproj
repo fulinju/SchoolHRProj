@@ -55,7 +55,9 @@
     <Compile Include="model\TypeModels.cs" />
     <Compile Include="model\T_DMType.cs" />
     <Compile Include="model\T_Member.cs" />
+    <Compile Include="model\T_MemberType.cs" />
     <Compile Include="model\T_PMType.cs" />
+    <Compile Include="model\T_ReviewResult.cs" />
     <Compile Include="model\T_SysModule.cs" />
     <Compile Include="model\T_User.cs" />
     <Compile Include="model\T_UserType.cs" />

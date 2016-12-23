@@ -41,7 +41,7 @@ namespace sl.web.Areas.Manager.Controllers
         #endregion
 
         #region 删除会员
-        public ActionResult MemberDel(string model)
+        public ActionResult MembersDel(string model)
         {
             List<T_Member> userEntityList = JsonConvert.DeserializeObject<List<T_Member>>(model);
             bool flag = true;
@@ -54,7 +54,7 @@ namespace sl.web.Areas.Manager.Controllers
         #endregion
 
         #region 编辑会员
-        public ActionResult MealEdit(T_Member m, string id = "0")
+        public ActionResult MemberEdit(T_Member m, string id = "0")
         {
             if (id == "0")
             {

@@ -15,4 +15,8 @@ namespace sl.service
     public partial class TDMTypeService : BaseDao<T_DMType>, ITDMTypeService { }
 
     public partial class TPMTypeService : BaseDao<T_PMType>, ITPMTypeService { }
+
+    public partial class TReviewResultService : BaseDao<T_ReviewResult>, ITReviewResultService { }
+
+    public partial class TMemberTypeService : BaseDao<T_MemberType>, ITMemberTypeService { }
 }

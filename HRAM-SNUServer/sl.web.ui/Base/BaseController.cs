@@ -86,6 +86,12 @@ namespace sl.web.ui
         {
             return Json(flag ? new JsonTip("1", "删除成功") : new JsonTip("0", "删除失败!"));
         }
+
+        protected ActionResult DelMessage(int flag)
+        {
+            return Json(flag == 1 ? new JsonTip("1", "删除成功") : new JsonTip("0", "删除失败!"));
+        }
+
         protected ActionResult ErrorMessage(string message = "")
         {
             return Json(new JsonTip("0", message));

@@ -388,11 +388,13 @@
     <Content Include="Areas\Manager\Views\System\ModuleAdd.cshtml" />
     <Content Include="Areas\Manager\Views\Config\WebSiteConfig.cshtml" />
     <Content Include="Areas\Manager\Views\Member\MemberView.cshtml" />
-    <Content Include="Areas\Manager\Views\Member\MealEdit.cshtml" />
     <Content Include="Areas\Manager\Views\TypeManager\TypeManagerView.cshtml" />
     <Content Include="Areas\Manager\Views\TypeManager\UserTypeEdit.cshtml" />
     <Content Include="Areas\Manager\Views\TypeManager\DMTypeEdit.cshtml" />
     <Content Include="Areas\Manager\Views\TypeManager\PMTypeEdit.cshtml" />
+    <Content Include="Areas\Manager\Views\Member\MemberEdit.cshtml" />
+    <Content Include="Areas\Manager\Views\TypeManager\ReviewResultEdit.cshtml" />
+    <Content Include="Areas\Manager\Views\TypeManager\MemberTypeEdit.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\easyui\EasyUIFormExtension.js" />
     <Content Include="Scripts\easyui\jquery.easyui.min.js" />
@@ -1685,6 +1687,7 @@
     <Content Include="Scripts\validBox\images\valid_error.png" />
     <Content Include="Scripts\validBox\images\valid_pointer.gif" />
     <Content Include="Scripts\validBox\validBox.js" />
+    <Content Include="UITest.html" />
     <Content Include="Web.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\_ViewStart.cshtml" />

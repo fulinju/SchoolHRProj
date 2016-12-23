@@ -180,12 +180,17 @@ function edit(dgid,title, url, width, height, btnText) {
         }];
     }
     var rows = $("#" + dgid).datagrid("getSelections");
+
     if (rows.length != 1) {
         parent.$.messager.alert("提示!", "请选择一条记录!", "info");
         return;
     }
 
-    var id = getId();
+    //var id = getId();
+    var id = rows[0].pk_id; //获取pk_id (怎么改写成通用的？)
+
+    //var id = getId(dgid);
+    //alert(dgid);
     if (id) {
         var dialog = parent.sy.modalDialog({
             title: "&nbsp;" + title,
@@ -203,10 +208,16 @@ function edit(dgid,title, url, width, height, btnText) {
     }
 }
 
-function getId() {
-    var id = $(".datagrid-view1 .datagrid-btable").find("tr[class*='datagrid-row-selected']").find("td[style*='none']").text();
+function getId(dgid) {
+    var id = $("#" + dgid).find("tr[class*='datagrid-row-selected']").find("td[style*='none']").text();
+    alert(id);
     return id || -1;
 }
+
+//function getId() {
+//    var id = $(".datagrid-view1 .datagrid-btable").find("tr[class*='datagrid-row-selected']").find("td[style*='none']").text();
+//    return id || -1;
+//}
 
 //重构initGrid
 function initGrid(dgid, url, idField, sortName, columns, remoteSort, singleSelect, title) {

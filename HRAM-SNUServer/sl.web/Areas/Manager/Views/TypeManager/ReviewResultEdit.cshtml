@@ -1,9 +1,9 @@
 ﻿@using sl.model
 @using sl.extension
 
-@model T_Member
+@model T_ReviewResult
 @{
-    ViewBag.Title = "编辑会员信息";
+    ViewBag.Title = "编辑审核结果类型";
     Layout = "~/Areas/Manager/Views/Shared/ManagerLayout.cshtml";
 }
 <form class="validate" method="post" autocomplete="off" action="" enctype="multipart/form-data">
@@ -11,13 +11,20 @@
         <table class="msgtable">
             <tr>
                 <th>
-                    登录名：
+                    审核结果ID：
                 </th>
                 <td>
-                    @Html.InputFor(m => m.A_LoginName)
+                    @Html.InputFor(m => m.M_ReviewResultID, new { type = "number", min = "0" })
                 </td>
             </tr>
-            
+            <tr>
+                <th style="width: 130px">
+                    审核结果：
+                </th>
+                <td>
+                    @Html.InputFor(m => m.M_ReviewResultValue)
+            </tr>
+
         </table>
     </div>
 </form>

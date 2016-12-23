@@ -15,4 +15,8 @@ namespace sl.IService
 
     public partial interface ITPMTypeService : IBaseDao<T_PMType> { }
 
+    public partial interface ITReviewResultService : IBaseDao<T_ReviewResult> { }
+
+    public partial interface ITMemberTypeService : IBaseDao<T_MemberType> { }
+
 }

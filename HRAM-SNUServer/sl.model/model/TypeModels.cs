@@ -19,5 +19,13 @@ namespace sl.model
        public List<T_PMType> pmTypeList { get; set; }
 
        public T_PMType pmType { get; set; }
+
+       public List<T_ReviewResult> reviewResultList { get; set; }
+
+       public T_ReviewResult reviewResult { get; set; }
+
+       public List<T_MemberType> memberTypeList { get; set; }
+
+       public T_MemberType memberType { get; set; }
     }
 }
