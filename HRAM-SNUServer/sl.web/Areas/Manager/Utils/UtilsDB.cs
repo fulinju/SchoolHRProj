@@ -24,7 +24,7 @@ namespace sl.web
             Sql sql = Sql.Builder;
             sql.Select("*")
                 .From("T_UserType")
-                .OrderBy("A_LoginTypeID asc");
+                .OrderBy("U_LoginTypeID asc");
             userTypes = DB.Fetch<T_UserType>(sql);
             return userTypes;
         }

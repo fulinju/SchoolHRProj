@@ -51,7 +51,7 @@ namespace sl.web.Areas.Manager.Controllers
 
 
             //Condition where = Condition.Builder.Equal("A_LoginName", loginName).Equal("A_Password", loginPwd);
-            Condition where = Condition.Builder.Equal("A_LoginName", loginName).Equal("A_Password", passwordMd5);
+            Condition where = Condition.Builder.Equal("U_LoginName", loginName).Equal("U_Password", passwordMd5);
 
 
             T_User manager = service.Load(where.Create());
@@ -61,7 +61,7 @@ namespace sl.web.Areas.Manager.Controllers
                 return Json(new JsonTip("0", errormessage));
             }
 
-            if (!manager.A_LoginTypeID.Equals(ConstantData.AdminTypeCode))
+            if (!manager.U_LoginTypeID.Equals(ConstantData.AdminTypeCode))
             {
                 errormessage = "该用户不是管理员";
             }
@@ -71,7 +71,7 @@ namespace sl.web.Areas.Manager.Controllers
                 service.Update(manager);
                 if (remberpassword)
                 {
-                    Utils.WriteCookie(Key.MANAGER_NAME, Security.DesEncrypt(CachedConfigContext.Current.WebSiteConfig.WebSiteKey, manager.A_LoginName));
+                    Utils.WriteCookie(Key.MANAGER_NAME, Security.DesEncrypt(CachedConfigContext.Current.WebSiteConfig.WebSiteKey, manager.U_LoginName));
                     Utils.WriteCookie(Key.MANAGER_PASS, passwordMd5);
                 }
                 return Json(new JsonTip("1", Url.Action("Main", "Main", new { area = "Manager" })));

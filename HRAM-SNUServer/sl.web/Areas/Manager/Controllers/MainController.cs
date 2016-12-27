@@ -18,8 +18,8 @@ namespace sl.web.Areas.Manager.Controllers
         // GET: /Manager/Main/
         public ActionResult Main()
         {
-            var where = Condition.Builder.Equal("IsDeleted", false).Equal("IsVisible", true).Create();
-            List<T_SysModule> list = DIContainer.Resolve<ISysModuleService>().List(where, "Sort asc");
+            var where = Condition.Builder.Equal("M_IsDeleted", false).Equal("M_IsVisible", true).Create();
+            List<T_SysModule> list = DIContainer.Resolve<ISysModuleService>().List(where, "M_Sort asc");
             return View(list);
         }
 

@@ -34,9 +34,9 @@ namespace sl.web.Areas.Manager.Controllers
         }
 
         #region 查询
-        public ActionResult GetUsersList(string a_loginname = "")
+        public ActionResult GetUsersList(string u_loginname = "")
         {
-            Sql where = Condition.Builder.Like("A_LoginName", a_loginname).Create();
+            Sql where = Condition.Builder.Like("M_LoginName", u_loginname).Create();
             return CommonPageList<T_User>(where);
         }
         #endregion
@@ -62,8 +62,8 @@ namespace sl.web.Areas.Manager.Controllers
             {
                 if (Request.IsPost())
                 {
-                    string passwordMd5 = Security.MD5Encrypt(m.A_Password);
-                    m.A_Password = passwordMd5;
+                    string passwordMd5 = Security.MD5Encrypt(m.U_Password);
+                    m.U_Password = passwordMd5;
 
                     var validate = Model.Valid(m);
                     if (!validate.Result)
@@ -81,15 +81,15 @@ namespace sl.web.Areas.Manager.Controllers
             else
             {
                 T_User load = usersService.Load(id);
-                String oldPwd = load.A_Password;
+                String oldPwd = load.U_Password;
                 if (Request.IsPost())
                 {
                     if (TryUpdateModel(load))
                     {
-                        if (!oldPwd.Equals(m.A_Password)) //密码有改动,调用MD5加密
+                        if (!oldPwd.Equals(m.U_Password)) //密码有改动,调用MD5加密
                         {
-                            string passwordMd5 = Security.MD5Encrypt(load.A_Password);
-                            load.A_Password = passwordMd5;
+                            string passwordMd5 = Security.MD5Encrypt(load.U_Password);
+                            load.U_Password = passwordMd5;
                         }
                         Model valid = Model.Valid(load);
                         return valid.Result ? SaveMessage(usersService.Update(load)) : ErrorMessage(valid.Message);

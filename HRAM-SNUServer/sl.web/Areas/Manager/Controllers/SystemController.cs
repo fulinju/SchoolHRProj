@@ -37,7 +37,7 @@ namespace sl.web.Areas.Manager.Controllers
         }
         public ActionResult ModuleList()
         {
-            Sql where = Condition.Builder.Equal("IsDeleted", false).Create();
+            Sql where = Condition.Builder.Equal("M_IsDeleted", false).Create();
             var list = moduleService.TreeList(@where, "Sort asc");
             return Json(list, JsonRequestBehavior.AllowGet);
         }
@@ -48,10 +48,10 @@ namespace sl.web.Areas.Manager.Controllers
             {
                 if (Request.IsPost())
                 {
-                    m.IsDeleted = false;
-                    m.Sort = 30;
-                    m.IsVisible = true;
-                    m.IsSingle = false;
+                    m.M_IsDeleted = false;
+                    m.M_Sort = 30;
+                    m.M_IsVisible = true;
+                    m.M_IsSingle = false;
                 }
                 return CommonAdd(m);
             }
@@ -79,9 +79,9 @@ namespace sl.web.Areas.Manager.Controllers
             Sql where = Condition.Builder.Equal("IsDeleted", false).Create();
             var treeNodes = moduleService.List(@where, "Sort asc").Select(p => new TreeNode
             {
-                id = p.ModuleID,
-                Pid = p.ParentNo,
-                text = p.ModuleName
+                id = p.M_ID,
+                Pid = p.M_ParentNo,
+                text = p.M_Name
             }).ToList();
             var jsons = TreeNode.CreateTree(treeNodes);
             return Json(jsons, JsonRequestBehavior.AllowGet);
@@ -93,7 +93,7 @@ namespace sl.web.Areas.Manager.Controllers
             bool flag = true;
             foreach (var sysMenu in sysMenus)
             {
-                sysMenu.IsDeleted = true;
+                sysMenu.M_IsDeleted = true;
                 flag = moduleService.Update(sysMenu) && flag;
             }
             return DelMessage(flag);

@@ -12,13 +12,13 @@
                 菜单名称:
             </th>
             <td>
-                @Html.InputFor(p => p.ModuleName)
+                @Html.InputFor(p => p.M_Name)
             </td>
             <th>
                 上级菜单:
             </th>
             <td>
-                @Html.EasyUiDropDownListTreeFor(p => p.ParentNo, Url.Action("ModuleTree", "System"))
+                @Html.EasyUiDropDownListTreeFor(p => p.M_ParentNo, Url.Action("ModuleTree", "System"))
             </td>
         </tr>
         <tr></tr>
@@ -27,16 +27,16 @@
                 控制器:
             </th>
             <td>
-                @Html.InputFor(m => m.ModuleController)
+                @Html.InputFor(m => m.M_Controller)
             </td>
             <th>
                 属性:
             </th>
             <td>
-                @Html.CheckBoxFor(p => p.IsVisible)
-                @Html.LabelFor(p => p.IsVisible, "是否显示")
-                @Html.CheckBoxFor(p => p.IsMenu)
-                @Html.LabelFor(p => p.IsMenu, "是否为菜单")
+                @Html.CheckBoxFor(p => p.M_IsVisible)
+                @Html.LabelFor(p => p.M_IsVisible, "是否显示")
+                @Html.CheckBoxFor(p => p.M_IsMenu)
+                @Html.LabelFor(p => p.M_IsMenu, "是否为菜单")
             </td>
         </tr>
         <tr>
@@ -44,7 +44,7 @@
                 图标:
             </th>
             <td colspan="3">
-                @Html.InputFor(m => m.ModuleIcon, InputWidthType.Longest, new { onclick = "pickIcon(this)" })
+                @Html.InputFor(m => m.M_Icon, InputWidthType.Longest, new { onclick = "pickIcon(this)" })
             </td>
         </tr>
         <tr>
@@ -52,7 +52,7 @@
                 菜单链接地址:
             </th>
             <td colspan="3">
-                @Html.InputFor(m => m.ModuleLinkUrl, InputWidthType.Longest)
+                @Html.InputFor(m => m.M_LinkUrl, InputWidthType.Longest)
             </td>
         </tr>
     </table>

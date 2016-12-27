@@ -5,7 +5,7 @@ using PetaPoco;
 namespace sl.model
 {
     [TableName("T_SysModule")]
-    [PrimaryKey("ModuleID")]
+    [PrimaryKey("M_ID")]
     [ExplicitColumns]
     public class T_SysModule
     {
@@ -13,37 +13,37 @@ namespace sl.model
         public List<T_SysModule> children { get; set; }
 
         [Column]
-        public int ModuleID { get; set; }
+        public int M_ID { get; set; }
 
         [Column]
-        public string ModuleName { get; set; }
+        public string M_Name { get; set; }
 
         [Column]
-        public string ModuleLinkUrl { get; set; }
+        public string M_LinkUrl { get; set; }
 
         [Column]
-        public string ModuleIcon { get; set; }
+        public string M_Icon { get; set; }
 
         [Column]
-        public int? ParentNo { get; set; }
+        public int? M_ParentNo { get; set; }
 
         [Column]
-        public int? Sort { get; set; }
+        public int? M_Sort { get; set; }
 
         [Column]
-        public bool IsVisible { get; set; }
+        public bool M_IsVisible { get; set; }
 
         [Column]
-        public bool? IsSingle { get; set; }
+        public bool? M_IsSingle { get; set; }
 
         [Column]
-        public bool IsMenu { get; set; }
+        public bool M_IsMenu { get; set; }
 
         [Column]
-        public bool IsDeleted { get; set; }
+        public bool M_IsDeleted { get; set; }
 
         [Column]
-        public string ModuleController { get; set; }
+        public string M_Controller { get; set; }
 
     }
 }

@@ -16,11 +16,11 @@ namespace sl.model
         public string pk_id { get; set; }
 
         [Column]
-        [JsonProperty("a_logintypeid")]
-        public string A_LoginTypeID { get; set; }
+        [JsonProperty("u_logintypeid")]
+        public string U_LoginTypeID { get; set; }
 
         [Column]
-        [JsonProperty("a_logintypevalue")]
-        public string A_LoginTypeValue { get; set; }
+        [JsonProperty("u_logintypevalue")]
+        public string U_LoginTypeValue { get; set; }
     }
 }

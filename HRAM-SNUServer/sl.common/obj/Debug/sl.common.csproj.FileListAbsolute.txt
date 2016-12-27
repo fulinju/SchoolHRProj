@@ -6,3 +6,7 @@ C:\Code\CSharpServer\SchoolHRProj\HRAM-SNUServer\sl.common\bin\Debug\sl.common.d
 C:\Code\CSharpServer\SchoolHRProj\HRAM-SNUServer\sl.common\bin\Debug\sl.common.pdb
 C:\Code\CSharpServer\SchoolHRProj\HRAM-SNUServer\sl.common\obj\Debug\sl.common.dll
 C:\Code\CSharpServer\SchoolHRProj\HRAM-SNUServer\sl.common\obj\Debug\sl.common.pdb
+F:\School\Code\CSharpServer\SchoolHRProj-master\HRAM-SNUServer\sl.common\bin\Debug\sl.common.dll
+F:\School\Code\CSharpServer\SchoolHRProj-master\HRAM-SNUServer\sl.common\bin\Debug\sl.common.pdb
+F:\School\Code\CSharpServer\SchoolHRProj-master\HRAM-SNUServer\sl.common\obj\Debug\sl.common.dll
+F:\School\Code\CSharpServer\SchoolHRProj-master\HRAM-SNUServer\sl.common\obj\Debug\sl.common.pdb

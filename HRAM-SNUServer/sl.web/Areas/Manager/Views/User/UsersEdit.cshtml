@@ -14,7 +14,7 @@
                     登录名：
                 </th>
                 <td>
-                    @Html.InputFor(m => m.A_LoginName)
+                    @Html.InputFor(m => m.U_LoginName)
                 </td>
             </tr>
             <tr>
@@ -22,7 +22,7 @@
                     账户类型：
                 </th>
                 <td>
-                    @Html.DropDownListFor(m => m.A_LoginTypeID, UtilsBind.UserTypes())
+                    @Html.DropDownListFor(m => m.U_LoginTypeID, UtilsBind.UserTypes())
                 </td>
             </tr>
             <tr>
@@ -30,7 +30,7 @@
                     用户昵称：
                 </th>
                 <td>
-                    @Html.InputFor(m => m.A_UserName)
+                    @Html.InputFor(m => m.U_UserName)
                 </td>
             </tr>
             <tr>
@@ -38,7 +38,7 @@
                     密码：
                 </th>
                 <td>
-                    @Html.InputFor(m => m.A_Password, new { type = "password" })
+                    @Html.InputFor(m => m.U_Password, new { type = "password" })
                 </td>
             </tr>
 
@@ -47,7 +47,7 @@
                     联系电话：
                 </th>
                 <td>
-                    @Html.InputFor(m => m.A_Phone)
+                    @Html.InputFor(m => m.U_Phone)
                 </td>
             </tr>
             <tr>
@@ -55,7 +55,7 @@
                     邮箱：
                 </th>
                 <td>
-                    @Html.InputFor(m => m.A_MaiBox)
+                    @Html.InputFor(m => m.U_MaiBox)
                 </td>
             </tr>
         </table>

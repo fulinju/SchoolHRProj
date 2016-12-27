@@ -22,7 +22,7 @@ namespace sl.web
             {
                 for (int i = 0; i < userTypes.Count; i++)
                 {
-                    list.Add(new SelectListItem { Text = userTypes[i].A_LoginTypeValue, Value = userTypes[i].A_LoginTypeID });
+                    list.Add(new SelectListItem { Text = userTypes[i].U_LoginTypeValue, Value = userTypes[i].U_LoginTypeID });
 
                 }
             }

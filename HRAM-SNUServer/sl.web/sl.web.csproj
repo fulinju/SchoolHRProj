@@ -395,6 +395,7 @@
     <Content Include="Areas\Manager\Views\Member\MemberEdit.cshtml" />
     <Content Include="Areas\Manager\Views\TypeManager\ReviewResultEdit.cshtml" />
     <Content Include="Areas\Manager\Views\TypeManager\MemberTypeEdit.cshtml" />
+    <Content Include="Areas\Manager\Views\PublishManager\PublishManagerView.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\easyui\EasyUIFormExtension.js" />
     <Content Include="Scripts\easyui\jquery.easyui.min.js" />
@@ -1700,6 +1701,7 @@
     <Compile Include="Areas\Manager\Controllers\LoginController.cs" />
     <Compile Include="Areas\Manager\Controllers\MainController.cs" />
     <Compile Include="Areas\Manager\Controllers\MemberController.cs" />
+    <Compile Include="Areas\Manager\Controllers\PublishManagerController.cs" />
     <Compile Include="Areas\Manager\Controllers\SystemController.cs" />
     <Compile Include="Areas\Manager\Controllers\TypeManagerController.cs" />
     <Compile Include="Areas\Manager\Controllers\UserController.cs" />
