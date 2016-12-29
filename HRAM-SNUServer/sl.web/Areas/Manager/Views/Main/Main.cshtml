@@ -211,11 +211,9 @@
                     }
                     @foreach (var c in Model.Where(p => p.M_ParentNo == parentId))
                     {
-                        bool IsSingle = c.M_IsSingle != null && (bool)c.M_IsSingle;
-                        if (!IsSingle)
-                        {
+                       
                             c.M_LinkUrl = c.M_LinkUrl + "?singeId=" + c.M_ID;
-                        }
+                        
                         <a href="javascript:void(0)" src="@c.M_LinkUrl" class="cs-navi-tab">@c.M_Name</a>
                     }
                 </div>

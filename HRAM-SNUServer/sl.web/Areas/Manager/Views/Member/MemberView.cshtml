@@ -14,7 +14,7 @@
                         登录名：
                     </td>
                     <td>
-                        @Html.Input("a_loginname")
+                        @Html.Input("u_loginname")
                     </td>
                     <td>
                         @Html.EasyuiLinkButtonForSearch("member_dg", "searchForm")
@@ -26,14 +26,14 @@
     <table>
         <tr>
             <td>
-                @Html.EasyuiLinkButtonForAdd("member_dg", "添加用户", Url.Action("MemberEdit"), 700, 400)
+                @Html.EasyuiLinkButtonForAdd("member_dg", "添加会员", Url.Action("MemberEdit"), 900, 600)
             </td>
             <td>
                 <div class="datagrid-btn-separator">
                 </div>
             </td>
             <td>
-                @Html.EasyuiLinkButtonForEdit("member_dg", "修改用户", Url.Action("MemberEdit"), 700, 400)
+                @Html.EasyuiLinkButtonForEdit("member_dg", "修改会员", Url.Action("MemberEdit"), 900, 600)
             </td>
             <td>
                 <div class="datagrid-btn-separator">
@@ -57,7 +57,7 @@
 <script type="text/javascript">
     var url = '@Url.Action("GetMembersList")';
     var columns = [[
-                    { field: 'a_loginname', title: '登录名', width: '10%', sortable: true },
+                    { field: 'u_loginname', title: '登录名', width: '10%', sortable: true },
                     { field: 'm_reviewresultid', title: '类型ID', width: '10%', sortable: true },
                     { field: 'm_applytime', title: '密码', width: '20%' },
                     { field: 'm_name', title: '用户名', width: '12%', sortable: true },

@@ -50,30 +50,29 @@
 
     <div id="loginDialog" title="系统登录" style="display: none; width: 300px; height: 200px;overflow: hidden;">
         <form method="post" class="form">
-            <table style="width:100%;height:100%">
-                <tr style="height:30%">
-                    <th style="width: 30%;text-align: right;">登录名：</th>
-                   
-                    <td style="width: 60%; margin-right:10%">
-                        <input name="loginName" class="easyui-textbox" style="width: 100%;" />
+            <table style="width: 100%; height: 100%;">
+                <tr>
+                    <th style="width: 80px; height: 35px; line-height: 35px; text-align: right;padding-top:10px">登录名：</th>
+
+                    <td>
+                        <input name="loginName" class="easyui-textbox" style="width: 173px;"  />
                     </td>
                 </tr>
-                <tr style="height:30%">
-                    <th style="text-align: right; width: 30%;">
+                <tr>
+                    <th style="text-align: right;">
                         密码：
                     </th>
-                    <td style="width: 60%; margin-right: 10%">
-                        <input name="loginPwd" type="password" class="easyui-textbox" style="width: 100%;" />
+                    <td>
+                        <input name="loginPwd" type="password" class="easyui-textbox" style="width: 173px;" />
                     </td>
                 </tr>
-                <tr style="height:40%">
-                    <th style="text-align: right; width: 30%;">
+                <tr>
+                    <th style ="padding-top:10px; text-align: right;">
                         验证码：
                     </th>
-
-                    <td style="width: 60%; margin-right: 10%;">
-                        <input name="checkCode" class="easyui-textbox" style="width: 50%;" oninput="if(value.length>5)value=value.slice(0,5)" " />
-                        <img id="GL_StandardCode" style="cursor: pointer; width: 40%;vertical-align:middle" src="@Url.Action("VerifyCode", "Login")?t=@DateTime.Now.Ticks" title="看不清，点击换一张" />
+                    <td style="padding-top:10px;">
+                        <input name=" checkcode" class="easyui-textbox" style="width: 90px;" oninput="if(value.length>5)value=value.slice(0,5)" />
+                        <img id="GL_StandardCode" style="cursor: pointer; width: 80px;vertical-align:middle" src="@Url.Action("VerifyCode", "Login")?t=@DateTime.Now.Ticks" title="看不清，点击换一张" />
                     </td>
                 </tr>
             </table>

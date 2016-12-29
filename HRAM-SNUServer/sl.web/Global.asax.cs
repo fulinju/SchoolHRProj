@@ -16,7 +16,7 @@ namespace sl.web
 {
     public class Global : HttpApplication
     {
-        void Application_Start()
+        protected void Application_Start()
         {
             // 在应用程序启动时运行的代码
             AreaRegistration.RegisterAllAreas();
@@ -31,6 +31,17 @@ namespace sl.web
             IContainer container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
             DIContainer.RegisterContainer(container);
+
+            InitWebSite();
+        }
+
+        private void InitWebSite()
+        {
+            //创建存储路径
+            string memberIconsPath = Server.MapPath(Key.MemberIconsPath);
+            if (!Directory.Exists(memberIconsPath))
+                Directory.CreateDirectory(memberIconsPath);
+            DirFile.CreateDir(Key.MemberIconsPath);
         }
     }
 }

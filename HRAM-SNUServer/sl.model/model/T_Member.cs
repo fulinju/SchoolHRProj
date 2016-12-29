@@ -17,8 +17,8 @@ namespace sl.model
         public string pk_id { get; set; }
 
         [Column]
-        [JsonProperty("a_loginname")]
-        public string A_LoginName { get; set; }
+        [JsonProperty("u_loginname")]
+        public string U_LoginName { get; set; }
 
         [Column]
         [JsonProperty("m_reviewresultid")]
@@ -66,7 +66,7 @@ namespace sl.model
 
         [Column]
         [JsonProperty("m_imgurl")]
-        public string M_ImgUrl { get; set; }
+        public string M_ImgURL { get; set; }
 
         [Column]
         [JsonProperty("m_url")]

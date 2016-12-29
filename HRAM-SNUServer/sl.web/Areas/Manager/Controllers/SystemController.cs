@@ -49,9 +49,8 @@ namespace sl.web.Areas.Manager.Controllers
                 if (Request.IsPost())
                 {
                     m.M_IsDeleted = false;
-                    m.M_Sort = 30;
+                    m.M_Sort = 0;
                     m.M_IsVisible = true;
-                    m.M_IsSingle = false;
                 }
                 return CommonAdd(m);
             }

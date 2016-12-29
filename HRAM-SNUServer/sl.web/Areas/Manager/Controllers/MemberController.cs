@@ -33,9 +33,9 @@ namespace sl.web.Areas.Manager.Controllers
         }
 
         #region 查询
-        public ActionResult GetMembersList(string a_loginname = "")
+        public ActionResult GetMembersList(string u_loginname = "")
         {
-            Sql where = Condition.Builder.Like("A_LoginName", a_loginname).Create();
+            Sql where = Condition.Builder.Like("U_LoginName", u_loginname).Create();
             return CommonPageList<T_Member>(where);
         }
         #endregion
@@ -58,22 +58,84 @@ namespace sl.web.Areas.Manager.Controllers
         {
             if (id == "0")
             {
-                return CommonAdd(m);
+                if (Request.IsPost())
+                {
+                    var validate = Model.Valid(m);
+                    if (validate.Result)
+                    {
+                        m.M_ImgURL = UploadFile();
+                        object result = memberService.Insert(m);
+                        return SaveMessage(result);
+                    }
+                    else
+                    {
+                        return Json(new JsonTip("0", validate.Message));
+                    }
+                }
+                return View(m);
             }
             else
             {
                 T_Member load = memberService.Load(id);
+                if (load == null)
+                {
+                    return Json(new JsonTip("0", "找不到该实体"));
+                }
+
                 if (Request.IsPost())
                 {
                     if (TryUpdateModel(load))
                     {
-                        Model valid = Model.Valid(load);
-                        return valid.Result ? SaveMessage(memberService.Update(load)) : ErrorMessage(valid.Message);
+                        if (Request.Files.Count > 0)
+                        {
+                            Utils.DeleteFile(load.M_ImgURL);
+                            string fileName = UploadFile();
+                            if (fileName != "")
+                            {
+                                load.M_ImgURL = fileName;
+                            }
+                        }
+                        bool success = memberService.Update(load);
+                        return SaveMessage(success);
                     }
                 }
-                return View(load);
+                return View("MemberEdit", load);
             }
         }
         #endregion
-	}
+
+        #region 上传图片
+        private string UploadFile()
+        {
+            string fileName = "";
+            if (Request.Files.Count > 0)
+            {
+                HttpPostedFileBase fileBase = Request.Files["M_ImgURL"];
+                if (fileBase != null && fileBase.FileName != "")
+                {
+                    fileName = Key.MemberIconsPath + Utils.GetRamCode() + "." + Utils.GetFileExt(fileBase.FileName);
+                    fileBase.SaveAs(Server.MapPath(fileName));
+                }
+            }
+            return fileName;
+        }
+        #endregion
+
+        #region 删除图片
+        [HttpPost]
+        public ActionResult DelM_ImgUrl(string id = "0")
+        {
+            var m = memberService.Load(id);
+            bool success = false;
+            if (m != null)
+            {
+                Utils.DeleteFile(m.M_ImgURL);
+                m.M_ImgURL = string.Empty;
+                success = memberService.Update(m);
+            }
+            return SaveMessage(success);
+
+        }
+        #endregion
+    }
 }

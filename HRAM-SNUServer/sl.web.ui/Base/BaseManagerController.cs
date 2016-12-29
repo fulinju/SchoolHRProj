@@ -66,7 +66,7 @@ namespace sl.web.ui
                 {
                     username = Security.DesDecrypt(CachedConfigContext.Current.WebSiteConfig.WebSiteKey, username);
                     ITUserService service = DIContainer.Resolve<ITUserService>();
-                    Condition where = Condition.Builder.Equal("A_LoginName", username).Equal("A_LoginTypeID", password);
+                    Condition where = Condition.Builder.Equal("U_LoginName", username).Equal("U_LoginTypeID", password);
                     manager = service.Load(where.Create());
                     if (manager != null)
                     {
@@ -162,6 +162,20 @@ namespace sl.web.ui
             /*return Json(new Dictionary<string, object> { { "total", list.TotalItems }, { "rows", list.Items } },
                         JsonRequestBehavior.AllowGet);*/
         }
+
+        /// <summary>
+        /// 由Page进行分页
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public ActionResult CommonPageList<T>(Page<T> list)
+        {
+            return Json(new { total = list.TotalItems, rows = list.Items });
+            /*return Json(new Dictionary<string, object> { { "total", list.TotalItems }, { "rows", list.Items } },
+                        JsonRequestBehavior.AllowGet);*/
+        }
+
         #endregion
     }
 }

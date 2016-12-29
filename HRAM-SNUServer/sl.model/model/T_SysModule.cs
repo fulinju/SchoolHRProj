@@ -34,9 +34,6 @@ namespace sl.model
         public bool M_IsVisible { get; set; }
 
         [Column]
-        public bool? M_IsSingle { get; set; }
-
-        [Column]
         public bool M_IsMenu { get; set; }
 
         [Column]
