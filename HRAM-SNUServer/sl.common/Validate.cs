@@ -96,6 +96,7 @@ namespace sl.common
             return Regex.IsMatch(source, @"(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])", RegexOptions.IgnoreCase);
         }
         #endregion
+
         #region 验证身份证是否有效
         /**/
         /// <summary>
@@ -175,6 +176,7 @@ namespace sl.common
             return true;//符合15位身份证标准
         }
         #endregion
+
         #region 是不是Int型的
         /**/
         /// <summary>
@@ -196,6 +198,7 @@ namespace sl.common
             return false;
         }
         #endregion
+
         #region 看字符串的长度是不是在限定数之间 一个中文为两个字符
         /**/
         /// <summary>
@@ -215,6 +218,7 @@ namespace sl.common
             return true;
         }
         #endregion
+
         #region 是不是中国电话，格式010-85849685
         /**/
         /// <summary>
@@ -227,6 +231,7 @@ namespace sl.common
             return Regex.IsMatch(source, @"^\d{3,4}-?\d{6,8}$", RegexOptions.IgnoreCase);
         }
         #endregion
+
         #region 邮政编码 6个数字
         /**/
         /// <summary>
@@ -239,6 +244,7 @@ namespace sl.common
             return Regex.IsMatch(source, @"^\d{6}$", RegexOptions.IgnoreCase);
         }
         #endregion
+
         #region 中文
         /**/
         /// <summary>
@@ -255,6 +261,7 @@ namespace sl.common
             return Regex.IsMatch(source, @"[\u4e00-\u9fa5]+", RegexOptions.IgnoreCase);
         }
         #endregion
+
         #region 验证是不是正常字符 字母，数字，下划线的组合
         /**/
         /// <summary>

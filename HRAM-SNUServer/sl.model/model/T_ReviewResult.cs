@@ -23,5 +23,10 @@ namespace sl.model
         [Column]
         [JsonProperty("m_reviewresultvalue")]
         public string M_ReviewResultValue { get; set; }
+
+        [JsonIgnore]
+        [Column]
+        [JsonProperty("isdeleted")]
+        public bool IsDeleted { get; set; }
     }
 }

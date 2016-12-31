@@ -7,6 +7,7 @@ namespace sl.common
 {
     public class CacheHelper
     {
+        #region 创建缓存项的文件依赖
         /// <summary>
         /// 创建缓存项的文件依赖
         /// </summary>
@@ -20,7 +21,9 @@ namespace sl.common
             //创建缓存
             HttpContext.Current.Cache.Insert(key, obj, dep);
         }
+        #endregion
 
+        #region 创建缓存项过期
         /// <summary>
         /// 创建缓存项过期
         /// </summary>
@@ -31,7 +34,9 @@ namespace sl.common
         {
             HttpContext.Current.Cache.Insert(key, obj, null, Cache.NoAbsoluteExpiration, new TimeSpan(0, expires, 0));
         }
+        #endregion
 
+        #region 获取缓存对象 Object
         /// <summary>
         /// 获取缓存对象
         /// </summary>
@@ -45,7 +50,9 @@ namespace sl.common
             }
             return HttpContext.Current.Cache.Get(key);
         }
+        #endregion
 
+        #region 获取缓存对象 T
         /// <summary>
         /// 获取缓存对象
         /// </summary>
@@ -57,6 +64,9 @@ namespace sl.common
             object obj = Get(key);
             return obj == null ? default(T) : (T)obj;
         }
+        #endregion
+
+        #region 移除一个缓存对象
         /// <summary>
         /// 移除一个缓存对象
         /// </summary>
@@ -69,6 +79,12 @@ namespace sl.common
                 HttpContext.Current.Cache.Remove(key);
             }
         }
+        #endregion
+
+        #region 移除所有缓存对象
+        /// <summary>
+        /// 移除所有缓存对象
+        /// </summary>
         public static void RemoveAll()
         {
             Cache _cache = HttpContext.Current.Cache;
@@ -83,10 +99,18 @@ namespace sl.common
                 _cache.Remove(key);
             }
         }
+        #endregion
+
+        #region 获取缓存对象数目
+        /// <summary>
+        /// 获取缓存对象数目
+        /// </summary>
+        /// <returns></returns>
         public static int GetCount()
         {
             return HttpContext.Current.Cache.Count;
         }
+        #endregion
 
     }
 }

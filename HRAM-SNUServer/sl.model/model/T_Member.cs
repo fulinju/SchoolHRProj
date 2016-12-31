@@ -71,5 +71,10 @@ namespace sl.model
         [Column]
         [JsonProperty("m_url")]
         public string M_URL { get; set; }
+
+        [JsonIgnore]
+        [Column]
+        [JsonProperty("isdeleted")]
+        public bool IsDeleted { get; set; }
     }
 }

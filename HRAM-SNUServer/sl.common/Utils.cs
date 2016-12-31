@@ -1287,7 +1287,7 @@ namespace sl.common
         }
         #endregion
 
-
+        #region 返回字符串真实长度, 1个汉字长度为2
         /// <summary>
         /// 返回字符串真实长度, 1个汉字长度为2
         /// </summary>
@@ -1296,7 +1296,9 @@ namespace sl.common
         {
             return Encoding.Default.GetBytes(str).Length;
         }
+        #endregion
 
+        #region 返回URL中结尾的文件名
         /// <summary>
         /// 返回URL中结尾的文件名
         /// </summary>		
@@ -1309,8 +1311,9 @@ namespace sl.common
             string[] strs1 = url.Split(new char[] { '/' });
             return strs1[strs1.Length - 1].Split(new char[] { '?' })[0];
         }
+        #endregion
 
-
+        #region 格式化字节数字符串
         /// <summary>
         /// 格式化字节数字符串
         /// </summary>
@@ -1335,9 +1338,9 @@ namespace sl.common
 
             return bytes.ToString() + "Bytes";
         }
+        #endregion
 
-
-
+        #region 移除Html标记
         /// <summary>
         /// 移除Html标记
         /// </summary>
@@ -1349,7 +1352,9 @@ namespace sl.common
                 return string.Empty;
             return Regex.Replace(content, @"<[^>]*>", string.Empty, RegexOptions.IgnoreCase);
         }
+        #endregion
 
+        #region 从HTML中获取文本,保留br,p,img
         /// <summary>
         /// 从HTML中获取文本,保留br,p,img
         /// </summary>
@@ -1360,7 +1365,9 @@ namespace sl.common
             Regex regEx = new Regex(@"</?(?!br|/?p|img)[^>]*>", RegexOptions.IgnoreCase);
             return regEx.Replace(HTML, "");
         }
+        #endregion
 
+        #region 备份文件
         /// <summary>
         /// 备份文件
         /// </summary>
@@ -1388,7 +1395,9 @@ namespace sl.common
                 throw e;
             }
         }
+        #endregion
 
+        #region 备份文件,当目标文件存在时覆盖
         /// <summary>
         /// 备份文件,当目标文件存在时覆盖
         /// </summary>
@@ -1399,7 +1408,9 @@ namespace sl.common
         {
             return BackupFile(sourceFileName, destFileName, true);
         }
+        #endregion
 
+        #region 恢复文件
         /// <summary>
         /// 恢复文件
         /// </summary>
@@ -1435,12 +1446,16 @@ namespace sl.common
             }
             return true;
         }
+        #endregion
 
+        #region 存储文件
         public static bool RestoreFile(string backupFileName, string targetFileName)
         {
             return RestoreFile(backupFileName, targetFileName, null);
         }
+        #endregion
 
+        #region 获取ajax形式的分页链接
         /// <summary>
         /// 获取ajax形式的分页链接
         /// </summary>
@@ -1520,7 +1535,9 @@ namespace sl.common
 
             return s.ToString();
         }
+        #endregion
 
+        #region 获取站点根目录URL
         /// <summary>
         /// 获取站点根目录URL
         /// </summary>
@@ -1531,7 +1548,9 @@ namespace sl.common
             return string.Format("{0}://{1}{2}{3}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Host.ToString(),
                                  (port == 80 || port == 0) ? "" : ":" + port, forumPath);
         }
+        #endregion
 
+        #region 根据字符串获取枚举值
         /// <summary>
         /// 根据字符串获取枚举值
         /// </summary>
@@ -1550,6 +1569,9 @@ namespace sl.common
                 return defValue;
             }
         }
+        #endregion
+
+        #region 将8位日期型整型数据转换为日期字符串数据
         /// <summary>
         /// 将8位日期型整型数据转换为日期字符串数据
         /// </summary>
@@ -1567,11 +1589,16 @@ namespace sl.common
                 return dateStr.Substring(0, 4) + "年" + dateStr.Substring(4, 2) + "月" + dateStr.Substring(6) + "日";
             return dateStr.Substring(0, 4) + "-" + dateStr.Substring(4, 2) + "-" + dateStr.Substring(6);
         }
+        #endregion
 
+        #region 格式化日期
         public static string FormatDate(int date)
         {
             return FormatDate(date, false);
         }
+        #endregion
+
+        #region 得到下一个日期
         /// <summary>
         /// 得到下一个日期
         /// </summary>
@@ -1582,10 +1609,16 @@ namespace sl.common
             DateTime dt = DateTime.Now.AddDays(daycount);
             return dt;
         }
+        #endregion
+
+        #region 获取UUID
         public static string UUID()
         {
             return Guid.NewGuid().ToString().Replace("-", "");
         }
+        #endregion
+
+        #region 闭合html标签
         /// <summary>
         /// 闭合html标签
         /// </summary>
@@ -1613,8 +1646,9 @@ namespace sl.common
 
             return str;
         }
+        #endregion
 
-
+        #region 获取颜色代码
         public static string GetColorString(string old, string key)
         {
             char[] sp = { ' ', '|', '\'', ';', ':', '-', '(', ')' };
@@ -1634,7 +1668,9 @@ namespace sl.common
             }
             return old;
         }
+        #endregion
 
+        #region 删除文件
         public static void DeleteFiles(string carPicture)
         {
             if (!string.IsNullOrEmpty(carPicture))
@@ -1646,8 +1682,9 @@ namespace sl.common
                 }
             }
         }
+        #endregion
 
-
+        #region 获取当前页面的主域，如www.qq.com主域是qq.com
         /// <summary>
         /// 获取当前页面的主域，如www.qq.com主域是qq.com
         /// </summary>
@@ -1669,10 +1706,13 @@ namespace sl.common
                 return urlHost2;
             }
         }
+        #endregion
 
+        #region 获取最小时间
         public static DateTime GetMinDateTime()
         {
             return SqlDateTime.MinValue.Value;
         }
+        #endregion
     }
 }

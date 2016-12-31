@@ -48,7 +48,7 @@ namespace sl.web.Areas.Manager.Controllers
             {
                 if (Request.IsPost())
                 {
-                    m.M_IsDeleted = false;
+                    m.IsDeleted = false;
                     m.M_Sort = 0;
                     m.M_IsVisible = true;
                 }
@@ -92,7 +92,7 @@ namespace sl.web.Areas.Manager.Controllers
             bool flag = true;
             foreach (var sysMenu in sysMenus)
             {
-                sysMenu.M_IsDeleted = true;
+                sysMenu.IsDeleted = true;
                 flag = moduleService.Update(sysMenu) && flag;
             }
             return DelMessage(flag);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using PetaPoco;
+using Newtonsoft.Json;
 
 namespace sl.model
 {
@@ -37,7 +38,7 @@ namespace sl.model
         public bool M_IsMenu { get; set; }
 
         [Column]
-        public bool M_IsDeleted { get; set; }
+        public bool IsDeleted { get; set; }
 
         [Column]
         public string M_Controller { get; set; }

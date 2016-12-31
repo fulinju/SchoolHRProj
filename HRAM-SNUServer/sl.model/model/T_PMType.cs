@@ -23,5 +23,10 @@ namespace sl.model
         [JsonProperty("pm_typevalue")]
         public string PM_TypeValue { get; set; }
 
+        [JsonIgnore]
+        [Column]
+        [JsonProperty("isdeleted")]
+        public bool IsDeleted { get; set; }
+
     }
 }

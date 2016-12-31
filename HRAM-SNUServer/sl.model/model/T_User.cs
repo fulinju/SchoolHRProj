@@ -37,6 +37,11 @@ namespace sl.model
         [JsonProperty("u_maibox")]
         public string U_MaiBox { get; set; }
 
+        [JsonIgnore]
+        [Column]
+        [JsonProperty("isdeleted")]
+        public bool IsDeleted { get; set; }
+
         //忽略该属性
         //[JsonIgnore]
         //public string Check_Code { get; set; }

@@ -9,8 +9,6 @@ using sl.web.ui;
 using sl.validate;
 using Newtonsoft.Json;
 using PetaPoco;
-using PetaPoco.Orm;
-
 
 namespace sl.web.Areas.Manager.Controllers
 {
@@ -21,12 +19,6 @@ namespace sl.web.Areas.Manager.Controllers
     {
         //
         // GET: /Manager/User/
-        private ITUserService usersService;
-
-        public UserController(ITUserService usersService)
-        {
-            this.usersService = usersService;
-        }
 
         public ActionResult UsersView()
         {
@@ -34,21 +26,26 @@ namespace sl.web.Areas.Manager.Controllers
         }
 
         #region 查询
-        public ActionResult GetUsersList(string u_loginname = "")
+        public ActionResult GetUsersList(string u_loginname)
         {
-            Sql where = Condition.Builder.Like("M_LoginName", u_loginname).Create();
-            return CommonPageList<T_User>(where);
+            Sql sql = Sql.Builder;
+
+            u_loginname = "%" + u_loginname + "%";
+            sql.Append("Select * from T_User where U_LoginName Like @0 and IsDeleted = 0", u_loginname);
+
+            return CommonPageList<T_User>(sql,UtilsDB.DB);
         }
         #endregion
+
 
         #region 删除用户
         public ActionResult UsersDel(string model)
         {
-            List<T_User> userEntityList = JsonConvert.DeserializeObject<List<T_User>>(model);
-            bool flag = true;
-            foreach (var entity in userEntityList)
+            List<T_User> usersList = JsonConvert.DeserializeObject<List<T_User>>(model);
+            int flag = 0;
+            foreach (var entity in usersList)
             {
-                flag = usersService.Delete(entity);
+                flag = UtilsDB.DB.Delete(entity);
             }
             return DelMessage(flag);
         }
@@ -72,7 +69,9 @@ namespace sl.web.Areas.Manager.Controllers
                     }
                     else
                     {
-                        object result = DIContainer.Resolve<IBaseDao<T_User>>().Insert(m);
+                        //object result = DIContainer.Resolve<IBaseDao<T_User>>().Insert(m);
+                        m.IsDeleted = false;
+                        object result = UtilsDB.DB.Insert(m);
                         return SaveMessage(result);
                     }
                 }
@@ -80,7 +79,9 @@ namespace sl.web.Areas.Manager.Controllers
             }
             else
             {
-                T_User load = usersService.Load(id);
+                //T_User load = UtilsDB.DB.SingleOrDefault<T_User>(id);
+                Sql sql = Sql.Builder.Append("Select * from T_User Where pk_id = @0", id);
+                T_User load = UtilsDB.DB.FirstOrDefault<T_User>(sql);
                 String oldPwd = load.U_Password;
                 if (Request.IsPost())
                 {
@@ -92,7 +93,7 @@ namespace sl.web.Areas.Manager.Controllers
                             load.U_Password = passwordMd5;
                         }
                         Model valid = Model.Valid(load);
-                        return valid.Result ? SaveMessage(usersService.Update(load)) : ErrorMessage(valid.Message);
+                        return valid.Result ? SaveMessage(UtilsDB.DB.Update(load)) : ErrorMessage(valid.Message);
                     }
                 }
                 return View(load);

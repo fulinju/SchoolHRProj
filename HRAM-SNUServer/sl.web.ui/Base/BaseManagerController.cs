@@ -169,8 +169,10 @@ namespace sl.web.ui
         /// <typeparam name="T"></typeparam>
         /// <param name="list"></param>
         /// <returns></returns>
-        public ActionResult CommonPageList<T>(Page<T> list)
+        public ActionResult CommonPageList<T>(Sql sql,Database DB)
         {
+            sql.OrderBy(Sort); //排序
+            Page<T> list = DB.Page<T>(PageIndex, PageSize, sql);
             return Json(new { total = list.TotalItems, rows = list.Items });
             /*return Json(new Dictionary<string, object> { { "total", list.TotalItems }, { "rows", list.Items } },
                         JsonRequestBehavior.AllowGet);*/

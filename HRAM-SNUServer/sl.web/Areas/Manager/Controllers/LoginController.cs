@@ -24,7 +24,7 @@ namespace sl.web.Areas.Manager.Controllers
         }
 
         [HttpPost]
-        public ActionResult LoginCheck(string loginName, string loginPwd, string checkCode, bool remberpassword = false)
+        public ActionResult LoginCheck(string loginName, string loginPwd, string checkCode, bool remberpassword = true)
         {
             string errormessage;
 
@@ -46,32 +46,38 @@ namespace sl.web.Areas.Manager.Controllers
                 return Json(new JsonTip("0", errormessage));
             }
 
-            ITUserService service = DIContainer.Resolve<ITUserService>();
             string passwordMd5 = Security.MD5Encrypt(loginPwd);
 
-
             //Condition where = Condition.Builder.Equal("A_LoginName", loginName).Equal("A_Password", loginPwd);
-            Condition where = Condition.Builder.Equal("U_LoginName", loginName).Equal("U_Password", passwordMd5);
 
+            Sql sql = Sql.Builder;
+            sql.Append("Select * from T_User where U_LoginName=@0 and U_Password = @1", loginName, passwordMd5);
+            T_User loginer = UtilsDB.DB.FirstOrDefault<T_User>(sql);
 
-            T_User manager = service.Load(where.Create());
-            if (manager == null)
+            if (loginer == null)
             {
                 errormessage = "用户名或者密码错误!";
                 return Json(new JsonTip("0", errormessage));
             }
 
-            if (!manager.U_LoginTypeID.Equals(ConstantData.AdminTypeCode))
+            if (!loginer.U_LoginTypeID.Equals(ConstantData.AdminTypeCode))
             {
                 errormessage = "该用户不是管理员";
             }
             else
             {
-                Session[Key.MANAGER_INFO] = manager;
-                service.Update(manager);
+                UtilsDB.DB.Update(loginer);
+                Session[Key.MANAGER_INFO] = loginer;
                 if (remberpassword)
                 {
-                    Utils.WriteCookie(Key.MANAGER_NAME, Security.DesEncrypt(CachedConfigContext.Current.WebSiteConfig.WebSiteKey, manager.U_LoginName));
+                    if (CachedConfigContext.Current.WebSiteConfig.WebSiteKey != null) //加密Key不为空
+                    {
+                        Utils.WriteCookie(Key.MANAGER_NAME, Security.DesEncrypt(CachedConfigContext.Current.WebSiteConfig.WebSiteKey, loginer.U_LoginName));//DES加密
+                    }
+                    else
+                    {
+                        Utils.WriteCookie(Key.MANAGER_NAME, loginer.U_LoginName);
+                    }
                     Utils.WriteCookie(Key.MANAGER_PASS, passwordMd5);
                 }
                 return Json(new JsonTip("1", Url.Action("Main", "Main", new { area = "Manager" })));

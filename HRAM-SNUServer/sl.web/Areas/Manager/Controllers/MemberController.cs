@@ -9,7 +9,6 @@ using sl.web.ui;
 using sl.validate;
 using Newtonsoft.Json;
 using PetaPoco;
-using PetaPoco.Orm;
 
 namespace sl.web.Areas.Manager.Controllers
 {
@@ -20,13 +19,7 @@ namespace sl.web.Areas.Manager.Controllers
     {
         //
         // GET: /Manager/Member/
-        private ITMemberService memberService;
-
-        public MemberController(ITMemberService memberService)
-        {
-            this.memberService = memberService;
-        }
-
+      
         public ActionResult MemberView()
         {
             return View();
@@ -35,19 +28,23 @@ namespace sl.web.Areas.Manager.Controllers
         #region 查询
         public ActionResult GetMembersList(string u_loginname = "")
         {
-            Sql where = Condition.Builder.Like("U_LoginName", u_loginname).Create();
-            return CommonPageList<T_Member>(where);
+            Sql sql = Sql.Builder;
+
+            u_loginname = "%" + u_loginname + "%";
+            sql.Append("Select * from T_Member where U_LoginName Like @0 and IsDeleted = 0", u_loginname);
+
+            return CommonPageList<T_Member>(sql, UtilsDB.DB);
         }
         #endregion
 
         #region 删除会员
         public ActionResult MembersDel(string model)
         {
-            List<T_Member> userEntityList = JsonConvert.DeserializeObject<List<T_Member>>(model);
-            bool flag = true;
-            foreach (var entity in userEntityList)
+            List<T_Member> membersList = JsonConvert.DeserializeObject<List<T_Member>>(model);
+            int flag = 0;
+            foreach (var entity in membersList)
             {
-                flag = memberService.Delete(entity);
+                flag = UtilsDB.DB.Delete(entity);
             }
             return DelMessage(flag);
         }
@@ -64,7 +61,8 @@ namespace sl.web.Areas.Manager.Controllers
                     if (validate.Result)
                     {
                         m.M_ImgURL = UploadFile();
-                        object result = memberService.Insert(m);
+                        m.IsDeleted = false;
+                        object result = UtilsDB.DB.Insert(m);
                         return SaveMessage(result);
                     }
                     else
@@ -76,7 +74,8 @@ namespace sl.web.Areas.Manager.Controllers
             }
             else
             {
-                T_Member load = memberService.Load(id);
+                Sql sql = Sql.Builder.Append("Select * from T_Member Where pk_id = @0", id);
+                T_Member load = UtilsDB.DB.FirstOrDefault<T_Member>(sql);
                 if (load == null)
                 {
                     return Json(new JsonTip("0", "找不到该实体"));
@@ -95,7 +94,7 @@ namespace sl.web.Areas.Manager.Controllers
                                 load.M_ImgURL = fileName;
                             }
                         }
-                        bool success = memberService.Update(load);
+                        int success = UtilsDB.DB.Update(load);
                         return SaveMessage(success);
                     }
                 }
@@ -125,13 +124,14 @@ namespace sl.web.Areas.Manager.Controllers
         [HttpPost]
         public ActionResult DelM_ImgUrl(string id = "0")
         {
-            var m = memberService.Load(id);
-            bool success = false;
+            Sql sql = Sql.Builder.Append("Select * from T_Member Where pk_id = @0", id);
+            var m = UtilsDB.DB.FirstOrDefault<T_Member>(sql);
+            int success = 0;
             if (m != null)
             {
                 Utils.DeleteFile(m.M_ImgURL);
                 m.M_ImgURL = string.Empty;
-                success = memberService.Update(m);
+                success = UtilsDB.DB.Update(m);
             }
             return SaveMessage(success);
 

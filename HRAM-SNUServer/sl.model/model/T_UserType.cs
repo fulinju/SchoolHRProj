@@ -22,5 +22,10 @@ namespace sl.model
         [Column]
         [JsonProperty("u_logintypevalue")]
         public string U_LoginTypeValue { get; set; }
+
+        [JsonIgnore]
+        [Column]
+        [JsonProperty("isdeleted")]
+        public bool IsDeleted { get; set; }
     }
 }
