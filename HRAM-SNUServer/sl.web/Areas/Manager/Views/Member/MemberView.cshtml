@@ -1,7 +1,7 @@
 ﻿@using sl.extension
 @{
     ViewBag.Title = "会员管理";
-    Layout = "~/Areas/Manager/Views/Shared/ManagerLayout.cshtml";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
 }
 
 <div id="toolbar">
@@ -11,10 +11,10 @@
             <table>
                 <tr>
                     <td>
-                        登录名：
+                        单位名称：
                     </td>
                     <td>
-                        @Html.Input("u_loginname")
+                        @Html.Input("m_name")
                     </td>
                     <td>
                         @Html.EasyuiLinkButtonForSearch("member_dg", "searchForm")
@@ -49,6 +49,14 @@
             <td>
                 @Html.EasyuiLinkButtonForReload("member_dg")
             </td>
+
+            <td>
+                <div class="datagrid-btn-separator">
+                </div>
+            </td>
+            <td>
+                @Html.EasyuiLinkButton("edit_summary", "编辑会员单位简介", new LinkButton { Icon = "icon-edit", OnClick = string.Format("EditSummary('{0}','{1}','{2}',{3},{4})", "member_dg", Url.Action("EditMemberSummary"), "编辑会员单位简介", 900, 600) });
+            </td>
         </tr>
     </table>
 </div>
@@ -58,20 +66,67 @@
     var url = '@Url.Action("GetMembersList")';
     var columns = [[
                     { field: 'u_loginname', title: '登录名', width: '10%', sortable: true },
-                    { field: 'm_reviewresultid', title: '类型ID', width: '10%', sortable: true },
-                    { field: 'm_applytime', title: '密码', width: '20%' },
-                    { field: 'm_name', title: '用户名', width: '12%', sortable: true },
-                    { field: 'm_typeid', title: '联系电话', width: '20%', sortable: true },
+                    { field: 'm_reviewresultvalue', title: '审核结果', width: '10%', sortable: true },
+                    { field: 'm_applytime', title: '申请时间', width: '20%',sortable: true },
+                    { field: 'm_name', title: '单位名称', width: '12%', sortable: true },
+                    { field: 'm_typevalue', title: '单位性质', width: '20%', sortable: true },
                     { field: 'm_organizationcode', title: '组织代码', width: '25%', sortable: true },
                     { field: 'm_address', title: '地址', width: '25%', sortable: true },
                     { field: 'm_corporatename', title: '法人代表', width: '25%', sortable: true },
                     { field: 'm_idcardno', title: '身份证号码', width: '25%', sortable: true },
                     { field: 'm_contacts', title: '联系人', width: '25%', sortable: true },
                     { field: 'm_contactsphone', title: '联系方式', width: '25%', sortable: true },
-                    { field: 'm_summary', title: '摘要', width: '25%', sortable: true },
                     { field: 'm_imgurl', title: '图片地址', width: '25%', sortable: true },
                     { field: 'm_url', title: '地址', width: '25%', sortable: true }
     ]];
-    initGrid("member_dg", url, "pk_id", "pk_id", columns, true, false);
+    initGrid("member_dg", url, "pk_id", "T_Member.pk_id", columns, true, false);
+</script>
+
+<script>
+    function EditSummary(dgid, url,title, width,height,btnText) {
+        var buttons = null;
+        if (btnText != "-1") {
+            buttons = [{
+                id: 'editSubmit',
+                text: btnText || '保 存',
+                iconCls: 'ext-icon-accept',
+                handler: function () {
+                    dialog.find('iframe').get(0).contentWindow.submitForm(dialog, $("#" + dgid), parent.$);
+                }
+            }, {
+                text: '取 消',
+                iconCls: 'ext-icon-cancel',
+                handler: function () {
+                    dialog.dialog('destroy');
+                }
+            }];
+        }
+        var rows = $("#" + dgid).datagrid("getSelections");
+
+        if (rows.length != 1) {
+            parent.$.messager.alert("提示!", "请选择一条记录!", "info");
+            return;
+        }
+
+        var id = rows[0].pk_id;
+
+        if (id) {
+            var dialog = parent.sy.modalDialog({
+                title: "&nbsp;" + title,
+                iconCls: 'icon-pencil',
+                url: url + "?id=" + id,
+                width: width || 700,
+                height: height || 500,
+                resizable: true,
+                maximizable: true,
+                onClose: function () {
+                    $("#" + dgid).datagrid("reload").datagrid('clearSelections').datagrid('clearChecked');
+                },
+                buttons: buttons
+            });
+        } else {
+            alert("id not found please check you initGrid()")
+        }
+    }
 </script>
 

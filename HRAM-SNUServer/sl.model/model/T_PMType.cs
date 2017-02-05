@@ -15,6 +15,7 @@ namespace sl.model
         [JsonProperty("pk_id")]
         public string pk_id { get; set; }
 
+
         [Column]
         [JsonProperty("pm_typeid")]
         public string PM_TypeID { get; set; }

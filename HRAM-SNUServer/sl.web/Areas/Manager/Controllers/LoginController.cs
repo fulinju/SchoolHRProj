@@ -10,7 +10,6 @@ using sl.web.ui;
 using sl.IService;
 using sl.service;
 using PetaPoco;
-using PetaPoco.Orm;
 
 namespace sl.web.Areas.Manager.Controllers
 {
@@ -48,8 +47,6 @@ namespace sl.web.Areas.Manager.Controllers
 
             string passwordMd5 = Security.MD5Encrypt(loginPwd);
 
-            //Condition where = Condition.Builder.Equal("A_LoginName", loginName).Equal("A_Password", loginPwd);
-
             Sql sql = Sql.Builder;
             sql.Append("Select * from T_User where U_LoginName=@0 and U_Password = @1", loginName, passwordMd5);
             T_User loginer = UtilsDB.DB.FirstOrDefault<T_User>(sql);
@@ -66,6 +63,8 @@ namespace sl.web.Areas.Manager.Controllers
             }
             else
             {
+                string manager_name = Utils.GetCookie(Key.MANAGER_NAME);
+                string manager_pass = Utils.GetCookie(Key.MANAGER_PASS);
                 UtilsDB.DB.Update(loginer);
                 Session[Key.MANAGER_INFO] = loginer;
                 if (remberpassword)

@@ -6,7 +6,7 @@
 
 @model List<T_SysModule>
 @{
-    Layout = "~/Areas/Manager/Views/Shared/ManagerLayout.cshtml";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
     WebSiteConfig config = CachedConfigContext.Current.WebSiteConfig;
 }
 <!DOCTYPE html>
@@ -207,12 +207,12 @@
             {
                 <div title="@m.M_Name">
                     @{
-                int? parentId = m.M_ID;
+                int? parentId = m.pk_id;
                     }
                     @foreach (var c in Model.Where(p => p.M_ParentNo == parentId))
                     {
                        
-                            c.M_LinkUrl = c.M_LinkUrl + "?singeId=" + c.M_ID;
+                            c.M_LinkUrl = c.M_LinkUrl + "?singeId=" + c.pk_id;
                         
                         <a href="javascript:void(0)" src="@c.M_LinkUrl" class="cs-navi-tab">@c.M_Name</a>
                     }

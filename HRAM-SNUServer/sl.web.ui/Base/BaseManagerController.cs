@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Diagnostics.SymbolStore;
 using System.Web.Mvc;
 using PetaPoco;
-using PetaPoco.Orm;
 using sl.IService;
 using sl.common;
 using sl.model;
@@ -42,11 +41,13 @@ namespace sl.web.ui
         /// <param name="filterContext"></param>
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (GetSessionManagerInfo() == null)
-            {
-                filterContext.Result = RedirectToAction("Login", "Login", new { Areas = "Manager" });
-                return;
-            }
+            T_User user = GetSessionManagerInfo();
+            //为了调试取消重定向
+            //if (GetSessionManagerInfo() == null)
+            //{
+            //    filterContext.Result = RedirectToAction("Login", "Login", new { Areas = "Manager" });
+            //    return;
+            //}
             base.OnActionExecuting(filterContext);
         }
 
@@ -65,9 +66,14 @@ namespace sl.web.ui
                 if (username != "" || password != "")
                 {
                     username = Security.DesDecrypt(CachedConfigContext.Current.WebSiteConfig.WebSiteKey, username);
-                    ITUserService service = DIContainer.Resolve<ITUserService>();
-                    Condition where = Condition.Builder.Equal("U_LoginName", username).Equal("U_LoginTypeID", password);
-                    manager = service.Load(where.Create());
+                    //ITUserService service = DIContainer.Resolve<ITUserService>();
+                    //Condition where = Condition.Builder.Equal("U_LoginName", username).Equal("U_LoginTypeID", password);
+                    //manager = service.Load(where.Create());
+                    Database DB = new Database("ConnectionString");
+                    Sql sql = Sql.Builder;
+                    sql.Append("Select * from T_User where U_LoginName = @0 and U_Password = @0", username, password);
+                    manager = DB.FirstOrDefault<T_User>(sql);
+
                     if (manager != null)
                     {
                         Session[Key.MANAGER_INFO] = manager;
@@ -86,14 +92,15 @@ namespace sl.web.ui
         /// <typeparam name="T"></typeparam>
         /// <param name="t"></param>
         /// <returns></returns>
-        public ActionResult CommonAdd<T>(T t)
+        public ActionResult CommonAdd<T>(Database DB, T t)
         {
             if (Request.IsPost())
             {
                 var validate = Model.Valid(t);
                 if (!validate.Result)
                     return ErrorMessage(validate.Message);
-                object result = DIContainer.Resolve<IBaseDao<T>>().Insert(t);
+                //object result = DIContainer.Resolve<IBaseDao<T>>().Insert(t);
+                object result = DB.Insert(t);
                 return SaveMessage(result);
             }
             return View(t);
@@ -106,22 +113,24 @@ namespace sl.web.ui
         /// <param name="t"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult CommonUpdate<T>(T t, int id = 0) where T : class
-        {
-            IBaseDao<T> service = DIContainer.Resolve<IBaseDao<T>>();
-            T load = service.Load(id);
-            if (Request.IsPost())
-            {
-                var validate = Model.Valid(t);
-                if (!validate.Result)
-                {
-                    return ErrorMessage(validate.Message);
-                }
-                bool updateSuccess = TryUpdateModel(load);
-                return updateSuccess ? SaveMessage(service.Update(load)) : ErrorMessage("更新实体错误...");
-            }
-            return View(load);
-        }
+        //public ActionResult CommonUpdate<T>(Database DB,T t, int id = 0) where T : class
+        //{
+        //    IBaseDao<T> service = DIContainer.Resolve<IBaseDao<T>>();
+        //    Sql sql = Sql.Builder;
+        //    sql.Append("Select * from ");
+        //    T load = service.Load(id);
+        //    if (Request.IsPost())
+        //    {
+        //        var validate = Model.Valid(t);
+        //        if (!validate.Result)
+        //        {
+        //            return ErrorMessage(validate.Message);
+        //        }
+        //        bool updateSuccess = TryUpdateModel(load);
+        //        return updateSuccess ? SaveMessage(service.Update(load)) : ErrorMessage("更新实体错误...");
+        //    }
+        //    return View(load);
+        //}
 
         /// <summary>
         /// 通用的删除
@@ -129,11 +138,11 @@ namespace sl.web.ui
         /// <typeparam name="T"></typeparam>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult CommonDelete<T>(int id)
-        {
-            bool success = DIContainer.Resolve<IBaseDao<T>>().DeleteById(id);
-            return DelMessage(success);
-        }
+        //public ActionResult CommonDelete<T>(int id)
+        //{
+        //    bool success = DIContainer.Resolve<IBaseDao<T>>().DeleteById(id);
+        //    return DelMessage(success);
+        //}
 
         /// <summary>
         /// 联表分页查询
@@ -143,25 +152,25 @@ namespace sl.web.ui
         /// <param name="where"></param>
         /// <param name="joinTable"></param>
         /// <returns></returns>
-        public ActionResult DynPageList<T>(string showFields, Sql where, List<Join> joinTable)
-        {
-            Page<dynamic> dynPager = DIContainer.Resolve<IBaseDao<T>>().DynPager(showFields, PageIndex, PageSize, joinTable, where, Sort);
-            return Json(new { total = dynPager.TotalItems, rows = dynPager.Items }, JsonRequestBehavior.AllowGet);
-        }
+        //public ActionResult DynPageList<T>(string showFields, Sql where, List<Join> joinTable)
+        //{
+        //    Page<dynamic> dynPager = DIContainer.Resolve<IBaseDao<T>>().DynPager(showFields, PageIndex, PageSize, joinTable, where, Sort);
+        //    return Json(new { total = dynPager.TotalItems, rows = dynPager.Items }, JsonRequestBehavior.AllowGet);
+        //}
 
-        /// <summary>
-        /// 分页查询
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="where"></param>
-        /// <returns></returns>
-        public ActionResult CommonPageList<T>(Sql where)
-        {
-            Page<T> list = DIContainer.Resolve<IBaseDao<T>>().Pager(PageIndex, PageSize, where, Sort);
-            return Json(new { total = list.TotalItems, rows = list.Items });
-            /*return Json(new Dictionary<string, object> { { "total", list.TotalItems }, { "rows", list.Items } },
-                        JsonRequestBehavior.AllowGet);*/
-        }
+        ///// <summary>
+        ///// 分页查询
+        ///// </summary>
+        ///// <typeparam name="T"></typeparam>
+        ///// <param name="where"></param>
+        ///// <returns></returns>
+        //public ActionResult CommonPageList<T>(Sql where)
+        //{
+        //    Page<T> list = DIContainer.Resolve<IBaseDao<T>>().Pager(PageIndex, PageSize, where, Sort);
+        //    return Json(new { total = list.TotalItems, rows = list.Items });
+        //    /*return Json(new Dictionary<string, object> { { "total", list.TotalItems }, { "rows", list.Items } },
+        //                JsonRequestBehavior.AllowGet);*/
+        //}
 
         /// <summary>
         /// 由Page进行分页

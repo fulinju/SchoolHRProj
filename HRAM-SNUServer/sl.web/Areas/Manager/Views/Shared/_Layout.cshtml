@@ -1,40 +1,35 @@
 ﻿<!DOCTYPE html>
+
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <link rel="icon" href="~/Images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="~Images/favicon.ico" type="image/x-icon" />
+    <link type="text/css" href="~/Css/admin.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @* 要先引入JQuery *@
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.form.js"></script>
+
+    @* 输入的验证 *@
+    <script src="~/Scripts/validBox/validBox.js"></script>
+
+    @* EasyUI 1.4 *@
+    <link href="~/Scripts/Easyui/themes/icon.css" rel="stylesheet" />
+    <link href="~/Scripts/Easyui/themes/extIcon.css" rel="stylesheet" />
+    <link href="~/Scripts/Easyui/themes/bootstrap/easyui.css" rel="stylesheet" />
+
+    <script src="~/Scripts/Easyui/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/Easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script src="~/Scripts/Easyui/easyui_functions.js"></script>
+    @* artDialog *@
+    <script src="~/Scripts/artDialog/artDialog.js"></script>
+    @* UEditor *@
+    <script src="~/Scripts/UEditor/ueditor.config.js"></script>
+    <script src="~/Scripts/UEditor/ueditor.all.min.js"></script>
+    <script src="~/Scripts/UEditor/lang/zh-cn/zh-cn.js"></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
-
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+    @RenderBody()
 </body>
 </html>

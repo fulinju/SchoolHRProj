@@ -16,5 +16,6 @@ namespace sl.web.ui
     public class JsonTipHelper
     {
         public static string ErrorJsonTip = "0";//错误的state
+        public static string SuccessJsonTip = "1";
     }
 }

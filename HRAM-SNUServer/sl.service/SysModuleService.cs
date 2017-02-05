@@ -7,22 +7,23 @@ namespace sl.service
 {
     public partial class SysModuleService
     {
-        public List<T_SysModule> TreeList(Sql where, string sort)
+        //树状结构的根节点
+        public List<T_SysModule> TreeList(Database DB,Sql sql,int rootNo)
         {
             List<T_SysModule> sortNodes = new List<T_SysModule>();
-           // List<T_SysModule> list = List(where, "Sort asc");
-            Database DB = new Database("ConnectionString");
-            List<T_SysModule> list = DB.Fetch<T_SysModule>(where);
-            List<T_SysModule> rootNodes = list.Where(p => p.M_ParentNo == 0).ToList();
+            List<T_SysModule> list = DB.Fetch<T_SysModule>(sql);
+            List<T_SysModule> rootNodes = list.Where(p => p.M_ParentNo == rootNo).ToList();
             foreach (T_SysModule m in rootNodes)
             {
                 GetChildrens(list, m, sortNodes, true);
             }
             return sortNodes;
         }
+
+        //获取树状结构的子集
         private void GetChildrens(List<T_SysModule> nodes, T_SysModule parentNode, List<T_SysModule> sortNodes, bool root)
         {
-            List<T_SysModule> chilren = nodes.Where(p => p.M_ParentNo == parentNode.M_ID).ToList();
+            List<T_SysModule> chilren = nodes.Where(p => p.M_ParentNo == parentNode.pk_id).ToList();
             parentNode.children = chilren;
             if (root)
                 sortNodes.Add(parentNode);

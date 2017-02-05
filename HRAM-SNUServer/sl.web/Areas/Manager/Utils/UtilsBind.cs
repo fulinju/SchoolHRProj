@@ -1,9 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using PetaPoco;
+using Newtonsoft.Json;
+using System.IO;
+using sl.common;
+
+
+
 using sl.model;
 
 namespace sl.web
@@ -57,6 +61,17 @@ namespace sl.web
         }
         #endregion
 
+        #region 绑定是否操作
+        public static List<SelectListItem> ChooseYesOrNo()
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            list.Add(new SelectListItem { Text ="否", Value = "0" });
+            list.Add(new SelectListItem { Text = "是", Value = "1" });
+
+            return list;
+        }
+        #endregion
+
         #region 绑定会员类型
         public static List<SelectListItem> MemberTypes()
         {
@@ -74,6 +89,67 @@ namespace sl.web
             {
                 list.Add(new SelectListItem { Text = ConstantData.ErrorMsg, Value = "" + ConstantData.ErrorCode });
             }
+
+            return list;
+        }
+        #endregion
+
+        #region 绑定控制器名称
+        public static List<SelectListItem> ControllerNames()
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            list.Add(new SelectListItem { Text = "无控制器", Value = "" }); //无控制器
+
+            var findPath = System.Web.HttpContext.Current.Server.MapPath("~/Areas/Manager/Controllers"); //Controller的路径
+
+            var files = DirFile.GetFileNames(findPath, "*.cs", false); //不搜索子目录
+
+            if (files != null)
+            {
+                for (int i = 0; i < files.Length; i++)
+                {
+                    list.Add(new SelectListItem { Text = DirFile.GetFileName(files[i]), Value = DirFile.GetFileName(files[i]) }); //截取名称带扩展名，Value也不需要绝对路径
+                }
+            }
+            else
+            {
+                list.Add(new SelectListItem { Text = ConstantData.ErrorMsg, Value = "" + ConstantData.ErrorCode });
+            }
+
+            return list;
+        }
+        #endregion
+
+        #region 绑定View
+        public static List<SelectListItem> ViewNames()
+        {
+            List<SelectListItem> list = new List<SelectListItem>(); //列表选项
+            list.Add(new SelectListItem { Text = "无视图", Value = "" }); //无控制器
+
+
+            var findPath = System.Web.HttpContext.Current.Server.MapPath("~/Areas/Manager/Views"); //Controller的路径
+
+            var dirs = DirFile.GetDirectories(findPath); //VIews下的子目录 不继续搜索
+
+            if (dirs != null)
+            {
+                for (int i = 0; i < dirs.Length; i++)
+                {
+                    var childrenDir = DirFile.GetFileName(dirs[i]);
+                    var files = DirFile.GetFileNames(findPath + '/' + childrenDir, "*.cshtml", false);
+                     if (files != null)
+                     {
+                         for (int j = 0; j < files.Length; j++)
+                         {
+                             list.Add(new SelectListItem { Text = DirFile.GetFileName(files[j]), Value = "/Manager/" + childrenDir + '/' + DirFile.GetFileNameNoExtension(files[j]) });//和JS不同,''里面只能有一个字符   值不含扩展名
+                         }
+                     }
+                }
+            }
+            else
+            {
+                list.Add(new SelectListItem { Text = ConstantData.ErrorMsg, Value = "" + ConstantData.ErrorCode });
+            }          
 
             return list;
         }

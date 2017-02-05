@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using PetaPoco;
-using PetaPoco.Orm;
 using sl.IService;
 using sl.common;
 using sl.model;
@@ -18,8 +17,9 @@ namespace sl.web.Areas.Manager.Controllers
         // GET: /Manager/Main/
         public ActionResult Main()
         {
-            var where = Condition.Builder.Equal("IsDeleted", false).Equal("M_IsVisible", true).Create();
-            List<T_SysModule> list = DIContainer.Resolve<ISysModuleService>().List(where, "M_Sort asc");
+            Sql sql = Sql.Builder;
+            sql.Append("Select * from T_SysModule where IsDeleted = 0 and M_IsVisible = 1 Order By M_Sort asc");
+            List<T_SysModule> list =UtilsDB.DB.Fetch<T_SysModule>(sql);
             return View(list);
         }
 

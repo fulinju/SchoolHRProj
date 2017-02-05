@@ -31,12 +31,24 @@ namespace sl.web.Areas.Manager.Controllers
             Sql sql = Sql.Builder;
 
             u_loginname = "%" + u_loginname + "%";
-            sql.Append("Select * from T_User where U_LoginName Like @0 and IsDeleted = 0", u_loginname);
 
-            return CommonPageList<T_User>(sql,UtilsDB.DB);
+            sql.Append("Select T_UserType.u_logintypevalue,");
+            sql.Append("T_User.pk_id,");
+            sql.Append("T_User.u_loginname,");
+            sql.Append("T_User.u_logintypeid,"); //不能少，重置的时候要用
+            sql.Append("T_User.u_password,");
+            sql.Append("T_User.u_username,");
+            sql.Append("T_User.u_phone,");
+            sql.Append("T_User.u_maibox");
+            sql.Append(" from T_User,T_UserType where U_LoginName Like @0 and T_User.IsDeleted = 0", u_loginname);
+            sql.Append(" and T_UserType.U_LoginTypeID = T_User.U_LoginTypeID");
+            List<dynamic> list = UtilsDB.DB.Fetch<dynamic>(sql);
+
+            string json = JsonConvert.SerializeObject(list);
+
+            return CommonPageList<dynamic>(sql, UtilsDB.DB);
         }
         #endregion
-
 
         #region 删除用户
         public ActionResult UsersDel(string model)
@@ -45,12 +57,12 @@ namespace sl.web.Areas.Manager.Controllers
             int flag = 0;
             foreach (var entity in usersList)
             {
-                flag = UtilsDB.DB.Delete(entity);
+                entity.IsDeleted = true;
+                flag = UtilsDB.DB.Update(entity); //假删除
             }
             return DelMessage(flag);
         }
         #endregion
-
 
         #region 编辑用户
         public ActionResult UsersEdit(T_User m, string id = "0")
@@ -69,7 +81,6 @@ namespace sl.web.Areas.Manager.Controllers
                     }
                     else
                     {
-                        //object result = DIContainer.Resolve<IBaseDao<T_User>>().Insert(m);
                         m.IsDeleted = false;
                         object result = UtilsDB.DB.Insert(m);
                         return SaveMessage(result);
@@ -79,9 +90,9 @@ namespace sl.web.Areas.Manager.Controllers
             }
             else
             {
-                //T_User load = UtilsDB.DB.SingleOrDefault<T_User>(id);
-                Sql sql = Sql.Builder.Append("Select * from T_User Where pk_id = @0", id);
-                T_User load = UtilsDB.DB.FirstOrDefault<T_User>(sql);
+                Object obj = id;
+                T_User load = UtilsDB.DB.SingleOrDefault<T_User>(obj);
+
                 String oldPwd = load.U_Password;
                 if (Request.IsPost())
                 {
@@ -100,5 +111,38 @@ namespace sl.web.Areas.Manager.Controllers
             }
         }
         #endregion
-	}
+
+        #region 重置密码
+        public ActionResult ResetUserPWD(string model)
+        {
+            List<T_User> usersList = JsonConvert.DeserializeObject<List<T_User>>(model);
+            int flag = 0;
+
+            foreach (var entity in usersList)
+            {
+                string initPwd = entity.U_LoginName; //初始化密码为登录名
+                string passwordMd5 = Security.MD5Encrypt(initPwd);
+                entity.U_Password = passwordMd5;
+                flag = UtilsDB.DB.Update(entity);
+            }
+            return Json(flag == 1 ? new JsonTip("1", "重置成功") : new JsonTip("0", "重置失败!"));
+        }
+        #endregion
+
+
+        #region 检查用户名是否存在
+        [HttpPost]
+        public ActionResult CheckUserIsExist(string u_loginname)
+        {
+            Sql sql = Sql.Builder;
+            sql.Append("Select * from T_User where U_LoginName = @0", u_loginname);
+            T_User user = UtilsDB.DB.FirstOrDefault<T_User>(sql);
+            if (user != null)
+            {
+                return Json(new { state = false, message = "此用户名已存在，请更换" });
+            }
+            return Json(new { state = true, message = string.Empty });
+        }
+        #endregion
+    }
 }

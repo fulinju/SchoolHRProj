@@ -1,6 +1,5 @@
 ﻿using System.Web;
 using PetaPoco;
-using PetaPoco.Orm;
 using sl.IService;
 using sl.common;
 using sl.model;
@@ -24,8 +23,12 @@ namespace sl.web.ui
                 string userpass = Utils.GetCookie(Key.MANAGER_PASS);
                 if (username != "" || userpass != "")
                 {
-                    Condition where = Condition.Builder.Equal("A_LoginName", username).Equal("A_Password", Security.MD5Encrypt(userpass));
-                    manager = DIContainer.Resolve<ITUserService>().Load(where);
+                    //Condition where = Condition.Builder.Equal("A_LoginName", username).Equal("A_Password", Security.MD5Encrypt(userpass));
+                    //manager = DIContainer.Resolve<ITUserService>().Load(where);
+
+                    Database DB = new Database("ConnectionString");
+                    Sql sql = Sql.Builder;
+                    sql.Append("Select * from T_User where U_LoginName = @0 and U_Password = @0", username, Security.MD5Encrypt(userpass));
                     if (manager != null)
                     {
                         HttpContext.Current.Session[Key.MANAGER_INFO] = manager;

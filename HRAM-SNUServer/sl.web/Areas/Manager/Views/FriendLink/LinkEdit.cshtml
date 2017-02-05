@@ -1,0 +1,57 @@
+﻿@using sl.model
+@using sl.extension
+
+
+@model T_FriendlyLink
+@{
+    ViewBag.Title = "编辑友情链接";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
+}
+<form class="validate" method="post" autocomplete="off" action="" enctype="multipart/form-data">
+    <table class="msgtable" title="编辑友情链接" style="width:100%;height:100%">
+        <tr>
+            <th>
+                登录名：
+            </th>
+            <td>
+                @Html.InputFor(m => m.U_LoginName, Html.Valid().Required("请输入用户名！").AsHtmlAttribute())
+            </td>
+        </tr>
+        <tr>
+            <th style="width: 130px">
+                链接名称：
+            </th>
+            <td>
+                @Html.InputFor(m => m.FL_Name, Html.Valid().Required("请输入链接名称！").AsHtmlAttribute())
+            </td>
+        </tr>
+
+        <tr>
+            <th style="width: 130px">
+                链接地址：
+            </th>
+            <td>
+                @Html.InputFor(m => m.FL_URL, Html.Valid().Required("请输入链接地址！").AsHtmlAttribute())
+            </td>
+        </tr>
+
+        <tr>
+            <th style="width: 130px">
+                链接图片地址：
+            </th>
+            <td>
+                @Html.InputFor(m => m.FL_ImgURL, Html.Valid().Required("请输入链接图片地址！").AsHtmlAttribute())
+            </td>
+        </tr>
+
+        <tr>
+            <th style="width: 130px">
+                添加时间：
+            </th>
+            <td>
+                @Html.EasyUiDateTimeBoxFor(m => m.FL_AddTime, Html.Valid().Required("请输入添加时间！").AsHtmlAttribute())
+            </td>
+        </tr>
+
+    </table>
+</form>

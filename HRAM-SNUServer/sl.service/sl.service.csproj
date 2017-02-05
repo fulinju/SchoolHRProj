@@ -33,10 +33,8 @@
     <Reference Include="Core.Config">
       <HintPath>..\DLL\Core.Config.dll</HintPath>
     </Reference>
-    <Reference Include="PetaPoco">
-      <HintPath>..\DLL\PetaPoco.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -56,6 +54,10 @@
       <Project>{896227f9-3624-4b87-9b2d-90389f8990f2}</Project>
       <Name>sl.common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\sl.extension\sl.extension.csproj">
+      <Project>{7507bf3f-9eac-45cd-994a-0478be737f74}</Project>
+      <Name>sl.extension</Name>
+    </ProjectReference>
     <ProjectReference Include="..\sl.IService\sl.IService.csproj">
       <Project>{6b9f68bf-573a-4d2c-99c9-0cc552d35ae5}</Project>
       <Name>sl.IService</Name>
@@ -64,6 +66,9 @@
       <Project>{3d33e14b-d2e1-458c-bdeb-5bc241caf0cc}</Project>
       <Name>sl.model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

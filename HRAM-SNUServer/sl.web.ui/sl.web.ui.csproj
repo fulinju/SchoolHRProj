@@ -49,9 +49,6 @@
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PetaPoco">
-      <HintPath>..\DLL\PetaPoco.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
@@ -120,6 +117,10 @@
     <ProjectReference Include="..\sl.service\sl.service.csproj">
       <Project>{0b50af9e-d504-44d3-b3e0-66374ca9a9b4}</Project>
       <Name>sl.service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\sl.validate\sl.validate.csproj">
+      <Project>{22f2a68a-f501-4d63-90d5-7bfbfc40a5b5}</Project>
+      <Name>sl.validate</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

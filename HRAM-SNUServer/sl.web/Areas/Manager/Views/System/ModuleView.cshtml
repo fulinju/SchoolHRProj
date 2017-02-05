@@ -1,12 +1,13 @@
 ﻿@using sl.extension
 @{
     ViewBag.Title = "系统模块管理";
-    Layout = "~/Areas/Manager/Views/Shared/ManagerLayout.cshtml";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
     
 }
 
 <table id="module_dg"></table>
 <div id="toolbar">
+
     <table>
         <tr>
             <td>
@@ -29,14 +30,6 @@
         <td>
             <div class="datagrid-btn-separator">
             </div>
-        </td>
-
-        <td>
-            <div class="datagrid-btn-separator">
-            </div>
-        </td>
-        <td>
-            @Html.EasyuiLinkButtonForReload("module_dg")
         </td>
     </tr>
 </table>
@@ -76,6 +69,7 @@
         },
         { field: 'M_LinkUrl', title: '菜单链接地址', width: '20%' }
     ]];
-    initTreeGrid("module_dg", url, '权限模块列表', 'M_ID', 'M_Name', columns);
+    initTreeGrid("module_dg", url, '权限模块列表', 'pk_id', 'M_Name', columns);
+    //initGrid("module_dg", url, "pk_id", "pk_id", columns, true, false);
 </script>
 

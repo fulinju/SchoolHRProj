@@ -42,12 +42,12 @@ namespace sl.extension
         }
         public static MvcHtmlString EasyuiLinkButtonForAdd(this HtmlHelper htmlHelper, string dgid, string title, string url, int width = 700, int height = 500, object htmlAttributes = null, bool showButton = true)
         {
-            LinkButton button = new LinkButton { Icon = "icon-add", OnClick = string.Format("newPage('{0}','{1}','{2}',{3},{4})", dgid, title, url, width, height) };
+            LinkButton button = new LinkButton { Icon = "icon-add", OnClick = string.Format("Add('{0}','{1}','{2}',{3},{4})", dgid, title, url, width, height) };
             return EasyuiLinkButton(htmlHelper, "btnAdd", "添加", button, htmlAttributes);
         }
         public static MvcHtmlString EasyuiLinkButtonForEdit(this HtmlHelper htmlHelper, string dgid, string title, string url, int width = 700, int height = 500, object htmlAttributes = null, bool showButton = true)
         {
-            LinkButton button = new LinkButton { Icon = "icon-edit", OnClick = string.Format("edit('{0}','{1}','{2}',{3},{4})", dgid, title, url, width, height) };
+            LinkButton button = new LinkButton { Icon = "icon-edit", OnClick = string.Format("Edit('{0}','{1}','{2}',{3},{4})", dgid, title, url, width, height) };
             return EasyuiLinkButton(htmlHelper, "btnEdit", "修改", button, htmlAttributes);
         }
         public static MvcHtmlString EasyuiLinkButtonForDel(this HtmlHelper htmlHelper, string dgid, string url, object htmlAttributes = null)

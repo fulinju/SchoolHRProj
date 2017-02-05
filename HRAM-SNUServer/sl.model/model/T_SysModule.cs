@@ -6,15 +6,16 @@ using Newtonsoft.Json;
 namespace sl.model
 {
     [TableName("T_SysModule")]
-    [PrimaryKey("M_ID")]
+    [PrimaryKey("pk_id")]
     [ExplicitColumns]
     public class T_SysModule
     {
+        [Column]
+        [JsonProperty("pk_id")]
+        public int pk_id { get; set; }
+
         [ResultColumn]
         public List<T_SysModule> children { get; set; }
-
-        [Column]
-        public int M_ID { get; set; }
 
         [Column]
         public string M_Name { get; set; }

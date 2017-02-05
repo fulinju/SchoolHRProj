@@ -1,22 +1,22 @@
-﻿using PetaPoco.Orm;
+﻿
 using sl.model;
 
 namespace sl.IService
 {
-    public partial interface ISysModuleService : IBaseDao<T_SysModule> { }
+    public partial interface ISysModuleService{ }
 
-    public partial interface ITUserService : IBaseDao<T_User> { }
+    public partial interface ITUserService { }
 
-    public partial interface ITMemberService : IBaseDao<T_Member> { }
+    public partial interface ITMemberService  { }
 
-    public partial interface ITUserTypeService : IBaseDao<T_UserType> { }
+    public partial interface ITUserTypeService{ }
 
-    public partial interface ITDMTypeService : IBaseDao<T_DMType> { }
+    public partial interface ITDMTypeService { }
 
-    public partial interface ITPMTypeService : IBaseDao<T_PMType> { }
+    public partial interface ITPMTypeService { }
 
-    public partial interface ITReviewResultService : IBaseDao<T_ReviewResult> { }
+    public partial interface ITReviewResultService{ }
 
-    public partial interface ITMemberTypeService : IBaseDao<T_MemberType> { }
+    public partial interface ITMemberTypeService { }
 
 }

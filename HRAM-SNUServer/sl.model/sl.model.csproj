@@ -37,10 +37,8 @@
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PetaPoco">
-      <HintPath>..\DLL\PetaPoco.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -53,10 +51,14 @@
   <ItemGroup>
     <Compile Include="Config\WebSiteConfig.cs" />
     <Compile Include="model\TypeModels.cs" />
+    <Compile Include="model\T_ADImgList.cs" />
     <Compile Include="model\T_DMType.cs" />
+    <Compile Include="model\T_DownloadManage.cs" />
+    <Compile Include="model\T_FriendlyLink.cs" />
     <Compile Include="model\T_Member.cs" />
     <Compile Include="model\T_MemberType.cs" />
     <Compile Include="model\T_PMType.cs" />
+    <Compile Include="model\T_PublishManage.cs" />
     <Compile Include="model\T_ReviewResult.cs" />
     <Compile Include="model\T_SysModule.cs" />
     <Compile Include="model\T_User.cs" />
@@ -69,9 +71,7 @@
       <Name>sl.extension</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AllEnum\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

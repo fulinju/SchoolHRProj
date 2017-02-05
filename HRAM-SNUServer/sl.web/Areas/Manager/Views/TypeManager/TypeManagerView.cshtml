@@ -4,7 +4,7 @@
 @model TypeModels
 @{
     ViewBag.Title = "类型管理";
-    Layout = "~/Areas/Manager/Views/Shared/ManagerLayout.cshtml";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
 }
 <style type="text/css">
     html, body {
@@ -275,60 +275,63 @@
             <table id="reviewresult_dg"></table>
         </div>
     </div>
-   
-
-    
-
-   
-
-    
-
-    
 </body>
 
 <script type="text/javascript">
-    var url = '@Url.Action("GetPMTypes")';
-    var columns = [[
-                        { field: 'pm_typeid', title: '发布类型ID', width: '20%', sortable: true },
-                        { field: 'pm_typevalue', title: '发布类型', width: '20%', sortable: true }
-    ]];
-    initGrid('pmtype_dg', url, "pk_id", "pk_id", columns, true, false); //不排序
-</script>
+    //显示用户类型
+    function showUserTypeList() {
+        var url = '@Url.Action("GetUserTypes")';
+        var columns = [[
+                            { field: 'u_logintypeid', title: '用户类型ID', width: '20%', sortable: true },
+                            { field: 'u_logintypevalue', title: '用户类型', width: '20%', sortable: true }
+        ]];
+        initGrid('usertype_dg', url, "pk_id", "pk_id", columns, true, false); //不排序
+    }
 
-<script type="text/javascript">
-    var url = '@Url.Action("GetUserTypes")';
-    var columns = [[
-                        { field: 'u_logintypeid', title: '用户类型ID', width: '20%', sortable: true },
-                        { field: 'u_logintypevalue', title: '用户类型', width: '20%', sortable: true }
-    ]];
-    initGrid('usertype_dg', url, "pk_id", "pk_id", columns, true, false); //不排序
-</script>
+    //显示会员类型
+    function showMemberTypeList() {
+        var url = '@Url.Action("GetMemberTypes")';
+        var columns = [[
+                            { field: 'm_typeid', title: '会员类型ID', width: '20%', sortable: true },
+                            { field: 'm_typevalue', title: '会员类型', width: '20%', sortable: true }
+        ]];
+        initGrid('mtype_dg', url, "pk_id", "pk_id", columns, true, false); //不排序
+    }
 
+    //显示发布类型
+    function showPMTypeList(){
+        var url = '@Url.Action("GetPMTypes")';
+        var columns = [[
+                            { field: 'pm_typeid', title: '发布类型ID', width: '20%', sortable: true },
+                            { field: 'pm_typevalue', title: '发布类型', width: '20%', sortable: true }
+        ]];
+        initGrid('pmtype_dg', url, "pk_id", "pk_id", columns, true, false); //不排序
+    }
 
-<script type="text/javascript">
-    var url = '@Url.Action("GetDMTypes")';
-    var columns = [[
-                        { field: 'dm_typeid', title: '下载类型ID', width: '20%', sortable: true },
-                        { field: 'dm_typevalue', title: '下载类型', width: '20%', sortable: true }
-    ]];
-    initGrid('dmtype_dg', url, "pk_id", "pk_id", columns, true, false); //不排序
-</script>
+    //显示下载类型
+    function showDMTypeList() {
+        var url = '@Url.Action("GetDMTypes")';
+        var columns = [[
+                            { field: 'dm_typeid', title: '下载类型ID', width: '20%', sortable: true },
+                            { field: 'dm_typevalue', title: '下载类型', width: '20%', sortable: true }
+        ]];
+        initGrid('dmtype_dg', url, "pk_id", "pk_id", columns, true, false); //不排序
+    }
 
-<script type="text/javascript">
-    var url = '@Url.Action("GetReviewResults")';
-    var columns = [[
-                        { field: 'm_reviewresultid', title: '审核结果ID', width: '20%', sortable: true },
-                        { field: 'm_reviewresultvalue', title: '审核结果', width: '20%', sortable: true }
-    ]];
-    initGrid('reviewresult_dg', url, "pk_id", "pk_id", columns, true, false); //不排序
-</script>
+    //显示审核结果
+    function showReviewResultList() {
+        var url = '@Url.Action("GetReviewResults")';
+        var columns = [[
+                            { field: 'm_reviewresultid', title: '审核结果ID', width: '20%', sortable: true },
+                            { field: 'm_reviewresultvalue', title: '审核结果', width: '20%', sortable: true }
+        ]];
+        initGrid('reviewresult_dg', url, "pk_id", "pk_id", columns, true, false); //不排序
+    }
 
-
-<script type="text/javascript">
-    var url = '@Url.Action("GetMemberTypes")';
-    var columns = [[
-                        { field: 'm_typeid', title: '会员类型ID', width: '20%', sortable: true },
-                        { field: 'm_typevalue', title: '会员类型', width: '20%', sortable: true }
-    ]];
-    initGrid('mtype_dg', url, "pk_id", "pk_id", columns, true, false); //不排序
+    //延时加载
+    setTimeout(showUserTypeList, 0);
+    setTimeout(showMemberTypeList, 500);
+    setTimeout(showPMTypeList, 1000);
+    setTimeout(showDMTypeList, 1500);
+    setTimeout(showReviewResultList, 2000);
 </script>

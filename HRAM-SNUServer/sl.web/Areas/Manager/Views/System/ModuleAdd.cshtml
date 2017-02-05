@@ -3,22 +3,22 @@
 @model T_SysModule
 @{
     ViewBag.Title = "添加/编辑菜单";
-    Layout = "~/Areas/Manager/Views/Shared/ManagerLayout.cshtml";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
 }
-<form class="validate" method="post" autocomplete="off" action="">
-    <table class="msgtable">
+<form class="validate" method="post" autocomplete="off" action="" enctype="multipart/form-data">
+    <table class="msgtable" title="添加/编辑菜单" style="width:100%;height:100%">
         <tr>
             <th style="width: 100px;">
                 菜单名称:
             </th>
             <td>
-                @Html.InputFor(p => p.M_Name)
+                @Html.InputFor(p => p.M_Name,new { placeholder = "请输入菜单名称" })
             </td>
             <th>
                 上级菜单:
             </th>
             <td>
-                @Html.EasyUiDropDownListTreeFor(p => p.M_ParentNo, Url.Action("ModuleTree", "System"))
+                @Html.EasyUiDropDownListTreeFor(p => p.M_ParentNo, Url.Action("ModuleTree", "System"), 240)
             </td>
         </tr>
         <tr></tr>
@@ -27,7 +27,7 @@
                 控制器:
             </th>
             <td>
-                @Html.InputFor(m => m.M_Controller)
+                @Html.DropDownListFor(m => m.M_Controller, UtilsBind.ControllerNames())
             </td>
             <th>
                 属性:
@@ -52,7 +52,7 @@
                 菜单链接地址:
             </th>
             <td colspan="3">
-                @Html.InputFor(m => m.M_LinkUrl, InputWidthType.Longest)
+                @Html.DropDownListFor(m => m.M_LinkUrl, UtilsBind.ViewNames())
             </td>
         </tr>
     </table>

@@ -17,11 +17,16 @@ namespace sl.extension.MvcExtensions.Controlls
         public int? Pid { get; set; }
         public string iconCls { get; set; }
 
-
-        public static List<TreeNode> CreateTree(List<TreeNode> list)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="rootID"></param>
+        /// <returns></returns>
+        public static List<TreeNode> CreateTree(List<TreeNode> list,int rootID)
         {
             List<TreeNode> sortNodes = new List<TreeNode>();
-            List<TreeNode> rootNodes = list.Where(p => p.Pid == 0).ToList();
+            List<TreeNode> rootNodes = list.Where(p => p.Pid == rootID).ToList(); 
             foreach (TreeNode treeNode in rootNodes)
             {
                 GetChildrens(list, treeNode, sortNodes, true);

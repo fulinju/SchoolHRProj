@@ -26,14 +26,30 @@ namespace sl.web.Areas.Manager.Controllers
         }
 
         #region 查询
-        public ActionResult GetMembersList(string u_loginname = "")
+        public ActionResult GetMembersList(string m_name = "")
         {
             Sql sql = Sql.Builder;
 
-            u_loginname = "%" + u_loginname + "%";
-            sql.Append("Select * from T_Member where U_LoginName Like @0 and IsDeleted = 0", u_loginname);
+            m_name = "%" + m_name + "%";
+            sql.Append("Select T_ReviewResult.m_reviewresultvalue,T_MemberType.m_typevalue,");
+            sql.Append("T_Member.pk_id,");
+            sql.Append("T_Member.u_loginname,");
+            sql.Append("T_Member.m_reviewresultid,");
+            sql.Append("T_Member.m_typeid,");
+            sql.Append("T_Member.m_applytime,");
+            sql.Append("T_Member.m_name,");
+            sql.Append("T_Member.m_organizationcode,");
+            sql.Append("T_Member.m_address,");
+            sql.Append("T_Member.m_corporatename,");
+            sql.Append("T_Member.m_idcardno,");
+            sql.Append("T_Member.m_contacts,");
+            sql.Append("T_Member.m_contactsphone,");
+            sql.Append("T_Member.m_imgurl,");
+            sql.Append("T_Member.m_url");
+            sql.Append(" from T_Member,T_ReviewResult,T_MemberType where M_Name Like @0 and T_Member.IsDeleted = 0", m_name);
+            sql.Append(" and T_Member.M_ReviewResultID = T_ReviewResult.M_ReviewResultID and T_Member.M_TypeID = T_MemberType.M_TypeID");
 
-            return CommonPageList<T_Member>(sql, UtilsDB.DB);
+            return CommonPageList<dynamic>(sql, UtilsDB.DB);
         }
         #endregion
 
@@ -51,6 +67,7 @@ namespace sl.web.Areas.Manager.Controllers
         #endregion
 
         #region 编辑会员
+        [ValidateInput(false)]
         public ActionResult MemberEdit(T_Member m, string id = "0")
         {
             if (id == "0")
@@ -74,8 +91,8 @@ namespace sl.web.Areas.Manager.Controllers
             }
             else
             {
-                Sql sql = Sql.Builder.Append("Select * from T_Member Where pk_id = @0", id);
-                T_Member load = UtilsDB.DB.FirstOrDefault<T_Member>(sql);
+                Object obj = id;
+                T_Member load = UtilsDB.DB.SingleOrDefault<T_Member>(obj);
                 if (load == null)
                 {
                     return Json(new JsonTip("0", "找不到该实体"));
@@ -137,5 +154,29 @@ namespace sl.web.Areas.Manager.Controllers
 
         }
         #endregion
+
+        #region 编辑会员单位简介
+        [ValidateInput(false)]
+        public ActionResult EditMemberSummary(T_Member m, string id = "0")
+        {
+            Object obj = id;
+            T_Member load = UtilsDB.DB.SingleOrDefault<T_Member>(obj);
+            if (load == null)
+            {
+                return Json(new JsonTip("0", "找不到该实体"));
+            }
+
+            if (Request.IsPost())
+            {
+                if (TryUpdateModel(load))
+                {
+                    int success = UtilsDB.DB.Update(load);
+                    return SaveMessage(success);
+                }
+            }
+            return View("EditMemberSummary", load);
+        }
+        #endregion
+        
     }
 }

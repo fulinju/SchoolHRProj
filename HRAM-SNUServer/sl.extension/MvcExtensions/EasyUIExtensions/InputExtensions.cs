@@ -25,7 +25,7 @@ namespace sl.extension
         }
 
         public static MvcHtmlString InputFor<T, TKey>(this HtmlHelper<T> htmlHelper, Expression<Func<T, TKey>> expression, InputWidthType? widthType, object htmlAttributes = null)
-        {
+        {                                             
             RouteValueDictionary valueDictionary = HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
             valueDictionary.AddCssClass("input");
             valueDictionary.AddCssClass(ResolveWidth(widthType));
@@ -148,7 +148,7 @@ namespace sl.extension
             return MvcHtmlString.Create(builder.ToString());
         }
         public static MvcHtmlString EasyUiDropDownListTreeFor<T, TKey>(this HtmlHelper<T> htmlHelper, Expression<Func<T, TKey>> expression, string url, int width = 240, object htmlAttributes = null)
-        {
+        {                                                             
             RouteValueDictionary valueDictionary = HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
             valueDictionary.AddCssClass("easyui-combotree");
             valueDictionary.Add("url", url);

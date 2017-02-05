@@ -9,7 +9,6 @@ using sl.web.ui;
 using sl.validate;
 using Newtonsoft.Json;
 using PetaPoco;
-using PetaPoco.Orm;
 
 
 namespace sl.web.Areas.Manager.Controllers
@@ -29,36 +28,39 @@ namespace sl.web.Areas.Manager.Controllers
         //private string ERR_MODIFY_ADMINTYPE = "不能更改管理员类型";
         //private string ERR_MODIFY_DEFAULTREVIEW = "不能更默认的审核结果";
 
-        private string ERR_USERTYPEID_EXIST = "用户类型ID已存在";
-        private string ERR_DMTYPEID_EXIST = "下载类型ID已存在";
-        private string ERR_PMTYPEID_EXIST = "发布类型ID已存在";
-        private string ERR_MEMBERTYPEID_EXIST = "会员类型ID已存在";
-        private string ERR_REVIEWID_EXIST = "审核结果ID已存在";
+        private string ERR_USERTYPE_EXIST = "用户类型已存在";
+        private string ERR_DMTYPE_EXIST = "下载类型ID已存在";
+        private string ERR_PMTYPE_EXIST = "发布类型ID已存在";
+        private string ERR_MEMBERTYPE_EXIST = "会员类型ID已存在";
+        private string ERR_REVIEW_EXIST = "审核结果ID已存在";
 
-       
-
+        private string TYPE_HEAD_USER = "USER_";
+        private string TYPE_HEAD_DM = "DM_";
+        private string TYPE_HEAD_PM = "PM_";
+        private string TYPE_HEAD_MEMBER = "MEMBER_";
+        private string TYPE_HEAD_REVIEW = "REVIEW_";
 
         //
-        // GET: /Manager/TypeManager/
-        private ITUserTypeService userTypeService;
-        private ITDMTypeService dmTypeService;
-        private ITPMTypeService pmTypeService;
-        private ITReviewResultService reviewResultService;
-        private ITMemberTypeService memberTypeService;
+        //// GET: /Manager/TypeManager/
+        //private ITUserTypeService userTypeService;
+        //private ITDMTypeService dmTypeService;
+        //private ITPMTypeService pmTypeService;
+        //private ITReviewResultService reviewResultService;
+        //private ITMemberTypeService memberTypeService;
 
-        public TypeManagerController
-            (ITUserTypeService userTypeService,
-            ITDMTypeService dmTypeService,
-            ITPMTypeService pmTypeService,
-            ITReviewResultService reviewResultService,
-            ITMemberTypeService memberTypeService)
-        {
-            this.userTypeService = userTypeService;
-            this.dmTypeService = dmTypeService;
-            this.pmTypeService = pmTypeService;
-            this.reviewResultService = reviewResultService;
-            this.memberTypeService = memberTypeService;
-        }
+        //public TypeManagerController
+        //    (ITUserTypeService userTypeService,
+        //    ITDMTypeService dmTypeService,
+        //    ITPMTypeService pmTypeService,
+        //    ITReviewResultService reviewResultService,
+        //    ITMemberTypeService memberTypeService)
+        //{
+        //    this.userTypeService = userTypeService;
+        //    this.dmTypeService = dmTypeService;
+        //    this.pmTypeService = pmTypeService;
+        //    this.reviewResultService = reviewResultService;
+        //    this.memberTypeService = memberTypeService;
+        //}
 
         public ActionResult TypeManagerView()
         {
@@ -69,21 +71,24 @@ namespace sl.web.Areas.Manager.Controllers
         #region 查询用户类型
         public ActionResult GetUserTypes(TypeModels m)
         {
-            string a_logintypevalue = "";
+            string u_logintypevalue = "";
             if (m != null)
             {
                 if (m.userType != null)
                 {
                     if (m.userType.U_LoginTypeValue != null)
                     {
-                        a_logintypevalue = m.userType.U_LoginTypeValue;
+                        u_logintypevalue = m.userType.U_LoginTypeValue;
                     }
                 }
             }
 
-            Sql where = Condition.Builder.Like("U_LoginTypeValue", a_logintypevalue).Create();
+            Sql sql = Sql.Builder;
 
-            return CommonPageList<T_UserType>(where);
+            u_logintypevalue = "%" + u_logintypevalue + "%";
+            sql.Append("Select * from T_UserType where U_LoginTypeValue Like @0 and IsDeleted = 0", u_logintypevalue);
+
+            return CommonPageList<T_UserType>(sql, UtilsDB.DB);
         }
         #endregion
 
@@ -102,9 +107,11 @@ namespace sl.web.Areas.Manager.Controllers
                 }
             }
 
-            Sql where = Condition.Builder.Like("DM_TypeID", dm_typevalue).Create();
+            Sql sql = Sql.Builder;
+            dm_typevalue = "%" + dm_typevalue + "%";
+            sql.Append("Select * from T_DMType where DM_TypeValue Like @0 and IsDeleted = 0", dm_typevalue);
 
-            return CommonPageList<T_DMType>(where);
+            return CommonPageList<T_DMType>(sql, UtilsDB.DB);
         }
         #endregion
 
@@ -122,11 +129,11 @@ namespace sl.web.Areas.Manager.Controllers
                     }
                 }
             }
-            Sql where = Condition.Builder
-                .Like("PM_TypeValue", pm_typevalue)
-                .Create();
 
-            return CommonPageList<T_PMType>(where);
+            Sql sql = Sql.Builder;
+            pm_typevalue = "%" + pm_typevalue + "%";
+            sql.Append("Select * from T_PMType where PM_TypeValue Like @0 and IsDeleted = 0", pm_typevalue);
+            return CommonPageList<T_PMType>(sql, UtilsDB.DB);
         }
         #endregion
 
@@ -145,9 +152,10 @@ namespace sl.web.Areas.Manager.Controllers
                 }
             }
 
-            Sql where = Condition.Builder.Like("M_ReviewResultValue", reviewResultValue).Create();
-
-            return CommonPageList<T_ReviewResult>(where);
+            Sql sql = Sql.Builder;
+            reviewResultValue = "%" + reviewResultValue + "%";
+            sql.Append("Select * from T_ReviewResult where M_ReviewResultValue Like @0 and IsDeleted = 0", reviewResultValue);
+            return CommonPageList<T_ReviewResult>(sql, UtilsDB.DB);
         }
         #endregion
 
@@ -166,9 +174,10 @@ namespace sl.web.Areas.Manager.Controllers
                 }
             }
 
-            Sql where = Condition.Builder.Like("M_TypeValue", mTypeValue).Create();
-
-            return CommonPageList<T_MemberType>(where);
+            Sql sql = Sql.Builder;
+            mTypeValue = "%" + mTypeValue + "%";
+            sql.Append("Select * from T_MemberType where M_TypeValue Like @0 and IsDeleted = 0", mTypeValue);
+            return CommonPageList<T_MemberType>(sql, UtilsDB.DB);
         }
         #endregion
 
@@ -255,7 +264,7 @@ namespace sl.web.Areas.Manager.Controllers
             List<string> listValue = new List<string>();
             foreach (var entity in memberTypes)
             {
-                if (ExistInTable("T_Member", "M_TypeID", entity.M_TypeID))
+                if (ExistInTable("T_Member", "pk_id", entity.M_TypeID))
                 {
                     listValue.Add(entity.M_TypeID); //获取存在于用户表的ID
                 }
@@ -271,16 +280,34 @@ namespace sl.web.Areas.Manager.Controllers
         {
             if (id == "0")
             {
-                return CommonInsert(m, "T_UserType", "U_LoginTypeID", m.U_LoginTypeID, ERR_USERTYPEID_EXIST);
+                if (Request.IsPost())
+                {
+                    m.U_LoginTypeID = TYPE_HEAD_USER + Utils.GetRamCode();
+                    m.IsDeleted = false;
+
+                    var validate = Model.Valid(m);
+                    if (!validate.Result)
+                    {
+                        return ErrorMessage(validate.Message);
+                    }
+                    else
+                    {
+                        m.IsDeleted = false;
+                        object result = UtilsDB.DB.Insert(m);
+                        return SaveMessage(result);
+                    }
+                }
+                return View(m);
             }
             else
             {
-                T_UserType load = userTypeService.Load(id);
+                Object obj = id;
+                T_UserType load = UtilsDB.DB.SingleOrDefault<T_UserType>(obj);
                 if (Request.IsPost())
                 {
-                    m.pk_id = id;
-                    return CommomEdit(m, "T_UserType", "pk_id", "T_User", "U_LoginTypeID", load.U_LoginTypeID, m.U_LoginTypeID, ERR_USERTYPEID_EXIST);
-
+                    load.U_LoginTypeValue = m.U_LoginTypeValue;
+                    Model valid = Model.Valid(load);
+                    return valid.Result ? SaveMessage(UtilsDB.DB.Update(load)) : ErrorMessage(valid.Message);
                 }
                 return View(load);
             }
@@ -290,18 +317,36 @@ namespace sl.web.Areas.Manager.Controllers
         #region 编辑下载类型
         public ActionResult DMTypeEdit(T_DMType m, string id = "0")
         {
-
             if (id == "0")
             {
-                return CommonInsert(m, "T_DMType", "DM_TypeID", m.DM_TypeID, ERR_DMTYPEID_EXIST);
+                if (Request.IsPost())
+                {
+                    m.DM_TypeID = TYPE_HEAD_DM + Utils.GetRamCode();
+                    m.IsDeleted = false;
+
+                    var validate = Model.Valid(m);
+                    if (!validate.Result)
+                    {
+                        return ErrorMessage(validate.Message);
+                    }
+                    else
+                    {
+                        m.IsDeleted = false;
+                        object result = UtilsDB.DB.Insert(m);
+                        return SaveMessage(result);
+                    }
+                }
+                return View(m);
             }
             else
             {
-                T_DMType load = dmTypeService.Load(id);
+                Object obj = id;
+                T_DMType load = UtilsDB.DB.SingleOrDefault<T_DMType>(obj);
                 if (Request.IsPost())
                 {
-                    m.pk_id = id;
-                    return CommomEdit(m, "T_DMType", "pk_id", "T_DownloadManage", "DM_TypeID", load.DM_TypeID, m.DM_TypeID, ERR_DMTYPEID_EXIST);
+                    load.DM_TypeValue = m.DM_TypeValue;
+                    Model valid = Model.Valid(load);
+                    return valid.Result ? SaveMessage(UtilsDB.DB.Update(load)) : ErrorMessage(valid.Message);
                 }
                 return View(load);
             }
@@ -313,15 +358,34 @@ namespace sl.web.Areas.Manager.Controllers
         {
             if (id == "0")
             {
-                return CommonInsert(m, "T_PMType", "PM_TypeID", m.PM_TypeID, ERR_PMTYPEID_EXIST);
+                if (Request.IsPost())
+                {
+                    m.PM_TypeID = TYPE_HEAD_PM + Utils.GetRamCode();
+                    m.IsDeleted = false;
+
+                    var validate = Model.Valid(m);
+                    if (!validate.Result)
+                    {
+                        return ErrorMessage(validate.Message);
+                    }
+                    else
+                    {
+                        m.IsDeleted = false;
+                        object result = UtilsDB.DB.Insert(m);
+                        return SaveMessage(result);
+                    }
+                }
+                return View(m);
             }
             else
             {
-                T_PMType load = pmTypeService.Load(id);
+                Object obj = id;
+                T_PMType load = UtilsDB.DB.SingleOrDefault<T_PMType>(obj);
                 if (Request.IsPost())
                 {
-                    m.pk_id = id;
-                    return CommomEdit(m, "T_PMType", "pk_id", "T_PublishManage", "PM_TypeID", load.PM_TypeID, m.PM_TypeID, ERR_PMTYPEID_EXIST);
+                    load.PM_TypeValue = m.PM_TypeValue;
+                    Model valid = Model.Valid(load);
+                    return valid.Result ? SaveMessage(UtilsDB.DB.Update(load)) : ErrorMessage(valid.Message);
                 }
                 return View(load);
             }
@@ -333,15 +397,34 @@ namespace sl.web.Areas.Manager.Controllers
         {
             if (id == "0")
             {
-                return CommonInsert(m, "T_ReviewResult", "M_ReviewResultID", m.M_ReviewResultID, ERR_REVIEWID_EXIST);
+                if (Request.IsPost())
+                {
+                    m.M_ReviewResultID = TYPE_HEAD_REVIEW + Utils.GetRamCode();
+                    m.IsDeleted = false;
+
+                    var validate = Model.Valid(m);
+                    if (!validate.Result)
+                    {
+                        return ErrorMessage(validate.Message);
+                    }
+                    else
+                    {
+                        m.IsDeleted = false;
+                        object result = UtilsDB.DB.Insert(m);
+                        return SaveMessage(result);
+                    }
+                }
+                return View(m);
             }
             else
             {
-                T_ReviewResult load = reviewResultService.Load(id);
+                Object obj = id;
+                T_ReviewResult load = UtilsDB.DB.SingleOrDefault<T_ReviewResult>(obj);
                 if (Request.IsPost())
                 {
-                    m.pk_id = id;
-                    return CommomEdit(m, "T_ReviewResult", "pk_id", "T_Member", "M_ReviewResultID", load.M_ReviewResultID, m.M_ReviewResultID, ERR_REVIEWID_EXIST);
+                    load.M_ReviewResultValue = m.M_ReviewResultValue;
+                    Model valid = Model.Valid(load);
+                    return valid.Result ? SaveMessage(UtilsDB.DB.Update(load)) : ErrorMessage(valid.Message);
                 }
                 return View(load);
             }
@@ -353,24 +436,39 @@ namespace sl.web.Areas.Manager.Controllers
         {
             if (id == "0")
             {
-                return CommonInsert(m, "T_MemberType", "M_TypeID", m.M_TypeID, ERR_MEMBERTYPEID_EXIST);
+                if (Request.IsPost())
+                {
+                    m.M_TypeID = TYPE_HEAD_MEMBER + Utils.GetRamCode();
+                    m.IsDeleted = false;
+
+                    var validate = Model.Valid(m);
+                    if (!validate.Result)
+                    {
+                        return ErrorMessage(validate.Message);
+                    }
+                    else
+                    {
+                        m.IsDeleted = false;
+                        object result = UtilsDB.DB.Insert(m);
+                        return SaveMessage(result);
+                    }
+                }
+                return View(m);
             }
             else
             {
-                T_MemberType load = memberTypeService.Load(id);
+                Object obj = id;
+                T_MemberType load = UtilsDB.DB.SingleOrDefault<T_MemberType>(obj);
                 if (Request.IsPost())
                 {
-                    m.pk_id = id;
-                    return CommomEdit(m, "T_MemberType", "pk_id", "T_Member", "M_TypeID", load.M_TypeID, m.M_TypeID, ERR_MEMBERTYPEID_EXIST);
-
+                    load.M_TypeValue = m.M_TypeValue;
+                    Model valid = Model.Valid(load);
+                    return valid.Result ? SaveMessage(UtilsDB.DB.Update(load)) : ErrorMessage(valid.Message);
                 }
                 return View(load);
             }
         }
         #endregion
-
-
-
 
 
         #region 判断是否存在于表中
@@ -397,76 +495,6 @@ namespace sl.web.Areas.Manager.Controllers
         }
         #endregion
 
-        #region 判断是否存在于表中的通用插入
-        /// <summary>
-        /// 判断是否存在于表中的通用插入
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="m">实体类</param> 
-        /// <param name="tableName">表名</param>
-        /// <param name="selectRow">需要判断的列</param>
-        /// <param name="selectRowValue">需要判断的列的值</param>
-        /// <param name="errMsg">错误信息</param>
-        /// <returns></returns> 
-        public ActionResult CommonInsert<T>(T m, string tableName, string selectRow, string selectRowValue, string errMsg)
-        {
-            if (Request.IsPost())
-            {
-                if (ExistInTable(tableName, selectRow, selectRowValue))
-                {
-                    return Json(new JsonTip(JsonTipHelper.ErrorJsonTip, errMsg));
-                }
-                else
-                {
-                    return CommonAdd(m);
-                }
-            }
-            return View(m);
-        }
-        #endregion
-
-        #region 更改的通用方法
-        /// <summary>
-        /// 更改的通用方法
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="m"></param>
-        /// <param name="modified"></param>
-        /// <param name="tableName"></param>
-        /// <param name="pkID"></param>
-        /// <param name="refTableName"></param>
-        /// <param name="refSelectRow"></param>
-        /// <param name="refSelectRowValue"></param>
-        /// <param name="errMsg"></param>
-        /// <returns></returns>
-        public ActionResult CommomEdit<T>(T m, string tableName, string pkID, string refTableName, string refSelectRow, string beforeValue, string changedValue, string errMsg)
-        {
-
-            if (beforeValue != changedValue)//ID修改了
-            {
-                if (ExistInTable(tableName, refSelectRow, changedValue))
-                {
-                    return Json(new JsonTip(JsonTipHelper.ErrorJsonTip, errMsg)); //ID已使用
-                }
-            }
-
-            Model valid = Model.Valid(m);
-            int result = 0;
-            if (UtilsDB.DB.Update(tableName, pkID, m) == 1)
-            {
-                if (ExistInTable(refTableName, refSelectRow, beforeValue))
-                {
-                    //其他表有这个数据 进行联表修改
-                    Sql sql = Sql.Builder;
-                    sql.Append("UPDATE " + refTableName + " SET " + refSelectRow + " =@0 WHERE " + refSelectRow + " = @1", changedValue, beforeValue);
-                    UtilsDB.DB.Execute(sql);
-                }
-                result = 1;
-            }
-
-            return valid.Result ? SaveMessage(result) : ErrorMessage(valid.Message);
-        }
-        #endregion
 
         #region 通用的删除方法
         public ActionResult CommonDelete<T>(List<T> m, List<string> listValue, string tableName, string pkID, string refTableName, string refSelectRow)
@@ -476,7 +504,7 @@ namespace sl.web.Areas.Manager.Controllers
             for (int i = 0; i < listValue.Count; i++)
             {
                 Sql sql = Sql.Builder;
-                sql.Append("UPDATE " + refTableName + " SET " + refSelectRow + " =@0 WHERE " + refSelectRow + " = @1", ConstantData.TYPE_NO_ID,listValue[i]);
+                sql.Append("UPDATE " + refTableName + " SET " + refSelectRow + " =@0 WHERE " + refSelectRow + " = @1", ConstantData.TYPE_NO_ID, listValue[i]);
                 UtilsDB.DB.Execute(sql);
             }
 
@@ -489,6 +517,82 @@ namespace sl.web.Areas.Manager.Controllers
         }
         #endregion
 
+
+
+        #region 检查用户类型是否存在
+        [HttpPost]
+        public ActionResult CheckUserTypeIsExist(string typeValue)
+        {
+            Sql sql = Sql.Builder;
+            sql.Append("Select * from T_UserType where U_LoginTypeValue = @0", typeValue);
+            T_UserType temp = UtilsDB.DB.FirstOrDefault<T_UserType>(sql);
+            if (temp != null)
+            {
+                return Json(new { state = false, message = ERR_USERTYPE_EXIST });
+            }
+            return Json(new { state = true, message = string.Empty });
+        }
+        #endregion
+
+        #region 检查下载类型是否存在
+        [HttpPost]
+        public ActionResult CheckDMTypeIsExist(string typeValue)
+        {
+            Sql sql = Sql.Builder;
+            sql.Append("Select * from T_DMType where DM_TypeValue = @0", typeValue);
+            T_DMType temp = UtilsDB.DB.FirstOrDefault<T_DMType>(sql);
+            if (temp != null)
+            {
+                return Json(new { state = false, message = ERR_DMTYPE_EXIST });
+            }
+            return Json(new { state = true, message = string.Empty });
+        }
+        #endregion
+
+        #region 检查发布类型是否存在
+        [HttpPost]
+        public ActionResult CheckPMTypeIsExist(string typeValue)
+        {
+            Sql sql = Sql.Builder;
+            sql.Append("Select * from T_PMType where PM_TypeValue = @0", typeValue);
+            T_PMType temp = UtilsDB.DB.FirstOrDefault<T_PMType>(sql);
+            if (temp != null)
+            {
+                return Json(new { state = false, message = ERR_PMTYPE_EXIST });
+            }
+            return Json(new { state = true, message = string.Empty });
+        }
+        #endregion
+
+        #region 检查审核结果是否存在
+        [HttpPost]
+        public ActionResult CheckReviewResultIsExist(string typeValue)
+        {
+            Sql sql = Sql.Builder;
+            sql.Append("Select * from T_ReviewResult where M_ReviewResultValue = @0", typeValue);
+            T_ReviewResult temp = UtilsDB.DB.FirstOrDefault<T_ReviewResult>(sql);
+            if (temp != null)
+            {
+                return Json(new { state = false, message = ERR_REVIEW_EXIST });
+            }
+            return Json(new { state = true, message = string.Empty });
+        }
+        #endregion
+
+        #region 检查会员类型是否存在
+        [HttpPost]
+        public ActionResult CheckMTypeIsExist(string typeValue)
+        {
+            Sql sql = Sql.Builder;
+            sql.Append("Select * from T_MemberType where M_TypeValue = @0", typeValue);
+            T_MemberType temp = UtilsDB.DB.FirstOrDefault<T_MemberType>(sql);
+            if (temp != null)
+            {
+                return Json(new { state = false, message = ERR_MEMBERTYPE_EXIST });
+            }
+            return Json(new { state = true, message = string.Empty });
+        }
+        #endregion
     }
 
 

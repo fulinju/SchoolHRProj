@@ -6,6 +6,6 @@ namespace sl.IService
 {
     public partial interface ISysModuleService
     {
-        List<T_SysModule> TreeList(Sql where, string sort);
+        List<T_SysModule> TreeList(Database DB, Sql sql,int rootNo);
     }
 }

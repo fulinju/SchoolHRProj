@@ -1,69 +1,103 @@
 ﻿@using sl.extension
 @{
     ViewBag.Title = "用户管理";
-    Layout = "~/Areas/Manager/Views/Shared/ManagerLayout.cshtml";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
 }
 
 <div id="toolbar">
-    <fieldset>
-        <legend>信息查询</legend>
-        <form id="searchForm" action="GetUsersList" method="post">
+            <fieldset>
+                <legend>信息查询</legend>
+                <form id="searchForm" action="GetUsersList" method="post">
+                    <table>
+                        <tr>
+                            <td>
+                                登录名：
+                            </td>
+                            <td>
+                                @Html.Input("u_loginname")
+                            </td>
+                            <td>
+                                @Html.EasyuiLinkButtonForSearch("user_dg", "searchForm")
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </fieldset>
+
             <table>
                 <tr>
                     <td>
-                        登录名：
+                        @Html.EasyuiLinkButtonForAdd("user_dg", "添加用户", Url.Action("UsersEdit"), 700, 400)
                     </td>
                     <td>
-                        @Html.Input("u_loginname")
+                        <div class="datagrid-btn-separator">
+                        </div>
                     </td>
                     <td>
-                        @Html.EasyuiLinkButtonForSearch("user_dg", "searchForm")
+                        @Html.EasyuiLinkButtonForEdit("user_dg", "修改用户", Url.Action("UsersEdit"), 700, 400)
+                    </td>
+                    <td>
+                        <div class="datagrid-btn-separator">
+                        </div>
+                    </td>
+                    <td>
+                        @Html.EasyuiLinkButtonForDel("user_dg", Url.Action("UsersDel"))
+                    </td>
+                    <td>
+                        <div class="datagrid-btn-separator">
+                        </div>
+                    </td>
+                    <td>
+                        @Html.EasyuiLinkButtonForReload("user_dg")
+                    </td>
+                    <td>
+                        <div class="datagrid-btn-separator">
+                        </div>
+                    </td>
+                    <td>
+                        @Html.EasyuiLinkButton("reset_pwd", "重置密码", new LinkButton { Icon = "icon-help", OnClick = string.Format("ResetPwd('{0}','{1}')", "user_dg", Url.Action("ResetUserPWD")) });
                     </td>
                 </tr>
             </table>
-        </form>
-    </fieldset>
-    <table>
-        <tr>
-            <td>
-                @Html.EasyuiLinkButtonForAdd("user_dg", "添加用户", Url.Action("UsersEdit"), 700, 400)
-            </td>
-            <td>
-                <div class="datagrid-btn-separator">
-                </div>
-            </td>
-            <td>
-                @Html.EasyuiLinkButtonForEdit("user_dg", "修改用户", Url.Action("UsersEdit"), 700, 400)
-            </td>
-            <td>
-                <div class="datagrid-btn-separator">
-                </div>
-            </td>
-            <td>
-                @Html.EasyuiLinkButtonForDel("user_dg", Url.Action("UsersDel"))
-            </td>
-            <td>
-                <div class="datagrid-btn-separator">
-                </div>
-            </td>
-            <td>
-                @Html.EasyuiLinkButtonForReload("user_dg")
-            </td>
-        </tr>
-    </table>
 </div>
 <table id="user_dg"></table>
+
 
 <script type="text/javascript">
     var url = '@Url.Action("GetUsersList")';
     var columns = [[
                     { field: 'u_loginname', title: '登录名', width: '10%', sortable: true },
-                    { field: 'u_logintypeid', title: '类型ID', width: '10%', sortable: true },
+                    { field: 'u_logintypevalue', title: '类型', width: '10%', sortable: true },
                     { field: 'u_password', title: '密码', width: '20%' },
                     { field: 'u_username', title: '用户名', width: '12%', sortable: true },
                     { field: 'u_phone', title: '联系电话', width: '20%', sortable: true },
-                    { field: 'u_maibox', title: '邮箱', width: '25%', sortable: true }    
+                    { field: 'u_maibox', title: '邮箱', width: '25%', sortable: true }
     ]];
-    initGrid("user_dg", url, "pk_id", "pk_id", columns, true, false);
+    initGrid("user_dg", url, "pk_id", "T_User.pk_id", columns, true, false);
+</script>
+
+<script>
+    function ResetPwd(dgid, url) {
+        var row = $("#" + dgid).datagrid("getSelections");
+        if (row.length < 1) {
+            parent.$.messager.alert("提示!", "请选择一条记录!", "info");
+            return;
+        } else {
+            parent.$.messager.confirm('提示', '确定要重置?', function (r) {
+                if (r) {
+                    $.post(url, { model: JSON.stringify(row) }, function (data) {
+                        if (data.state == "1") {
+                            $("#" + dgid).datagrid('reload').datagrid('clearSelections').datagrid('clearChecked');
+                            try {
+                                $("#" + dgid).treegrid('reload').treegrid('clearSelections').treegrid('clearChecked');
+                            } catch (e) { }
+                        } else {
+                            $.messager.alert('错误', data.message);
+                        }
+                    }, 'json');
+                }
+            });
+        }
+    }
 </script>
 

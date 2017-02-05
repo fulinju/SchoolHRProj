@@ -1,0 +1,36 @@
+﻿@using sl.model
+@using sl.extension
+
+@model T_PublishManage
+@{
+    ViewBag.Title = "编辑发布正文";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
+}
+<form class="validate" method="post" autocomplete="off" action="" enctype="multipart/form-data">
+    <div class="easyui-panel" title="编辑发布正文" style="width:100%;height:100%">
+        <table class="msgtable">
+            <tr>
+                <th>
+                    标题：
+                </th>
+                <td>
+                    @Html.InputFor(m => m.PM_Title)
+                </td>
+            </tr>
+        </table>
+
+
+        <div style="padding:10px">
+            <script id="PM_Text" name="PM_Text" type="text/plain">
+                @Html.Raw(@Model.PM_Text)
+            </script>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    var ue = UE.getEditor('PM_Text', {
+        initialFrameWidth: '95%',
+        initialFrameHeight: 360
+    });
+</script>

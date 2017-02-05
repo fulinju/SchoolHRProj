@@ -11,3 +11,13 @@ F:\School\Code\CSharpServer\SchoolHRProj-master\HRAM-SNUServer\sl.common\bin\Deb
 F:\School\Code\CSharpServer\SchoolHRProj-master\HRAM-SNUServer\sl.common\obj\Debug\sl.common.dll
 F:\School\Code\CSharpServer\SchoolHRProj-master\HRAM-SNUServer\sl.common\obj\Debug\sl.common.pdb
 C:\Code\CSharpServer\SchoolHRProj\HRAM-SNUServer\sl.common\obj\Debug\sl.common.csprojResolveAssemblyReference.cache
+F:\School\Code\SchoolHRProj\HRAM-SNUServer\sl.common\bin\Debug\sl.common.dll
+F:\School\Code\SchoolHRProj\HRAM-SNUServer\sl.common\bin\Debug\sl.common.pdb
+F:\School\Code\SchoolHRProj\HRAM-SNUServer\sl.common\obj\Debug\sl.common.dll
+F:\School\Code\SchoolHRProj\HRAM-SNUServer\sl.common\obj\Debug\sl.common.pdb
+C:\MyTemp\School\Code\SchoolHRProj\HRAM-SNUServer\sl.common\bin\Debug\sl.common.dll
+C:\MyTemp\School\Code\SchoolHRProj\HRAM-SNUServer\sl.common\bin\Debug\sl.common.pdb
+C:\MyTemp\School\Code\SchoolHRProj\HRAM-SNUServer\sl.common\obj\Debug\sl.common.csprojResolveAssemblyReference.cache
+C:\MyTemp\School\Code\SchoolHRProj\HRAM-SNUServer\sl.common\obj\Debug\sl.common.dll
+C:\MyTemp\School\Code\SchoolHRProj\HRAM-SNUServer\sl.common\obj\Debug\sl.common.pdb
+F:\School\Code\SchoolHRProj\HRAM-SNUServer\sl.common\obj\Debug\sl.common.csprojResolveAssemblyReference.cache
