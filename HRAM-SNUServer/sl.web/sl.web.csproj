@@ -1815,6 +1815,9 @@
     <Content Include="Areas\Manager\Views\PublishManager\PMAdView.cshtml" />
     <Content Include="Areas\Manager\Views\FriendLink\FriendLinkView.cshtml" />
     <Content Include="Areas\Manager\Views\FriendLink\LinkEdit.cshtml" />
+    <Content Include="Areas\Manager\Views\DownloadManager\DownloadManagerView.cshtml" />
+    <Content Include="Areas\Manager\Views\DownloadManager\DownloadEdit.cshtml" />
+    <Content Include="Areas\api\Views\web.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\font-awesome\css\font-awesome-ie7.css" />
     <Content Include="Scripts\font-awesome\css\font-awesome-ie7.min.css" />
@@ -2187,6 +2190,21 @@
     <Content Include="Scripts\validBox\images\valid_pointer.gif" />
     <Content Include="Scripts\validBox\validBox.js" />
     <Content Include="UITest.html" />
+    <Content Include="upload\member\icons\201612291629518305.png" />
+    <Content Include="upload\member\icons\201612291633462285.png" />
+    <Content Include="upload\member\icons\201612291634461458.png" />
+    <Content Include="upload\member\icons\201612291636214861.png" />
+    <Content Include="upload\member\icons\201612291658470351.png" />
+    <Content Include="upload\member\icons\201701071751404899.jpg" />
+    <Content Include="upload\member\icons\201701071755463480.jpg" />
+    <Content Include="upload\member\icons\201701071757023293.jpg" />
+    <Content Include="upload\member\icons\201701071918174982.jpg" />
+    <Content Include="upload\member\icons\201701102136286231.jpg" />
+    <Content Include="upload\ueditor\image\20170114\6362000243982399458456055.jpg" />
+    <Content Include="upload\ueditor\image\20170114\6362000352072381844155018.jpg" />
+    <Content Include="upload\ueditor\image\20170114\6362000361716333441430722.jpg" />
+    <Content Include="upload\ueditor\image\20170114\6362000367403858752764660.jpg" />
+    <Content Include="upload\ueditor\video\20170114\6362000402906289373592846.mp4" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -2197,6 +2215,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\api\Controllers\PublishController.cs" />
     <Compile Include="Areas\Manager\Controllers\ConfigController.cs" />
     <Compile Include="Areas\Manager\Controllers\DownloadManagerController.cs" />
     <Compile Include="Areas\Manager\Controllers\ExportToExcelController.cs" />
@@ -2225,6 +2244,7 @@
     <Compile Include="Scripts\UEditor\net\App_Code\NotSupportedHandler.cs" />
     <Compile Include="Scripts\UEditor\net\App_Code\PathFormater.cs" />
     <Compile Include="Scripts\UEditor\net\App_Code\UploadHandler.cs" />
+    <Compile Include="Utils\JsonUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -2248,7 +2268,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Manager\Views\DownloadManager\" />
+    <Folder Include="Areas\api\Models\" />
+    <Folder Include="Areas\api\Views\Shared\" />
     <Folder Include="Models\" />
     <Folder Include="Scripts\UEditor\upload\image\" />
   </ItemGroup>

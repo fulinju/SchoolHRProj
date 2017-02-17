@@ -19,8 +19,10 @@ namespace sl.web
         {
             // 在应用程序启动时运行的代码
             AreaRegistration.RegisterAllAreas();
-            GlobalConfiguration.Configure(WebApiConfig.Register);
+            GlobalConfiguration.Configure(WebApiConfig.Register);//注册api路由
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            //WebApiConfig.Register(GlobalConfiguration.Configuration); 
 
             //注册petapoco的DIContainer，否则使用service为null
             ContainerBuilder builder = new ContainerBuilder();

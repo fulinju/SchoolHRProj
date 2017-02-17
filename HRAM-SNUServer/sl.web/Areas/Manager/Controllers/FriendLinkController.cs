@@ -31,10 +31,10 @@ namespace sl.web.Areas.Manager.Controllers
 
             fl_name = "%" + fl_name + "%";
 
-            sql.Append("select * from T_FriendlyLink where FL_Name Like @0 and T_FriendlyLink.IsDeleted = 0", fl_name);
+            sql.Append("select * from T_FriendlyLink where FL_Name Like @0 and IsDeleted = 0", fl_name);
             List<T_FriendlyLink> list = UtilsDB.DB.Fetch<T_FriendlyLink>(sql);
 
-            string json = JsonConvert.SerializeObject(list);
+            //string json = JsonConvert.SerializeObject(list);
 
             return CommonPageList<T_FriendlyLink>(sql, UtilsDB.DB);
         }
@@ -44,9 +44,9 @@ namespace sl.web.Areas.Manager.Controllers
         #region 删除链接
         public ActionResult LinkDel(string model)
         {
-            List<T_FriendlyLink> linkList = JsonConvert.DeserializeObject<List<T_FriendlyLink>>(model);
+            List<T_FriendlyLink> entityList = JsonConvert.DeserializeObject<List<T_FriendlyLink>>(model);
             int flag = 0;
-            foreach (var entity in linkList)
+            foreach (var entity in entityList)
             {
                 entity.IsDeleted = true;
                 flag = UtilsDB.DB.Update(entity); //假删除

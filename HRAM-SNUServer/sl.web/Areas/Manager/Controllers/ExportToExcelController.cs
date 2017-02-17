@@ -116,9 +116,7 @@ namespace sl.web.Areas.Manager.Controllers
             }
             catch { }
             app.Quit();
-        }  
-
-
+        }
 
         public void ExportClientsListToExcel()
         {
@@ -139,7 +137,7 @@ namespace sl.web.Areas.Manager.Controllers
             string FileName = "123";
 
             Response.ClearContent();
-            Response.AppendHeader("content-disposition", "attachment;filename=" +System.Web.HttpUtility.UrlEncode(FileName,System.Text.Encoding.UTF8) + ".xls");
+            Response.AppendHeader("content-disposition", "attachment;filename=" + System.Web.HttpUtility.UrlEncode(FileName, System.Text.Encoding.UTF8) + ".xls");
             Response.ContentType = "application/ms-excel";
             Response.Charset = "utf-8";
             Response.ContentEncoding = System.Text.Encoding.GetEncoding("GB2312");
@@ -153,112 +151,66 @@ namespace sl.web.Areas.Manager.Controllers
         }
 
         /// <summary>
-
         /// Excle导出数据
-
         /// </summary>
-
         /// <typeparam name="T">类对象</typeparam>
-
         /// <param name="list">对象数据</param>
-
         /// <param name="column">类字段，字段对应列名</param>
-
         /// <param name="filename">excel表名</param>
 
         public void OutExcel<T>(List<T> list, Dictionary<string, string> column, string filename)
         {
-
             if (list == null || list.Count == 0 || column == null || column.Count == 0)
             {
-
                 return;
-
             }
-
             StringWriter sw = new StringWriter();
-
             //-------------------------------表头读取开始------------------------------------------------
-
             string title = string.Empty;
-
             foreach (KeyValuePair<string, string> kvp in column)
             {
-
                 title += kvp.Value + "/t";
-
             }
 
             title = title.Substring(0, title.LastIndexOf("/t"));
-
             sw.WriteLine(title);
-
             //-------------------------------表头读取结束--------------------------------------------------------
 
             //--------------------------------数据读取start----------------------------------------------------------------------------------
-
             Type objType = typeof(T);
-
             BindingFlags bf = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static;//反射标识 
-
             PropertyInfo[] propInfoArr = objType.GetProperties(bf); //获取映射列表
-
             foreach (T model in list)
             {
-
                 System.Text.StringBuilder data = new System.Text.StringBuilder();
-
                 foreach (string key in column.Keys)
                 {
-
                     foreach (PropertyInfo propInfo in propInfoArr)
                     {
-
                         if (key == propInfo.Name)//判断头相对应的字段 
                         {
-
                             PropertyInfo modelProperty = model.GetType().GetProperty(propInfo.Name);
-
                             if (modelProperty != null)
                             {
-
                                 object objResult = modelProperty.GetValue(model, null);//获取值                        
-
                                 data.Append(((objResult == null) ? string.Empty : objResult) + "/t");
-
                             }
-
                         }
-
                     }
-
-
-
                 }
-
                 var temp = data.ToString();
-
                 temp = temp.Substring(0, temp.LastIndexOf("/t"));
-
                 sw.WriteLine(temp);
-
             }
 
             //------------------------------------------end----------------------------------------------------------------------------------
-
             sw.Close();//读取数据结束
-
             //-----------------------------------输出excel-------------------------------------------------------------
-
             Response.AddHeader("Content-Disposition", "attachment; filename=" + filename + ".xls");
-
-           Response.ContentType = "application/ms-excel";
-
+            Response.ContentType = "application/ms-excel";
             Response.ContentEncoding = System.Text.Encoding.GetEncoding("GBK");
-
             Response.Write(sw.ToString());
             Response.End();
-
             //-------------------------------------------------------------------------------------------------------------               
 
         }

@@ -2,7 +2,7 @@
 using PetaPoco;
 using Newtonsoft.Json;
 
-namespace sl.model.model
+namespace sl.model
 {
     /// <summary>
     /// 下载管理
@@ -35,7 +35,7 @@ namespace sl.model.model
 
         [Column]
         [JsonProperty("dm_downloadnum")]
-        public string DM_DownloadNum { get; set; }
+        public int DM_DownloadNum { get; set; }
 
         [Column]
         [JsonProperty("dm_uploadtime")]

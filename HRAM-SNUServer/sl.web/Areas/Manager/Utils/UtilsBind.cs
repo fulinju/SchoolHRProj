@@ -94,6 +94,29 @@ namespace sl.web
         }
         #endregion
 
+
+        #region 绑定下载类型
+        public static List<SelectListItem> DownloadTypes()
+        {
+            List<T_DMType> types = UtilsDB.GetDownloadTypeList();
+            List<SelectListItem> list = new List<SelectListItem>();
+            if (types != null)
+            {
+                for (int i = 0; i < types.Count; i++)
+                {
+                    list.Add(new SelectListItem { Text = types[i].DM_TypeValue, Value = types[i].DM_TypeID });
+
+                }
+            }
+            else
+            {
+                list.Add(new SelectListItem { Text = ConstantData.ErrorMsg, Value = "" + ConstantData.ErrorCode });
+            }
+
+            return list;
+        }
+        #endregion
+
         #region 绑定控制器名称
         public static List<SelectListItem> ControllerNames()
         {

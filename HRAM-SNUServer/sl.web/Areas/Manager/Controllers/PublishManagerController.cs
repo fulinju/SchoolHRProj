@@ -35,6 +35,7 @@ namespace sl.web.Areas.Manager.Controllers
 
             sql.Append("Select T_PMType.pm_typevalue,");
             sql.Append("T_PublishManage.pk_id,");
+            sql.Append("T_PublishManage.pm_typeid,");
             sql.Append("T_PublishManage.u_loginname,");
             sql.Append("T_PublishManage.pm_title,");
             sql.Append("T_PublishManage.pm_adimglistid,");
@@ -44,7 +45,7 @@ namespace sl.web.Areas.Manager.Controllers
             sql.Append(" from T_PMType,T_PublishManage where U_LoginName Like @0 and T_PublishManage.IsDeleted = 0", u_loginname);
             sql.Append(" and T_PMType.PM_TypeID = T_PublishManage.PM_TypeID");
 
-            return CommonPageList<T_PublishManage>(sql, UtilsDB.DB);
+            return CommonPageList<dynamic>(sql, UtilsDB.DB);
         }
         #endregion
 
@@ -79,7 +80,7 @@ namespace sl.web.Areas.Manager.Controllers
                     if (validate.Result)
                     {
                         m.PM_ADImgListID = PM_AD_HEAD + Utils.GetRamCode();
-                        m.PM_Views = "0";
+                        m.PM_Views = 0; //初始化浏览次数
                         m.IsDeleted = false;
                         object result = UtilsDB.DB.Insert(m);
                         return SaveMessage(result);

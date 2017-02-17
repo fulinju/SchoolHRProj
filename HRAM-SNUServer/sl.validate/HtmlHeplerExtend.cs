@@ -11,6 +11,7 @@ namespace System.Web.Mvc.Html
     /// </summary>
     public static class HtmlHeplerExtend
     {
+        #region 生成前端验证规则
         /// <summary>
         /// 生成前端验证规则
         /// </summary>
@@ -20,7 +21,9 @@ namespace System.Web.Mvc.Html
         {
             return ValidBox.Empty();
         }
+        #endregion
 
+        #region 验证必须输入
         /// <summary>
         /// 验证必须输入
         /// </summary>
@@ -32,10 +35,10 @@ namespace System.Web.Mvc.Html
             var newBox = new RequiredAttribute { Message = message }.ToValidBox();
             return box & newBox;
         }
+        #endregion
 
-
+        #region 验证输入是URL
         /// <summary>
-        /// 
         /// 验证输入是URL
         /// </summary>
         /// <param name="box">验证框</param>        
@@ -46,7 +49,9 @@ namespace System.Web.Mvc.Html
             var newBox = new UrlAttribute { Message = message }.ToValidBox();
             return box & newBox;
         }
+        #endregion
 
+        #region 验证输入是否是Email
         /// <summary>
         /// 验证输入是否是Email
         /// </summary>
@@ -58,6 +63,9 @@ namespace System.Web.Mvc.Html
             var newBox = new EmailAttribute { Message = message }.ToValidBox();
             return box & newBox;
         }
+        #endregion
+
+        #region 验证输入是否是手机
         /// <summary>
         /// 验证输入是否是手机
         /// </summary>
@@ -69,6 +77,9 @@ namespace System.Web.Mvc.Html
             var newBox = new CellPhoneAttribute { Message = message }.ToValidBox();
             return box & newBox;
         }
+        #endregion
+
+        #region 验证输入的长度
         /// <summary>
         /// 验证输入的长度
         /// </summary>
@@ -82,7 +93,9 @@ namespace System.Web.Mvc.Html
             var newBox = new LengthAttribute(minLength, maxLength) { Message = message }.ToValidBox();
             return box & newBox;
         }
+        #endregion
 
+        #region 验证输入的最小长度
         /// <summary>
         /// 验证输入的最小长度
         /// </summary>
@@ -95,7 +108,9 @@ namespace System.Web.Mvc.Html
             var newBox = new MinLengthAttribute(length) { Message = message }.ToValidBox();
             return box & newBox;
         }
+        #endregion
 
+        #region 验证输入的最大长度
         /// <summary>
         /// 验证输入的最大长度
         /// </summary>
@@ -108,7 +123,9 @@ namespace System.Web.Mvc.Html
             var newBox = new MaxLengthAttribute(length) { Message = message }.ToValidBox();
             return box & newBox;
         }
+        #endregion
 
+        #region 验证输入的值的范围
         /// <summary>
         /// 验证输入的值的范围
         /// </summary>
@@ -122,7 +139,9 @@ namespace System.Web.Mvc.Html
             var newBox = new RangeAttribute(minValue, maxValue) { Message = message }.ToValidBox();
             return box & newBox;
         }
+        #endregion
 
+        #region 验证和正则表达式是否匹配
         /// <summary>
         /// 验证和正则表达式是否匹配
         /// </summary>
@@ -135,7 +154,9 @@ namespace System.Web.Mvc.Html
             var newBox = new MatchAttribute(regParam) { Message = message }.ToValidBox();
             return box & newBox;
         }
+        #endregion
 
+        #region 验证输入和正则表达式不匹配
         /// <summary>
         /// 验证输入和正则表达式不匹配
         /// </summary>
@@ -148,7 +169,9 @@ namespace System.Web.Mvc.Html
             var newBox = new NotMatchAttribute(regParam) { Message = message }.ToValidBox();
             return box & newBox;
         }
+        #endregion
 
+        #region 验证输入是否和目标ID元素的值相等
         /// <summary>
         /// 验证输入是否和目标ID元素的值相等
         /// </summary>
@@ -161,8 +184,9 @@ namespace System.Web.Mvc.Html
             var newBox = new EqualToAttribute(targetID) { Message = message }.ToValidBox();
             return box & newBox;
         }
+        #endregion
 
-
+        #region 验证输入是否和目标ID元素的值不相等
         /// <summary>
         /// 验证输入是否和目标ID元素的值不相等
         /// </summary>
@@ -175,8 +199,9 @@ namespace System.Web.Mvc.Html
             var newBox = new NotEqualToAttribute(targetID) { Message = message }.ToValidBox();
             return box & newBox;
         }
+        #endregion
 
-
+        #region 远程验证输入值
         /// <summary>
         /// 远程验证输入值
         /// </summary>
@@ -189,6 +214,9 @@ namespace System.Web.Mvc.Html
             var newBox = new sl.validate.ValidRules.RemoteAttribute(url, targetID).ToValidBox();
             return box & newBox;
         }
+        #endregion
+
+        #region 验证是否为整数
         /// <summary>
         /// 验证是否为整数
         /// </summary>
@@ -200,7 +228,9 @@ namespace System.Web.Mvc.Html
             var newBox = new DigitsAttribute { Message = message }.ToValidBox();
             return box & newBox;
         }
+        #endregion
 
+        #region 验证是否为整数
         /// <summary>
         /// 验证是否为整数
         /// </summary>
@@ -212,6 +242,9 @@ namespace System.Web.Mvc.Html
             var newBox = new NumberAttribute { Message = message }.ToValidBox();
             return box & newBox;
         }
+        #endregion
+
+        #region  验证下拉框，当值为0或者-1时则不通过
         /// <summary>
         /// 验证下拉框，当值为0或者-1时则不通过
         /// </summary>
@@ -223,6 +256,9 @@ namespace System.Web.Mvc.Html
             var newBox = new DropDownAttribute { Message = message }.ToValidBox();
             return box & newBox;
         }
+        #endregion
+
+        #region 验证是否为日期
         /// <summary>
         /// 验证是否为日期
         /// </summary>
@@ -234,6 +270,9 @@ namespace System.Web.Mvc.Html
             var newBox = new DateTimeAttribute { Message = message }.ToValidBox();
             return box & newBox;
         }
+        #endregion
+
+        #region 获取表达式对应属性的验证框描述
         /// <summary>
         /// 获取表达式对应属性的验证框描述
         /// </summary>
@@ -277,7 +316,9 @@ namespace System.Web.Mvc.Html
             }
             return validBox;
         }
+        #endregion
 
+        #region 依据实体属性的特性生成前端验证规则
         /// <summary>
         /// 依据实体属性的特性生成前端验证规则
         /// </summary>
@@ -290,7 +331,9 @@ namespace System.Web.Mvc.Html
         {
             return html.GetExpressionValidBox(keySelector).AsHtmlAttribute();
         }
+        #endregion
 
+        #region 依据实体属性的特性生成前端验证规则
         /// <summary>
         /// 依据实体属性的特性生成前端验证规则
         /// </summary>
@@ -304,5 +347,6 @@ namespace System.Web.Mvc.Html
         {
             return html.GetExpressionValidBox(keySelector).AsHtmlAttribute(attribute);
         }
+        #endregion
     }
 }

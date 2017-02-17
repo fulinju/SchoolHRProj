@@ -55,5 +55,18 @@ namespace sl.web
             return reviewResults;
         }
         #endregion
+
+        #region 查询下载类型
+        public static List<T_DMType> GetDownloadTypeList()
+        {
+            List<T_DMType> types = new List<T_DMType>();
+            Sql sql = Sql.Builder;
+            sql.Select("*")
+                .From("T_DMType")
+                .OrderBy("DM_TypeValue asc");
+            types = DB.Fetch<T_DMType>(sql);
+            return types;
+        }
+        #endregion
     }
 }
