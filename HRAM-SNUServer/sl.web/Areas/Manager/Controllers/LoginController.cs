@@ -10,6 +10,7 @@ using sl.web.ui;
 using sl.IService;
 using sl.service;
 using PetaPoco;
+using sl.service.manager;
 
 namespace sl.web.Areas.Manager.Controllers
 {
@@ -45,11 +46,9 @@ namespace sl.web.Areas.Manager.Controllers
                 return Json(new JsonTip("0", errormessage));
             }
 
-            string passwordMd5 = Security.MD5Encrypt(loginPwd);
+            string passwordMd5 = Security.MD5Encrypt(loginPwd); //一般MD5密码登录
 
-            Sql sql = Sql.Builder;
-            sql.Append("Select * from T_User where U_LoginName=@0 and U_Password = @1", loginName, passwordMd5);
-            T_User loginer = UtilsDB.DB.FirstOrDefault<T_User>(sql);
+            T_User loginer =  HRAManagerService.CheckLogin(loginName, passwordMd5);
 
             if (loginer == null)
             {
@@ -65,7 +64,7 @@ namespace sl.web.Areas.Manager.Controllers
             {
                 string manager_name = Utils.GetCookie(Key.MANAGER_NAME);
                 string manager_pass = Utils.GetCookie(Key.MANAGER_PASS);
-                UtilsDB.DB.Update(loginer);
+                HRAManagerService.database.Update(loginer);
                 Session[Key.MANAGER_INFO] = loginer;
                 if (remberpassword)
                 {

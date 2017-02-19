@@ -9,6 +9,7 @@ using sl.web.ui;
 using sl.validate;
 using Newtonsoft.Json;
 using PetaPoco;
+using sl.service.manager;
 
 namespace sl.web.Areas.Manager.Controllers
 {
@@ -28,28 +29,9 @@ namespace sl.web.Areas.Manager.Controllers
         #region 查询
         public ActionResult GetMembersList(string m_name = "")
         {
-            Sql sql = Sql.Builder;
+            Sql sql = HRAManagerService.GetMemberSql(m_name);
 
-            m_name = "%" + m_name + "%";
-            sql.Append("Select T_ReviewResult.m_reviewresultvalue,T_MemberType.m_typevalue,");
-            sql.Append("T_Member.pk_id,");
-            sql.Append("T_Member.u_loginname,");
-            sql.Append("T_Member.m_reviewresultid,");
-            sql.Append("T_Member.m_typeid,");
-            sql.Append("T_Member.m_applytime,");
-            sql.Append("T_Member.m_name,");
-            sql.Append("T_Member.m_organizationcode,");
-            sql.Append("T_Member.m_address,");
-            sql.Append("T_Member.m_corporatename,");
-            sql.Append("T_Member.m_idcardno,");
-            sql.Append("T_Member.m_contacts,");
-            sql.Append("T_Member.m_contactsphone,");
-            sql.Append("T_Member.m_imgurl,");
-            sql.Append("T_Member.m_url");
-            sql.Append(" from T_Member,T_ReviewResult,T_MemberType where M_Name Like @0 and T_Member.IsDeleted = 0", m_name);
-            sql.Append(" and T_Member.M_ReviewResultID = T_ReviewResult.M_ReviewResultID and T_Member.M_TypeID = T_MemberType.M_TypeID");
-
-            return CommonPageList<dynamic>(sql, UtilsDB.DB);
+            return CommonPageList<dynamic>(sql, HRAManagerService.database);
         }
         #endregion
 
@@ -60,7 +42,7 @@ namespace sl.web.Areas.Manager.Controllers
             int flag = 0;
             foreach (var entity in membersList)
             {
-                flag = UtilsDB.DB.Delete(entity);
+                flag = HRAManagerService.database.Delete(entity);
             }
             return DelMessage(flag);
         }
@@ -79,7 +61,7 @@ namespace sl.web.Areas.Manager.Controllers
                     {
                         m.M_ImgURL = UploadFile();
                         m.IsDeleted = false;
-                        object result = UtilsDB.DB.Insert(m);
+                        object result = HRAManagerService.database.Insert(m);
                         return SaveMessage(result);
                     }
                     else
@@ -92,7 +74,7 @@ namespace sl.web.Areas.Manager.Controllers
             else
             {
                 Object obj = id;
-                T_Member load = UtilsDB.DB.SingleOrDefault<T_Member>(obj);
+                T_Member load = HRAManagerService.database.SingleOrDefault<T_Member>(obj);
                 if (load == null)
                 {
                     return Json(new JsonTip("0", "找不到该实体"));
@@ -111,7 +93,7 @@ namespace sl.web.Areas.Manager.Controllers
                                 load.M_ImgURL = fileName;
                             }
                         }
-                        int success = UtilsDB.DB.Update(load);
+                        int success = HRAManagerService.database.Update(load);
                         return SaveMessage(success);
                     }
                 }
@@ -129,29 +111,42 @@ namespace sl.web.Areas.Manager.Controllers
                 HttpPostedFileBase fileBase = Request.Files["M_ImgURL"];
                 if (fileBase != null && fileBase.FileName != "")
                 {
+                    if (!DirFile.IsExistDirectory(Key.MemberIconsPath)) //判断文件夹是否存在
+                    {
+                        DirFile.CreateDir(Key.MemberIconsPath);
+                    }
+
                     fileName = Key.MemberIconsPath + Utils.GetRamCode() + "." + Utils.GetFileExt(fileBase.FileName);
                     fileBase.SaveAs(Server.MapPath(fileName));
                 }
             }
+            //string message = "上传成功!";
+            //return Json(new JsonTip("0", message));
             return fileName;
         }
         #endregion
 
         #region 删除图片
         [HttpPost]
-        public ActionResult DelM_ImgUrl(string id = "0")
+        public ActionResult DelImg(string id = "0")
         {
-            Sql sql = Sql.Builder.Append("Select * from T_Member Where pk_id = @0", id);
-            var m = UtilsDB.DB.FirstOrDefault<T_Member>(sql);
+
+            var m = HRAManagerService.CheckMemberExist(id);
             int success = 0;
             if (m != null)
             {
                 Utils.DeleteFile(m.M_ImgURL);
                 m.M_ImgURL = string.Empty;
-                success = UtilsDB.DB.Update(m);
+                success = HRAManagerService.database.Update(m);
             }
-            return SaveMessage(success);
-
+            //换成 DelMessage
+            if(success == 1){
+                return Json(Message("删除成功"), JsonRequestBehavior.AllowGet); //删除成功
+            }
+            else
+            {
+                return Json(Message("删除失败"), JsonRequestBehavior.AllowGet); //删除失败
+            } 
         }
         #endregion
 
@@ -160,7 +155,7 @@ namespace sl.web.Areas.Manager.Controllers
         public ActionResult EditMemberSummary(T_Member m, string id = "0")
         {
             Object obj = id;
-            T_Member load = UtilsDB.DB.SingleOrDefault<T_Member>(obj);
+            T_Member load = HRAManagerService.database.SingleOrDefault<T_Member>(obj);
             if (load == null)
             {
                 return Json(new JsonTip("0", "找不到该实体"));
@@ -170,7 +165,7 @@ namespace sl.web.Areas.Manager.Controllers
             {
                 if (TryUpdateModel(load))
                 {
-                    int success = UtilsDB.DB.Update(load);
+                    int success = HRAManagerService.database.Update(load);
                     return SaveMessage(success);
                 }
             }

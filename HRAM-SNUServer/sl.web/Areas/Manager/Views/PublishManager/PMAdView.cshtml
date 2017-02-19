@@ -26,21 +26,21 @@
     <table>
         <tr>
             <td>
-                @Html.EasyuiLinkButtonForAdd("pm_ad_dg", "新建消息", Url.Action("PublishEdit"), 900, 600)
+                @Html.EasyuiLinkButtonForAdd("pm_ad_dg", "加入广告图片", Url.Action("PMAdEdit", new { aid = Request["aid"] }), 900, 600)
             </td>
             <td>
                 <div class="datagrid-btn-separator">
                 </div>
             </td>
             <td>
-                @Html.EasyuiLinkButtonForEdit("pm_ad_dg", "修改消息", Url.Action("PublishEdit"), 900, 600)
+                @Html.EasyuiLinkButtonForEdit("pm_ad_dg", "编辑广告图片", Url.Action("PMAdEdit"), 900, 600)
             </td>
             <td>
                 <div class="datagrid-btn-separator">
                 </div>
             </td>
             <td>
-                @Html.EasyuiLinkButtonForDel("pm_ad_dg", Url.Action("PublishDel"))
+                @Html.EasyuiLinkButtonForDel("pm_ad_dg", Url.Action("PMAdDel"))
             </td>
             <td>
                 <div class="datagrid-btn-separator">
@@ -55,12 +55,12 @@
 <table id="pm_ad_dg"></table>
 
 <script type="text/javascript">
-    var url = '@Url.Action("GetJsonPMAdImgs", new { aid = Request["aid"] }))';
+    var url = '@Url.Action("GetJsonPMAdImgs", new { aid = Request["aid"] })';
+
     var columns = [[
-                    { field: 'pm_adimglistid', title: '发布者', width: '10%', sortable: true },
-                    { field: 'pm_adimglisturl', title: '标题', width: '10%', sortable: true },
-                    { field: 'pm_adimglistnum', title: '所属类别', width: '20%', sortable: true },
-                    { field: 'isdeleted', title: '发布时间', width: '20%', sortable: true }
+                    { field: 'pm_title', title: '文章标题', width: '10%', sortable: true },
+                    { field: 'pm_adimglisturl', title: '链接', width: '10%', sortable: true },
+                    { field: 'pm_adimglistnum', title: '序号', width: '20%', sortable: true }
     ]];
-    initGrid("pm_ad_dg", url, "pk_id", "pk_id", columns, true, false);
+    initGrid("pm_ad_dg", url, "pk_id", "T_ADImgList.pk_id", columns, true, false);
 </script>

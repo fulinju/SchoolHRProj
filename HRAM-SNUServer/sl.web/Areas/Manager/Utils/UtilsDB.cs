@@ -5,7 +5,7 @@ using System.Web;
 using sl.model;
 using PetaPoco;
 
-namespace sl.web
+namespace sl.web.db
 {
     /// <summary>
     /// 数据库通用方法

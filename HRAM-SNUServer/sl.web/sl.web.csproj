@@ -1818,6 +1818,7 @@
     <Content Include="Areas\Manager\Views\DownloadManager\DownloadManagerView.cshtml" />
     <Content Include="Areas\Manager\Views\DownloadManager\DownloadEdit.cshtml" />
     <Content Include="Areas\api\Views\web.config" />
+    <Content Include="Areas\Manager\Views\PublishManager\PMAdEdit.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\font-awesome\css\font-awesome-ie7.css" />
     <Content Include="Scripts\font-awesome\css\font-awesome-ie7.min.css" />
@@ -2215,7 +2216,10 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Areas\api\Controllers\PublishController.cs" />
+    <Compile Include="Areas\api\Controllers\AccountController.cs" />
+    <Compile Include="Areas\api\Controllers\ArticleController.cs" />
+    <Compile Include="Areas\api\Controllers\DownloadController.cs" />
+    <Compile Include="Areas\api\Controllers\MemberController.cs" />
     <Compile Include="Areas\Manager\Controllers\ConfigController.cs" />
     <Compile Include="Areas\Manager\Controllers\DownloadManagerController.cs" />
     <Compile Include="Areas\Manager\Controllers\ExportToExcelController.cs" />
@@ -2249,7 +2253,6 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Scripts\UEditor\net\config.json" />
     <Content Include="Scripts\UEditor\net\controller.ashx" />
@@ -2259,6 +2262,7 @@
     <Content Include="Scripts\UEditor\third-party\video-js\font\vjs.eot" />
     <Content Include="Scripts\UEditor\third-party\video-js\font\vjs.ttf" />
     <Content Include="Scripts\UEditor\third-party\video-js\font\vjs.woff" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

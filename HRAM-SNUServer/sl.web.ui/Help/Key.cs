@@ -11,6 +11,8 @@
         public const string MemberIconsPath = "/upload/member/icons/"; //会员图片
         public const string PublishAdImgsPath = "/upload/publish/"; //发布信息的广告图片
 
+        public const string DownloadFilesPath = "/upload/download/files/"; //下载的文件
+
         #endregion
     }
 }

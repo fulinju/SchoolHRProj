@@ -50,6 +50,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\WebSiteConfig.cs" />
+    <Compile Include="model\api\DownloadInfo.cs" />
+    <Compile Include="model\api\PublishInfo.cs" />
+    <Compile Include="model\api\RegisterUser.cs" />
+    <Compile Include="model\msg\ApiMsgEntity.cs" />
+    <Compile Include="model\msg\ManagerMsgEntity.cs" />
     <Compile Include="model\TypeModels.cs" />
     <Compile Include="model\T_ADImgList.cs" />
     <Compile Include="model\T_DMType.cs" />

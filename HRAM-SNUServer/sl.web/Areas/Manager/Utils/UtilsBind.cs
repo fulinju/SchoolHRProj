@@ -5,10 +5,9 @@ using PetaPoco;
 using Newtonsoft.Json;
 using System.IO;
 using sl.common;
-
-
-
 using sl.model;
+using sl.service.manager;
+
 
 namespace sl.web
 {
@@ -20,7 +19,7 @@ namespace sl.web
         #region 绑定账户类型
         public static List<SelectListItem> UserTypes()
         {
-            List<T_UserType> userTypes = UtilsDB.GetUserTypeList();
+            List<T_UserType> userTypes = HRAManagerService.GetUserTypeList();
             List<SelectListItem> list = new List<SelectListItem>();
             if (userTypes != null)
             {
@@ -42,7 +41,7 @@ namespace sl.web
         #region 绑定审核结果类型
         public static List<SelectListItem> ReviewResults()
         {
-            List<T_ReviewResult> reviewResults = UtilsDB.GetReviewResults();
+            List<T_ReviewResult> reviewResults = HRAManagerService.GetReviewResults();
             List<SelectListItem> list = new List<SelectListItem>();
             if (reviewResults != null)
             {
@@ -75,7 +74,7 @@ namespace sl.web
         #region 绑定会员类型
         public static List<SelectListItem> MemberTypes()
         {
-            List<T_MemberType> memberTypes = UtilsDB.GetMemberTypes();
+            List<T_MemberType> memberTypes = HRAManagerService.GetMemberTypes();
             List<SelectListItem> list = new List<SelectListItem>();
             if (memberTypes != null)
             {
@@ -98,7 +97,7 @@ namespace sl.web
         #region 绑定下载类型
         public static List<SelectListItem> DownloadTypes()
         {
-            List<T_DMType> types = UtilsDB.GetDownloadTypeList();
+            List<T_DMType> types = HRAManagerService.GetDownloadTypeList();
             List<SelectListItem> list = new List<SelectListItem>();
             if (types != null)
             {

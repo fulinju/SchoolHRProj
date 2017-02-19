@@ -6,135 +6,143 @@
     ViewBag.Title = "编辑会员信息";
     Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
 }
-    <form class="validate" method="post" autocomplete="off" action="" enctype="multipart/form-data">
-            <table class="msgtable" style="width:100%;height:100%">
-                <tr>
-                    <th>
-                        审核者：
-                    </th>
-                    <td>
-                        @Html.InputFor(m => m.U_LoginName)
-                    </td>
-                    <th>
-                        审核结果：
-                    </th>
-                    <td>
-                        @Html.DropDownListFor(m => m.M_ReviewResultID, UtilsBind.ReviewResults())
-                    </td>
-                </tr>
 
-                <tr>
-                    <th>
-                        申请时间：
-                    </th>
-                    <td>
-                        @Html.InputFor(m => m.M_ApplyTime)
-                    </td>
-                    <th>
-                        会员名称：
-                    </th>
-                    <td>
-                        @Html.InputFor(m => m.M_Name)
-                    </td>
-                </tr>
+<form class="validate" method="post" autocomplete="off" action="" enctype="multipart/form-data">
+    <table class="msgtable" style="width:100%;height:100%">
+        <tr>
+            <th>
+                审核者：
+            </th>
+            <td>
+                @Html.InputFor(m => m.U_LoginName)
+            </td>
+            <th>
+                审核结果：
+            </th>
+            <td>
+                @Html.DropDownListFor(m => m.M_ReviewResultID, UtilsBind.ReviewResults())
+            </td>
+        </tr>
 
-                <tr>
-                    <th>
-                        会员类型：
-                    </th>
-                    <td>
-                        @Html.DropDownListFor(m => m.M_TypeID, UtilsBind.MemberTypes())
-                    </td>
+        <tr>
+            <th>
+                申请时间：
+            </th>
+            <td>
+                @Html.InputFor(m => m.M_ApplyTime)
+            </td>
+            <th>
+                会员名称：
+            </th>
+            <td>
+                @Html.InputFor(m => m.M_Name)
+            </td>
+        </tr>
 
-                    <th>
-                        组织代码：
-                    </th>
-                    <td>
-                        @Html.InputFor(m => m.M_OrganizationCode)
-                    </td>
-                </tr>
+        <tr>
+            <th>
+                会员类型：
+            </th>
+            <td>
+                @Html.DropDownListFor(m => m.M_TypeID, UtilsBind.MemberTypes())
+            </td>
 
-                <tr>
-                    <th>
-                        会员地址：
-                    </th>
-                    <td>
-                        @Html.InputFor(m => m.M_Address)
-                    </td>
+            <th>
+                组织代码：
+            </th>
+            <td>
+                @Html.InputFor(m => m.M_OrganizationCode)
+            </td>
+        </tr>
 
-                    <th>
-                        法人名字：
-                    </th>
-                    <td>
-                        @Html.InputFor(m => m.M_CorporateName)
-                    </td>
-                </tr>
+        <tr>
+            <th>
+                会员地址：
+            </th>
+            <td>
+                @Html.InputFor(m => m.M_Address)
+            </td>
 
-                <tr>
-                    <th>
-                        法人身份证号：
-                    </th>
-                    <td>
-                        @Html.InputFor(m => m.M_IDCardNo)
-                    </td>
+            <th>
+                法人名字：
+            </th>
+            <td>
+                @Html.InputFor(m => m.M_CorporateName)
+            </td>
+        </tr>
 
-                    <th>
-                        联系人：
-                    </th>
-                    <td>
-                        @Html.InputFor(m => m.M_Contacts)
-                    </td>
-                </tr>
+        <tr>
+            <th>
+                法人身份证号：
+            </th>
+            <td>
+                @Html.InputFor(m => m.M_IDCardNo)
+            </td>
 
-                <tr>
-                    <th>
-                        联系方式：
-                    </th>
-                    <td>
-                        @Html.InputFor(m => m.M_ContactsPhone)
-                    </td>
-                    <th>
-                        会员网址：
-                    </th>
-                    <td>
-                        @Html.InputFor(m => m.M_URL)
-                    </td>
-                </tr>
+            <th>
+                联系人：
+            </th>
+            <td>
+                @Html.InputFor(m => m.M_Contacts)
+            </td>
+        </tr>
 
-                <tr>
-                    <th>
-                        会员图片地址：
-                    </th>
-                    <td>
-                        <input type="file" id="M_ImgUrl" name="M_ImgUrl" />
-                    </td>
+        <tr>
+            <th>
+                联系方式：
+            </th>
+            <td>
+                @Html.InputFor(m => m.M_ContactsPhone)
+            </td>
+            <th>
+                会员网址：
+            </th>
+            <td>
+                @Html.InputFor(m => m.M_URL)
+            </td>
+        </tr>
 
-                </tr>
+        <tr>
+            <th>
+                会员图片地址：
+            </th>
+            <td>
+                <input type="file" id="M_ImgUrl" name="M_ImgUrl" />
+            </td>
 
-                <tr>
-                    <th>
-                        会员图片：
-                    </th>
-                    <td colspan="2">
-                        @if (Model != null && !string.IsNullOrEmpty(Model.M_ImgURL))
-                        {
-                            <img src="@Model.M_ImgURL" alt="" id="imgMImgUrl" />
-                            <a href="javascript:;" id="delMImgUrl" onclick="delface(@Model.pk_id)">删除</a>
-                        }
-                    </td>
-                </tr>
-            </table>
-    </form>
+        </tr>
 
+        <tr id="ivMember">
+            <th>
+                会员图片：
+            </th>
+            <td colspan="2">
+                @if (Model != null && !string.IsNullOrEmpty(Model.M_ImgURL))
+                {
+                    <img src="@Model.M_ImgURL" alt="" />
+                <a class="btnDelImg" id="@Model.pk_id" onclick="delface(@Model.pk_id)">删除</a>
+                }
+            </td>
+        </tr>
+    </table>
+</form>
 
 <script type="text/javascript">
-    function delface(id) {
-        var url = '@Url.Action("DelM_ImgUrl")';
-        $.post(url, { pk_id: id }, function (data) {
-            if (data.State == "1") {
-                $("#imgMImgUrl").remove();
-                $("#delMImgUrl").remove();
-            }
-        }, "json");
-    }
+    $('.btnDelImg').click(function () {
+        var url = '@Url.Action("DelImg")';
+        var id = $(this).attr('id');
+
+        $.ajax({
+            type: 'post',
+            url: url,
+            data: {
+                id: id
+            },
+            success: function(data){
+                //服务器返回响应，根据响应结果
+                $.messager.alert(data.code,data.message);
+            },
+            dataType: "json"
+        });
+    })
 </script>

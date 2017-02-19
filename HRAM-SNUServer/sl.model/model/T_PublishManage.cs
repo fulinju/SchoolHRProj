@@ -26,10 +26,6 @@ namespace sl.model
         public string PM_TypeID { get; set; }
 
         [Column]
-        [JsonProperty("pm_typevalue")]
-        public string PM_TypeValue { get; set; }
-
-        [Column]
         [JsonProperty("pm_adimglistid")]
         public string PM_ADImgListID { get; set; }
 

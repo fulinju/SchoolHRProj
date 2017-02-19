@@ -7,6 +7,7 @@ using sl.model;
 using PetaPoco;
 using sl.web.ui;
 using sl.common;
+using sl.service.manager;
 
 namespace sl.web.Controllers
 {
@@ -31,14 +32,9 @@ namespace sl.web.Controllers
             if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(pwd))
             {
                 T_User user = new T_User();
+                string passwordMd5 = Security.MD5Encrypt(pwd); //优化为一般MD5
 
-
-                string passwordMd5 = Security.MD5Encrypt(pwd);
-
-                Sql sql = Sql.Builder;
-                sql.Append("Select * from T_User where U_LoginName=@0 and U_Password = @1", name, passwordMd5);
-
-                user = UtilsDB.DB.FirstOrDefault<T_User>(sql);
+                user = HRAManagerService.CheckLogin(name, passwordMd5);
 
                 if (user != null)
                 {

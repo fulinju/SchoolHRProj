@@ -96,6 +96,13 @@ namespace sl.web.ui
         {
             return Json(new JsonTip("0", message));
         }
+
+
+        protected ActionResult Message(string message = "")
+        {
+            return Json(new JsonTip("1", message));
+        }
+        
         #endregion
 
 

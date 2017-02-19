@@ -9,6 +9,7 @@ using sl.web.ui;
 using sl.validate;
 using Newtonsoft.Json;
 using PetaPoco;
+using sl.service.manager;
 
 
 namespace sl.web.Areas.Manager.Controllers
@@ -83,12 +84,8 @@ namespace sl.web.Areas.Manager.Controllers
                 }
             }
 
-            Sql sql = Sql.Builder;
-
-            u_logintypevalue = "%" + u_logintypevalue + "%";
-            sql.Append("Select * from T_UserType where U_LoginTypeValue Like @0 and IsDeleted = 0", u_logintypevalue);
-
-            return CommonPageList<T_UserType>(sql, UtilsDB.DB);
+            Sql sql = HRAManagerService.GetUserTypeSql(u_logintypevalue);
+            return CommonPageList<T_UserType>(sql, HRAManagerService.database);
         }
         #endregion
 
@@ -107,11 +104,9 @@ namespace sl.web.Areas.Manager.Controllers
                 }
             }
 
-            Sql sql = Sql.Builder;
-            dm_typevalue = "%" + dm_typevalue + "%";
-            sql.Append("Select * from T_DMType where DM_TypeValue Like @0 and IsDeleted = 0", dm_typevalue);
+            Sql sql = HRAManagerService.GetUserTypeSql(dm_typevalue);
 
-            return CommonPageList<T_DMType>(sql, UtilsDB.DB);
+            return CommonPageList<T_DMType>(sql, HRAManagerService.database);
         }
         #endregion
 
@@ -130,10 +125,8 @@ namespace sl.web.Areas.Manager.Controllers
                 }
             }
 
-            Sql sql = Sql.Builder;
-            pm_typevalue = "%" + pm_typevalue + "%";
-            sql.Append("Select * from T_PMType where PM_TypeValue Like @0 and IsDeleted = 0", pm_typevalue);
-            return CommonPageList<T_PMType>(sql, UtilsDB.DB);
+            Sql sql = HRAManagerService.GetPublishTypeSql(pm_typevalue);
+            return CommonPageList<T_PMType>(sql, HRAManagerService.database);
         }
         #endregion
 
@@ -152,10 +145,8 @@ namespace sl.web.Areas.Manager.Controllers
                 }
             }
 
-            Sql sql = Sql.Builder;
-            reviewResultValue = "%" + reviewResultValue + "%";
-            sql.Append("Select * from T_ReviewResult where M_ReviewResultValue Like @0 and IsDeleted = 0", reviewResultValue);
-            return CommonPageList<T_ReviewResult>(sql, UtilsDB.DB);
+            Sql sql = HRAManagerService.GetReviewResultSql(reviewResultValue);
+            return CommonPageList<T_ReviewResult>(sql, HRAManagerService.database);
         }
         #endregion
 
@@ -174,10 +165,8 @@ namespace sl.web.Areas.Manager.Controllers
                 }
             }
 
-            Sql sql = Sql.Builder;
-            mTypeValue = "%" + mTypeValue + "%";
-            sql.Append("Select * from T_MemberType where M_TypeValue Like @0 and IsDeleted = 0", mTypeValue);
-            return CommonPageList<T_MemberType>(sql, UtilsDB.DB);
+            Sql sql = HRAManagerService.GetMemberTypeSql(mTypeValue);
+            return CommonPageList<T_MemberType>(sql, HRAManagerService.database);
         }
         #endregion
 
@@ -293,7 +282,7 @@ namespace sl.web.Areas.Manager.Controllers
                     else
                     {
                         m.IsDeleted = false;
-                        object result = UtilsDB.DB.Insert(m);
+                        object result = HRAManagerService.database.Insert(m);
                         return SaveMessage(result);
                     }
                 }
@@ -302,12 +291,12 @@ namespace sl.web.Areas.Manager.Controllers
             else
             {
                 Object obj = id;
-                T_UserType load = UtilsDB.DB.SingleOrDefault<T_UserType>(obj);
+                T_UserType load = HRAManagerService.database.SingleOrDefault<T_UserType>(obj);
                 if (Request.IsPost())
                 {
                     load.U_LoginTypeValue = m.U_LoginTypeValue;
                     Model valid = Model.Valid(load);
-                    return valid.Result ? SaveMessage(UtilsDB.DB.Update(load)) : ErrorMessage(valid.Message);
+                    return valid.Result ? SaveMessage(HRAManagerService.database.Update(load)) : ErrorMessage(valid.Message);
                 }
                 return View(load);
             }
@@ -332,7 +321,7 @@ namespace sl.web.Areas.Manager.Controllers
                     else
                     {
                         m.IsDeleted = false;
-                        object result = UtilsDB.DB.Insert(m);
+                        object result = HRAManagerService.database.Insert(m);
                         return SaveMessage(result);
                     }
                 }
@@ -341,12 +330,12 @@ namespace sl.web.Areas.Manager.Controllers
             else
             {
                 Object obj = id;
-                T_DMType load = UtilsDB.DB.SingleOrDefault<T_DMType>(obj);
+                T_DMType load = HRAManagerService.database.SingleOrDefault<T_DMType>(obj);
                 if (Request.IsPost())
                 {
                     load.DM_TypeValue = m.DM_TypeValue;
                     Model valid = Model.Valid(load);
-                    return valid.Result ? SaveMessage(UtilsDB.DB.Update(load)) : ErrorMessage(valid.Message);
+                    return valid.Result ? SaveMessage(HRAManagerService.database.Update(load)) : ErrorMessage(valid.Message);
                 }
                 return View(load);
             }
@@ -371,7 +360,7 @@ namespace sl.web.Areas.Manager.Controllers
                     else
                     {
                         m.IsDeleted = false;
-                        object result = UtilsDB.DB.Insert(m);
+                        object result = HRAManagerService.database.Insert(m);
                         return SaveMessage(result);
                     }
                 }
@@ -380,12 +369,12 @@ namespace sl.web.Areas.Manager.Controllers
             else
             {
                 Object obj = id;
-                T_PMType load = UtilsDB.DB.SingleOrDefault<T_PMType>(obj);
+                T_PMType load = HRAManagerService.database.SingleOrDefault<T_PMType>(obj);
                 if (Request.IsPost())
                 {
                     load.PM_TypeValue = m.PM_TypeValue;
                     Model valid = Model.Valid(load);
-                    return valid.Result ? SaveMessage(UtilsDB.DB.Update(load)) : ErrorMessage(valid.Message);
+                    return valid.Result ? SaveMessage(HRAManagerService.database.Update(load)) : ErrorMessage(valid.Message);
                 }
                 return View(load);
             }
@@ -410,7 +399,7 @@ namespace sl.web.Areas.Manager.Controllers
                     else
                     {
                         m.IsDeleted = false;
-                        object result = UtilsDB.DB.Insert(m);
+                        object result = HRAManagerService.database.Insert(m);
                         return SaveMessage(result);
                     }
                 }
@@ -419,12 +408,12 @@ namespace sl.web.Areas.Manager.Controllers
             else
             {
                 Object obj = id;
-                T_ReviewResult load = UtilsDB.DB.SingleOrDefault<T_ReviewResult>(obj);
+                T_ReviewResult load = HRAManagerService.database.SingleOrDefault<T_ReviewResult>(obj);
                 if (Request.IsPost())
                 {
                     load.M_ReviewResultValue = m.M_ReviewResultValue;
                     Model valid = Model.Valid(load);
-                    return valid.Result ? SaveMessage(UtilsDB.DB.Update(load)) : ErrorMessage(valid.Message);
+                    return valid.Result ? SaveMessage(HRAManagerService.database.Update(load)) : ErrorMessage(valid.Message);
                 }
                 return View(load);
             }
@@ -449,7 +438,7 @@ namespace sl.web.Areas.Manager.Controllers
                     else
                     {
                         m.IsDeleted = false;
-                        object result = UtilsDB.DB.Insert(m);
+                        object result = HRAManagerService.database.Insert(m);
                         return SaveMessage(result);
                     }
                 }
@@ -458,18 +447,17 @@ namespace sl.web.Areas.Manager.Controllers
             else
             {
                 Object obj = id;
-                T_MemberType load = UtilsDB.DB.SingleOrDefault<T_MemberType>(obj);
+                T_MemberType load = HRAManagerService.database.SingleOrDefault<T_MemberType>(obj);
                 if (Request.IsPost())
                 {
                     load.M_TypeValue = m.M_TypeValue;
                     Model valid = Model.Valid(load);
-                    return valid.Result ? SaveMessage(UtilsDB.DB.Update(load)) : ErrorMessage(valid.Message);
+                    return valid.Result ? SaveMessage(HRAManagerService.database.Update(load)) : ErrorMessage(valid.Message);
                 }
                 return View(load);
             }
         }
         #endregion
-
 
         #region 判断是否存在于表中
         /// <summary>
@@ -481,9 +469,7 @@ namespace sl.web.Areas.Manager.Controllers
         /// <returns></returns>
         public bool ExistInTable(string tableName, string selectRow, string selectRowValue)
         {
-            Sql sql = Sql.Builder;
-            sql.Append("Select count(*) from " + tableName + " where " + selectRow + "=@0", selectRowValue);
-            int exist = UtilsDB.DB.FirstOrDefault<int>(sql);
+            int exist = HRAManagerService.ExistInTable(tableName, selectRow, selectRowValue);
             if (exist > 0)
             {
                 return true;
@@ -495,7 +481,6 @@ namespace sl.web.Areas.Manager.Controllers
         }
         #endregion
 
-
         #region 通用的删除方法
         public ActionResult CommonDelete<T>(List<T> m, List<string> listValue, string tableName, string pkID, string refTableName, string refSelectRow)
         {
@@ -503,29 +488,23 @@ namespace sl.web.Areas.Manager.Controllers
             //把删除的ID初始化置为TYPE_NO_ID:-0000
             for (int i = 0; i < listValue.Count; i++)
             {
-                Sql sql = Sql.Builder;
-                sql.Append("UPDATE " + refTableName + " SET " + refSelectRow + " =@0 WHERE " + refSelectRow + " = @1", ConstantData.TYPE_NO_ID, listValue[i]);
-                UtilsDB.DB.Execute(sql);
+                HRAManagerService.CommonDelete(refTableName, refSelectRow, ConstantData.TYPE_NO_ID, listValue[i]);
             }
 
             foreach (var entity in m)
             {
-                flag = UtilsDB.DB.Delete(tableName, pkID, entity);
+                flag = HRAManagerService.database.Delete(tableName, pkID, entity);
             }
 
             return DelMessage(flag);
         }
         #endregion
 
-
-
         #region 检查用户类型是否存在
         [HttpPost]
         public ActionResult CheckUserTypeIsExist(string typeValue)
         {
-            Sql sql = Sql.Builder;
-            sql.Append("Select * from T_UserType where U_LoginTypeValue = @0", typeValue);
-            T_UserType temp = UtilsDB.DB.FirstOrDefault<T_UserType>(sql);
+            T_UserType temp = HRAManagerService.UserTypeIsExist(typeValue);
             if (temp != null)
             {
                 return Json(new { state = false, message = ERR_USERTYPE_EXIST });
@@ -538,9 +517,7 @@ namespace sl.web.Areas.Manager.Controllers
         [HttpPost]
         public ActionResult CheckDMTypeIsExist(string typeValue)
         {
-            Sql sql = Sql.Builder;
-            sql.Append("Select * from T_DMType where DM_TypeValue = @0", typeValue);
-            T_DMType temp = UtilsDB.DB.FirstOrDefault<T_DMType>(sql);
+            T_DMType temp = HRAManagerService.DownloadTypeIsExist(typeValue);
             if (temp != null)
             {
                 return Json(new { state = false, message = ERR_DMTYPE_EXIST });
@@ -553,9 +530,7 @@ namespace sl.web.Areas.Manager.Controllers
         [HttpPost]
         public ActionResult CheckPMTypeIsExist(string typeValue)
         {
-            Sql sql = Sql.Builder;
-            sql.Append("Select * from T_PMType where PM_TypeValue = @0", typeValue);
-            T_PMType temp = UtilsDB.DB.FirstOrDefault<T_PMType>(sql);
+            T_PMType temp = HRAManagerService.PublishTypeIsExist(typeValue);
             if (temp != null)
             {
                 return Json(new { state = false, message = ERR_PMTYPE_EXIST });
@@ -568,9 +543,8 @@ namespace sl.web.Areas.Manager.Controllers
         [HttpPost]
         public ActionResult CheckReviewResultIsExist(string typeValue)
         {
-            Sql sql = Sql.Builder;
-            sql.Append("Select * from T_ReviewResult where M_ReviewResultValue = @0", typeValue);
-            T_ReviewResult temp = UtilsDB.DB.FirstOrDefault<T_ReviewResult>(sql);
+
+            T_ReviewResult temp = HRAManagerService.ReviewResultIsExist(typeValue);
             if (temp != null)
             {
                 return Json(new { state = false, message = ERR_REVIEW_EXIST });
@@ -583,9 +557,7 @@ namespace sl.web.Areas.Manager.Controllers
         [HttpPost]
         public ActionResult CheckMTypeIsExist(string typeValue)
         {
-            Sql sql = Sql.Builder;
-            sql.Append("Select * from T_MemberType where M_TypeValue = @0", typeValue);
-            T_MemberType temp = UtilsDB.DB.FirstOrDefault<T_MemberType>(sql);
+            T_MemberType temp = HRAManagerService.MemberTypetIsExist(typeValue);
             if (temp != null)
             {
                 return Json(new { state = false, message = ERR_MEMBERTYPE_EXIST });

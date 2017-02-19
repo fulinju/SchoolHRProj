@@ -5,6 +5,7 @@ using sl.IService;
 using sl.common;
 using sl.model;
 using sl.web.ui;
+using sl.service.manager;
 
 namespace sl.web.Areas.Manager.Controllers
 {
@@ -19,7 +20,7 @@ namespace sl.web.Areas.Manager.Controllers
         {
             Sql sql = Sql.Builder;
             sql.Append("Select * from T_SysModule where IsDeleted = 0 and M_IsVisible = 1 Order By M_Sort asc");
-            List<T_SysModule> list =UtilsDB.DB.Fetch<T_SysModule>(sql);
+            List<T_SysModule> list = HRAManagerService.database.Fetch<T_SysModule>(sql);
             return View(list);
         }
 

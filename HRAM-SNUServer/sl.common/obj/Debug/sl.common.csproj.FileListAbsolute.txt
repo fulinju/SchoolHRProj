@@ -21,3 +21,7 @@ C:\MyTemp\School\Code\SchoolHRProj\HRAM-SNUServer\sl.common\obj\Debug\sl.common.
 C:\MyTemp\School\Code\SchoolHRProj\HRAM-SNUServer\sl.common\obj\Debug\sl.common.dll
 C:\MyTemp\School\Code\SchoolHRProj\HRAM-SNUServer\sl.common\obj\Debug\sl.common.pdb
 F:\School\Code\SchoolHRProj\HRAM-SNUServer\sl.common\obj\Debug\sl.common.csprojResolveAssemblyReference.cache
+C:\Users\xuzhijix\Desktop\SchoolHRProj\HRAM-SNUServer\sl.common\bin\Debug\sl.common.dll
+C:\Users\xuzhijix\Desktop\SchoolHRProj\HRAM-SNUServer\sl.common\bin\Debug\sl.common.pdb
+C:\Users\xuzhijix\Desktop\SchoolHRProj\HRAM-SNUServer\sl.common\obj\Debug\sl.common.dll
+C:\Users\xuzhijix\Desktop\SchoolHRProj\HRAM-SNUServer\sl.common\obj\Debug\sl.common.pdb

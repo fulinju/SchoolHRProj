@@ -14,6 +14,7 @@ using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using NPOI.HSSF.UserModel;
 using System.Text;
+using sl.service.manager;
 
 namespace sl.web.Areas.Manager.Controllers
 {
@@ -30,7 +31,7 @@ namespace sl.web.Areas.Manager.Controllers
         {
             Sql sql = Sql.Builder;
             sql.Append("Select * from T_User");
-            List<T_User> users = UtilsDB.DB.Fetch<T_User>(sql);
+            List<T_User> users = HRAManagerService.database.Fetch<T_User>(sql);
             return users;
         }
 

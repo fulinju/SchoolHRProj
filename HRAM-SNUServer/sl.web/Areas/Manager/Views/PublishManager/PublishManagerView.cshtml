@@ -55,7 +55,8 @@
                 </div>
             </td>
             <td>
-                @Html.EasyuiLinkButton("edit_text", "编辑发布正文", new LinkButton { Icon = "icon-edit", OnClick = string.Format("EditText('{0}','{1}','{2}',{3},{4})", "pm_dg", Url.Action("EditPublishText"), "编辑发布正文", 900, 600) });
+                @Html.EasyuiLinkButton("edit_text", "编辑发布正文", new LinkButton { Icon = "icon-edit", OnClick = string.Format("EditText('{0}','{1}','{2}',{3},{4})", "pm_dg", Url.Action("EditPublishText"), "编辑会员单位简介", 900, 600) })
+                @*@Html.EasyuiLinkButton("edit_text", "编辑发布正文", new LinkButton { Icon = "icon-edit", OnClick = string.Format("EditText('{0}','{1}','{2}',{3},{4})", "pm_dg", Url.Action("EditPublishText"), "编辑发布正文", 900, 600) })*@
             </td>
         </tr>
     </table>
@@ -70,7 +71,7 @@
                     { field: 'pm_typevalue', title: '所属类别', width: '20%', sortable: true },
                     { field: 'pm_publishtime', title: '发布时间', width: '20%', sortable: true },
                     { field: 'pm_views', title: '浏览量', width: '25%', sortable: true },
-                    { field: 'pm_title', title: '信息标题', width: '25%', sortable: true },
+                    { field: 'pm_text', title: '文章内容', width: '25%', sortable: true },
                     { field: 'pm_preview', title: '是否置顶', width: '25%', sortable: true },
                     { field: 'opt', title: '操作', width: '10%', sortable: true, formatter: option }
     ]];
@@ -79,7 +80,7 @@
     function option(value, row, index) {
         var opt = '';
         var url = '@Url.Action("PMAdView", "PublishManager")?aid=' + row.pm_adimglistid;
-        console.log(url);
+        //console.log(url);
         var detail = '<a style="color:red;" href="' + url + '">查看广告</a>';
         return opt + detail;
     }
@@ -120,6 +121,8 @@
                 url: url + "?id=" + id,
                 width: width || 700,
                 height: height || 500,
+                resizable: true,
+                maximizable: true,
                 onClose: function () {
                     $("#" + dgid).datagrid("reload").datagrid('clearSelections').datagrid('clearChecked');
                 },

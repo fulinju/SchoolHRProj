@@ -9,6 +9,7 @@ using sl.web.ui;
 using sl.validate;
 using Newtonsoft.Json;
 using PetaPoco;
+using sl.service.manager;
 
 namespace sl.web.Areas.Manager.Controllers
 {
@@ -28,25 +29,9 @@ namespace sl.web.Areas.Manager.Controllers
         #region 查询
         public ActionResult GetUsersList(string u_loginname)
         {
-            Sql sql = Sql.Builder;
+            Sql sql = HRAManagerService.GetUserSql(u_loginname);
 
-            u_loginname = "%" + u_loginname + "%";
-
-            sql.Append("Select T_UserType.u_logintypevalue,");
-            sql.Append("T_User.pk_id,");
-            sql.Append("T_User.u_loginname,");
-            sql.Append("T_User.u_logintypeid,"); //不能少，重置的时候要用
-            sql.Append("T_User.u_password,");
-            sql.Append("T_User.u_username,");
-            sql.Append("T_User.u_phone,");
-            sql.Append("T_User.u_maibox");
-            sql.Append(" from T_User,T_UserType where U_LoginName Like @0 and T_User.IsDeleted = 0", u_loginname);
-            sql.Append(" and T_UserType.U_LoginTypeID = T_User.U_LoginTypeID");
-            List<dynamic> list = UtilsDB.DB.Fetch<dynamic>(sql);
-
-            string json = JsonConvert.SerializeObject(list);
-
-            return CommonPageList<dynamic>(sql, UtilsDB.DB);
+            return CommonPageList<dynamic>(sql,HRAManagerService.database);
         }
         #endregion
 
@@ -58,7 +43,7 @@ namespace sl.web.Areas.Manager.Controllers
             foreach (var entity in usersList)
             {
                 entity.IsDeleted = true;
-                flag = UtilsDB.DB.Update(entity); //假删除
+                flag = HRAManagerService.database.Update(entity); //假删除
             }
             return DelMessage(flag);
         }
@@ -82,7 +67,7 @@ namespace sl.web.Areas.Manager.Controllers
                     else
                     {
                         m.IsDeleted = false;
-                        object result = UtilsDB.DB.Insert(m);
+                        object result = HRAManagerService.database.Insert(m);
                         return SaveMessage(result);
                     }
                 }
@@ -91,7 +76,7 @@ namespace sl.web.Areas.Manager.Controllers
             else
             {
                 Object obj = id;
-                T_User load = UtilsDB.DB.SingleOrDefault<T_User>(obj);
+                T_User load = HRAManagerService.database.SingleOrDefault<T_User>(obj);
 
                 String oldPwd = load.U_Password;
                 if (Request.IsPost())
@@ -104,7 +89,7 @@ namespace sl.web.Areas.Manager.Controllers
                             load.U_Password = passwordMd5;
                         }
                         Model valid = Model.Valid(load);
-                        return valid.Result ? SaveMessage(UtilsDB.DB.Update(load)) : ErrorMessage(valid.Message);
+                        return valid.Result ? SaveMessage(HRAManagerService.database.Update(load)) : ErrorMessage(valid.Message);
                     }
                 }
                 return View(load);
@@ -123,7 +108,7 @@ namespace sl.web.Areas.Manager.Controllers
                 string initPwd = entity.U_LoginName; //初始化密码为登录名
                 string passwordMd5 = Security.MD5Encrypt(initPwd);
                 entity.U_Password = passwordMd5;
-                flag = UtilsDB.DB.Update(entity);
+                flag = HRAManagerService.database.Update(entity);
             }
             return Json(flag == 1 ? new JsonTip("1", "重置成功") : new JsonTip("0", "重置失败!"));
         }
@@ -136,7 +121,7 @@ namespace sl.web.Areas.Manager.Controllers
         {
             Sql sql = Sql.Builder;
             sql.Append("Select * from T_User where U_LoginName = @0", u_loginname);
-            T_User user = UtilsDB.DB.FirstOrDefault<T_User>(sql);
+            T_User user = HRAManagerService.CheckUserExist(u_loginname);
             if (user != null)
             {
                 return Json(new { state = false, message = "此用户名已存在，请更换" });

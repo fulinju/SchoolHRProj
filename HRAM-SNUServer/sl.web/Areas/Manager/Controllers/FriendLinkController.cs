@@ -9,6 +9,7 @@ using sl.web.ui;
 using sl.validate;
 using Newtonsoft.Json;
 using PetaPoco;
+using sl.service.manager;
 
 namespace sl.web.Areas.Manager.Controllers
 {
@@ -27,16 +28,8 @@ namespace sl.web.Areas.Manager.Controllers
         #region 查询链接
         public ActionResult GetLinkList(string fl_name)
         {
-            Sql sql = Sql.Builder;
-
-            fl_name = "%" + fl_name + "%";
-
-            sql.Append("select * from T_FriendlyLink where FL_Name Like @0 and IsDeleted = 0", fl_name);
-            List<T_FriendlyLink> list = UtilsDB.DB.Fetch<T_FriendlyLink>(sql);
-
-            //string json = JsonConvert.SerializeObject(list);
-
-            return CommonPageList<T_FriendlyLink>(sql, UtilsDB.DB);
+            Sql sql = HRAManagerService.GetLinksSql(fl_name);
+            return CommonPageList<T_FriendlyLink>(sql, HRAManagerService.database);
         }
         #endregion
 
@@ -49,7 +42,7 @@ namespace sl.web.Areas.Manager.Controllers
             foreach (var entity in entityList)
             {
                 entity.IsDeleted = true;
-                flag = UtilsDB.DB.Update(entity); //假删除
+                flag = HRAManagerService.database.Update(entity); //假删除
             }
             return DelMessage(flag);
         }
@@ -69,8 +62,8 @@ namespace sl.web.Areas.Manager.Controllers
                     }
                     else
                     {
-                        m.IsDeleted = false; 
-                        object result = UtilsDB.DB.Insert(m);
+                        m.IsDeleted = false;
+                        object result = HRAManagerService.database.Insert(m);
                         return SaveMessage(result);
                     }
                 }
@@ -79,14 +72,14 @@ namespace sl.web.Areas.Manager.Controllers
             else
             {
                 Object obj = id;
-                T_FriendlyLink load = UtilsDB.DB.SingleOrDefault<T_FriendlyLink>(obj);
+                T_FriendlyLink load = HRAManagerService.database.SingleOrDefault<T_FriendlyLink>(obj);
 
                 if (Request.IsPost())
                 {
                     if (TryUpdateModel(load))
                     {
                         Model valid = Model.Valid(load);
-                        return valid.Result ? SaveMessage(UtilsDB.DB.Update(load)) : ErrorMessage(valid.Message);
+                        return valid.Result ? SaveMessage(HRAManagerService.database.Update(load)) : ErrorMessage(valid.Message);
                     }
                 }
                 return View(load);

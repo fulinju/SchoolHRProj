@@ -18,15 +18,34 @@
             </td>
         </tr>
 
-        
+
+        @*<tr>
+                <th style="width: 130px">
+                    上传文件：
+                </th>
+                <td>
+                    @Html.UploadTextBox("文件路径", width: InputWidthType.Long, value: Model.DM_FileURL)
+                </td>
+            </tr>*@
+
         <tr>
-            <th style="width: 130px">
-                上传文件：
+            <th>
+                文件地址：
             </th>
             <td>
-                @Html.UploadTextBox("文件路径", isWater: true, width: InputWidthType.Long, value: Model.DM_FileURL)
+                <input type="file" id="DM_FileURL" name="DM_FileURL" />
             </td>
+            <td>
+                @if (Model != null && !string.IsNullOrEmpty(Model.DM_FileURL))
+                {
+                    <a class="btnDelFile" id="@Model.pk_id" onclick="delface(@Model.pk_id)">删除</a>
+                }
+            </td>
+
         </tr>
+
+
+
         <tr>
             <th style="width: 130px">
                 文件标题：
@@ -46,20 +65,20 @@
         </tr>
 
         @*<tr>
-            <th style="width: 130px">
-                文件路径：
-            </th>
-            <td>
-                @Html.InputFor(m => m.DM_FileURL, Html.Valid().Required("请输入文件路径！").AsHtmlAttribute())
-            </td>
-        </tr>*@
+                <th style="width: 130px">
+                    文件路径：
+                </th>
+                <td>
+                    @Html.InputFor(m => m.DM_FileURL, Html.Valid().Required("请输入文件路径！").AsHtmlAttribute())
+                </td>
+            </tr>*@
 
         <tr>
             <th style="width: 130px">
                 下载数量：
             </th>
             <td>
-                @Html.InputFor(m => m.DM_DownloadNum, new { readOnly = "true"})
+                @Html.InputFor(m => m.DM_DownloadNum, new { readOnly = "true" })
             </td>
         </tr>
 
@@ -75,3 +94,24 @@
 
     </table>
 </form>
+
+
+<script type="text/javascript">
+    $('.btnDelFile').click(function () {
+        var url = '@Url.Action("DelFile")';
+        var id = $(this).attr('id');
+
+        $.ajax({
+            type: 'post',
+            url: url,
+            data: {
+                id: id
+            },
+            success: function(data){
+                //服务器返回响应，根据响应结果
+                $.messager.alert(data.code,data.message);
+            },
+            dataType: "json"
+        });
+    })
+</script>
