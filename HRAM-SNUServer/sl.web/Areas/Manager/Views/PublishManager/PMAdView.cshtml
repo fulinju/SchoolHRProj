@@ -4,6 +4,7 @@
     Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
 }
 
+
 <div id="toolbar">
     <fieldset>
         <legend>信息查询</legend>
@@ -25,6 +26,13 @@
     </fieldset>
     <table>
         <tr>
+            <td>
+                <a href="javascript:" class="easyui-linkbutton" data-options="iconCls:'icon-back'" onclick="self.location=document.referrer;">返回</a>
+            </td>
+            <td>
+                <div class="datagrid-btn-separator">
+                </div>
+            </td>
             <td>
                 @Html.EasyuiLinkButtonForAdd("pm_ad_dg", "加入广告图片", Url.Action("PMAdEdit", new { aid = Request["aid"] }), 900, 600)
             </td>

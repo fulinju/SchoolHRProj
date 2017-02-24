@@ -47,7 +47,7 @@ namespace sl.service.manager
             return database.FirstOrDefault<T_User>(sql);
         }
         #endregion
-     
+
         #region 用户登录
         public static T_User CheckLogin(string name, string passwordMd5)
         {
@@ -96,7 +96,7 @@ namespace sl.service.manager
             return database.FirstOrDefault<T_Member>(sql);
         }
         #endregion
-     
+
         #endregion
         #endregion
 
@@ -122,6 +122,46 @@ namespace sl.service.manager
             return sql;
         }
 
+        public static List<PublishInfo> GetTopPublish(int num = -1)
+        {
+            Sql sql = Sql.Builder;
+            if (num == -1)
+            {
+                sql.Append("Select T_PMType.pm_typevalue,");
+                sql.Append(" T_User.u_username,");
+                sql.Append("T_PublishManage.u_loginname,");
+                sql.Append("T_PublishManage.pm_title,");
+                sql.Append("T_PublishManage.pm_adimglistid,");
+                sql.Append("T_PublishManage.pm_publishtime,");
+                sql.Append("T_PublishManage.pm_text,");
+                sql.Append("T_PublishManage.pm_views,");
+                sql.Append("T_PublishManage.pm_preview");
+                sql.Append(" from T_PMType,T_PublishManage,T_User where T_PublishManage.IsDeleted = 0");
+                sql.Append(" and T_PMType.PM_TypeID = T_PublishManage.PM_TypeID");
+                sql.Append(" and T_User.U_LoginName = T_PublishManage.U_LoginName");
+
+            }
+            else
+            {
+                sql.Append("Select top " + num);
+                sql.Append(" T_PMType.pm_typevalue,");
+                sql.Append(" T_User.u_username,");
+                sql.Append("T_PublishManage.u_loginname,");
+                sql.Append("T_PublishManage.pm_title,");
+                sql.Append("T_PublishManage.pm_adimglistid,");
+                sql.Append("T_PublishManage.pm_publishtime,");
+                sql.Append("T_PublishManage.pm_text,");
+                sql.Append("T_PublishManage.pm_views,");
+                sql.Append("T_PublishManage.pm_preview");
+                sql.Append(" from T_PMType,T_PublishManage,T_User where T_PublishManage.IsDeleted = 0");
+                sql.Append(" and T_PMType.PM_TypeID = T_PublishManage.PM_TypeID");
+                sql.Append(" and T_User.U_LoginName = T_PublishManage.U_LoginName");
+            }
+
+            List<PublishInfo> list = database.Fetch<PublishInfo>(sql);
+            return list;
+        }
+
 
 
         #endregion
@@ -131,7 +171,7 @@ namespace sl.service.manager
         #region 获取下载列表Sql
         public static Sql GetDownloadSql(string dm_title)
         {
-             Sql sql = Sql.Builder;
+            Sql sql = Sql.Builder;
 
             dm_title = "%" + dm_title + "%";
 
@@ -260,6 +300,17 @@ namespace sl.service.manager
         #endregion
 
         #region 查询发布类型
+        public static List<T_PMType> GetPublishTypes()
+        {
+            List<T_PMType> publishTypes = new List<T_PMType>();
+            Sql sql = Sql.Builder;
+            sql.Select("*")
+                .From("T_PMType")
+                .OrderBy("PM_TypeID asc");
+            publishTypes = database.Fetch<T_PMType>(sql);
+            return publishTypes;
+        }
+
         public static Sql GetPublishTypeSql(string pm_typevalue)
         {
             Sql sql = Sql.Builder;
@@ -267,7 +318,7 @@ namespace sl.service.manager
             sql.Append("Select * from T_PMType where PM_TypeValue Like @0 and IsDeleted = 0", pm_typevalue);
             return sql;
         }
-#endregion
+        #endregion
 
 
         #region 是否存在于表中
@@ -275,7 +326,7 @@ namespace sl.service.manager
         {
             Sql sql = Sql.Builder;
             sql.Append("Select count(*) from " + tableName + " where " + selectRow + "=@0", selectRowValue);
-             
+
             return database.FirstOrDefault<int>(sql);
         }
         #endregion
@@ -304,7 +355,7 @@ namespace sl.service.manager
         public static T_DMType DownloadTypeIsExist(string typeValue)
         {
             Sql sql = Sql.Builder;
-            sql.Append("Select * from T_DMType where DM_TypeValue = @0", typeValue); 
+            sql.Append("Select * from T_DMType where DM_TypeValue = @0", typeValue);
             T_DMType result = database.FirstOrDefault<T_DMType>(sql);
             return result;
         }
@@ -314,7 +365,7 @@ namespace sl.service.manager
         public static T_PMType PublishTypeIsExist(string typeValue)
         {
             Sql sql = Sql.Builder;
-            sql.Append("Select * from T_PMType where PM_TypeValue = @0", typeValue); 
+            sql.Append("Select * from T_PMType where PM_TypeValue = @0", typeValue);
             T_PMType result = database.FirstOrDefault<T_PMType>(sql);
             return result;
         }

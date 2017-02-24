@@ -93,6 +93,28 @@ namespace sl.web
         }
         #endregion
 
+        #region 绑定发布类型
+        public static List<SelectListItem> PublishTypes()
+        {
+            List<T_PMType> types = HRAManagerService.GetPublishTypes();
+            List<SelectListItem> list = new List<SelectListItem>();
+            if (types != null)
+            {
+                for (int i = 0; i < types.Count; i++)
+                {
+                    list.Add(new SelectListItem { Text = types[i].PM_TypeValue, Value = types[i].PM_TypeID });
+
+                }
+            }
+            else
+            {
+                list.Add(new SelectListItem { Text = ConstantData.ErrorMsg, Value = "" + ConstantData.ErrorCode });
+            }
+
+            return list;
+        }
+        #endregion
+
 
         #region 绑定下载类型
         public static List<SelectListItem> DownloadTypes()

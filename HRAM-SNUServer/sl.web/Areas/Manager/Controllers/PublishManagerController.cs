@@ -8,8 +8,16 @@ using sl.common;
 using sl.web.ui;
 using sl.validate;
 using Newtonsoft.Json;
+using System.IO;
+using System.Text;
+using System.Data;
 using PetaPoco;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
+using NPOI.HSSF.UserModel;
 using sl.service.manager;
+using sl.extension;
+using common.utils;
 
 namespace sl.web.Areas.Manager.Controllers
 {
@@ -107,7 +115,7 @@ namespace sl.web.Areas.Manager.Controllers
             return View();
         }
 
-        
+
         #region 获取广告图片
         public ActionResult GetJsonPMAdImgs(T_ADImgList m, string aid = "0")
         {
@@ -197,10 +205,11 @@ namespace sl.web.Areas.Manager.Controllers
             string fileName = "";
             if (Request.Files.Count > 0)
             {
-                HttpPostedFileBase fileBase = Request.Files["PM_ADImgListURL"];  
+                HttpPostedFileBase fileBase = Request.Files["PM_ADImgListURL"];
                 if (fileBase != null && fileBase.FileName != "")
                 {
-                    if(!DirFile.IsExistDirectory(Key.PublishAdImgsPath)){
+                    if (!DirFile.IsExistDirectory(Key.PublishAdImgsPath))
+                    {
                         DirFile.CreateDir(Key.PublishAdImgsPath);
                     }
                     fileName = Key.PublishAdImgsPath + Utils.GetRamCode() + "." + Utils.GetFileExt(fileBase.FileName);
@@ -240,7 +249,6 @@ namespace sl.web.Areas.Manager.Controllers
 
         #endregion
 
-
         #region 编辑发布信息
         [ValidateInput(false)]
         public ActionResult EditPublishText(T_PublishManage m, string id = "0")
@@ -263,5 +271,92 @@ namespace sl.web.Areas.Manager.Controllers
             return View("EditPublishText", load);
         }
         #endregion
+
+
+        [HttpPost]
+        public string post_test(string str)
+        {
+            return "post的字符串是：" + str;
+        }  
+
+        /// <summary>
+        /// 导出选中
+        /// </summary>
+        [HttpPost]
+        public bool ExportSelectPublishAsExcel(string model)
+        {
+            List<PublishInfo> publishsList = JsonConvert.DeserializeObject<List<PublishInfo>>(model);
+
+            //List<PublishInfo> result = HRAManagerService.GetTopPublish();
+
+            DataTable dt = DTExtensions.ToDataTable(publishsList);
+
+
+            DataRow dr = dt.NewRow();
+            dr[0] = "用户名";
+            dr[1] = "标题";
+            dr[2] = "类别";
+            dr[3] = "广告ID";
+            dr[4] = "发布时间";
+            //dr[5] = "浏览量";
+            //dr[6] = "文章内容";
+
+            dt.Rows.InsertAt(dr, 0);
+            ExportToExcel(dt);
+
+            return true;
+            //Response.Redirect("http://www.jb51.net", false);
+        }
+
+
+
+        /// <summary>
+        /// 导出全部
+        /// </summary>
+        /// <param name="m"></param>
+        /// <param name="aid"></param>
+        /// <returns></returns>
+        public void ExportPublishAsExcel()
+        {
+            List<PublishInfo> result = HRAManagerService.GetTopPublish();
+
+            DataTable dt = DTExtensions.ToDataTable(result);
+
+
+            DataRow dr = dt.NewRow();
+            dr[0] = "用户名";
+            dr[1] = "标题";
+            dr[2] = "类别";
+            dr[3] = "广告ID";
+            dr[4] = "发布时间";
+            dr[5] = "浏览量";
+            dr[6] = "文章内容";
+
+            dt.Rows.InsertAt(dr, 0);
+            ExportToExcel(dt);
+        }
+
+
+
+
+        public void ExportToExcel(DataTable dt, string fileName = "")
+        {
+
+            //生成Excel
+            IWorkbook book = WorkbookUtils.BuildWorkbook(dt);
+
+            //web 下载
+            fileName = WorkbookUtils.GetExcelFileName(fileName);
+
+            Response.Clear();
+            Response.Buffer = true;
+            Response.Charset = Encoding.UTF8.BodyName;
+            Response.AppendHeader("Content-Disposition", "attachment;filename=" + fileName + ".xls");
+            Response.ContentEncoding = Encoding.UTF8;
+            Response.ContentType = "application/vnd.ms-excel; charset=UTF-8";
+            book.Write(Response.OutputStream);
+            Response.Flush();
+            Response.End();
+        }
     }
 }

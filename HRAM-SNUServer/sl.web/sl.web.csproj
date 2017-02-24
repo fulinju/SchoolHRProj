@@ -2249,6 +2249,7 @@
     <Compile Include="Scripts\UEditor\net\App_Code\PathFormater.cs" />
     <Compile Include="Scripts\UEditor\net\App_Code\UploadHandler.cs" />
     <Compile Include="Utils\JsonUtils.cs" />
+    <Compile Include="Utils\WorkbookUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

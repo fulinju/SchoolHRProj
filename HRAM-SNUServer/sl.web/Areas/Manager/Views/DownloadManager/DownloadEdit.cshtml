@@ -19,39 +19,36 @@
         </tr>
 
 
-        @*<tr>
-                <th style="width: 130px">
-                    上传文件：
+        @if (Model != null && !string.IsNullOrEmpty(Model.DM_FileURL))
+        {
+            <tr id="colFilePath">
+                <th>
+                    操作：
                 </th>
                 <td>
-                    @Html.UploadTextBox("文件路径", width: InputWidthType.Long, value: Model.DM_FileURL)
+                    <label id="tvFilePath">文件路径: @Model.DM_FileURL &nbsp;&nbsp;</label>
+                    <a class="btnDelFile easyui-linkbutton" id="@Model.pk_id">&nbsp;删除&nbsp;</a>
                 </td>
-            </tr>*@
-
-        <tr>
-            <th>
-                文件地址：
-            </th>
-            <td>
-                <input type="file" id="DM_FileURL" name="DM_FileURL" />
-            </td>
-            <td>
-                @if (Model != null && !string.IsNullOrEmpty(Model.DM_FileURL))
-                {
-                    <a class="btnDelFile" id="@Model.pk_id" onclick="delface(@Model.pk_id)">删除</a>
-                }
-            </td>
-
-        </tr>
-
-
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <th>
+                    文件地址：
+                </th>
+                <td>
+                    <input type="file" id="DM_FileURL" name="DM_FileURL" />
+                </td>
+            </tr>
+        }
 
         <tr>
             <th style="width: 130px">
                 文件标题：
             </th>
             <td>
-                @Html.InputFor(m => m.DM_Title, Html.Valid().Required("请输入链接名称！").AsHtmlAttribute())
+                @Html.InputFor(m => m.DM_Title, Html.Valid().Required("请输入下载名称！").AsHtmlAttribute())
             </td>
         </tr>
 
@@ -63,15 +60,6 @@
                 @Html.DropDownListFor(m => m.DM_TypeID, UtilsBind.DownloadTypes())
             </td>
         </tr>
-
-        @*<tr>
-                <th style="width: 130px">
-                    文件路径：
-                </th>
-                <td>
-                    @Html.InputFor(m => m.DM_FileURL, Html.Valid().Required("请输入文件路径！").AsHtmlAttribute())
-                </td>
-            </tr>*@
 
         <tr>
             <th style="width: 130px">
@@ -93,10 +81,12 @@
         </tr>
 
     </table>
+
 </form>
 
 
 <script type="text/javascript">
+    //删除操作
     $('.btnDelFile').click(function () {
         var url = '@Url.Action("DelFile")';
         var id = $(this).attr('id');
@@ -107,9 +97,15 @@
             data: {
                 id: id
             },
-            success: function(data){
+            success: function (data) {
                 //服务器返回响应，根据响应结果
-                $.messager.alert(data.code,data.message);
+                $.messager.alert("提示", data.message);
+                if (data.state == 1) {
+
+                    document.location.reload();//当前页面 
+                    //$('#colFilePath').hide();
+                }
+                //$.messager.alert(data.code,data.message);
             },
             dataType: "json"
         });

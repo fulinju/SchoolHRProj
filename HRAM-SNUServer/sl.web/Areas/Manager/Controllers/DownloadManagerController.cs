@@ -59,11 +59,25 @@ namespace sl.web.Areas.Manager.Controllers
                     var validate = Model.Valid(m);
                     if (validate.Result)
                     {
-                        m.DM_FileURL = UploadFile();
-                        m.DM_DownloadNum = 0; //初始化下载数量
-                        m.IsDeleted = false;
-                        object result = HRAManagerService.database.Insert(m);
-                        return SaveMessage(result);
+                        HttpPostedFileBase fileBase = GetFileBase();
+                        if (fileBase == null || fileBase.FileName == "")
+                        {
+                            m.DM_FileURL = "";
+                        }
+                        else if (CheckUploadFile(fileBase))
+                        {
+                            return ErrorMessage("上传格式错误");
+                        }
+                        else
+                        {
+                            m.DM_FileURL = GetSavedFileName(fileBase);
+                            m.DM_DownloadNum = 0; //初始化下载数量
+                            m.IsDeleted = false;
+                            object result = HRAManagerService.database.Insert(m);
+                            SaveFile(fileBase, m.DM_FileURL);// 存储
+                            return SaveMessage(result);
+                        }
+
                     }
                     else
                     {
@@ -84,11 +98,21 @@ namespace sl.web.Areas.Manager.Controllers
                     {
                         if (Request.Files.Count > 0)
                         {
-                            Utils.DeleteFile(load.DM_FileURL);
-                            string fileName = UploadFile();
-                            if (fileName != "")
+                            HttpPostedFileBase fileBase = GetFileBase();
+                            if (fileBase == null || fileBase.FileName =="")
                             {
+                                load.DM_FileURL = "";
+                            }
+                            else if (CheckUploadFile(fileBase))
+                            {
+                                return ErrorMessage("上传格式错误");
+                            }
+                            else
+                            {
+                                Utils.DeleteFile(load.DM_FileURL);
+                                string fileName = GetSavedFileName(fileBase);                             
                                 load.DM_FileURL = fileName;
+                                SaveFile(fileBase, load.DM_FileURL);// 存储
                             }
                         }
 
@@ -108,47 +132,78 @@ namespace sl.web.Areas.Manager.Controllers
         {
             Sql sql = HRAManagerService.GetDownloadByIDSql(id);
             var m = HRAManagerService.database.FirstOrDefault<T_DownloadManage>(sql);
-            int success = 0;
+            int flag = 0;
             if (m != null)
             {
                 Utils.DeleteFile(m.DM_FileURL);
                 m.DM_FileURL = string.Empty;
-                success = HRAManagerService.database.Update(m);
+                flag = HRAManagerService.database.Update(m);
             }
             //换成 DelMessage
-            if (success == 1)
-            {
-                return Json(Message("删除成功"), JsonRequestBehavior.AllowGet); //删除成功
-            }
-            else
-            {
-                return Json(Message("删除失败"), JsonRequestBehavior.AllowGet); //删除失败
-            }
+
+            return DelMessage(flag);
+
         }
         #endregion
 
-        #region 上传文件
-        public string UploadFile()
+        /// <summary>
+        /// 获取存储的名称
+        /// </summary>
+        /// <param name="fileBase"></param>
+        /// <returns></returns>
+        public string GetSavedFileName(HttpPostedFileBase fileBase)
         {
             string fileName = "";
+
+            fileName = Key.DownloadFilesPath + Utils.GetRamCode() + "." + Utils.GetFileExt(fileBase.FileName);
+          
+            return fileName;
+        }
+
+        /// <summary>
+        /// 存储文件
+        /// </summary>
+        private void SaveFile(HttpPostedFileBase fileBase,string fileName)
+        {
+            if (!DirFile.IsExistDirectory(Key.DownloadFilesPath))
+            {
+                DirFile.CreateDir(Key.DownloadFilesPath);
+            }
+
+            fileBase.SaveAs(Server.MapPath(fileName)); //存储操作
+        }
+
+
+        #region 检查上传文件
+        public bool CheckUploadFile(HttpPostedFileBase fileBase)
+        {
             if (Request.Files.Count > 0)
             {
-                HttpPostedFileBase fileBase = Request.Files["DM_FileURL"];
                 if (fileBase != null && fileBase.FileName != "")
                 {
-                    if (!DirFile.IsExistDirectory(Key.DownloadFilesPath))
+                    string extension = Utils.GetFileExt(fileBase.FileName);
+
+                    if (extension == "doc" || extension == "docx"
+                   || extension == "xls" || extension == "xlsx"
+                   || extension == "ppt" || extension == "pptx"
+                   || extension == "txt")
                     {
-                        DirFile.CreateDir(Key.DownloadFilesPath);
+                        return false;
                     }
 
-                    fileName = Key.DownloadFilesPath + Utils.GetRamCode() + "." + Utils.GetFileExt(fileBase.FileName);
-                    fileBase.SaveAs(Server.MapPath(fileName));
                 }
             }
-            return fileName;
-
-            //return Json(Message("上传成功")); //上传成功
+            return true;
         }
         #endregion
+
+        /// <summary>
+        /// 获取文件FileBase
+        /// </summary>
+        /// <returns></returns>
+        public HttpPostedFileBase GetFileBase()
+        {
+            return Request.Files["DM_FileURL"];
+        }
     }
 }
