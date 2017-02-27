@@ -376,3 +376,4 @@ C:\Users\xuzhijix\Desktop\SchoolHRProj\HRAM-SNUServer\sl.web\bin\zh-Hans\System.
 C:\Users\xuzhijix\Desktop\SchoolHRProj\HRAM-SNUServer\sl.web\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
 C:\Users\xuzhijix\Desktop\SchoolHRProj\HRAM-SNUServer\sl.web\obj\Debug\sl.web.dll
 C:\Users\xuzhijix\Desktop\SchoolHRProj\HRAM-SNUServer\sl.web\obj\Debug\sl.web.pdb
+F:\School\Code\SchoolHRProj\HRAM-SNUServer\sl.web\bin\NPinyin.dll

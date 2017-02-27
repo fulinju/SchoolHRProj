@@ -15,7 +15,7 @@
 
         public string pm_publishtime { get; set; }
 
-        public int pm_views { get; set; }
+        public string pm_views { get; set; }
 
         public string pm_text { get; set; }
     }

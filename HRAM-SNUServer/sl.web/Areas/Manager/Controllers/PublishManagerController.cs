@@ -322,7 +322,7 @@ namespace sl.web.Areas.Manager.Controllers
 
             DataTable dt = DTExtensions.ToDataTable(result);
 
-
+            //DataTable title = new DataTable();
             DataRow dr = dt.NewRow();
             dr[0] = "用户名";
             dr[1] = "标题";
@@ -333,7 +333,9 @@ namespace sl.web.Areas.Manager.Controllers
             dr[6] = "文章内容";
 
             dt.Rows.InsertAt(dr, 0);
-            ExportToExcel(dt);
+            //用column name 作为列名
+         
+            ExportToExcel(dt, "表格");
         }
 
 
@@ -354,8 +356,11 @@ namespace sl.web.Areas.Manager.Controllers
             Response.AppendHeader("Content-Disposition", "attachment;filename=" + fileName + ".xls");
             Response.ContentEncoding = Encoding.UTF8;
             Response.ContentType = "application/vnd.ms-excel; charset=UTF-8";
+
+
             book.Write(Response.OutputStream);
             Response.Flush();
+
             Response.End();
         }
     }

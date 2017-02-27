@@ -55,12 +55,37 @@
                         </div>
                     </td>
                     <td>
-                        @Html.EasyuiLinkButton("reset_pwd", "重置密码", new LinkButton { Icon = "icon-help", OnClick = string.Format("ResetPwd('{0}','{1}')", "user_dg", Url.Action("ResetUserPWD")) });
+                        @Html.EasyuiLinkButton("reset_pwd", "重置密码", new LinkButton { Icon = "icon-help", OnClick = string.Format("ResetPwd('{0}','{1}')", "user_dg", Url.Action("ResetUserPWD")) })
+                    </td>
+
+                    <td>
+                        <div class="datagrid-btn-separator">
+                        </div>
+                    </td>
+                    <td>
+                        <div style="padding:5px 0;">
+                            <a class="easyui-linkbutton" data-options="iconCls:'icon-save'" style="padding: 1px 0;">导入</a>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="datagrid-btn-separator">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="easyui-linkbutton">
+                            <a class="easyui-menubutton" data-options="menu:'#mm',iconCls:'icon-save'">导出</a>
+                        </div>
                     </td>
                 </tr>
             </table>
 </div>
 <table id="user_dg"></table>
+
+<div id="mm" style="width:80px;">
+    <div id="btn_export_all" data-options="iconCls:'icon-undo'">导出全部</div>
+    <div id="btn_export_selected" data-options="iconCls:'icon-redo'">导出选中</div>
+</div>
 
 
 <script type="text/javascript">

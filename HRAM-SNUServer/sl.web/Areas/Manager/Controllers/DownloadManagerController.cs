@@ -10,6 +10,7 @@ using sl.validate;
 using Newtonsoft.Json;
 using PetaPoco;
 using sl.service.manager;
+using NPinyin;
 
 namespace sl.web.Areas.Manager.Controllers
 {
@@ -42,8 +43,9 @@ namespace sl.web.Areas.Manager.Controllers
             int flag = 0;
             foreach (var entity in entityList)
             {
+                DirFile.DeleteFile(entity.DM_FileURL);
                 entity.IsDeleted = true;
-                flag = HRAManagerService.database.Update(entity); //假删除
+                flag = HRAManagerService.database.Update(entity); //假删除 可以直接删
             }
             return DelMessage(flag);
         }
@@ -70,11 +72,10 @@ namespace sl.web.Areas.Manager.Controllers
                         }
                         else
                         {
-                            m.DM_FileURL = GetSavedFileName(fileBase);
+                            m.DM_FileURL = SaveFile(fileBase, m.DM_FileURL, HRAManagerService.GetDownloadValueByID(m.DM_TypeID));// 存储
                             m.DM_DownloadNum = 0; //初始化下载数量
                             m.IsDeleted = false;
                             object result = HRAManagerService.database.Insert(m);
-                            SaveFile(fileBase, m.DM_FileURL);// 存储
                             return SaveMessage(result);
                         }
 
@@ -110,9 +111,8 @@ namespace sl.web.Areas.Manager.Controllers
                             else
                             {
                                 Utils.DeleteFile(load.DM_FileURL);
-                                string fileName = GetSavedFileName(fileBase);                             
-                                load.DM_FileURL = fileName;
-                                SaveFile(fileBase, load.DM_FileURL);// 存储
+                                //string fileName = GetSavedFileName(fileBase);
+                                load.DM_FileURL = SaveFile(fileBase, load.DM_FileURL, HRAManagerService.GetDownloadValueByID(load.DM_TypeID));// 存储
                             }
                         }
 
@@ -141,6 +141,7 @@ namespace sl.web.Areas.Manager.Controllers
             }
             //换成 DelMessage
 
+            DirFile.DeleteFile(m.DM_FileURL);
             return DelMessage(flag);
 
         }
@@ -155,7 +156,7 @@ namespace sl.web.Areas.Manager.Controllers
         {
             string fileName = "";
 
-            fileName = Key.DownloadFilesPath + Utils.GetRamCode() + "." + Utils.GetFileExt(fileBase.FileName);
+            fileName =  Utils.GetRamCode() + "." + Utils.GetFileExt(fileBase.FileName);
           
             return fileName;
         }
@@ -163,14 +164,22 @@ namespace sl.web.Areas.Manager.Controllers
         /// <summary>
         /// 存储文件
         /// </summary>
-        private void SaveFile(HttpPostedFileBase fileBase,string fileName)
+        private string SaveFile(HttpPostedFileBase fileBase,string fileName,string typeName)
         {
-            if (!DirFile.IsExistDirectory(Key.DownloadFilesPath))
+            //string typeNamePinYin = Pinyin.GetPinyin(typeName);
+            //typeNamePinYin = typeNamePinYin.Replace(" ", "");
+
+            string tagetPath = Key.DownloadFilesPath + typeName + "/";
+            if (!DirFile.IsExistDirectory(tagetPath))
             {
-                DirFile.CreateDir(Key.DownloadFilesPath);
+                DirFile.CreateDir(tagetPath);
             }
 
-            fileBase.SaveAs(Server.MapPath(fileName)); //存储操作
+            tagetPath = tagetPath + GetSavedFileName(fileBase);
+
+            fileBase.SaveAs(Server.MapPath(tagetPath)); //存储操作
+            return tagetPath;
+
         }
 
 

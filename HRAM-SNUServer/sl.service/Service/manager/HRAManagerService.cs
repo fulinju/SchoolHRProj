@@ -177,6 +177,7 @@ namespace sl.service.manager
 
             sql.Append("Select T_DMType.dm_typevalue,");
             sql.Append("T_DownloadManage.pk_id,");
+            sql.Append("T_DownloadManage.dm_typeid,");
             sql.Append("T_DownloadManage.u_loginname,");
             sql.Append("T_DownloadManage.dm_title,");
             sql.Append("T_DownloadManage.dm_fileurl,");
@@ -193,6 +194,15 @@ namespace sl.service.manager
         {
             Sql sql = Sql.Builder.Append("Select * from T_DownloadManage Where pk_id = @0", id);
             return sql;
+        }
+        #endregion
+
+        #region 根据typeID获取类型value
+        public static string GetDownloadValueByID(string dm_typeid)
+        {
+            Sql sql = Sql.Builder.Append("Select * from T_DMType Where DM_TypeID = @0", dm_typeid);
+            T_DMType temp = database.FirstOrDefault<T_DMType>(sql);
+            return temp.DM_TypeValue;
         }
         #endregion
 
