@@ -1,0 +1,59 @@
+{
+	"application/view/pre/GuideView.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"js/jquery-1.10.2.min.js",
+			"application/js/pre/GuideJS.js",
+			"img/guide/guide3.png",
+			"img/guide/guide1.png",
+			"img/guide/guide0.png",
+			"img/guide/guide2.png"
+		],
+		"refer": [
+			"application/view/acc/LoginView.html"
+		]
+	},
+	"application/view/pre/SplashView.html": {
+		"resources": [
+			"js/mui.min.js",
+			"application/js/pre/SplashJS.js",
+			"css/mui.min.css",
+			"js/jquery-1.10.2.min.js"
+		],
+		"refer": [
+			"application/view/acc/LoginView.html",
+			"application/view/pre/GuideView.html"
+		]
+	},
+	"application/view/acc/LoginView.html": {
+		"resources": [
+			"application/js/acc/LoginJS.js",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"js/jquery-1.10.2.min.js"
+		],
+		"refer": [
+			"application/view/main/MainView.html",
+			"application/view/guide/GuideView.html"
+		]
+	},
+	"application/view/main/MainView.html": {
+		"resources": [
+			"application/js/main/MainJS.js",
+			"js/jquery-1.10.2.min.js"
+		]
+	},
+	"application/view/guide/GuideView.html": {
+		"resources": [
+			"img/guide/guide3.png",
+			"img/guide/guide1.png",
+			"img/guide/guide0.png",
+			"application/js/guide/GuideJS.js",
+			"img/guide/guide2.png"
+		],
+		"refer": [
+			"application/view/acc/LoginView.html"
+		]
+	}
+}
