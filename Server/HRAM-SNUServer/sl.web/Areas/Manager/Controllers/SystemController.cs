@@ -40,7 +40,7 @@ namespace sl.web.Areas.Manager.Controllers
         public ActionResult ModuleList()
         {
             Sql sql = Sql.Builder;
-            sql.Append("Select * from T_SysModule where IsDeleted = 0 Order By M_Sort asc");
+            sql.Append("Select * from T_SysModule where isDeleted = 0 Order By mSort asc");
 
             var list = moduleService.TreeList(HRAManagerService.database, sql, 0); // 0显示根目录
 
@@ -51,12 +51,12 @@ namespace sl.web.Areas.Manager.Controllers
         public ActionResult ModuleTree()
         {
             Sql sql = Sql.Builder;
-            sql.Append("Select * from T_SysModule where IsDeleted =0  Order By M_Sort asc");
+            sql.Append("Select * from T_SysModule where isDeleted =0  Order By mSort asc");
             var treeNodes = HRAManagerService.database.Fetch<T_SysModule>(sql).Select(p => new TreeNode
             {
-                id = p.pk_id,
-                Pid = p.M_ParentNo,
-                text = p.M_Name
+                id = p.pkId,
+                Pid = p.mParentNo,
+                text = p.mName
             }).ToList();
 
             var jsons = TreeNode.CreateTree(treeNodes,-1); //使得根节点显现
@@ -71,14 +71,14 @@ namespace sl.web.Areas.Manager.Controllers
             {
                 if (Request.IsPost())
                 {
-                    if (m.M_ParentNo == null)
+                    if (m.mParentNo == null)
                     {
-                        m.M_ParentNo = 0;
+                        m.mParentNo = 0;
                     }
 
-                    m.IsDeleted = false;
-                    m.M_Sort = 0;
-                    m.M_IsVisible = true;
+                    m.isDeleted = false;
+                    m.mSort = 0;
+                    m.mIsVisible = true;
                 }
                 return CommonAdd(HRAManagerService.database, m);
             }
@@ -107,7 +107,7 @@ namespace sl.web.Areas.Manager.Controllers
             bool flag = true;
             foreach (var sysMenu in sysMenus)
             {
-                sysMenu.IsDeleted = true;
+                sysMenu.isDeleted = true;
 
                 bool updateFlag = false;
                 if (HRAManagerService.database.Update(sysMenu) == 1)

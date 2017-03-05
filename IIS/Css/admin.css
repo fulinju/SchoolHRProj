@@ -1,0 +1,337 @@
+﻿body {
+    font-family: helvetica,tahoma,verdana,sans-serif;
+    font-size: 13px;
+    margin: 0;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+    blockquote:before, blockquote:after, q:before, q:after {
+        content: '';
+        content: none;
+    }
+
+strong {
+    font-weight: bold;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+img {
+    border: 0;
+    max-width: 100%;
+}
+
+p {
+    color: #333;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+.clearfix {
+    display: block;
+}
+
+html[xmlns] .clearfix {
+    display: block;
+}
+
+.red {
+    color: red;
+    padding: 0 4px;
+}
+
+* html .clearfix {
+    height: 1%;
+}
+
+iframe {
+    border: 0;
+}
+
+a:link {
+    text-decoration: none;
+    color: #494949;
+}
+
+a:visited {
+    text-decoration: none;
+    color: #494949;
+}
+
+a:hover {
+    color: #F37C06;
+    text-decoration: underline;
+}
+
+a:active {
+    color: #F37C06;
+}
+
+.msgtable {
+    background: #fff;
+    width: 100%;
+    font-size: 13px;
+}
+
+    .msgtable a {
+        color: #005eac;
+    }
+
+    .msgtable .tright {
+        text-align: right;
+    }
+
+    .msgtable .tleft {
+        text-align: left;
+    }
+
+    .msgtable .center {
+        text-align: center;
+    }
+
+    .msgtable th {
+        padding: 0.5em;
+        font-weight: 500;
+        text-align: right;
+        background: #ECECEC;
+        border-bottom: 1px solid #ccc;
+        border-top: 1px solid #ccc;
+        font-size: 1.1em;
+    }
+
+    .msgtable td {
+        padding: 0.4em;
+        border-bottom: 1px solid #F3F3F3;
+    }
+
+.validBox {
+}
+
+.input {
+    border: 1px solid #ccc;
+    padding: 3px 5px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+}
+
+textarea {
+    padding: 5px 5px;
+}
+
+    .input:focus, textarea:focus {
+        border-color: #66AFE9; /*box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);*/
+        outline: 0 none;
+    }
+
+.wh260 {
+    width: 260px;
+}
+
+.wh130 {
+    width: 130px;
+}
+
+.wh80 {
+    width: 80px;
+}
+
+.wh-min {
+    width: 80px;
+}
+
+.wh-middle {
+    width: 200px;
+}
+
+.wh-big {
+    width: 300px;
+}
+
+.wh-bigbig {
+    width: 400px;
+}
+
+.tip {
+    padding-left: 10px;
+    color: #ccc;
+}
+
+    .tip:hover {
+        color: #000;
+    }
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.textarea {
+    width: 70%;
+    height: 60px;
+    border: 1px solid #ccc;
+    font-size: 12px;
+}
+
+select {
+    border: 1px solid #ccc;
+    line-height: 22px;
+    color: #666;
+    margin: -1px;
+    padding: 4px 3px;
+    font-size: 13px;
+    min-width: 93px;
+}
+
+#show_list {
+    margin: 10px 20px 20px 10px;
+}
+
+    #show_list ul li {
+        float: left;
+        margin: 10px 10px 10px 40px;
+        text-align: center;
+        height: 110px;
+        width: 100px;
+        line-height: 15px;
+    }
+
+        #show_list ul li img {
+            border: 3px #efefed solid;
+            cursor: pointer;
+            width: 100px;
+            height: 100px;
+            opacity: 1;
+        }
+
+            #show_list ul li img.current {
+                border: 3px #f60 solid;
+            }
+
+        #show_list ul li a {
+            padding-right: 1em;
+        }
+
+.piclist {
+    margin-top: 50px;
+}
+
+    .piclist li {
+        float: left;
+        width: 280px;
+        height: 200px;
+        margin: 10px 0 10px 10px;
+    }
+
+.car_pic label {
+    height: 30px;
+    float: left;
+    line-height: 30px;
+    font-size: 14px;
+}
+
+.car_pic li {
+    float: left;
+}
+
+.car_pic img {
+    width: 200px;
+    margin: 3px;
+}
+
+
+/*file容器样式*/
+.upload {
+}
+
+    .upload span {
+        line-height: 30px;
+        padding-left: 20px;
+    }
+
+a.files {
+    background: url(/images/Manager/upfilebg.gif) left top no-repeat #D5F2FF;
+    margin-left: 10px;
+    float: left;
+    width: 64px;
+    height: 18px;
+    overflow: hidden;
+    display: block;
+    border: 1px solid #70b1cf;
+    text-decoration: none;
+}
+    /*file设为透明，并覆盖整个触发面*/
+    a.files input {
+        margin-left: -200px;
+        font-size: 20px;
+        cursor: pointer;
+        filter: alpha(opacity=0);
+        opacity: 0;
+    }
+    /*取消点击时的虚线框*/
+    a.files, a.files input {
+        outline: none; /*ff*/
+        hide-focus: expression(this.hideFocus=true); /*ie*/
+    }
+/*上传文件时切换图片*/
+.filesbg2 {
+    background: url(/Images/Manager/upfilebg2.gif) left top no-repeat !important;
+}
+
+.uploading {
+    float: left;
+    background: url(/images/Manager/loading.gif) no-repeat left center;
+    display: none;
+}
+
+.filetip {
+    color: #898989;
+    padding: 10px 0 0 20px;
+    display: block;
+    float: left;
+}
+
+fieldset {
+    border: 1px solid #ccc;
+    margin-top: 10px;
+}
+
+.Wdate {
+    border: #999 1px solid; /*height: 20px;*/
+    background: url("/Scripts/DatePicker/skin/datePicker.gif") no-repeat right;
+}
+
+#toolbar {
+    padding: 3px 0 3px 5px;
+}
+
+    #toolbar table {
+        margin: 10px 0 3px 5px;
+    }
+
+#searchForm td {
+    padding: 0 2px;
+}
+
+.tooltip .tooltip-arrow-outer, .tooltip .tooltip-arrow {
+    display: none\9;
+}

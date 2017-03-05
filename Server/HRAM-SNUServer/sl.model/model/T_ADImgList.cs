@@ -8,30 +8,30 @@ namespace sl.model
     /// 发布的广告列表
     /// </summary>
     [TableName("T_ADImgList")]
-    [PrimaryKey("pk_id")]
+    [PrimaryKey("pkId")]
     [ExplicitColumns]
     public class T_ADImgList
     {
         [Column]
-        [JsonProperty("pk_id")]
-        public string pk_id { get; set; }
+        [JsonProperty("pkId")]
+        public string pkId { get; set; }
 
         [Column]
-        [JsonProperty("pm_adimglistld")]
-        public string PM_ADImgListID { get; set; }
+        [JsonProperty("pmADImgListID")]
+        public string pmADImgListID { get; set; }
 
         [Column]
-        [JsonProperty("pm_adimglisturl")]
-        public string PM_ADImgListURL { get; set; }
+        [JsonProperty("pmADImgListURL")]
+        public string pmADImgListURL { get; set; }
 
 
         [Column]
-        [JsonProperty("pm_adimglistnum")]
-        public string PM_ADImgListNum { get; set; }
+        [JsonProperty("pmADImgListNum")]
+        public string pmADImgListNum { get; set; }
 
         [JsonIgnore]
         [Column]
-        [JsonProperty("isdeleted")]
-        public bool IsDeleted { get; set; }
+        [JsonProperty("isDeleted")]
+        public bool isDeleted { get; set; }
     }
 }

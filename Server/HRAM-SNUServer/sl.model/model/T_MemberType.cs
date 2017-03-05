@@ -8,25 +8,25 @@ namespace sl.model
     /// 会员类型
     /// </summary>
     [TableName("T_MemberType")]
-    [PrimaryKey("pk_id")]
+    [PrimaryKey("pkId")]
     [ExplicitColumns]
     public class T_MemberType
     {
         [Column]
-        [JsonProperty("pk_id")]
-        public string pk_id { get; set; }
+        [JsonProperty("pkId")]
+        public string pkId { get; set; }
 
         [Column]
-        [JsonProperty("m_typeid")]
-        public string M_TypeID { get; set; }
+        [JsonProperty("mTypeID")]
+        public string mTypeID { get; set; }
 
         [Column]
-        [JsonProperty("m_typevalue")]
-        public string M_TypeValue { get; set; }
+        [JsonProperty("mTypeValue")]
+        public string mTypeValue { get; set; }
 
         [JsonIgnore]
         [Column]
-        [JsonProperty("isdeleted")]
-        public bool IsDeleted { get; set; }
+        [JsonProperty("isDeleted")]
+        public bool isDeleted { get; set; }
     }
 }

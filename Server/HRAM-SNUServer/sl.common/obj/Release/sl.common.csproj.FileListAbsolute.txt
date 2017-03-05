@@ -1,0 +1,4 @@
+F:\School\Code\SchoolHRProj\Server\HRAM-SNUServer\sl.common\bin\Release\sl.common.dll
+F:\School\Code\SchoolHRProj\Server\HRAM-SNUServer\sl.common\bin\Release\sl.common.pdb
+F:\School\Code\SchoolHRProj\Server\HRAM-SNUServer\sl.common\obj\Release\sl.common.dll
+F:\School\Code\SchoolHRProj\Server\HRAM-SNUServer\sl.common\obj\Release\sl.common.pdb

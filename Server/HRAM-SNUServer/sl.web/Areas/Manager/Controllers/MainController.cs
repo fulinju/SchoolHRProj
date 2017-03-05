@@ -19,7 +19,7 @@ namespace sl.web.Areas.Manager.Controllers
         public ActionResult Main()
         {
             Sql sql = Sql.Builder;
-            sql.Append("Select * from T_SysModule where IsDeleted = 0 and M_IsVisible = 1 Order By M_Sort asc");
+            sql.Append("Select * from T_SysModule where isDeleted = 0 and mIsVisible = 1 Order By mSort asc");
             List<T_SysModule> list = HRAManagerService.database.Fetch<T_SysModule>(sql);
             return View(list);
         }

@@ -5,50 +5,50 @@ using Newtonsoft.Json;
 namespace sl.model
 {
     [TableName("T_PublishManage")]
-    [PrimaryKey("pk_id")]
+    [PrimaryKey("pkId")]
     [ExplicitColumns]
     public class T_PublishManage
     {
         [Column]
-        [JsonProperty("pk_id")]
-        public string pk_id { get; set; }
+        [JsonProperty("pkId")]
+        public string pkId { get; set; }
 
         [Column]
-        [JsonProperty("u_loginname")]
-        public string U_LoginName { get; set; }
+        [JsonProperty("uLoginName")]
+        public string uLoginName { get; set; }
 
         [Column]
-        [JsonProperty("pm_title")]
-        public string PM_Title { get; set; }
+        [JsonProperty("pmTitle")]
+        public string pmTitle { get; set; }
 
         [Column]
-        [JsonProperty("pm_typeid")]
-        public string PM_TypeID { get; set; }
+        [JsonProperty("pmTypeID")]
+        public string pmTypeID { get; set; }
 
         [Column]
-        [JsonProperty("pm_adimglistid")]
-        public string PM_ADImgListID { get; set; }
+        [JsonProperty("pmADImgListID")]
+        public string pmADImgListID { get; set; }
 
         [Column]
-        [JsonProperty("pm_publishtime")]
-        public string PM_PublishTime { get; set; }
+        [JsonProperty("pmPublishTime")]
+        public string pmPublishTime { get; set; }
 
         [Column]
-        [JsonProperty("pm_views")]
-        public int PM_Views { get; set; }
+        [JsonProperty("pmViews")]
+        public int pmViews { get; set; }
 
         [Column]
-        [JsonProperty("pm_text")]
-        public string PM_Text { get; set; }
+        [JsonProperty("pmText")]
+        public string pmText { get; set; }
 
         [Column]
-        [JsonProperty("pm_preview")]
-        public string PM_Preview { get; set; }
+        [JsonProperty("pmPreview")]
+        public string pmPreview { get; set; }
 
         [JsonIgnore]
         [Column]
-        [JsonProperty("isdeleted")]
-        public bool IsDeleted { get; set; }
+        [JsonProperty("isDeleted")]
+        public bool isDeleted { get; set; }
 
         //忽略该属性
         //[JsonIgnore]

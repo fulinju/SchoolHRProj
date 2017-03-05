@@ -6,43 +6,43 @@ using Newtonsoft.Json;
 namespace sl.model
 {
     [TableName("T_SysModule")]
-    [PrimaryKey("pk_id")]
+    [PrimaryKey("pkId")]
     [ExplicitColumns]
     public class T_SysModule
     {
         [Column]
-        [JsonProperty("pk_id")]
-        public int pk_id { get; set; }
+        [JsonProperty("pkId")]
+        public int pkId { get; set; }
 
         [ResultColumn]
         public List<T_SysModule> children { get; set; }
 
         [Column]
-        public string M_Name { get; set; }
+        public string mName { get; set; }
 
         [Column]
-        public string M_LinkUrl { get; set; }
+        public string mLinkUrl { get; set; }
 
         [Column]
-        public string M_Icon { get; set; }
+        public string mIcon { get; set; }
 
         [Column]
-        public int? M_ParentNo { get; set; }
+        public int? mParentNo { get; set; }
 
         [Column]
-        public int? M_Sort { get; set; }
+        public int? mSort { get; set; }
 
         [Column]
-        public bool M_IsVisible { get; set; }
+        public bool mIsVisible { get; set; }
 
         [Column]
-        public bool M_IsMenu { get; set; }
+        public bool mIsMenu { get; set; }
 
         [Column]
-        public bool IsDeleted { get; set; }
+        public bool isDeleted { get; set; }
 
         [Column]
-        public string M_Controller { get; set; }
+        public string mController { get; set; }
 
     }
 }

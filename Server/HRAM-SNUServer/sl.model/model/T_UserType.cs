@@ -7,25 +7,25 @@ namespace sl.model
 {
 
     [TableName("T_UserType")]
-    [PrimaryKey("pk_id")]
+    [PrimaryKey("pkId")]
     [ExplicitColumns]
     public class T_UserType
     {
         [Column]
-        [JsonProperty("pk_id")]
-        public string pk_id { get; set; }
+        [JsonProperty("pkId")]
+        public string pkId { get; set; }
 
         [Column]
-        [JsonProperty("u_logintypeid")]
-        public string U_LoginTypeID { get; set; }
+        [JsonProperty("uLoginTypeID")]
+        public string uLoginTypeID { get; set; }
 
         [Column]
-        [JsonProperty("u_logintypevalue")]
-        public string U_LoginTypeValue { get; set; }
+        [JsonProperty("uLoginTypeValue")]
+        public string uLoginTypeValue { get; set; }
 
         [JsonIgnore]
         [Column]
-        [JsonProperty("isdeleted")]
-        public bool IsDeleted { get; set; }
+        [JsonProperty("isDeleted")]
+        public bool isDeleted { get; set; }
     }
 }

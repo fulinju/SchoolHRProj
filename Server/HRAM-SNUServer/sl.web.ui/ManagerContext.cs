@@ -28,7 +28,7 @@ namespace sl.web.ui
 
                     Database DB = new Database("ConnectionString");
                     Sql sql = Sql.Builder;
-                    sql.Append("Select * from T_User where U_LoginName = @0 and U_Password = @0", username, Security.MD5Encrypt(userpass));
+                    sql.Append("Select * from T_User where uLoginName = @0 and uPassword = @0", username, Security.MD5Encrypt(userpass));
                     if (manager != null)
                     {
                         HttpContext.Current.Session[Key.MANAGER_INFO] = manager;

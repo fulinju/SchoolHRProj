@@ -12,7 +12,7 @@ namespace sl.service
         {
             List<T_SysModule> sortNodes = new List<T_SysModule>();
             List<T_SysModule> list = DB.Fetch<T_SysModule>(sql);
-            List<T_SysModule> rootNodes = list.Where(p => p.M_ParentNo == rootNo).ToList();
+            List<T_SysModule> rootNodes = list.Where(p => p.mParentNo == rootNo).ToList();
             foreach (T_SysModule m in rootNodes)
             {
                 GetChildrens(list, m, sortNodes, true);
@@ -23,7 +23,7 @@ namespace sl.service
         //获取树状结构的子集
         private void GetChildrens(List<T_SysModule> nodes, T_SysModule parentNode, List<T_SysModule> sortNodes, bool root)
         {
-            List<T_SysModule> chilren = nodes.Where(p => p.M_ParentNo == parentNode.pk_id).ToList();
+            List<T_SysModule> chilren = nodes.Where(p => p.mParentNo == parentNode.pkId).ToList();
             parentNode.children = chilren;
             if (root)
                 sortNodes.Add(parentNode);

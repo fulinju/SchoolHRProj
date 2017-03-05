@@ -5,42 +5,42 @@ using Newtonsoft.Json;
 namespace sl.model
 {
     [TableName("T_User")]
-    [PrimaryKey("pk_id")]
+    [PrimaryKey("pkId")]
     [ExplicitColumns]
     public class T_User
     {
         [Column]
-        [JsonProperty("pk_id")]
-        public string pk_id { get; set; }
+        [JsonProperty("pkId")]
+        public string pkId { get; set; }
 
         [Column]
-        [JsonProperty("u_loginname")]
-        public string U_LoginName { get; set; }
+        [JsonProperty("uLoginName")]
+        public string uLoginName { get; set; }
 
         [Column]
-        [JsonProperty("u_logintypeid")]
-        public string U_LoginTypeID { get; set; }
+        [JsonProperty("uLoginTypeID")]
+        public string uLoginTypeID { get; set; }
 
         [Column]
-        [JsonProperty("u_password")]
-        public string U_Password { get; set; }
+        [JsonProperty("uPassword")]
+        public string uPassword { get; set; }
 
         [Column]
-        [JsonProperty("u_username")]
-        public string U_UserName { get; set; }
+        [JsonProperty("uUserName")]
+        public string uUserName { get; set; }
 
         [Column]
-        [JsonProperty("u_phone")]
-        public string U_Phone { get; set; }
+        [JsonProperty("uPhone")]
+        public string uPhone { get; set; }
 
         [Column]
-        [JsonProperty("u_maibox")]
-        public string U_MaiBox { get; set; }
+        [JsonProperty("uMaiBox")]
+        public string uMaiBox { get; set; }
 
         [JsonIgnore]
         [Column]
-        [JsonProperty("isdeleted")]
-        public bool IsDeleted { get; set; }
+        [JsonProperty("isDeleted")]
+        public bool isDeleted { get; set; }
 
         //忽略该属性
         //[JsonIgnore]

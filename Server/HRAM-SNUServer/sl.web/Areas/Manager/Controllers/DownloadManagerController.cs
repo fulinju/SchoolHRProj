@@ -27,9 +27,9 @@ namespace sl.web.Areas.Manager.Controllers
         }
 
         #region 查询下载列表
-        public ActionResult GetDownloadList(string dm_title)
+        public ActionResult GetDownloadList(string dmTitle)
         {
-            Sql sql = HRAManagerService.GetDownloadSql(dm_title);
+            Sql sql = HRAManagerService.GetDownloadSql(dmTitle);
 
             return CommonPageList<dynamic>(sql, HRAManagerService.database);
         }
@@ -43,8 +43,8 @@ namespace sl.web.Areas.Manager.Controllers
             int flag = 0;
             foreach (var entity in entityList)
             {
-                DirFile.DeleteFile(entity.DM_FileURL);
-                entity.IsDeleted = true;
+                DirFile.DeleteFile(entity.dmFileURL);
+                entity.isDeleted = true;
                 flag = HRAManagerService.database.Update(entity); //假删除 可以直接删
             }
             return DelMessage(flag);
@@ -64,7 +64,7 @@ namespace sl.web.Areas.Manager.Controllers
                         HttpPostedFileBase fileBase = GetFileBase();
                         if (fileBase == null || fileBase.FileName == "")
                         {
-                            m.DM_FileURL = "";
+                            m.dmFileURL = "";
                         }
                         else if (CheckUploadFile(fileBase))
                         {
@@ -72,9 +72,9 @@ namespace sl.web.Areas.Manager.Controllers
                         }
                         else
                         {
-                            m.DM_FileURL = SaveFile(fileBase, m.DM_FileURL, HRAManagerService.GetDownloadValueByID(m.DM_TypeID));// 存储
-                            m.DM_DownloadNum = 0; //初始化下载数量
-                            m.IsDeleted = false;
+                            m.dmFileURL = SaveFile(fileBase, m.dmFileURL, HRAManagerService.GetDownloadValueByID(m.dmTypeID));// 存储
+                            m.dmDownloadNum = 0; //初始化下载数量
+                            m.isDeleted = false;
                             object result = HRAManagerService.database.Insert(m);
                             return SaveMessage(result);
                         }
@@ -102,7 +102,7 @@ namespace sl.web.Areas.Manager.Controllers
                             HttpPostedFileBase fileBase = GetFileBase();
                             if (fileBase == null || fileBase.FileName =="")
                             {
-                                load.DM_FileURL = "";
+                                load.dmFileURL = "";
                             }
                             else if (CheckUploadFile(fileBase))
                             {
@@ -110,9 +110,9 @@ namespace sl.web.Areas.Manager.Controllers
                             }
                             else
                             {
-                                Utils.DeleteFile(load.DM_FileURL);
+                                Utils.DeleteFile(load.dmFileURL);
                                 //string fileName = GetSavedFileName(fileBase);
-                                load.DM_FileURL = SaveFile(fileBase, load.DM_FileURL, HRAManagerService.GetDownloadValueByID(load.DM_TypeID));// 存储
+                                load.dmFileURL = SaveFile(fileBase, load.dmFileURL, HRAManagerService.GetDownloadValueByID(load.dmTypeID));// 存储
                             }
                         }
 
@@ -135,13 +135,13 @@ namespace sl.web.Areas.Manager.Controllers
             int flag = 0;
             if (m != null)
             {
-                Utils.DeleteFile(m.DM_FileURL);
-                m.DM_FileURL = string.Empty;
+                Utils.DeleteFile(m.dmFileURL);
+                m.dmFileURL = string.Empty;
                 flag = HRAManagerService.database.Update(m);
             }
             //换成 DelMessage
 
-            DirFile.DeleteFile(m.DM_FileURL);
+            DirFile.DeleteFile(m.dmFileURL);
             return DelMessage(flag);
 
         }
@@ -212,7 +212,7 @@ namespace sl.web.Areas.Manager.Controllers
         /// <returns></returns>
         public HttpPostedFileBase GetFileBase()
         {
-            return Request.Files["DM_FileURL"];
+            return Request.Files["dmFileURL"];
         }
     }
 }

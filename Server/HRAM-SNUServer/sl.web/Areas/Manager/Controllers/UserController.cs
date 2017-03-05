@@ -27,9 +27,9 @@ namespace sl.web.Areas.Manager.Controllers
         }
 
         #region 查询
-        public ActionResult GetUsersList(string u_loginname)
+        public ActionResult GetUsersList(string uLoginName)
         {
-            Sql sql = HRAManagerService.GetUserSql(u_loginname);
+            Sql sql = HRAManagerService.GetUserSql(uLoginName);
 
             return CommonPageList<dynamic>(sql,HRAManagerService.database);
         }
@@ -42,7 +42,7 @@ namespace sl.web.Areas.Manager.Controllers
             int flag = 0;
             foreach (var entity in usersList)
             {
-                entity.IsDeleted = true;
+                entity.isDeleted = true;
                 flag = HRAManagerService.database.Update(entity); //假删除
             }
             return DelMessage(flag);
@@ -56,8 +56,8 @@ namespace sl.web.Areas.Manager.Controllers
             {
                 if (Request.IsPost())
                 {
-                    string passwordMd5 = Security.MD5Encrypt(m.U_Password);
-                    m.U_Password = passwordMd5;
+                    string passwordMd5 = Security.MD5Encrypt(m.uPassword);
+                    m.uPassword = passwordMd5;
 
                     var validate = Model.Valid(m);
                     if (!validate.Result)
@@ -66,7 +66,7 @@ namespace sl.web.Areas.Manager.Controllers
                     }
                     else
                     {
-                        m.IsDeleted = false;
+                        m.isDeleted = false;
                         object result = HRAManagerService.database.Insert(m);
                         return SaveMessage(result);
                     }
@@ -78,15 +78,15 @@ namespace sl.web.Areas.Manager.Controllers
                 Object obj = id;
                 T_User load = HRAManagerService.database.SingleOrDefault<T_User>(obj);
 
-                String oldPwd = load.U_Password;
+                String oldPwd = load.uPassword;
                 if (Request.IsPost())
                 {
                     if (TryUpdateModel(load))
                     {
-                        if (!oldPwd.Equals(m.U_Password)) //密码有改动,调用MD5加密
+                        if (!oldPwd.Equals(m.uPassword)) //密码有改动,调用MD5加密
                         {
-                            string passwordMd5 = Security.MD5Encrypt(load.U_Password);
-                            load.U_Password = passwordMd5;
+                            string passwordMd5 = Security.MD5Encrypt(load.uPassword);
+                            load.uPassword = passwordMd5;
                         }
                         Model valid = Model.Valid(load);
                         return valid.Result ? SaveMessage(HRAManagerService.database.Update(load)) : ErrorMessage(valid.Message);
@@ -105,9 +105,9 @@ namespace sl.web.Areas.Manager.Controllers
 
             foreach (var entity in usersList)
             {
-                string initPwd = entity.U_LoginName; //初始化密码为登录名
+                string initPwd = entity.uLoginName; //初始化密码为登录名
                 string passwordMd5 = Security.MD5Encrypt(initPwd);
-                entity.U_Password = passwordMd5;
+                entity.uPassword = passwordMd5;
                 flag = HRAManagerService.database.Update(entity);
             }
             return Json(flag == 1 ? new JsonTip("1", "重置成功") : new JsonTip("0", "重置失败!"));
@@ -117,11 +117,11 @@ namespace sl.web.Areas.Manager.Controllers
 
         #region 检查用户名是否存在
         [HttpPost]
-        public ActionResult CheckUserIsExist(string u_loginname)
+        public ActionResult CheckUserIsExist(string uLoginName)
         {
             Sql sql = Sql.Builder;
-            sql.Append("Select * from T_User where U_LoginName = @0", u_loginname);
-            T_User user = HRAManagerService.CheckUserExist(u_loginname);
+            sql.Append("Select * from T_User where uLoginName = @0", uLoginName);
+            T_User user = HRAManagerService.CheckUserExist(uLoginName);
             if (user != null)
             {
                 return Json(new { state = false, message = "此用户名已存在，请更换" });

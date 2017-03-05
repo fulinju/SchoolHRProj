@@ -1,0 +1,316 @@
+﻿@using sl.model
+
+@model WebSiteConfig
+@{
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
+}
+<form method="post" class="validate" id="form1" enctype="multipart/form-data" action="@Url.Action("SaveWebSiteConfig")">
+    <div class="easyui-panel" title="配置">
+        <div class="easyui-tabs" title="系统配置">
+            <div title="网站基本信息">
+                <table class="msgtable" style="width: 100%;">
+                    <tr>
+                        <th width="100" align="right">
+                            网站域名:
+                        </th>
+                        <td>
+                            @Html.TextBoxFor(m => m.Url, new { validType = "url", @class = "input wh260" })
+                        </td>
+                        <th align="right">
+                            网站名称:
+                        </th>
+                        <td>
+                            @Html.TextBoxFor(m => m.WebName, new { required = "true", @class = "input wh260" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <th align="right">
+                            联系邮箱:
+                        </th>
+                        <td>
+                            @Html.TextBoxFor(m => m.WebEmail, new { validType = "email", @class = "input wh260" })
+                        </td>
+                        <th align="right">
+                            联系地址:
+                        </th>
+                        <td>
+                            @Html.TextBoxFor(m => m.Address, new { @class = "input wh260" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <th align="right">
+                            邮编:
+                        </th>
+                        <td>
+                            @Html.TextBoxFor(m => m.Post, new { validType = "ZIP", @class = "input wh260" })
+                        </td>
+                        <th align="right">
+                            电话:
+                        </th>
+                        <td>
+                            @Html.TextBoxFor(m => m.Phone, new { @class = "input wh260" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <th align="right">
+                            手机:
+                        </th>
+                        <td>
+                            @Html.TextBoxFor(m => m.CellPhone, new { validType = "mobile", @class = "input wh260" })
+                        </td>
+                        <th align="right">
+                            Logo:
+                        </th>
+                        <td>
+                            @Html.TextBoxFor(m => m.Logo, new { @class = "input wh260", @readonly = "readonly" })
+                            <a href="javascript:;" id="getlogo">点击查看</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th align="right">
+                            传真:
+                        </th>
+                        <td>
+                            @Html.TextBoxFor(m => m.Fax, new { @class = "input wh260" })
+                        </td>
+                        <th align="right">
+                            QQ:
+                        </th>
+                        <td>
+                            @Html.TextBoxFor(m => m.QQ, new { @class = "input wh260" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <th align="right">
+                            备案:
+                        </th>
+                        <td>
+                            @Html.TextBoxFor(m => m.BeiAn, new { @class = "input wh-bigbig" })
+                        </td>
+                        <th align="right">
+                            网站关键字:
+                        </th>
+                        <td>
+                            @Html.TextBoxFor(m => m.KeyWord, new { @class = "input wh-bigbig" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <th align="right">
+                            公司版权:
+                        </th>
+                        <td>
+                            @Html.TextAreaFor(m => m.WebCopyRight, new { @class = "textarea wh260" })
+                        </td>
+                        <th align="right">
+                            公司描述:
+                        </th>
+                        <td>
+                            @Html.TextAreaFor(m => m.WebDescription, new { @class = "textarea wh260" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            统计代码：
+                        </th>
+                        <td colspan="3">
+                            @Html.TextAreaFor(m => m.WebSiteTjCode, new { @class = "textarea wh260" })
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div title="系统信息">
+                <table class="msgtable">
+                    <tr>
+                        <th width="140" align="right">
+                            网站加密Key:
+                        </th>
+                        <td>
+                            @Html.TextBoxFor(m => m.WebSiteKey, new { @class = "input wh260" })
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div title="附件配置">
+                <table class="msgtable">
+                    <tr>
+                        <th width="180px" align="right">
+                            附件上传目录：
+                        </th>
+                        <td>
+                            @Html.TextBoxFor(m => m.AttachPath, new { @class = "input wh-middle" })
+                            <label>
+                                *上传图片或附件的目录，自动创建在网站根目录下
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th align="right">
+                            附件上传类型：
+                        </th>
+                        <td>
+                            @Html.TextBoxFor(m => m.Extension, new { @class = "input wh-big" })
+                            <label>
+                                *以英文的逗号分隔开，如：“jpg,gif,rar”
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th align="right">
+                            附件保存方式：
+                        </th>
+                        <td>
+                            @{
+                                List<SelectListItem> items = new List<SelectListItem>();
+                                items.Add(new SelectListItem { Text = "按年月日每天一个目录", Value = "1" });
+                                items.Add(new SelectListItem { Text = "按年月/日/存入不同目录", Value = "2" });
+                            }
+                            @Html.DropDownListFor(m => m.AttachSaveType, items)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th align="right">
+                            文件上传大小：
+                        </th>
+                        <td>
+                            @Html.TextBoxFor(m => m.AttchFileSize, new { @class = "input wh-min" })
+                            MB<label>*超过设置的文件大小不予上传，0不限制</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th align="right">
+                            图片上传大小：
+                        </th>
+                        <td>
+                            @Html.TextBoxFor(m => m.AttachImgSize, new { @class = "input wh-min" })
+                            MB<label>*超过设置的图片大小不予上传，0不限制</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th align="right">
+                            图片最大尺寸：
+                        </th>
+                        <td>
+                            @Html.TextBoxFor(m => m.ImgMaxWidth, new { @class = "input wh-min" })
+                            ×
+                            @Html.TextBoxFor(m => m.ImgMaxHeight, new { @class = "input wh-min" })
+                            px
+                            <label>
+                                *设置图片高和宽，超出自动裁剪，0为不受限制
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th align="right">
+                            生成缩略图大小宽和高：
+                        </th>
+                        <td>
+                            @Html.TextBoxFor(m => m.ThumbnailWidth, new { @class = "input wh-min" })
+                            ×
+                            @Html.TextBoxFor(m => m.ThumbnailHeight, new { @class = "input wh-min" })
+                            px
+                            <label>
+                                *图片生成缩略图，0为不生成
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th align="right">
+                            图片水印类型：
+                        </th>
+                        <td>
+                            <input type="radio" name="WaterMarkType" value="0" />
+                            关闭水印
+                            <input type="radio" name="WaterMarkType" value="1" />
+                            文字水印
+                            <input type="radio" name="WaterMarkType" value="2" />
+                            图片水印
+                        </td>
+                    </tr>
+                    <tr>
+                        <th align="right">
+                            图片水印位置：
+                        </th>
+                        <td>
+                            <input type="radio" name="WatermarkPosition" value="1" />左上
+                            <input type="radio" name="WatermarkPosition" value="2" />中上
+                            <input type="radio" name="WatermarkPosition" value="3" />右上
+                            <input type="radio" name="WatermarkPosition" value="4" />左中
+                            <input type="radio" name="WatermarkPosition" value="5" />居中
+                            <input type="radio" name="WatermarkPosition" value="6" />右中
+                            <input type="radio" name="WatermarkPosition" value="7" />左下
+                            <input type="radio" name="WatermarkPosition" value="8" />中下
+                            <input type="radio" name="WatermarkPosition" value="9" checked="checked" />右下
+                        </td>
+                    </tr>
+                    <tr>
+                        <th align="right">
+                            图片水印文件：
+                        </th>
+                        <td>
+                            @Html.TextBoxFor(m => m.WatermarkPic, new { @class = "input wh-middle" })
+                            <label>
+                                *需存放在站点目录下，如图片不存在将使用文字水印
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th align="right">
+                            水印文字：
+                        </th>
+                        <td>
+                            @Html.TextBoxFor(m => m.WatermarkText, new { @class = "input wh-middle" })
+                            <label>
+                                *文字水印的内容
+                            </label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <table class="msgtable">
+        <tr>
+            <td></td>
+            <td>
+                <a href="javascript:void(0)" icon="ext-icon-accept" class="easyui-linkbutton" id="save">
+                    保存
+                </a>
+            </td>
+        </tr>
+    </table>
+</form>
+
+<link href="~/Scripts/artDialog/skins/black.css" rel="stylesheet" />
+<script type="text/javascript">
+    $("#save").click(function () {
+        $('.validate').form({
+            success: function (data) {
+                var json = eval('(' + data + ')');
+                if (json.state == "1") {
+                    parent.$.messager.alert('提示', json.message, "success");
+                } else {
+                    parent.$.messager.alert("错误", json.message, "error");
+                }
+            }
+        });
+        $(".validate").submit();
+    });
+
+    $("#getlogo").click(function () {
+        art.dialog({
+            padding: 0,
+            title: 'Logo',
+            content: '<img src="@Model.Logo" style="max-width:800px;max-height:600px;"/>'
+        });
+    });
+    $.each($("input[name='WaterMarkType']"), function() {
+        if($(this).val()==@Model.WaterMarkType) {
+            $(this).attr("checked", "checked");
+        }
+    });
+    $.each($("input[name='WatermarkPosition']"), function() {
+        if($(this).val()==@Model.WatermarkPosition) {
+            $(this).attr("checked", "checked");
+        }
+    });
+</script>

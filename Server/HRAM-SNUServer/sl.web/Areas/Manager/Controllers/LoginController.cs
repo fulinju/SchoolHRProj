@@ -56,7 +56,7 @@ namespace sl.web.Areas.Manager.Controllers
                 return Json(new JsonTip("0", errormessage));
             }
 
-            if (!loginer.U_LoginTypeID.Equals(ConstantData.AdminTypeCode))
+            if (!loginer.uLoginTypeID.Equals(ConstantData.AdminTypeCode))
             {
                 errormessage = "该用户不是管理员";
             }
@@ -70,11 +70,11 @@ namespace sl.web.Areas.Manager.Controllers
                 {
                     if (CachedConfigContext.Current.WebSiteConfig.WebSiteKey != null) //加密Key不为空
                     {
-                        Utils.WriteCookie(Key.MANAGER_NAME, Security.DesEncrypt(CachedConfigContext.Current.WebSiteConfig.WebSiteKey, loginer.U_LoginName));//DES加密
+                        Utils.WriteCookie(Key.MANAGER_NAME, Security.DesEncrypt(CachedConfigContext.Current.WebSiteConfig.WebSiteKey, loginer.uLoginName));//DES加密
                     }
                     else
                     {
-                        Utils.WriteCookie(Key.MANAGER_NAME, loginer.U_LoginName);
+                        Utils.WriteCookie(Key.MANAGER_NAME, loginer.uLoginName);
                     }
                     Utils.WriteCookie(Key.MANAGER_PASS, passwordMd5);
                 }

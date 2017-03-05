@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>注册</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" type="text/css" href="../../../css/mui.min.css"/>
+			<style>
+		.area {
+			margin: 20px auto 0px auto;
+		}
+		
+		.mui-input-group:first-child {
+			margin-top: 20px;
+		}
+		
+		.mui-input-group label {
+			width: 30%;
+		}
+		
+		.mui-input-row label~input,
+		.mui-input-row label~select,
+		.mui-input-row label~textarea {
+			width: 70%;
+		}
+		
+		.mui-checkbox input[type=checkbox],
+		.mui-radio input[type=radio] {
+			top: 6px;
+		}
+		
+		.mui-content-padded {
+			margin-top: 25px;
+		}
+		
+		.mui-btn {
+			padding: 10px;
+		}
+	</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="ivBack" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" EN="Register">注册</h1>
+		</header>
+
+		<div class="mui-content">
+			<form class="mui-input-group">
+			
+				<div class="mui-input-row">
+					<label EN="E-Mail">邮箱</label>
+					<input id='edtMaibox' type="email" class="mui-input-clear mui-input" placeholderEN="Please input mailbox" placeholder="请输入邮箱" value="" />
+				</div>
+					
+			</form>
+			<div class="mui-content-padded">
+				<button id='btnRegister' class="mui-btn mui-btn-block mui-btn-primary" EN="Register">注册</button>
+			</div>
+		</div>
+	</body>
+	
+	<script src="../../../js/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/acc/RegisterJS.js" type="text/javascript" charset="utf-8"></script>
+</html>

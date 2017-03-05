@@ -8,36 +8,36 @@ namespace sl.model
     /// 友情链接
     /// </summary>
     [TableName("T_FriendlyLink")]
-    [PrimaryKey("pk_id")]
+    [PrimaryKey("pkId")]
     [ExplicitColumns]
     public class T_FriendlyLink
     {
         [Column]
-        [JsonProperty("pk_id")]
-        public string pk_id { get; set; }
+        [JsonProperty("pkId")]
+        public string pkId { get; set; }
 
         [Column]
-        [JsonProperty("u_loginname")]
-        public string U_LoginName { get; set; }
+        [JsonProperty("uLoginName")]
+        public string uLoginName { get; set; }
 
         [Column]
-        [JsonProperty("fl_name")]
-        public string FL_Name { get; set; }
+        [JsonProperty("flName")]
+        public string flName { get; set; }
 
         [Column]
-        [JsonProperty("fl_url")]
-        public string FL_URL { get; set; }
+        [JsonProperty("flURL")]
+        public string flURL { get; set; }
 
         [Column]
-        [JsonProperty("fl_imgurl")]
-        public string FL_ImgURL { get; set; }
+        [JsonProperty("flImgURL")]
+        public string flImgURL { get; set; }
 
         [Column]
-        [JsonProperty("fl_addtime")]
-        public string FL_AddTime { get; set; }
+        [JsonProperty("flAddTime")]
+        public string flAddTime { get; set; }
 
         [Column]
-        [JsonProperty("isdeleted")]
-        public bool IsDeleted { get; set; }
+        [JsonProperty("isDeleted")]
+        public bool isDeleted { get; set; }
     }
 }

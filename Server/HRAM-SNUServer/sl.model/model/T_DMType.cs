@@ -8,25 +8,25 @@ namespace sl.model
     /// 下载类型
     /// </summary>
     [TableName("T_DMType")]
-    [PrimaryKey("pk_id")]
+    [PrimaryKey("pkId")]
     [ExplicitColumns]
     public class T_DMType
     {
         [Column]
-        [JsonProperty("pk_id")]
-        public string pk_id { get; set; }
+        [JsonProperty("pkId")]
+        public string pkId { get; set; }
 
         [Column]
-        [JsonProperty("dm_typeid")]
-        public string DM_TypeID { get; set; }
+        [JsonProperty("dmTypeID")]
+        public string dmTypeID { get; set; }
 
         [Column]
-        [JsonProperty("dm_typevalue")]
-        public string DM_TypeValue { get; set; }
+        [JsonProperty("dmTypeValue")]
+        public string dmTypeValue { get; set; }
 
         [JsonIgnore]
         [Column]
-        [JsonProperty("isdeleted")]
-        public bool IsDeleted { get; set; }
+        [JsonProperty("isDeleted")]
+        public bool isDeleted { get; set; }
     }
 }

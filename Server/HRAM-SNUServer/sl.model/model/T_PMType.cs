@@ -7,27 +7,27 @@ namespace sl.model
     /// 发布类型
     /// </summary>
     [TableName("T_PMType")]
-    [PrimaryKey("pk_id")]
+    [PrimaryKey("pkId")]
     [ExplicitColumns]
     public class T_PMType
     {
         [Column]
-        [JsonProperty("pk_id")]
-        public string pk_id { get; set; }
+        [JsonProperty("pkId")]
+        public string pkId { get; set; }
 
 
         [Column]
-        [JsonProperty("pm_typeid")]
-        public string PM_TypeID { get; set; }
+        [JsonProperty("pmTypeID")]
+        public string pmTypeID { get; set; }
 
         [Column]
-        [JsonProperty("pm_typevalue")]
-        public string PM_TypeValue { get; set; }
+        [JsonProperty("pmTypeValue")]
+        public string pmTypeValue { get; set; }
 
         [JsonIgnore]
         [Column]
-        [JsonProperty("isdeleted")]
-        public bool IsDeleted { get; set; }
+        [JsonProperty("isDeleted")]
+        public bool isDeleted { get; set; }
 
     }
 }

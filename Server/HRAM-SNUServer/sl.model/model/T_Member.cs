@@ -8,73 +8,73 @@ namespace sl.model
     /// 会员
     /// </summary>
     [TableName("T_Member")]
-    [PrimaryKey("pk_id")]
+    [PrimaryKey("pkId")]
     [ExplicitColumns]
     public class T_Member
     {
         [Column]
-        [JsonProperty("pk_id")]
-        public string pk_id { get; set; }
+        [JsonProperty("pkId")]
+        public string pkId { get; set; }
 
         [Column]
-        [JsonProperty("u_loginname")]
-        public string U_LoginName { get; set; }
+        [JsonProperty("uLoginName")]
+        public string uLoginName { get; set; }
 
         [Column]
-        [JsonProperty("m_reviewresultid")]
-        public string M_ReviewResultID { get; set; }
+        [JsonProperty("mReviewResultID")]
+        public string mReviewResultID { get; set; }
 
         [Column]
-        [JsonProperty("m_applytime")]
-        public string M_ApplyTime { get; set; }
+        [JsonProperty("mApplyTime")]
+        public string mApplyTime { get; set; }
 
         [Column]
-        [JsonProperty("m_name")]
-        public string M_Name { get; set; }
+        [JsonProperty("mName")]
+        public string mName { get; set; }
 
         [Column]
-        [JsonProperty("m_typeid")]
-        public string M_TypeID { get; set; }
+        [JsonProperty("mtypeid")]
+        public string mTypeID { get; set; }
 
         [Column]
-        [JsonProperty("m_organizationcode")]
-        public string M_OrganizationCode { get; set; }
+        [JsonProperty("mOrganizationCode")]
+        public string mOrganizationCode { get; set; }
 
         [Column]
-        [JsonProperty("m_address")]
-        public string M_Address { get; set; }
+        [JsonProperty("mAddress")]
+        public string mAddress { get; set; }
 
         [Column]
-        [JsonProperty("m_corporatename")]
-        public string M_CorporateName { get; set; }
+        [JsonProperty("mCorporateName")]
+        public string mCorporateName { get; set; }
 
         [Column]
-        [JsonProperty("m_idcardno")]
-        public string M_IDCardNo { get; set; }
+        [JsonProperty("mIDCardNo")]
+        public string mIDCardNo { get; set; }
 
         [Column]
-        [JsonProperty("m_contacts")]
-        public string M_Contacts { get; set; }
+        [JsonProperty("mContacts")]
+        public string mContacts { get; set; }
 
         [Column]
-        [JsonProperty("m_contactsphone")]
-        public string M_ContactsPhone { get; set; }
+        [JsonProperty("mContactsPhone")]
+        public string mContactsPhone { get; set; }
 
         [Column]
-        [JsonProperty("m_summary")]
-        public string M_Summary { get; set; }
+        [JsonProperty("mSummary")]
+        public string mSummary { get; set; }
 
         [Column]
-        [JsonProperty("m_imgurl")]
-        public string M_ImgURL { get; set; }
+        [JsonProperty("mImgURL")]
+        public string mImgURL { get; set; }
 
         [Column]
-        [JsonProperty("m_url")]
-        public string M_URL { get; set; }
+        [JsonProperty("mURL")]
+        public string mURL { get; set; }
 
         [JsonIgnore]
         [Column]
-        [JsonProperty("isdeleted")]
-        public bool IsDeleted { get; set; }
+        [JsonProperty("isDeleted")]
+        public bool isDeleted { get; set; }
     }
 }

@@ -26,7 +26,7 @@ namespace sl.web.Areas.Manager.Controllers
     /// </summary>
     public class PublishManagerController : BaseManagerController
     {
-        private string PM_AD_HEAD = "PMAD_";
+        private string pmAD_HEAD = "PMAD_";
 
         //
         // GET: /Manager/PublishManager/
@@ -36,9 +36,9 @@ namespace sl.web.Areas.Manager.Controllers
         }
 
         #region 查询发布信息
-        public ActionResult GetPublishsList(string u_loginname = "")
+        public ActionResult GetPublishsList(string uLoginName = "")
         {
-            Sql sql = HRAManagerService.GetPublishSql(u_loginname);
+            Sql sql = HRAManagerService.GetPublishSql(uLoginName);
 
             return CommonPageList<dynamic>(sql, HRAManagerService.database);
         }
@@ -51,10 +51,10 @@ namespace sl.web.Areas.Manager.Controllers
             int flag = 0;
             foreach (var entity in publishsList)
             {
-                entity.IsDeleted = true;
+                entity.isDeleted = true;
                 //搜索相关联的发布广告图片列表 
                 Sql sql = Sql.Builder;
-                sql.Append("Update T_ADImgList set IsDeleted = 1 where PM_ADImgListID = @0", entity.PM_ADImgListID);
+                sql.Append("Update T_ADImgList set isDeleted = 1 where pmADImgListID = @0", entity.pmADImgListID);
                 HRAManagerService.database.Execute(sql);
 
                 flag = HRAManagerService.database.Update(entity);
@@ -74,9 +74,9 @@ namespace sl.web.Areas.Manager.Controllers
                     var validate = Model.Valid(m);
                     if (validate.Result)
                     {
-                        m.PM_ADImgListID = PM_AD_HEAD + Utils.GetRamCode();
-                        m.PM_Views = 0; //初始化浏览次数
-                        m.IsDeleted = false;
+                        m.pmADImgListID = pmAD_HEAD + Utils.GetRamCode();
+                        m.pmViews = 0; //初始化浏览次数
+                        m.isDeleted = false;
                         object result = HRAManagerService.database.Insert(m);
                         return SaveMessage(result);
                     }
@@ -120,11 +120,11 @@ namespace sl.web.Areas.Manager.Controllers
         public ActionResult GetJsonPMAdImgs(T_ADImgList m, string aid = "0")
         {
             Sql sql = Sql.Builder;
-            sql.Append("Select T_PublishManage.pm_title,T_ADImgList.pk_id,T_ADImgList.pm_adimglisturl,T_ADImgList.pm_adimglistnum");
+            sql.Append("Select T_PublishManage.pmTitle,T_ADImgList.pkId,T_ADImgList.pmADImgListURL,T_ADImgList.pmADImgListNum");
             sql.Append(" from T_ADImgList,T_PublishManage ");
-            sql.Append(" where T_ADImgList.PM_ADImgListID =  T_PublishManage.PM_ADImgListID");
-            sql.Append(" and  T_ADImgList.PM_ADImgListID= @0  and T_ADImgList.IsDeleted = 0 ", aid);
-            //sql.Append(" Order by T_ADImgList.pm_adimglistnum asc"); 排序出现错误
+            sql.Append(" where T_ADImgList.pmADImgListID =  T_PublishManage.pmADImgListID");
+            sql.Append(" and  T_ADImgList.pmADImgListID= @0  and T_ADImgList.isDeleted = 0 ", aid);
+            //sql.Append(" Order by T_ADImgList.pmADImgListNum asc"); 排序出现错误
             return CommonPageList<dynamic>(sql, HRAManagerService.database);
         }
         #endregion
@@ -136,7 +136,7 @@ namespace sl.web.Areas.Manager.Controllers
             int flag = 0;
             foreach (var entity in publishsList)
             {
-                entity.IsDeleted = true; //可以考虑直接删除
+                entity.isDeleted = true; //可以考虑直接删除
                 flag = HRAManagerService.database.Update(entity);
             }
             return DelMessage(flag);
@@ -154,9 +154,9 @@ namespace sl.web.Areas.Manager.Controllers
                     var validate = Model.Valid(m);
                     if (validate.Result)
                     {
-                        m.PM_ADImgListID = aid;
-                        m.PM_ADImgListURL = UploadFile();
-                        m.IsDeleted = false;
+                        m.pmADImgListID = aid;
+                        m.pmADImgListURL = UploadFile();
+                        m.isDeleted = false;
                         object result = HRAManagerService.database.Insert(m);
                         return SaveMessage(result);
                     }
@@ -182,11 +182,11 @@ namespace sl.web.Areas.Manager.Controllers
                     {
                         if (Request.Files.Count > 0)
                         {
-                            Utils.DeleteFile(load.PM_ADImgListURL);
+                            Utils.DeleteFile(load.pmADImgListURL);
                             string fileName = UploadFile();
                             if (fileName != "")
                             {
-                                load.PM_ADImgListURL = fileName;
+                                load.pmADImgListURL = fileName;
                             }
                         }
 
@@ -205,7 +205,7 @@ namespace sl.web.Areas.Manager.Controllers
             string fileName = "";
             if (Request.Files.Count > 0)
             {
-                HttpPostedFileBase fileBase = Request.Files["PM_ADImgListURL"];
+                HttpPostedFileBase fileBase = Request.Files["pmADImgListURL"];
                 if (fileBase != null && fileBase.FileName != "")
                 {
                     if (!DirFile.IsExistDirectory(Key.PublishAdImgsPath))
@@ -225,13 +225,13 @@ namespace sl.web.Areas.Manager.Controllers
         [HttpPost]
         public ActionResult DelImg(string id = "0")
         {
-            Sql sql = Sql.Builder.Append("Select * from T_ADImgList Where pk_id = @0", id);
+            Sql sql = Sql.Builder.Append("Select * from T_ADImgList Where pkId = @0", id);
             var m = HRAManagerService.database.FirstOrDefault<T_ADImgList>(sql);
             int success = 0;
             if (m != null)
             {
-                Utils.DeleteFile(m.PM_ADImgListURL);
-                m.PM_ADImgListURL = string.Empty;
+                Utils.DeleteFile(m.pmADImgListURL);
+                m.pmADImgListURL = string.Empty;
                 success = HRAManagerService.database.Update(m);
             }
             //换成 DelMessage

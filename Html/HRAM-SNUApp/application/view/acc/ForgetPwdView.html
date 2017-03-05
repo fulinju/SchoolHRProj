@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>忘记密码</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" type="text/css" href="../../../css/mui.min.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="btnBack" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" EN="Forget Password">忘记密码</h1>
+		</header>
+
+		<div class="mui-content">
+			<form class="mui-input-group">
+				<div class="mui-input-row" style="margin-top: 20px;">
+					<label EN="Username">用户名</label>
+					<input id='edtUsername' type="text" class="mui-input-clear mui-input" placeholderEN="Please enter your username" placeholder="请输入你的用户名">
+				</div>
+
+				<div class="mui-input-row">
+					<label EN="E-mail">邮箱</label>
+					<input id='edtMail' type="email" class="mui-input-clear mui-input" placeholderEN="Please enter your E-mail" placeholder="请输入注册邮箱">
+				</div>
+			</form>
+			<div class="mui-content-padded">
+				<button id='btnSend' class="mui-btn mui-btn-block mui-btn-primary" EN="Send to mailbox">发送到邮箱</button>
+			</div>
+		</div>
+	</body>
+	<script src="../../../js/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/acc/ForgetPwdJS.js" type="text/javascript" charset="utf-8"></script>
+
+</html>

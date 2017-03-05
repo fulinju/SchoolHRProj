@@ -36,8 +36,8 @@ namespace sl.web.Areas.Manager.Controllers
         private string ERR_REVIEW_EXIST = "审核结果ID已存在";
 
         private string TYPE_HEAD_USER = "USER_";
-        private string TYPE_HEAD_DM = "DM_";
-        private string TYPE_HEAD_PM = "PM_";
+        private string TYPE_HEAD_DM = "dm";
+        private string TYPE_HEAD_PM = "Pm";
         private string TYPE_HEAD_MEMBER = "MEMBER_";
         private string TYPE_HEAD_REVIEW = "REVIEW_";
 
@@ -72,19 +72,19 @@ namespace sl.web.Areas.Manager.Controllers
         #region 查询用户类型
         public ActionResult GetUserTypes(TypeModels m)
         {
-            string u_logintypevalue = "";
+            string uLoginTypeValue = "";
             if (m != null)
             {
                 if (m.userType != null)
                 {
-                    if (m.userType.U_LoginTypeValue != null)
+                    if (m.userType.uLoginTypeValue != null)
                     {
-                        u_logintypevalue = m.userType.U_LoginTypeValue;
+                        uLoginTypeValue = m.userType.uLoginTypeValue;
                     }
                 }
             }
 
-            Sql sql = HRAManagerService.GetUserTypeSql(u_logintypevalue);
+            Sql sql = HRAManagerService.GetUserTypeSql(uLoginTypeValue);
             return CommonPageList<T_UserType>(sql, HRAManagerService.database);
         }
         #endregion
@@ -92,19 +92,19 @@ namespace sl.web.Areas.Manager.Controllers
         #region 查询下载类型
         public ActionResult GetDMTypes(TypeModels m)
         {
-            string dm_typevalue = "";
+            string dmTypeValue = "";
             if (m != null)
             {
                 if (m.dmType != null)
                 {
-                    if (m.dmType.DM_TypeValue != null)
+                    if (m.dmType.dmTypeValue != null)
                     {
-                        dm_typevalue = m.dmType.DM_TypeValue;
+                        dmTypeValue = m.dmType.dmTypeValue;
                     }
                 }
             }
 
-            Sql sql = HRAManagerService.GetUserTypeSql(dm_typevalue);
+            Sql sql = HRAManagerService.GetDownloadTypeSql(dmTypeValue);
 
             return CommonPageList<T_DMType>(sql, HRAManagerService.database);
         }
@@ -113,19 +113,19 @@ namespace sl.web.Areas.Manager.Controllers
         #region 查询发布类型
         public ActionResult GetPMTypes(TypeModels m)
         {
-            string pm_typevalue = "";
+            string pmTypeValue = "";
             if (m != null)
             {
                 if (m.pmType != null)
                 {
-                    if (m.pmType.PM_TypeValue != null)
+                    if (m.pmType.pmTypeValue != null)
                     {
-                        pm_typevalue = m.pmType.PM_TypeValue;
+                        pmTypeValue = m.pmType.pmTypeValue;
                     }
                 }
             }
 
-            Sql sql = HRAManagerService.GetPublishTypeSql(pm_typevalue);
+            Sql sql = HRAManagerService.GetPublishTypeSql(pmTypeValue);
             return CommonPageList<T_PMType>(sql, HRAManagerService.database);
         }
         #endregion
@@ -138,9 +138,9 @@ namespace sl.web.Areas.Manager.Controllers
             {
                 if (m.reviewResult != null)
                 {
-                    if (m.reviewResult.M_ReviewResultValue != null)
+                    if (m.reviewResult.mReviewResultValue != null)
                     {
-                        reviewResultValue = m.reviewResult.M_ReviewResultValue;
+                        reviewResultValue = m.reviewResult.mReviewResultValue;
                     }
                 }
             }
@@ -158,9 +158,9 @@ namespace sl.web.Areas.Manager.Controllers
             {
                 if (m.memberType != null)
                 {
-                    if (m.memberType.M_TypeValue != null)
+                    if (m.memberType.mTypeValue != null)
                     {
-                        mTypeValue = m.memberType.M_TypeValue;
+                        mTypeValue = m.memberType.mTypeValue;
                     }
                 }
             }
@@ -181,13 +181,13 @@ namespace sl.web.Areas.Manager.Controllers
             List<string> listValue = new List<string>();
             foreach (var entity in userEntityList)
             {
-                if (ExistInTable("T_User", "U_LoginTypeID", entity.U_LoginTypeID))
+                if (ExistInTable("T_User", "uLoginTypeID", entity.uLoginTypeID))
                 {
-                    listValue.Add(entity.U_LoginTypeID); //获取存在于用户表的ID
+                    listValue.Add(entity.uLoginTypeID); //获取存在于用户表的ID
                 }
             }
 
-            return CommonDelete(userEntityList, listValue, "T_UserType", "pk_id", "T_User", "U_LoginTypeID");
+            return CommonDelete(userEntityList, listValue, "T_UserType", "pkId", "T_User", "uLoginTypeID");
         }
         #endregion
 
@@ -199,13 +199,13 @@ namespace sl.web.Areas.Manager.Controllers
             List<string> listValue = new List<string>();
             foreach (var entity in dmEntityList)
             {
-                if (ExistInTable("T_DownloadManage", "DM_TypeID", entity.DM_TypeID))
+                if (ExistInTable("T_DownloadManage", "dmTypeID", entity.dmTypeID))
                 {
-                    listValue.Add(entity.DM_TypeID); //获取存在于用户表的ID
+                    listValue.Add(entity.dmTypeID); //获取存在于用户表的ID
                 }
             }
 
-            return CommonDelete(dmEntityList, listValue, "T_DMType", "pk_id", "T_DownloadManage", "DM_TypeID");
+            return CommonDelete(dmEntityList, listValue, "T_DMType", "pkId", "T_DownloadManage", "dmTypeID");
         }
         #endregion
 
@@ -217,12 +217,12 @@ namespace sl.web.Areas.Manager.Controllers
             List<string> listValue = new List<string>();
             foreach (var entity in pmEntityList)
             {
-                if (ExistInTable("T_PublishManage", "PM_TypeID", entity.PM_TypeID))
+                if (ExistInTable("T_PublishManage", "pmTypeID", entity.pmTypeID))
                 {
-                    listValue.Add(entity.PM_TypeID); //获取存在于用户表的ID
+                    listValue.Add(entity.pmTypeID); //获取存在于用户表的ID
                 }
             }
-            return CommonDelete(pmEntityList, listValue, "T_PMType", "pk_id", "T_PublishManage", "PM_TypeID");
+            return CommonDelete(pmEntityList, listValue, "T_PMType", "pkId", "T_PublishManage", "pmTypeID");
         }
         #endregion
 
@@ -234,13 +234,13 @@ namespace sl.web.Areas.Manager.Controllers
             List<string> listValue = new List<string>();
             foreach (var entity in reviewEntityList)
             {
-                if (ExistInTable("T_ReviewResult", "M_ReviewResultID", entity.M_ReviewResultID))
+                if (ExistInTable("T_ReviewResult", "mReviewResultID", entity.mReviewResultID))
                 {
-                    listValue.Add(entity.M_ReviewResultID); //获取存在于用户表的ID
+                    listValue.Add(entity.mReviewResultID); //获取存在于用户表的ID
                 }
 
             }
-            return CommonDelete(reviewEntityList, listValue, "T_ReviewResult", "pk_id", "T_Member", "M_ReviewResultID");
+            return CommonDelete(reviewEntityList, listValue, "T_ReviewResult", "pkId", "T_Member", "mReviewResultID");
         }
         #endregion
 
@@ -253,12 +253,12 @@ namespace sl.web.Areas.Manager.Controllers
             List<string> listValue = new List<string>();
             foreach (var entity in memberTypes)
             {
-                if (ExistInTable("T_Member", "pk_id", entity.M_TypeID))
+                if (ExistInTable("T_Member", "pkId", entity.mTypeID))
                 {
-                    listValue.Add(entity.M_TypeID); //获取存在于用户表的ID
+                    listValue.Add(entity.mTypeID); //获取存在于用户表的ID
                 }
             }
-            return CommonDelete(memberTypes, listValue, "T_MemberType", "pk_id", "T_Member", "M_TypeID");
+            return CommonDelete(memberTypes, listValue, "T_MemberType", "pkId", "T_Member", "mTypeID");
         }
         #endregion
 
@@ -271,8 +271,8 @@ namespace sl.web.Areas.Manager.Controllers
             {
                 if (Request.IsPost())
                 {
-                    m.U_LoginTypeID = TYPE_HEAD_USER + Utils.GetRamCode();
-                    m.IsDeleted = false;
+                    m.uLoginTypeID = TYPE_HEAD_USER + Utils.GetRamCode();
+                    m.isDeleted = false;
 
                     var validate = Model.Valid(m);
                     if (!validate.Result)
@@ -281,7 +281,7 @@ namespace sl.web.Areas.Manager.Controllers
                     }
                     else
                     {
-                        m.IsDeleted = false;
+                        m.isDeleted = false;
                         object result = HRAManagerService.database.Insert(m);
                         return SaveMessage(result);
                     }
@@ -294,7 +294,7 @@ namespace sl.web.Areas.Manager.Controllers
                 T_UserType load = HRAManagerService.database.SingleOrDefault<T_UserType>(obj);
                 if (Request.IsPost())
                 {
-                    load.U_LoginTypeValue = m.U_LoginTypeValue;
+                    load.uLoginTypeValue = m.uLoginTypeValue;
                     Model valid = Model.Valid(load);
                     return valid.Result ? SaveMessage(HRAManagerService.database.Update(load)) : ErrorMessage(valid.Message);
                 }
@@ -310,8 +310,8 @@ namespace sl.web.Areas.Manager.Controllers
             {
                 if (Request.IsPost())
                 {
-                    m.DM_TypeID = TYPE_HEAD_DM + Utils.GetRamCode();
-                    m.IsDeleted = false;
+                    m.dmTypeID = TYPE_HEAD_DM + Utils.GetRamCode();
+                    m.isDeleted = false;
 
                     var validate = Model.Valid(m);
                     if (!validate.Result)
@@ -320,7 +320,7 @@ namespace sl.web.Areas.Manager.Controllers
                     }
                     else
                     {
-                        m.IsDeleted = false;
+                        m.isDeleted = false;
                         object result = HRAManagerService.database.Insert(m);
                         return SaveMessage(result);
                     }
@@ -333,7 +333,7 @@ namespace sl.web.Areas.Manager.Controllers
                 T_DMType load = HRAManagerService.database.SingleOrDefault<T_DMType>(obj);
                 if (Request.IsPost())
                 {
-                    load.DM_TypeValue = m.DM_TypeValue;
+                    load.dmTypeValue = m.dmTypeValue;
                     Model valid = Model.Valid(load);
                     return valid.Result ? SaveMessage(HRAManagerService.database.Update(load)) : ErrorMessage(valid.Message);
                 }
@@ -349,8 +349,8 @@ namespace sl.web.Areas.Manager.Controllers
             {
                 if (Request.IsPost())
                 {
-                    m.PM_TypeID = TYPE_HEAD_PM + Utils.GetRamCode();
-                    m.IsDeleted = false;
+                    m.pmTypeID = TYPE_HEAD_PM + Utils.GetRamCode();
+                    m.isDeleted = false;
 
                     var validate = Model.Valid(m);
                     if (!validate.Result)
@@ -359,7 +359,7 @@ namespace sl.web.Areas.Manager.Controllers
                     }
                     else
                     {
-                        m.IsDeleted = false;
+                        m.isDeleted = false;
                         object result = HRAManagerService.database.Insert(m);
                         return SaveMessage(result);
                     }
@@ -372,7 +372,7 @@ namespace sl.web.Areas.Manager.Controllers
                 T_PMType load = HRAManagerService.database.SingleOrDefault<T_PMType>(obj);
                 if (Request.IsPost())
                 {
-                    load.PM_TypeValue = m.PM_TypeValue;
+                    load.pmTypeValue = m.pmTypeValue;
                     Model valid = Model.Valid(load);
                     return valid.Result ? SaveMessage(HRAManagerService.database.Update(load)) : ErrorMessage(valid.Message);
                 }
@@ -388,8 +388,8 @@ namespace sl.web.Areas.Manager.Controllers
             {
                 if (Request.IsPost())
                 {
-                    m.M_ReviewResultID = TYPE_HEAD_REVIEW + Utils.GetRamCode();
-                    m.IsDeleted = false;
+                    m.mReviewResultID = TYPE_HEAD_REVIEW + Utils.GetRamCode();
+                    m.isDeleted = false;
 
                     var validate = Model.Valid(m);
                     if (!validate.Result)
@@ -398,7 +398,7 @@ namespace sl.web.Areas.Manager.Controllers
                     }
                     else
                     {
-                        m.IsDeleted = false;
+                        m.isDeleted = false;
                         object result = HRAManagerService.database.Insert(m);
                         return SaveMessage(result);
                     }
@@ -411,7 +411,7 @@ namespace sl.web.Areas.Manager.Controllers
                 T_ReviewResult load = HRAManagerService.database.SingleOrDefault<T_ReviewResult>(obj);
                 if (Request.IsPost())
                 {
-                    load.M_ReviewResultValue = m.M_ReviewResultValue;
+                    load.mReviewResultValue = m.mReviewResultValue;
                     Model valid = Model.Valid(load);
                     return valid.Result ? SaveMessage(HRAManagerService.database.Update(load)) : ErrorMessage(valid.Message);
                 }
@@ -427,8 +427,8 @@ namespace sl.web.Areas.Manager.Controllers
             {
                 if (Request.IsPost())
                 {
-                    m.M_TypeID = TYPE_HEAD_MEMBER + Utils.GetRamCode();
-                    m.IsDeleted = false;
+                    m.mTypeID = TYPE_HEAD_MEMBER + Utils.GetRamCode();
+                    m.isDeleted = false;
 
                     var validate = Model.Valid(m);
                     if (!validate.Result)
@@ -437,7 +437,7 @@ namespace sl.web.Areas.Manager.Controllers
                     }
                     else
                     {
-                        m.IsDeleted = false;
+                        m.isDeleted = false;
                         object result = HRAManagerService.database.Insert(m);
                         return SaveMessage(result);
                     }
@@ -450,7 +450,7 @@ namespace sl.web.Areas.Manager.Controllers
                 T_MemberType load = HRAManagerService.database.SingleOrDefault<T_MemberType>(obj);
                 if (Request.IsPost())
                 {
-                    load.M_TypeValue = m.M_TypeValue;
+                    load.mTypeValue = m.mTypeValue;
                     Model valid = Model.Valid(load);
                     return valid.Result ? SaveMessage(HRAManagerService.database.Update(load)) : ErrorMessage(valid.Message);
                 }

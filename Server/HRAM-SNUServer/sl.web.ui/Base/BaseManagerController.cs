@@ -67,11 +67,11 @@ namespace sl.web.ui
                 {
                     username = Security.DesDecrypt(CachedConfigContext.Current.WebSiteConfig.WebSiteKey, username);
                     //ITUserService service = DIContainer.Resolve<ITUserService>();
-                    //Condition where = Condition.Builder.Equal("U_LoginName", username).Equal("U_LoginTypeID", password);
+                    //Condition where = Condition.Builder.Equal("uLoginName", username).Equal("uLoginTypeValue", password);
                     //manager = service.Load(where.Create());
                     Database DB = new Database("ConnectionString");
                     Sql sql = Sql.Builder;
-                    sql.Append("Select * from T_User where U_LoginName = @0 and U_Password = @0", username, password);
+                    sql.Append("Select * from T_User where uLoginName = @0 and uPassword = @0", username, password);
                     manager = DB.FirstOrDefault<T_User>(sql);
 
                     if (manager != null)

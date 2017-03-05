@@ -8,64 +8,7 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" type="text/css" href="../../../css/mui.min.css" />
-		
-			<style>
-			.area {
-				margin: 20px auto 0px auto;
-			}
-			
-			.mui-input-group {
-				margin-top: 10px;
-			}
-			
-			.mui-input-group:first-child {
-				margin-top: 20px;
-			}
-			
-			.mui-input-group label {
-				width: 30%;
-			}
-			
-			.mui-input-row label~input,
-			.mui-input-row label~select,
-			.mui-input-row label~textarea {
-				width: 70%;
-			}
-			
-			.mui-checkbox input[type=checkbox],
-			.mui-radio input[type=radio] {
-				top: 6px;
-			}
-			
-			.mui-content-padded {
-				margin-top: 25px;
-			}
-			
-			.mui-btn {
-				padding: 10px;
-			}
-			
-			.link-area {
-				display: block;
-				margin-top: 25px;
-				text-align: center;
-			}
-			
-			.spliter {
-				color: #bbb;
-				padding: 0px 8px;
-			}
-			
-			.align-center {
-				margin: 0 auto;
-				/* 居中 这个是必须的，，其它的属性非必须 */
-				width: 500px;
-				/* 给个宽度 顶到浏览器的两边就看不出居中效果了 */
-				text-align: center;
-				/* 文字等内容居中 */
-			}
-			
-		</style>
+
 	</head>
 
 	<body>
@@ -75,14 +18,14 @@
 
 		<div class="mui-content">
 			<div class="mui-scroll">
-				<form id='login-form' class="mui-input-group">
+				<form id='login-form' class="mui-input-group" style="margin-top: 10px;">
 					<div class="mui-input-row">
-						<label EN="UserName">用户名</label>
-						<input id="edtUserName" type="text" class="mui-input-clear mui-input" placeholderEN="Please input userName" placeholder="请输入用户名" value="" />
+						<label style="width: 22%;">用户名</label>
+						<input id="edtLoginName" type="text" class="mui-input-clear mui-input" style="width: 78%;" placeholder="请输入用户名" />
 					</div>
 					<div class="mui-input-row">
-						<label EN="Password">密码</label>
-						<input id="edtPwd" type="password" class="mui-input-clear mui-input" placeholderEN="Please input password" placeholder="请输入密码" value="" />
+						<label style="width: 22%;">密码</label>
+						<input id="edtPwd" type="password" class="mui-input-clear mui-input" style="width: 78%;" placeholder="请输入密码" />
 					</div>
 				</form>
 				<form class="mui-input-group">
@@ -95,12 +38,12 @@
 						</li>
 					</ul>
 				</form>
-				<div class="mui-content-padded">
-					<button id='btnLogin' class="mui-btn mui-btn-block mui-btn-primary" style="height: 55px;" EN="Login in">登录</button>
-					<div class="link-area">
-						<a id='btnRegister' EN="Register">注册账号</a>
+				<div class="mui-content-padded" style="margin-top: 25px;">
+					<button id='btnLogin' class="mui-btn mui-btn-block mui-btn-primary" style="height: 55px;">登录</button>
+					<div class="link-area" style="display: block;margin-top: 15px;text-align: center;">
+						<a id='btnRegister'>注册账号</a>
 						<span class="spliter">|</span>
-						<a id='btnForgetPwd' EN="Forget Password">忘记密码</a>
+						<a id='btnForgetPwd'>忘记密码</a>
 					</div>
 				</div>
 
@@ -108,18 +51,27 @@
 
 		</div>
 
-		<!--<div id="modifyLanguage" class="mui-popover">
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<a id="selectChinese" class="pack-method" ">中文</a>
-				</li>
-				<li class="mui-table-view-cell">
-					<a id="selectEnglish" class="pack-method" >English</a>
-				</li>
-			</ul>
-		</div>-->
+		<div id="registerDlg" class="mui-popover" style="width: 0 auto; margin-top: 100px;margin-bottom: 100px;margin-left: 50px;margin-right: 50px;">
+
+			<div class="mui-content">
+				<div class="mui-table-view-cell" style="background: dodgerblue;">
+					<h5 class="mui-text-center" style="color: white;">马上注册 </h5>
+				</div>
+
+				<div class="mui-input-group" style="margin-top: 5px;">
+					<div class="mui-input-row">
+						<label>邮箱</label>
+						<input id='edtMaibox' type="email" class="mui-input-clear mui-input" placeholderEN="Please input mailbox" placeholder="请输入邮箱" value="" />
+					</div>
+				</div>
+
+				<a id='btnReg' class="mui-btn mui-btn-primary" style="height:36px; text-align:center;display:block;margin: 5px;">注册</a>
+			</div>
+		</div>
+
 	</body>
 	<script src="../../../js/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/common/md5.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../../js/acc/LoginJS.js" type="text/javascript" charset="utf-8"></script>
 

@@ -126,12 +126,12 @@ namespace sl.web.Areas.Manager.Controllers
             grid.DataSource = from item in GetCoaches()
                               select new
                               {
-                                  编号 = item.pk_id,
-                                  登录名 = item.U_LoginName,
-                                  登陆密码 = item.U_Password,
-                                  用户名 = item.U_UserName,
-                                  手机号 = item.U_Phone,
-                                  邮箱 = item.U_MaiBox
+                                  编号 = item.pkId,
+                                  登录名 = item.uLoginName,
+                                  登陆密码 = item.uPassword,
+                                  用户名 = item.uUserName,
+                                  手机号 = item.uPhone,
+                                  邮箱 = item.uMaiBox
                               };
 
             grid.DataBind();
@@ -231,10 +231,10 @@ namespace sl.web.Areas.Manager.Controllers
         //    //循环读取List集合 
         //    for (int i = 0; i < list.Count; i++)
         //    {
-        //        sHtml.Append("<tr height=\"20\" align=\"left\"><td>" + list[i].pk_id
-        //            + "</td><td>" + list[i].U_LoginName + "</td><td>" + list[i].U_LoginTypeID + "</td><td>" + list[i].U_Password
-        //            + "</td><td>" + list[i].U_UserName + "</td><td>" + list[i].U_Phone + "</td><td>" + list[i].U_MaiBox
-        //            + "</td><td>" + list[i].IsDeleted
+        //        sHtml.Append("<tr height=\"20\" align=\"left\"><td>" + list[i].pkId
+        //            + "</td><td>" + list[i].uLoginName + "</td><td>" + list[i].uLoginTypeID + "</td><td>" + list[i].uPassword
+        //            + "</td><td>" + list[i].uUserName + "</td><td>" + list[i].uPhone + "</td><td>" + list[i].uMaiBox
+        //            + "</td><td>" + list[i].isDeleted
         //            + "</td></tr>");
         //    }
         //    //打印表尾

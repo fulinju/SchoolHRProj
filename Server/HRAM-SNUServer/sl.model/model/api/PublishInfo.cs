@@ -5,18 +5,18 @@
     /// </summary>
     public class PublishInfo
     { 
-        public string u_username { get; set; }//发布者的用户名
+        public string uUserName { get; set; }//发布者的用户名
 
-        public string pm_title { get; set; }
+        public string pmTitle { get; set; }
 
-        public string pm_typevalue { get; set; }//发布的类型
+        public string pmTypeValue { get; set; }//发布的类型
 
-        public string pm_adimglistid { get; set; }
+        public string pmADImgListID { get; set; }
 
-        public string pm_publishtime { get; set; }
+        public string pmPublishTime { get; set; }
 
-        public string pm_views { get; set; }
+        public string pmViews { get; set; }
 
-        public string pm_text { get; set; }
+        public string pmText { get; set; }
     }
 }

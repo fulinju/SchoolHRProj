@@ -26,9 +26,9 @@ namespace sl.web.Areas.Manager.Controllers
         }
 
         #region 查询链接
-        public ActionResult GetLinkList(string fl_name)
+        public ActionResult GetLinkList(string flName)
         {
-            Sql sql = HRAManagerService.GetLinksSql(fl_name);
+            Sql sql = HRAManagerService.GetLinksSql(flName);
             return CommonPageList<T_FriendlyLink>(sql, HRAManagerService.database);
         }
         #endregion
@@ -41,7 +41,7 @@ namespace sl.web.Areas.Manager.Controllers
             int flag = 0;
             foreach (var entity in entityList)
             {
-                entity.IsDeleted = true;
+                entity.isDeleted = true;
                 flag = HRAManagerService.database.Update(entity); //假删除
             }
             return DelMessage(flag);
@@ -62,7 +62,7 @@ namespace sl.web.Areas.Manager.Controllers
                     }
                     else
                     {
-                        m.IsDeleted = false;
+                        m.isDeleted = false;
                         object result = HRAManagerService.database.Insert(m);
                         return SaveMessage(result);
                     }

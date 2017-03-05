@@ -9,40 +9,40 @@ namespace sl.model
     /// </summary>
     /// 
     [TableName("T_DownloadManage")]
-    [PrimaryKey("pk_id")]
+    [PrimaryKey("pkId")]
     [ExplicitColumns]
     public class T_DownloadManage
     {
         [Column]
-        [JsonProperty("pk_id")]
-        public string pk_id { get; set; }
+        [JsonProperty("pkId")]
+        public string pkId { get; set; }
 
         [Column]
-        [JsonProperty("u_loginname")]
-        public string U_LoginName { get; set; }
+        [JsonProperty("uLoginName")]
+        public string uLoginName { get; set; }
 
         [Column]
-        [JsonProperty("dm_title")]
-        public string DM_Title { get; set; }
+        [JsonProperty("dmTitle")]
+        public string dmTitle { get; set; }
 
         [Column]
-        [JsonProperty("dm_typeid")]
-        public string DM_TypeID { get; set; }
+        [JsonProperty("dmTypeID")]
+        public string dmTypeID { get; set; }
 
         [Column]
-        [JsonProperty("dm_fileurl")]
-        public string DM_FileURL { get; set; }
+        [JsonProperty("dmFileURL")]
+        public string dmFileURL { get; set; }
 
         [Column]
-        [JsonProperty("dm_downloadnum")]
-        public int DM_DownloadNum { get; set; }
+        [JsonProperty("dmDownloadNum")]
+        public int dmDownloadNum { get; set; }
 
         [Column]
-        [JsonProperty("dm_uploadtime")]
-        public string DM_UploadTime { get; set; }
+        [JsonProperty("dmUploadTime")]
+        public string dmUploadTime { get; set; }
 
         [Column]
-        [JsonProperty("isdeleted")]
-        public bool IsDeleted { get; set; }
+        [JsonProperty("isDeleted")]
+        public bool isDeleted { get; set; }
     }
 }

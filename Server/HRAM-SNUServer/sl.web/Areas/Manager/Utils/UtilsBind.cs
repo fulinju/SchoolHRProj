@@ -25,7 +25,7 @@ namespace sl.web
             {
                 for (int i = 0; i < userTypes.Count; i++)
                 {
-                    list.Add(new SelectListItem { Text = userTypes[i].U_LoginTypeValue, Value = userTypes[i].U_LoginTypeID });
+                    list.Add(new SelectListItem { Text = userTypes[i].uLoginTypeValue, Value = userTypes[i].uLoginTypeID });
 
                 }
             }
@@ -47,7 +47,7 @@ namespace sl.web
             {
                 for (int i = 0; i < reviewResults.Count; i++)
                 {
-                    list.Add(new SelectListItem { Text = reviewResults[i].M_ReviewResultValue, Value = reviewResults[i].M_ReviewResultID });
+                    list.Add(new SelectListItem { Text = reviewResults[i].mReviewResultValue, Value = reviewResults[i].mReviewResultID });
 
                 }
             }
@@ -80,7 +80,7 @@ namespace sl.web
             {
                 for (int i = 0; i < memberTypes.Count; i++)
                 {
-                    list.Add(new SelectListItem { Text = memberTypes[i].M_TypeValue, Value = memberTypes[i].M_TypeID });
+                    list.Add(new SelectListItem { Text = memberTypes[i].mTypeValue, Value = memberTypes[i].mTypeID });
 
                 }
             }
@@ -102,7 +102,7 @@ namespace sl.web
             {
                 for (int i = 0; i < types.Count; i++)
                 {
-                    list.Add(new SelectListItem { Text = types[i].PM_TypeValue, Value = types[i].PM_TypeID });
+                    list.Add(new SelectListItem { Text = types[i].pmTypeValue, Value = types[i].pmTypeID });
 
                 }
             }
@@ -125,7 +125,7 @@ namespace sl.web
             {
                 for (int i = 0; i < types.Count; i++)
                 {
-                    list.Add(new SelectListItem { Text = types[i].DM_TypeValue, Value = types[i].DM_TypeID });
+                    list.Add(new SelectListItem { Text = types[i].dmTypeValue, Value = types[i].dmTypeID });
 
                 }
             }

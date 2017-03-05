@@ -24,7 +24,7 @@ namespace sl.web.db
             Sql sql = Sql.Builder;
             sql.Select("*")
                 .From("T_UserType")
-                .OrderBy("U_LoginTypeID asc");
+                .OrderBy("uLoginTypeValue asc");
             userTypes = DB.Fetch<T_UserType>(sql);
             return userTypes;
         }
@@ -37,7 +37,7 @@ namespace sl.web.db
             Sql sql = Sql.Builder;
             sql.Select("*")
                 .From("T_ReviewResult")
-                .OrderBy("M_ReviewResultID asc");
+                .OrderBy("mReviewResultID asc");
             reviewResults = DB.Fetch<T_ReviewResult>(sql);
             return reviewResults;
         }
@@ -50,7 +50,7 @@ namespace sl.web.db
             Sql sql = Sql.Builder;
             sql.Select("*")
                 .From("T_MemberType")
-                .OrderBy("M_TypeID asc");
+                .OrderBy("mTypeID asc");
             reviewResults = DB.Fetch<T_MemberType>(sql);
             return reviewResults;
         }
@@ -63,7 +63,7 @@ namespace sl.web.db
             Sql sql = Sql.Builder;
             sql.Select("*")
                 .From("T_DMType")
-                .OrderBy("DM_TypeValue asc");
+                .OrderBy("dmTypeValue asc");
             types = DB.Fetch<T_DMType>(sql);
             return types;
         }

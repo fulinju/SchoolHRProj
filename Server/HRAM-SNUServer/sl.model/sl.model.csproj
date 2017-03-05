@@ -51,8 +51,9 @@
   <ItemGroup>
     <Compile Include="Config\WebSiteConfig.cs" />
     <Compile Include="model\api\DownloadInfo.cs" />
+    <Compile Include="model\api\LoginModel.cs" />
     <Compile Include="model\api\PublishInfo.cs" />
-    <Compile Include="model\api\RegisterUser.cs" />
+    <Compile Include="model\FinalData.cs" />
     <Compile Include="model\msg\ApiMsgEntity.cs" />
     <Compile Include="model\msg\ManagerMsgEntity.cs" />
     <Compile Include="model\TypeModels.cs" />

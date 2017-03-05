@@ -27,9 +27,9 @@ namespace sl.web.Areas.Manager.Controllers
         }
 
         #region 查询
-        public ActionResult GetMembersList(string m_name = "")
+        public ActionResult GetMembersList(string mName = "")
         {
-            Sql sql = HRAManagerService.GetMemberSql(m_name);
+            Sql sql = HRAManagerService.GetMemberSql(mName);
 
             return CommonPageList<dynamic>(sql, HRAManagerService.database);
         }
@@ -59,8 +59,8 @@ namespace sl.web.Areas.Manager.Controllers
                     var validate = Model.Valid(m);
                     if (validate.Result)
                     {
-                        m.M_ImgURL = UploadFile();
-                        m.IsDeleted = false;
+                        m.mImgURL = UploadFile();
+                        m.isDeleted = false;
                         object result = HRAManagerService.database.Insert(m);
                         return SaveMessage(result);
                     }
@@ -86,11 +86,11 @@ namespace sl.web.Areas.Manager.Controllers
                     {
                         if (Request.Files.Count > 0)
                         {
-                            Utils.DeleteFile(load.M_ImgURL);
+                            Utils.DeleteFile(load.mImgURL);
                             string fileName = UploadFile();
                             if (fileName != "")
                             {
-                                load.M_ImgURL = fileName;
+                                load.mImgURL = fileName;
                             }
                         }
                         int success = HRAManagerService.database.Update(load);
@@ -108,7 +108,7 @@ namespace sl.web.Areas.Manager.Controllers
             string fileName = "";
             if (Request.Files.Count > 0)
             {
-                HttpPostedFileBase fileBase = Request.Files["M_ImgURL"];
+                HttpPostedFileBase fileBase = Request.Files["mImgURL"];
                 if (fileBase != null && fileBase.FileName != "")
                 {
                     if (!DirFile.IsExistDirectory(Key.MemberIconsPath)) //判断文件夹是否存在
@@ -135,8 +135,8 @@ namespace sl.web.Areas.Manager.Controllers
             int success = 0;
             if (m != null)
             {
-                Utils.DeleteFile(m.M_ImgURL);
-                m.M_ImgURL = string.Empty;
+                Utils.DeleteFile(m.mImgURL);
+                m.mImgURL = string.Empty;
                 success = HRAManagerService.database.Update(m);
             }
             //换成 DelMessage

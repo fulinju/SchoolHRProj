@@ -19,31 +19,31 @@ namespace sl.service.manager
         #region 用户相关
 
         #region 获取用户列表
-        public static Sql GetUserSql(string u_loginname)
+        public static Sql GetUserSql(string uLoginName)
         {
             Sql sql = Sql.Builder;
 
-            u_loginname = "%" + u_loginname + "%";
+            uLoginName = "%" + uLoginName + "%";
 
-            sql.Append("Select T_UserType.u_logintypevalue,");
-            sql.Append("T_User.pk_id,");
-            sql.Append("T_User.u_loginname,");
-            sql.Append("T_User.u_logintypeid,"); //不能少，重置的时候要用
-            sql.Append("T_User.u_password,");
-            sql.Append("T_User.u_username,");
-            sql.Append("T_User.u_phone,");
-            sql.Append("T_User.u_maibox");
-            sql.Append(" from T_User,T_UserType where U_LoginName Like @0 and T_User.IsDeleted = 0", u_loginname);
-            sql.Append(" and T_UserType.U_LoginTypeID = T_User.U_LoginTypeID");
+            sql.Append("Select T_UserType.uLoginTypeValue,");
+            sql.Append("T_User.pkId,");
+            sql.Append("T_User.uLoginName,");
+            sql.Append("T_User.uLoginTypeID,"); //不能少，重置的时候要用
+            sql.Append("T_User.uPassword,");
+            sql.Append("T_User.uUserName,");
+            sql.Append("T_User.uPhone,");
+            sql.Append("T_User.uMaiBox");
+            sql.Append(" from T_User,T_UserType where uLoginName Like @0 and T_User.isDeleted = 0", uLoginName);
+            sql.Append(" and T_UserType.uLoginTypeID = T_User.uLoginTypeID");
             return sql;
         }
         #endregion
 
         #region 检查用户是否存在
-        public static T_User CheckUserExist(string u_loginname)
+        public static T_User CheckUserExist(string uLoginName)
         {
             Sql sql = Sql.Builder;
-            sql.Append("Select * from T_User where U_LoginName = @0", u_loginname);
+            sql.Append("Select * from T_User where uLoginName = @0", uLoginName);
             return database.FirstOrDefault<T_User>(sql);
         }
         #endregion
@@ -52,7 +52,7 @@ namespace sl.service.manager
         public static T_User CheckLogin(string name, string passwordMd5)
         {
             Sql sql = Sql.Builder;
-            sql.Append("Select * from T_User where U_LoginName=@0 and U_Password = @1", name, passwordMd5);
+            sql.Append("Select * from T_User where uLoginName=@0 and uPassword = @1", name, passwordMd5);
 
             return database.FirstOrDefault<T_User>(sql);
         }
@@ -63,28 +63,28 @@ namespace sl.service.manager
 
         #region 会员
         #region 获取会员列表
-        public static Sql GetMemberSql(string m_name)
+        public static Sql GetMemberSql(string mName)
         {
             Sql sql = Sql.Builder;
 
-            m_name = "%" + m_name + "%";
-            sql.Append("Select T_ReviewResult.m_reviewresultvalue,T_MemberType.m_typevalue,");
-            sql.Append("T_Member.pk_id,");
-            sql.Append("T_Member.u_loginname,");
-            sql.Append("T_Member.m_reviewresultid,");
-            sql.Append("T_Member.m_typeid,");
-            sql.Append("T_Member.m_applytime,");
-            sql.Append("T_Member.m_name,");
-            sql.Append("T_Member.m_organizationcode,");
-            sql.Append("T_Member.m_address,");
-            sql.Append("T_Member.m_corporatename,");
-            sql.Append("T_Member.m_idcardno,");
-            sql.Append("T_Member.m_contacts,");
-            sql.Append("T_Member.m_contactsphone,");
-            sql.Append("T_Member.m_imgurl,");
-            sql.Append("T_Member.m_url");
-            sql.Append(" from T_Member,T_ReviewResult,T_MemberType where M_Name Like @0 and T_Member.IsDeleted = 0", m_name);
-            sql.Append(" and T_Member.M_ReviewResultID = T_ReviewResult.M_ReviewResultID and T_Member.M_TypeID = T_MemberType.M_TypeID");
+            mName = "%" + mName + "%";
+            sql.Append("Select T_ReviewResult.mReviewResultValue,T_MemberType.mTypeValue,");
+            sql.Append("T_Member.pkId,");
+            sql.Append("T_Member.uLoginName,");
+            sql.Append("T_Member.mReviewResultID,");
+            sql.Append("T_Member.mTypeID,");
+            sql.Append("T_Member.mApplyTime,");
+            sql.Append("T_Member.mName,");
+            sql.Append("T_Member.mOrganizationCode,");
+            sql.Append("T_Member.mAddress,");
+            sql.Append("T_Member.mCorporateName,");
+            sql.Append("T_Member.mIDCardNo,");
+            sql.Append("T_Member.mContacts,");
+            sql.Append("T_Member.mContactsphone,");
+            sql.Append("T_Member.mImgURL,");
+            sql.Append("T_Member.mURL");
+            sql.Append(" from T_Member,T_ReviewResult,T_MemberType where mName Like @0 and T_Member.isDeleted = 0", mName);
+            sql.Append(" and T_Member.mReviewResultID = T_ReviewResult.mReviewResultID and T_Member.mTypeID = T_MemberType.mTypeID");
             return sql;
         }
 
@@ -92,7 +92,7 @@ namespace sl.service.manager
         #region 检查会员是否存在
         public static T_Member CheckMemberExist(string id)
         {
-            Sql sql = Sql.Builder.Append("Select * from T_Member Where pk_id = @0", id);
+            Sql sql = Sql.Builder.Append("Select * from T_Member Where pkId = @0", id);
             return database.FirstOrDefault<T_Member>(sql);
         }
         #endregion
@@ -101,24 +101,24 @@ namespace sl.service.manager
         #endregion
 
         #region 发布相关
-        public static Sql GetPublishSql(string u_loginname)
+        public static Sql GetPublishSql(string uLoginName)
         {
             Sql sql = Sql.Builder;
 
-            u_loginname = "%" + u_loginname + "%";
+            uLoginName = "%" + uLoginName + "%";
 
-            sql.Append("Select T_PMType.pm_typevalue,");
-            sql.Append("T_PublishManage.pk_id,");
-            sql.Append("T_PublishManage.pm_typeid,");
-            sql.Append("T_PublishManage.u_loginname,");
-            sql.Append("SUBSTRING(REPLACE(CAST(T_PublishManage.pm_title as nvarchar(4000)),' ',''),0,20)+'...'  as pm_title,");
-            sql.Append("T_PublishManage.pm_adimglistid,");
-            sql.Append("T_PublishManage.pm_publishtime,");
-            sql.Append("SUBSTRING(REPLACE(CAST(T_PublishManage.pm_text as nvarchar(4000)),' ',''),0,20)+'...'  as pm_text,"); //文章内容太长
-            sql.Append("T_PublishManage.pm_views,");
-            sql.Append("T_PublishManage.pm_preview");
-            sql.Append(" from T_PMType,T_PublishManage where U_LoginName Like @0 and T_PublishManage.IsDeleted = 0", u_loginname);
-            sql.Append(" and T_PMType.PM_TypeID = T_PublishManage.PM_TypeID");
+            sql.Append("Select T_PMType.pmTypeValue,");
+            sql.Append("T_PublishManage.pkId,");
+            sql.Append("T_PublishManage.pmTypeID,");
+            sql.Append("T_PublishManage.uLoginName,");
+            sql.Append("SUBSTRING(REPLACE(CAST(T_PublishManage.pmTitle as nvarchar(4000)),' ',''),0,20)+'...'  as pmTitle,");
+            sql.Append("T_PublishManage.pmADImgListID,");
+            sql.Append("T_PublishManage.pmPublishTime,");
+            sql.Append("SUBSTRING(REPLACE(CAST(T_PublishManage.pmText as nvarchar(4000)),' ',''),0,20)+'...'  as pmText,"); //文章内容太长
+            sql.Append("T_PublishManage.pmViews,");
+            sql.Append("T_PublishManage.pmPreview");
+            sql.Append(" from T_PMType,T_PublishManage where uLoginName Like @0 and T_PublishManage.isDeleted = 0", uLoginName);
+            sql.Append(" and T_PMType.pmTypeID = T_PublishManage.pmTypeID");
             return sql;
         }
 
@@ -127,35 +127,35 @@ namespace sl.service.manager
             Sql sql = Sql.Builder;
             if (num == -1)
             {
-                sql.Append("Select T_PMType.pm_typevalue,");
-                sql.Append(" T_User.u_username,");
-                sql.Append("T_PublishManage.u_loginname,");
-                sql.Append("T_PublishManage.pm_title,");
-                sql.Append("T_PublishManage.pm_adimglistid,");
-                sql.Append("T_PublishManage.pm_publishtime,");
-                sql.Append("T_PublishManage.pm_text,");
-                sql.Append("T_PublishManage.pm_views,");
-                sql.Append("T_PublishManage.pm_preview");
-                sql.Append(" from T_PMType,T_PublishManage,T_User where T_PublishManage.IsDeleted = 0");
-                sql.Append(" and T_PMType.PM_TypeID = T_PublishManage.PM_TypeID");
-                sql.Append(" and T_User.U_LoginName = T_PublishManage.U_LoginName");
+                sql.Append("Select T_PMType.pmTypeValue,");
+                sql.Append(" T_User.uUserName,");
+                sql.Append("T_PublishManage.uLoginName,");
+                sql.Append("T_PublishManage.pmTitle,");
+                sql.Append("T_PublishManage.pmADImgListID,");
+                sql.Append("T_PublishManage.pmPublishTime,");
+                sql.Append("T_PublishManage.pmText,");
+                sql.Append("T_PublishManage.pmViews,");
+                sql.Append("T_PublishManage.pmPreview");
+                sql.Append(" from T_PMType,T_PublishManage,T_User where T_PublishManage.isDeleted = 0");
+                sql.Append(" and T_PMType.pmTypeID = T_PublishManage.pmTypeID");
+                sql.Append(" and T_User.uLoginName = T_PublishManage.uLoginName");
 
             }
             else
             {
                 sql.Append("Select top " + num);
-                sql.Append(" T_PMType.pm_typevalue,");
-                sql.Append(" T_User.u_username,");
-                sql.Append("T_PublishManage.u_loginname,");
-                sql.Append("T_PublishManage.pm_title,");
-                sql.Append("T_PublishManage.pm_adimglistid,");
-                sql.Append("T_PublishManage.pm_publishtime,");
-                sql.Append("T_PublishManage.pm_text,");
-                sql.Append("T_PublishManage.pm_views,");
-                sql.Append("T_PublishManage.pm_preview");
-                sql.Append(" from T_PMType,T_PublishManage,T_User where T_PublishManage.IsDeleted = 0");
-                sql.Append(" and T_PMType.PM_TypeID = T_PublishManage.PM_TypeID");
-                sql.Append(" and T_User.U_LoginName = T_PublishManage.U_LoginName");
+                sql.Append(" T_PMType.pmTypeValue,");
+                sql.Append(" T_User.uUserName,");
+                sql.Append("T_PublishManage.uLoginName,");
+                sql.Append("T_PublishManage.pmTitle,");
+                sql.Append("T_PublishManage.pmADImgListID,");
+                sql.Append("T_PublishManage.pmPublishTime,");
+                sql.Append("T_PublishManage.pmText,");
+                sql.Append("T_PublishManage.pmViews,");
+                sql.Append("T_PublishManage.pmPreview");
+                sql.Append(" from T_PMType,T_PublishManage,T_User where T_PublishManage.isDeleted = 0");
+                sql.Append(" and T_PMType.pmTypeID = T_PublishManage.pmTypeID");
+                sql.Append(" and T_User.uLoginName = T_PublishManage.uLoginName");
             }
 
             List<PublishInfo> list = database.Fetch<PublishInfo>(sql);
@@ -169,40 +169,40 @@ namespace sl.service.manager
         #region 下载相关
 
         #region 获取下载列表Sql
-        public static Sql GetDownloadSql(string dm_title)
+        public static Sql GetDownloadSql(string dmTitle)
         {
             Sql sql = Sql.Builder;
 
-            dm_title = "%" + dm_title + "%";
+            dmTitle = "%" + dmTitle + "%";
 
-            sql.Append("Select T_DMType.dm_typevalue,");
-            sql.Append("T_DownloadManage.pk_id,");
-            sql.Append("T_DownloadManage.dm_typeid,");
-            sql.Append("T_DownloadManage.u_loginname,");
-            sql.Append("T_DownloadManage.dm_title,");
-            sql.Append("T_DownloadManage.dm_fileurl,");
-            sql.Append("T_DownloadManage.dm_downloadnum,");
-            sql.Append("T_DownloadManage.dm_uploadtime");
-            sql.Append(" from T_DMType,T_DownloadManage where U_LoginName Like @0 and T_DownloadManage.IsDeleted = 0", dm_title);
-            sql.Append(" and T_DMType.DM_TypeID = T_DownloadManage.DM_TypeID");
+            sql.Append("Select T_DMType.dmTypeValue,");
+            sql.Append("T_DownloadManage.pkId,");
+            sql.Append("T_DownloadManage.dmTypeID,");
+            sql.Append("T_DownloadManage.uLoginName,");
+            sql.Append("T_DownloadManage.dmTitle,");
+            sql.Append("T_DownloadManage.dmFileURL,");
+            sql.Append("T_DownloadManage.dmDownloadNum,");
+            sql.Append("T_DownloadManage.dmUploadTime");
+            sql.Append(" from T_DMType,T_DownloadManage where uLoginName Like @0 and T_DownloadManage.isDeleted = 0", dmTitle);
+            sql.Append(" and T_DMType.dmTypeID = T_DownloadManage.dmTypeID");
             return sql;
         }
         #endregion
 
-        #region 根据pk_id获取单个下载
+        #region 根据pkId获取单个下载
         public static Sql GetDownloadByIDSql(string id)
         {
-            Sql sql = Sql.Builder.Append("Select * from T_DownloadManage Where pk_id = @0", id);
+            Sql sql = Sql.Builder.Append("Select * from T_DownloadManage Where pkId = @0", id);
             return sql;
         }
         #endregion
 
         #region 根据typeID获取类型value
-        public static string GetDownloadValueByID(string dm_typeid)
+        public static string GetDownloadValueByID(string dmTypeID)
         {
-            Sql sql = Sql.Builder.Append("Select * from T_DMType Where DM_TypeID = @0", dm_typeid);
+            Sql sql = Sql.Builder.Append("Select * from T_DMType Where dmTypeID = @0", dmTypeID);
             T_DMType temp = database.FirstOrDefault<T_DMType>(sql);
-            return temp.DM_TypeValue;
+            return temp.dmTypeValue;
         }
         #endregion
 
@@ -210,11 +210,11 @@ namespace sl.service.manager
 
 
         #region 友情链接相关
-        public static Sql GetLinksSql(string fl_name)
+        public static Sql GetLinksSql(string flName)
         {
             Sql sql = Sql.Builder;
-            fl_name = "%" + fl_name + "%";
-            sql.Append("select * from T_FriendlyLink where FL_Name Like @0 and IsDeleted = 0", fl_name);
+            flName = "%" + flName + "%";
+            sql.Append("select * from T_FriendlyLink where flName Like @0 and isDeleted = 0", flName);
             return sql;
         }
         #endregion
@@ -228,17 +228,17 @@ namespace sl.service.manager
             Sql sql = Sql.Builder;
             sql.Select("*")
                 .From("T_UserType")
-                .OrderBy("U_LoginTypeID asc");
+                .OrderBy("uLoginTypeValue asc");
             userTypes = database.Fetch<T_UserType>(sql);
             return userTypes;
         }
 
-        public static Sql GetUserTypeSql(string u_logintypevalue)
+        public static Sql GetUserTypeSql(string uLoginTypeValue)
         {
             Sql sql = Sql.Builder;
 
-            u_logintypevalue = "%" + u_logintypevalue + "%";
-            sql.Append("Select * from T_UserType where U_LoginTypeValue Like @0 and IsDeleted = 0", u_logintypevalue);
+            uLoginTypeValue = "%" + uLoginTypeValue + "%";
+            sql.Append("Select * from T_UserType where uLoginTypeValue Like @0 and isDeleted = 0", uLoginTypeValue);
             return sql;
         }
 
@@ -252,7 +252,7 @@ namespace sl.service.manager
             Sql sql = Sql.Builder;
             sql.Select("*")
                 .From("T_ReviewResult")
-                .OrderBy("M_ReviewResultID asc");
+                .OrderBy("mReviewResultID asc");
             reviewResults = database.Fetch<T_ReviewResult>(sql);
             return reviewResults;
         }
@@ -262,7 +262,7 @@ namespace sl.service.manager
         {
             Sql sql = Sql.Builder;
             reviewResultValue = "%" + reviewResultValue + "%";
-            sql.Append("Select * from T_ReviewResult where M_ReviewResultValue Like @0 and IsDeleted = 0", reviewResultValue);
+            sql.Append("Select * from T_ReviewResult where mReviewResultValue Like @0 and isDeleted = 0", reviewResultValue);
             return sql;
         }
         #endregion
@@ -274,7 +274,7 @@ namespace sl.service.manager
             Sql sql = Sql.Builder;
             sql.Select("*")
                 .From("T_MemberType")
-                .OrderBy("M_TypeID asc");
+                .OrderBy("mTypeID asc");
             reviewResults = database.Fetch<T_MemberType>(sql);
             return reviewResults;
         }
@@ -283,7 +283,7 @@ namespace sl.service.manager
         {
             Sql sql = Sql.Builder;
             mTypeValue = "%" + mTypeValue + "%";
-            sql.Append("Select * from T_MemberType where M_TypeValue Like @0 and IsDeleted = 0", mTypeValue);
+            sql.Append("Select * from T_MemberType where mTypeValue Like @0 and isDeleted = 0", mTypeValue);
             return sql;
         }
         #endregion
@@ -295,16 +295,16 @@ namespace sl.service.manager
             Sql sql = Sql.Builder;
             sql.Select("*")
                 .From("T_DMType")
-                .OrderBy("DM_TypeValue asc");
+                .OrderBy("dmTypeValue asc");
             types = database.Fetch<T_DMType>(sql);
             return types;
         }
 
-        public static Sql GetDownloadTypeSql(string dm_typevalue)
+        public static Sql GetDownloadTypeSql(string dmTypeValue)
         {
             Sql sql = Sql.Builder;
-            dm_typevalue = "%" + dm_typevalue + "%";
-            sql.Append("Select * from T_DMType where DM_TypeValue Like @0 and IsDeleted = 0", dm_typevalue);
+            dmTypeValue = "%" + dmTypeValue + "%";
+            sql.Append("Select * from T_DMType where dmTypeValue Like @0 and isDeleted = 0", dmTypeValue);
             return sql;
         }
         #endregion
@@ -316,16 +316,16 @@ namespace sl.service.manager
             Sql sql = Sql.Builder;
             sql.Select("*")
                 .From("T_PMType")
-                .OrderBy("PM_TypeID asc");
+                .OrderBy("pmTypeID asc");
             publishTypes = database.Fetch<T_PMType>(sql);
             return publishTypes;
         }
 
-        public static Sql GetPublishTypeSql(string pm_typevalue)
+        public static Sql GetPublishTypeSql(string pmTypeValue)
         {
             Sql sql = Sql.Builder;
-            pm_typevalue = "%" + pm_typevalue + "%";
-            sql.Append("Select * from T_PMType where PM_TypeValue Like @0 and IsDeleted = 0", pm_typevalue);
+            pmTypeValue = "%" + pmTypeValue + "%";
+            sql.Append("Select * from T_PMType where pmTypeValue Like @0 and isDeleted = 0", pmTypeValue);
             return sql;
         }
         #endregion
@@ -355,7 +355,7 @@ namespace sl.service.manager
         public static T_UserType UserTypeIsExist(string typeValue)
         {
             Sql sql = Sql.Builder;
-            sql.Append("Select * from T_UserType where U_LoginTypeValue = @0", typeValue);
+            sql.Append("Select * from T_UserType where uLoginTypeValue = @0", typeValue);
             T_UserType result = database.FirstOrDefault<T_UserType>(sql);
             return result;
         }
@@ -365,7 +365,7 @@ namespace sl.service.manager
         public static T_DMType DownloadTypeIsExist(string typeValue)
         {
             Sql sql = Sql.Builder;
-            sql.Append("Select * from T_DMType where DM_TypeValue = @0", typeValue);
+            sql.Append("Select * from T_DMType where dmTypeValue = @0", typeValue);
             T_DMType result = database.FirstOrDefault<T_DMType>(sql);
             return result;
         }
@@ -375,7 +375,7 @@ namespace sl.service.manager
         public static T_PMType PublishTypeIsExist(string typeValue)
         {
             Sql sql = Sql.Builder;
-            sql.Append("Select * from T_PMType where PM_TypeValue = @0", typeValue);
+            sql.Append("Select * from T_PMType where pmTypeValue = @0", typeValue);
             T_PMType result = database.FirstOrDefault<T_PMType>(sql);
             return result;
         }
@@ -385,7 +385,7 @@ namespace sl.service.manager
         public static T_ReviewResult ReviewResultIsExist(string typeValue)
         {
             Sql sql = Sql.Builder;
-            sql.Append("Select * from T_ReviewResult where M_ReviewResultValue = @0", typeValue);
+            sql.Append("Select * from T_ReviewResult where mReviewResultValue = @0", typeValue);
             T_ReviewResult result = database.FirstOrDefault<T_ReviewResult>(sql);
             return result;
         }
@@ -395,7 +395,7 @@ namespace sl.service.manager
         public static T_MemberType MemberTypetIsExist(string typeValue)
         {
             Sql sql = Sql.Builder;
-            sql.Append("Select * from T_MemberType where M_TypeValue = @0", typeValue);
+            sql.Append("Select * from T_MemberType where mTypeValue = @0", typeValue);
             T_MemberType result = database.FirstOrDefault<T_MemberType>(sql);
             return result;
         }

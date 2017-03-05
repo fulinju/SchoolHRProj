@@ -1,0 +1,11 @@
+﻿@using sl.model
+
+@model T_User
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+@Html.ActionLink("导出到Excel", "TestExcelWrite")
