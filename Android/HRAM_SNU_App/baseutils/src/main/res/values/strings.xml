@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">资源工程</string>
+    <string name="can_not_find_version_name">未能获取到当前版本</string>
+
+    <!--TimePicker-->
+    <string name="pickerView_cancel">取消</string>
+    <string name="pickerView_submit">确定</string>
+    <string name="pickerView_year">年</string>
+    <string name="pickerView_month">月</string>
+    <string name="pickerView_day">日</string>
+    <string name="pickerView_hours">时</string>
+    <string name="pickerView_minutes">分</string>
+    <string name="pickerView_seconds">秒</string>
+
+    <string name="pickerView_overtime">当前时间已超过可选时间</string>
+</resources>

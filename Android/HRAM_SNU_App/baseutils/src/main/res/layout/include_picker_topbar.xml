@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:background="@color/pickerView_bg_topBar">
+
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_theme_rect"
+        android:gravity="center"
+        android:text="@string/pickerView_cancel"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/pickerView_topBar_btn_textSize" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="fill_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/btnSubmit"
+        android:layout_toRightOf="@+id/btnCancel"
+        android:textColor="@color/pickerView_topBar_title"
+        android:textSize="@dimen/pickerView_topBar_title_textSize" />
+
+    <Button
+        android:id="@id/btnSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/button_theme_rect"
+        android:gravity="center"
+        android:textAllCaps="false"
+        android:text="@string/pickerView_submit"
+        android:textColor="@color/white"
+        android:textSize="@dimen/pickerView_topBar_btn_textSize" />
+</RelativeLayout>

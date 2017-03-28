@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--加载动画-->
+    <declare-styleable name="AVLoadingIndicatorView">
+        <attr name="minWidth" format="dimension" />
+        <attr name="maxWidth" format="dimension" />
+        <attr name="minHeight" format="dimension" />
+        <attr name="maxHeight" format="dimension" />
+        <attr name="indicatorName" format="string" />
+        <attr name="indicatorColor" format="color" />
+    </declare-styleable>
+
+    <!--顶部segment-->
+    <declare-styleable name="SegmentedGroup">
+        <attr name="sc_corner_radius" format="dimension" />
+        <attr name="sc_border_width" format="dimension" />
+        <attr name="sc_tint_color" format="color" />
+        <attr name="sc_checked_text_color" format="color" />
+        <attr name="sc_unchecked_tint_color" format="color" />
+    </declare-styleable>
+
+    <!--RatingBar-->
+    <declare-styleable name="RatingBar">
+        <!--尺寸值-->
+        <attr name="starImageSize" format="dimension" />
+        <!--星星间距-->
+        <attr name="starPadding" format="dimension" />
+        <!--星星总数-->
+        <attr name="starCount" format="integer" />
+        <!--空白的星星资源文件值-->
+        <attr name="starEmpty" format="reference" />
+        <!--满星资源文件值-->
+        <attr name="starFill" format="reference" />
+        <!--半星资源文件值-->
+        <attr name="starHalf" format="reference" />
+        <!--是否可点击boolean值-->
+        <attr name="clickable" format="boolean" />
+        <!--当前进度float值-->
+        <attr name="starStep" format="float" />
+        <!--每次进度方式的值，整星还是半星-->
+        <attr name="stepSize">
+            <enum name="Half" value="0" />
+            <enum name="Full" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <!--Switch-->
+    <declare-styleable name="SwitchView">
+        <attr name="hasShadow" format="boolean" />
+        <attr name="primaryColor" format="color" />
+        <attr name="primaryColorDark" format="color" />
+        <attr name="isOpened" format="boolean" />
+    </declare-styleable>
+
+    <!--TimePicker-->
+    <declare-styleable name="wheelView">
+        <attr name="gravity">
+            <enum name="center" value="17" />
+            <enum name="left" value="3" />
+            <enum name="right" value="5" />
+        </attr>
+        <attr name="textColorOut" format="color" />
+        <attr name="textColorCenter" format="color" />
+        <attr name="dividerColor" format="color" />
+    </declare-styleable>
+
+</resources>

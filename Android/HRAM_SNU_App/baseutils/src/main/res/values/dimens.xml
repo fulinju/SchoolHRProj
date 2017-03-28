@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--顶部segment-->
+    <dimen name="radio_button_conner_radius">5dp</dimen>
+    <dimen name="radio_button_stroke_border">1dp</dimen>
+
+
+    <!--TimePicker-->
+    <!-- 顶部按钮栏高度 -->
+    <dimen name="pickerView_topBar_height">44dp</dimen>
+    <!-- 顶部按钮paddingLeft -->
+    <dimen name="pickerView_topBar_paddingLeft">10dp</dimen>
+    <!-- 顶部按钮paddingRight -->
+    <dimen name="pickerView_topBar_paddingRight">30dp</dimen>
+    <!-- 顶部按钮文字大小 -->
+    <dimen name="pickerView_topBar_btn_textSize">17sp</dimen>
+    <dimen name="pickerView_topBar_title_textSize">21sp</dimen>
+</resources>
