@@ -1,9 +1,10 @@
 package sl.base.ui.loading.indicators;
 
-
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Jack on 2015/10/19.
@@ -11,8 +12,8 @@ import java.util.ArrayList;
 public class LineScalePulseOutRapidIndicator extends LineScaleIndicator {
 
     @Override
-    public ArrayList<ValueAnimator> onCreateAnimators() {
-        ArrayList<ValueAnimator> animators=new ArrayList<>();
+    public List<Animator> createAnimation() {
+        List<Animator> animators=new ArrayList<>();
         long[] delays=new long[]{400,200,0,200,400};
         for (int i = 0; i < 5; i++) {
             final int index=i;
@@ -20,13 +21,14 @@ public class LineScalePulseOutRapidIndicator extends LineScaleIndicator {
             scaleAnim.setDuration(1000);
             scaleAnim.setRepeatCount(-1);
             scaleAnim.setStartDelay(delays[i]);
-            addUpdateListener(scaleAnim,new ValueAnimator.AnimatorUpdateListener() {
+            scaleAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
                     scaleYFloats[index] = (float) animation.getAnimatedValue();
                     postInvalidate();
                 }
             });
+            scaleAnim.start();
             animators.add(scaleAnim);
         }
         return animators;

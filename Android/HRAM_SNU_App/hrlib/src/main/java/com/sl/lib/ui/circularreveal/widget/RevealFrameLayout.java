@@ -5,11 +5,12 @@ import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 import com.sl.lib.ui.circularreveal.animation.RevealViewGroup;
 import com.sl.lib.ui.circularreveal.animation.ViewRevealManager;
 
-public class RevealFrameLayout extends FrameLayout implements RevealViewGroup {
+public class RevealFrameLayout extends RelativeLayout implements RevealViewGroup {
   private ViewRevealManager manager;
 
   public RevealFrameLayout(Context context) {

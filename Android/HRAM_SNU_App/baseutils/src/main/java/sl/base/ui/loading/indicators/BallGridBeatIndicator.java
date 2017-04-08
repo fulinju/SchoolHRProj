@@ -1,17 +1,17 @@
 package sl.base.ui.loading.indicators;
 
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-import sl.base.ui.loading.Indicator;
-
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Jack on 2015/10/20.
  */
-public class BallGridBeatIndicator extends Indicator {
+public class BallGridBeatIndicator extends BaseIndicatorController {
 
     public static final int ALPHA=255;
 
@@ -46,8 +46,8 @@ public class BallGridBeatIndicator extends Indicator {
     }
 
     @Override
-    public ArrayList<ValueAnimator> onCreateAnimators() {
-        ArrayList<ValueAnimator> animators=new ArrayList<>();
+    public List<Animator> createAnimation() {
+        List<Animator> animators=new ArrayList<>();
 
         int[] durations={960, 930, 1190, 1130, 1340, 940, 1200, 820, 1190};
         int[] delays= {360, 400, 680, 410, 710, -150, -120, 10, 320};
@@ -58,18 +58,18 @@ public class BallGridBeatIndicator extends Indicator {
             alphaAnim.setDuration(durations[i]);
             alphaAnim.setRepeatCount(-1);
             alphaAnim.setStartDelay(delays[i]);
-            addUpdateListener(alphaAnim,new ValueAnimator.AnimatorUpdateListener() {
+            alphaAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
                     alphas[index] = (int) animation.getAnimatedValue();
                     postInvalidate();
                 }
             });
+            alphaAnim.start();
             animators.add(alphaAnim);
         }
         return animators;
     }
-
 
 
 

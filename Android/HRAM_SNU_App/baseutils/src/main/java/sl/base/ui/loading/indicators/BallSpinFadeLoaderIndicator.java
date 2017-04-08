@@ -1,17 +1,17 @@
 package sl.base.ui.loading.indicators;
 
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-import sl.base.ui.loading.Indicator;
-
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Jack on 2015/10/20.
  */
-public class BallSpinFadeLoaderIndicator extends Indicator {
+public class BallSpinFadeLoaderIndicator extends BaseIndicatorController {
 
     public static final float SCALE=1.0f;
 
@@ -50,41 +50,6 @@ public class BallSpinFadeLoaderIndicator extends Indicator {
         }
     }
 
-    @Override
-    public ArrayList<ValueAnimator> onCreateAnimators() {
-        ArrayList<ValueAnimator> animators=new ArrayList<>();
-        int[] delays= {0, 120, 240, 360, 480, 600, 720, 780, 840};
-        for (int i = 0; i < 8; i++) {
-            final int index=i;
-            ValueAnimator scaleAnim=ValueAnimator.ofFloat(1,0.4f,1);
-            scaleAnim.setDuration(1000);
-            scaleAnim.setRepeatCount(-1);
-            scaleAnim.setStartDelay(delays[i]);
-            addUpdateListener(scaleAnim,new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator animation) {
-                    scaleFloats[index] = (float) animation.getAnimatedValue();
-                    postInvalidate();
-                }
-            });
-
-            ValueAnimator alphaAnim=ValueAnimator.ofInt(255, 77, 255);
-            alphaAnim.setDuration(1000);
-            alphaAnim.setRepeatCount(-1);
-            alphaAnim.setStartDelay(delays[i]);
-            addUpdateListener(alphaAnim,new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator animation) {
-                    alphas[index] = (int) animation.getAnimatedValue();
-                    postInvalidate();
-                }
-            });
-            animators.add(scaleAnim);
-            animators.add(alphaAnim);
-        }
-        return animators;
-    }
-
     /**
      * 圆O的圆心为(a,b),半径为R,点A与到X轴的为角α.
      *则点A的坐标为(a+R*cosα,b+R*sinα)
@@ -98,6 +63,43 @@ public class BallSpinFadeLoaderIndicator extends Indicator {
         float x= (float) (width/2+radius*(Math.cos(angle)));
         float y= (float) (height/2+radius*(Math.sin(angle)));
         return new Point(x,y);
+    }
+
+    @Override
+    public List<Animator> createAnimation() {
+        List<Animator> animators=new ArrayList<>();
+        int[] delays= {0, 120, 240, 360, 480, 600, 720, 780, 840};
+        for (int i = 0; i < 8; i++) {
+            final int index=i;
+            ValueAnimator scaleAnim=ValueAnimator.ofFloat(1,0.4f,1);
+            scaleAnim.setDuration(1000);
+            scaleAnim.setRepeatCount(-1);
+            scaleAnim.setStartDelay(delays[i]);
+            scaleAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    scaleFloats[index] = (float) animation.getAnimatedValue();
+                    postInvalidate();
+                }
+            });
+            scaleAnim.start();
+
+            ValueAnimator alphaAnim=ValueAnimator.ofInt(255, 77, 255);
+            alphaAnim.setDuration(1000);
+            alphaAnim.setRepeatCount(-1);
+            alphaAnim.setStartDelay(delays[i]);
+            alphaAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    alphas[index] = (int) animation.getAnimatedValue();
+                    postInvalidate();
+                }
+            });
+            alphaAnim.start();
+            animators.add(scaleAnim);
+            animators.add(alphaAnim);
+        }
+        return animators;
     }
 
     final class Point{

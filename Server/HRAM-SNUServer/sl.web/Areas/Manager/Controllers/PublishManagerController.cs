@@ -280,16 +280,17 @@ namespace sl.web.Areas.Manager.Controllers
         }  
 
         /// <summary>
-        /// 导出选中
+        /// 导出选中 导出到word还得定义模板 太麻烦
         /// </summary>
-        [HttpPost]
-        public bool ExportSelectPublishAsExcel(string model)
+        //[HttpPost]
+        public void ParseSelectPublishAsDT(string selectID)
         {
-            List<PublishInfo> publishsList = JsonConvert.DeserializeObject<List<PublishInfo>>(model);
+            //List<PublishExportInfo> publishsList = JsonConvert.DeserializeObject<List<PublishExportInfo>>(model);
 
             //List<PublishInfo> result = HRAManagerService.GetTopPublish();
+            List<PublishExportInfo> result = HRAManagerService.ExportSelectedPublishByID(selectID);
 
-            DataTable dt = DTExtensions.ToDataTable(publishsList);
+            DataTable dt = DTExtensions.ToDataTable(result);
 
 
             DataRow dr = dt.NewRow();
@@ -302,12 +303,11 @@ namespace sl.web.Areas.Manager.Controllers
             //dr[6] = "文章内容";
 
             dt.Rows.InsertAt(dr, 0);
-            ExportToExcel(dt);
 
-            return true;
+            ExportToExcel(dt,"导出选中的文章");
+            //Response.Redirect("ExportSelectPublishAsExcel", true); //在同一个
             //Response.Redirect("http://www.jb51.net", false);
         }
-
 
 
         /// <summary>
@@ -316,9 +316,9 @@ namespace sl.web.Areas.Manager.Controllers
         /// <param name="m"></param>
         /// <param name="aid"></param>
         /// <returns></returns>
-        public void ExportPublishAsExcel()
+        public void ExportPublishAsExcel(int num = -1)
         {
-            List<PublishInfo> result = HRAManagerService.GetTopPublish();
+            List<PublishExportInfo> result = HRAManagerService.ExportTopPublish(num);
 
             DataTable dt = DTExtensions.ToDataTable(result);
 
@@ -334,8 +334,8 @@ namespace sl.web.Areas.Manager.Controllers
 
             dt.Rows.InsertAt(dr, 0);
             //用column name 作为列名
-         
-            ExportToExcel(dt, "表格");
+
+            ExportToExcel(dt, "发布文章列表");
         }
 
 

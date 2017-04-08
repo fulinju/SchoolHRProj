@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.sl.lib.ui.sidemenu.interfaces.ScreenShotable;
+import com.sl.lib.ui.sidemenu.interfaces.ScreenShotAble;
 
 import sl.hr_client.R;
 
@@ -18,7 +18,7 @@ import sl.hr_client.R;
  * Created by xuzhijix on 2017/2/25.
  *  侧面菜单
  */
-public class ContentFragment extends Fragment implements ScreenShotable {
+public class ContentFragment extends Fragment implements ScreenShotAble {
     public static final String CLOSE = "Close";
     public static final String BUILDING = "Building";
     public static final String BOOK = "Book";
@@ -30,7 +30,7 @@ public class ContentFragment extends Fragment implements ScreenShotable {
 
     private View containerView;
     protected ImageView mImageView;
-    protected int res;
+//    protected int res;
     private Bitmap bitmap;
 
     public static ContentFragment newInstance(int resId) {
@@ -48,11 +48,11 @@ public class ContentFragment extends Fragment implements ScreenShotable {
         this.containerView = view.findViewById(R.id.container);
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        res = getArguments().getInt(Integer.class.getName());
-    }
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        res = getArguments().getInt(Integer.class.getName());
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,7 +61,7 @@ public class ContentFragment extends Fragment implements ScreenShotable {
         mImageView = (ImageView) rootView.findViewById(R.id.image_content);
         mImageView.setClickable(true);
         mImageView.setFocusable(true);
-        mImageView.setImageResource(res);
+//        mImageView.setImageResource(res);
         return rootView;
     }
 

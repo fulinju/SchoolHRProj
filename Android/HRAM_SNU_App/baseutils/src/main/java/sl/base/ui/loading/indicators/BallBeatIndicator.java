@@ -1,18 +1,17 @@
 package sl.base.ui.loading.indicators;
 
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-
 import java.util.ArrayList;
-
-import sl.base.ui.loading.Indicator;
+import java.util.List;
 
 /**
  * Created by Jack on 2015/10/19.
  */
-public class BallBeatIndicator extends Indicator {
+public class BallBeatIndicator extends BaseIndicatorController {
 
     public static final float SCALE=1.0f;
 
@@ -44,8 +43,8 @@ public class BallBeatIndicator extends Indicator {
     }
 
     @Override
-    public ArrayList<ValueAnimator> onCreateAnimators() {
-        ArrayList<ValueAnimator> animators=new ArrayList<>();
+    public List<Animator> createAnimation() {
+        List<Animator> animators=new ArrayList<>();
         int[] delays=new int[]{350,0,350};
         for (int i = 0; i < 3; i++) {
             final int index=i;
@@ -53,30 +52,31 @@ public class BallBeatIndicator extends Indicator {
             scaleAnim.setDuration(700);
             scaleAnim.setRepeatCount(-1);
             scaleAnim.setStartDelay(delays[i]);
-            addUpdateListener(scaleAnim,new ValueAnimator.AnimatorUpdateListener() {
+            scaleAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
                     scaleFloats[index] = (float) animation.getAnimatedValue();
                     postInvalidate();
                 }
             });
+            scaleAnim.start();
 
             ValueAnimator alphaAnim=ValueAnimator.ofInt(255,51,255);
             alphaAnim.setDuration(700);
             alphaAnim.setRepeatCount(-1);
             alphaAnim.setStartDelay(delays[i]);
-            addUpdateListener(alphaAnim,new ValueAnimator.AnimatorUpdateListener() {
+            alphaAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
                     alphas[index] = (int) animation.getAnimatedValue();
                     postInvalidate();
                 }
             });
+            alphaAnim.start();
             animators.add(scaleAnim);
             animators.add(alphaAnim);
         }
         return animators;
     }
-
 
 }

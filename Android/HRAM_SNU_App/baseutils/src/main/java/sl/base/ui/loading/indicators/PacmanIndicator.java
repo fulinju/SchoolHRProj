@@ -1,19 +1,19 @@
 package sl.base.ui.loading.indicators;
 
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.view.animation.LinearInterpolator;
 
-import sl.base.ui.loading.Indicator;
-
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Jack on 2015/10/16.
  */
-public class PacmanIndicator extends Indicator {
+public class PacmanIndicator extends BaseIndicatorController{
 
     private float translateX;
 
@@ -58,53 +58,57 @@ public class PacmanIndicator extends Indicator {
     }
 
     @Override
-    public ArrayList<ValueAnimator> onCreateAnimators() {
-        ArrayList<ValueAnimator> animators=new ArrayList<>();
+    public List<Animator> createAnimation() {
+        List<Animator> animators=new ArrayList<>();
         float startT=getWidth()/11;
         ValueAnimator translationAnim=ValueAnimator.ofFloat(getWidth()-startT,getWidth()/2);
         translationAnim.setDuration(650);
         translationAnim.setInterpolator(new LinearInterpolator());
         translationAnim.setRepeatCount(-1);
-        addUpdateListener(translationAnim,new ValueAnimator.AnimatorUpdateListener() {
+        translationAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 translateX = (float) animation.getAnimatedValue();
                 postInvalidate();
             }
         });
+        translationAnim.start();
 
         ValueAnimator alphaAnim=ValueAnimator.ofInt(255,122);
         alphaAnim.setDuration(650);
         alphaAnim.setRepeatCount(-1);
-        addUpdateListener(alphaAnim,new ValueAnimator.AnimatorUpdateListener() {
+        alphaAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 alpha = (int) animation.getAnimatedValue();
                 postInvalidate();
             }
         });
+        alphaAnim.start();
 
         ValueAnimator rotateAnim1=ValueAnimator.ofFloat(0, 45, 0);
         rotateAnim1.setDuration(650);
         rotateAnim1.setRepeatCount(-1);
-        addUpdateListener(rotateAnim1,new ValueAnimator.AnimatorUpdateListener() {
+        rotateAnim1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 degrees1 = (float) animation.getAnimatedValue();
                 postInvalidate();
             }
         });
+        rotateAnim1.start();
 
         ValueAnimator rotateAnim2=ValueAnimator.ofFloat(0,-45,0);
         rotateAnim2.setDuration(650);
         rotateAnim2.setRepeatCount(-1);
-        addUpdateListener(rotateAnim2,new ValueAnimator.AnimatorUpdateListener() {
+        rotateAnim2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 degrees2 = (float) animation.getAnimatedValue();
                 postInvalidate();
             }
         });
+        rotateAnim2.start();
 
         animators.add(translationAnim);
         animators.add(alphaAnim);

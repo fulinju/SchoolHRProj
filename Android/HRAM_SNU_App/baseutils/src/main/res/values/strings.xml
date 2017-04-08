@@ -13,4 +13,24 @@
     <string name="pickerView_seconds">秒</string>
 
     <string name="pickerView_overtime">当前时间已超过可选时间</string>
+
+
+    <!--P2Refresh-->
+    <string name="pull_to_refresh_pull_label">下拉刷新…</string>
+    <string name="pull_to_refresh_release_label">放开以刷新…</string>
+    <string name="pull_to_refresh_refreshing_label">正在载入…</string>
+    <!--默认值-->
+    <string name="pull_to_refresh_from_bottom_pull_label">@string/pull_to_refresh_pull_label</string>
+    <string name="pull_to_refresh_from_bottom_release_label">@string/pull_to_refresh_release_label</string>
+    <string name="pull_to_refresh_from_bottom_refreshing_label">@string/pull_to_refresh_refreshing_label</string>
+
+    <!--RecyclerView-->
+    <string name="listView_header_hint_normal">下拉刷新</string>
+    <string name="listView_header_hint_release">释放立即刷新</string>
+    <string name="listView_loading">正在加载...</string>
+    <string name="noMore_loading">没有了</string>
+    <string name="refreshing">正在刷新...</string>
+    <string name="refresh_done">刷新完成</string>
+    <string name="loading_done">加载完成</string>
+    <string name="listView_header_last_time">上次更新时间：</string>
 </resources>

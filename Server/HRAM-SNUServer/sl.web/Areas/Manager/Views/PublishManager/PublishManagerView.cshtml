@@ -78,6 +78,7 @@
 
 <div id="mm" style="width:80px;">
     <div id="btn_export_all" data-options="iconCls:'icon-undo'">导出全部</div>
+    <div id="btn_export_top" data-options="iconCls:'icon-undo'">导出前N页</div>
     <div id="btn_export_selected" data-options="iconCls:'icon-redo'">导出选中</div>
 </div>
 
@@ -155,56 +156,35 @@
         window.location.href = url; //跳转
     })
 
+    $("#btn_export_top").click(function () {
+        $.messager.prompt('导出前N条', '请输入导出的条数', function (r) {
+            if (r) {
+                if (!isNaN(r)) {
+                    var url = '@Url.Action("ExportPublishAsExcel")?num='+r;
+                    console.log(url);
+                    window.location.href = url; //跳转
+                } else {
+                    $.messager.alert("提示!", "输入的不是数字", "info");
+                }
+            }
+        });
+
+
+    })
+
+
     //导出选中
     $("#btn_export_selected").click(function () {
         var row = $("#pm_dg").datagrid("getSelections");
-        if (row.length < 1) {
-            parent.$.messager.alert("提示!", "请选择一条记录!", "info");
+        if (row.length != 1) {
+            parent.$.messager.alert("提示!", "仅支持导出单条记录!", "info");
             return;
         } else {
             parent.$.messager.confirm('提示', '确定要导出?', function (r) {
                 if (r) {
-
-                    var url = '@Url.Action("ExportSelectPublishAsExcel")';// + "?model=" + JSON.stringify(row);
-
-                    console.log(url + " " + JSON.stringify(row))
-
-                    $.post(url, { model: JSON.stringify(row)+"" }, function (data) {
-                        console.log(data);
-                    });
-
-
-                    //$.ajax({
-                    //    type: 'post',
-                    //    url: url,
-                    //    data: { model: JSON.stringify(row) },
-                    //    success: function (data) {
-                    //        if (data.state == "1") {
-                    //            $.messager.alert('成功', "导出成功");
-                    //        } else {
-                    //            $.messager.alert('错误', data.message);
-                    //        }
-                    //    },
-                    //    dataType: "json"
-                    //});
-                    //var config = $.extend(true, { method: 'post' });
-                    //var $iframe = $('<iframe id="down-file-iframe" />');
-                    //var $form = $('<form target="down-file-iframe" method="' + config.method + '" />');
-                    //$form.attr('action', config.url);
-                    //    $form.append('<input type="hidden" name="model" value="' + JSON.stringify(row) + '" />');
-
-                    //$iframe.append($form);
-                    //$(document.body).append($iframe);
-                    //$form[0].submit();
-                    //$iframe.remove();
-                    //$.post(url, { model: JSON.stringify(row) }, function (data) {
-                    //    console.log(url)
-                    //    if (data.state == "1") {
-                    //        $.messager.alert('成功', "导出成功");
-                    //    } else {
-                    //        $.messager.alert('错误', data.message);
-                    //    }
-                    //}, 'json');
+                    var id = row[0].pkId;
+                    var url = '@Url.Action("ParseSelectPublishAsDT")?selectID=' + id;
+                    window.location.href = url; //跳转
                 }
             });
         }

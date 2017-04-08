@@ -1,18 +1,18 @@
 package sl.base.ui.loading.indicators;
 
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.view.animation.LinearInterpolator;
 
-import sl.base.ui.loading.Indicator;
-
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Jack on 2015/10/19.
  */
-public class BallTrianglePathIndicator extends Indicator {
+public class BallTrianglePathIndicator extends BaseIndicatorController {
 
     float[] translateX=new float[3],translateY=new float[3];
 
@@ -29,8 +29,8 @@ public class BallTrianglePathIndicator extends Indicator {
     }
 
     @Override
-    public ArrayList<ValueAnimator> onCreateAnimators() {
-        ArrayList<ValueAnimator> animators=new ArrayList<>();
+    public List<Animator> createAnimation() {
+        List<Animator> animators=new ArrayList<>();
         float startX=getWidth()/5;
         float startY=getWidth()/5;
         for (int i = 0; i < 3; i++) {
@@ -51,24 +51,26 @@ public class BallTrianglePathIndicator extends Indicator {
             translateXAnim.setDuration(2000);
             translateXAnim.setInterpolator(new LinearInterpolator());
                 translateXAnim.setRepeatCount(-1);
-            addUpdateListener(translateXAnim,new ValueAnimator.AnimatorUpdateListener() {
+            translateXAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
                     translateX [index]= (float) animation.getAnimatedValue();
                     postInvalidate();
                 }
             });
+            translateXAnim.start();
 
             translateYAnim.setDuration(2000);
             translateYAnim.setInterpolator(new LinearInterpolator());
             translateYAnim.setRepeatCount(-1);
-            addUpdateListener(translateYAnim,new ValueAnimator.AnimatorUpdateListener() {
+            translateYAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
                     translateY [index]= (float) animation.getAnimatedValue();
                     postInvalidate();
                 }
             });
+            translateYAnim.start();
 
             animators.add(translateXAnim);
             animators.add(translateYAnim);

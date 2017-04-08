@@ -122,7 +122,12 @@ namespace sl.service.manager
             return sql;
         }
 
-        public static List<PublishInfo> GetTopPublish(int num = -1)
+        /// <summary>
+        /// 导出前N条 默认全部
+        /// </summary>
+        /// <param name="num"></param>
+        /// <returns></returns>
+        public static List<PublishExportInfo> ExportTopPublish(int num = -1)
         {
             Sql sql = Sql.Builder;
             if (num == -1)
@@ -158,8 +163,27 @@ namespace sl.service.manager
                 sql.Append(" and T_User.uLoginName = T_PublishManage.uLoginName");
             }
 
-            List<PublishInfo> list = database.Fetch<PublishInfo>(sql);
+            List<PublishExportInfo> list = database.Fetch<PublishExportInfo>(sql);
             return list;
+        }
+
+        public static List<PublishExportInfo> ExportSelectedPublishByID(string pkId)
+        {
+            Sql sql = Sql.Builder;
+            sql.Append("Select T_PMType.pmTypeValue,");
+            sql.Append(" T_User.uUserName,");
+            sql.Append("T_PublishManage.uLoginName,");
+            sql.Append("T_PublishManage.pmTitle,");
+            sql.Append("T_PublishManage.pmADImgListID,");
+            sql.Append("T_PublishManage.pmPublishTime,");
+            sql.Append("T_PublishManage.pmText,");
+            sql.Append("T_PublishManage.pmViews,");
+            sql.Append("T_PublishManage.pmPreview");
+            sql.Append(" from T_PMType,T_PublishManage,T_User where T_PublishManage.isDeleted = 0");
+            sql.Append(" and T_PMType.pmTypeID = T_PublishManage.pmTypeID");
+            sql.Append(" and T_User.uLoginName = T_PublishManage.uLoginName");
+            sql.Append(" and T_PublishManage.pkId = @0", pkId);
+            return database.Fetch<PublishExportInfo>(sql);
         }
 
 

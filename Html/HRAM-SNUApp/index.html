@@ -4,12 +4,27 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title></title>
+    
+    <script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
-    	
    		document.addEventListener('plusready', function(){
    			//console.log("所有plus api都应该在此事件发生后调用，否则会出现plus is undefined。"
    			
    		});
+   		
+   		var URL = 'http://10.177.35.144:7777/api/Article/GetPublishList/?pageIndex=1&pageSize=2';
+   		mui.ajax(URL, {
+		dataType: 'json', //服务器返回json格式数据
+		type: 'get', //HTTP请求类型
+		timeout: 6000, //超时时间设置为6秒；
+		contentType: 'application/json',
+		success: function(data) {
+			console.log(JSON.stringify(data));
+		},
+		error: function(err, type) {
+			console.log(err)
+		}
+	});
    		
     </script>
 </head>

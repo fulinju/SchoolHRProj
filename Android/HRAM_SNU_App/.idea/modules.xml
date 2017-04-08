@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HRAM_SNU_App.iml" filepath="$PROJECT_DIR$/HRAM_SNU_App.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/baseutils/baseutils.iml" filepath="$PROJECT_DIR$/baseutils/baseutils.iml" />
       <module fileurl="file://$PROJECT_DIR$/hr-client/hr-client.iml" filepath="$PROJECT_DIR$/hr-client/hr-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/hrlib/hrlib.iml" filepath="$PROJECT_DIR$/hrlib/hrlib.iml" />

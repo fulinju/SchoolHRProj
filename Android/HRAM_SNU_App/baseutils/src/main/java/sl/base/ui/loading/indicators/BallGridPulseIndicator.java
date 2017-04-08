@@ -1,17 +1,17 @@
 package sl.base.ui.loading.indicators;
 
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-import sl.base.ui.loading.Indicator;
-
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Jack on 2015/10/16.
  */
-public class BallGridPulseIndicator extends Indicator {
+public class BallGridPulseIndicator extends BaseIndicatorController{
 
     public static final int ALPHA=255;
 
@@ -61,8 +61,8 @@ public class BallGridPulseIndicator extends Indicator {
     }
 
     @Override
-    public ArrayList<ValueAnimator> onCreateAnimators() {
-        ArrayList<ValueAnimator> animators=new ArrayList<>();
+    public List<Animator> createAnimation() {
+        List<Animator> animators=new ArrayList<>();
         int[] durations={720, 1020, 1280, 1420, 1450, 1180, 870, 1450, 1060};
         int[] delays= {-60, 250, -170, 480, 310, 30, 460, 780, 450};
 
@@ -72,29 +72,32 @@ public class BallGridPulseIndicator extends Indicator {
             scaleAnim.setDuration(durations[i]);
             scaleAnim.setRepeatCount(-1);
             scaleAnim.setStartDelay(delays[i]);
-            addUpdateListener(scaleAnim,new ValueAnimator.AnimatorUpdateListener() {
+            scaleAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
                     scaleFloats[index] = (float) animation.getAnimatedValue();
                     postInvalidate();
                 }
             });
+            scaleAnim.start();
 
             ValueAnimator alphaAnim=ValueAnimator.ofInt(255, 210, 122, 255);
             alphaAnim.setDuration(durations[i]);
             alphaAnim.setRepeatCount(-1);
             alphaAnim.setStartDelay(delays[i]);
-            addUpdateListener(alphaAnim,new ValueAnimator.AnimatorUpdateListener() {
+            alphaAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
                     alphas[index] = (int) animation.getAnimatedValue();
                     postInvalidate();
                 }
             });
+            alphaAnim.start();
             animators.add(scaleAnim);
             animators.add(alphaAnim);
         }
         return animators;
     }
+
 
 }

@@ -1,44 +1,22 @@
 package sl.base.ui.loading.indicators;
 
-import android.animation.ValueAnimator;
-import android.graphics.Camera;
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.graphics.Canvas;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.view.animation.LinearInterpolator;
 
-import sl.base.ui.loading.Indicator;
-
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Jack on 2015/10/17.
  */
-public class BallPulseRiseIndicator extends Indicator {
-
-    private Camera mCamera;
-    private Matrix mMatrix;
-
-    private float degress;
-
-    public BallPulseRiseIndicator(){
-        mCamera=new Camera();
-        mMatrix=new Matrix();
-    }
+public class BallPulseRiseIndicator extends BaseIndicatorController{
 
     @Override
     public void draw(Canvas canvas, Paint paint) {
-
-        mMatrix.reset();
-        mCamera.save();
-        mCamera.rotateX(degress);
-        mCamera.getMatrix(mMatrix);
-        mCamera.restore();
-
-        mMatrix.preTranslate(-centerX(), -centerY());
-        mMatrix.postTranslate(centerX(), centerY());
-        canvas.concat(mMatrix);
-
         float radius=getWidth()/10;
         canvas.drawCircle(getWidth()/4,radius*2,radius,paint);
         canvas.drawCircle(getWidth()*3/4,radius*2,radius,paint);
@@ -49,21 +27,15 @@ public class BallPulseRiseIndicator extends Indicator {
     }
 
     @Override
-    public ArrayList<ValueAnimator> onCreateAnimators() {
-        ArrayList<ValueAnimator> animators=new ArrayList<>();
-        ValueAnimator animator=ValueAnimator.ofFloat(0,360);
-        addUpdateListener(animator,new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                degress = (float) animation.getAnimatedValue();
-                postInvalidate();
-            }
-        });
+    public List<Animator> createAnimation() {
+        PropertyValuesHolder rotation6=PropertyValuesHolder.ofFloat("rotationX",0,360);
+        ObjectAnimator animator=ObjectAnimator.ofPropertyValuesHolder(getTarget(), rotation6);
         animator.setInterpolator(new LinearInterpolator());
         animator.setRepeatCount(-1);
         animator.setDuration(1500);
+        animator.start();
+        List<Animator> animators=new ArrayList<>();
         animators.add(animator);
         return animators;
     }
-
 }

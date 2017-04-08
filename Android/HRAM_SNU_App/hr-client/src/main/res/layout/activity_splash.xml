@@ -14,11 +14,11 @@
 
     <sl.base.ui.loading.AVLoadingIndicatorView
         android:id="@+id/v_loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:visibility="visible"
         android:layout_centerInParent="true"
-        app:indicatorName="BallPulseIndicator"
-        app:indicatorColor="@color/white"
+        app:indicator="BallZigZag"
+        app:indicatorColor="@color/theme_color"
         />
 </RelativeLayout>

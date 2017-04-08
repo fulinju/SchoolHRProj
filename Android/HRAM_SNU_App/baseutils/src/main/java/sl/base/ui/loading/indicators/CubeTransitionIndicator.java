@@ -1,19 +1,19 @@
 package sl.base.ui.loading.indicators;
 
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.view.animation.LinearInterpolator;
 
-import sl.base.ui.loading.Indicator;
-
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Jack on 2015/10/18.
  */
-public class CubeTransitionIndicator extends Indicator {
+public class CubeTransitionIndicator extends BaseIndicatorController {
 
     float[] translateX=new float[2],translateY=new float[2];
     float degrees,scaleFloat=1.0f;
@@ -34,8 +34,8 @@ public class CubeTransitionIndicator extends Indicator {
     }
 
     @Override
-    public ArrayList<ValueAnimator> onCreateAnimators() {
-        ArrayList<ValueAnimator> animators=new ArrayList<>();
+    public List<Animator> createAnimation() {
+        List<Animator> animators=new ArrayList<>();
         float startX=getWidth()/5;
         float startY=getHeight()/5;
         for (int i = 0; i < 2; i++) {
@@ -55,6 +55,7 @@ public class CubeTransitionIndicator extends Indicator {
                     postInvalidate();
                 }
             });
+            translationXAnim.start();
             translateY[index]=startY;
             ValueAnimator translationYAnim=ValueAnimator.ofFloat(startY,startY,getHeight()-startY,getHeight()- startY,startY);
             if (i==1){
@@ -63,13 +64,14 @@ public class CubeTransitionIndicator extends Indicator {
             translationYAnim.setDuration(1600);
             translationYAnim.setInterpolator(new LinearInterpolator());
             translationYAnim.setRepeatCount(-1);
-            addUpdateListener(translationYAnim,new ValueAnimator.AnimatorUpdateListener() {
+            translationYAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
                     translateY[index] = (float) animation.getAnimatedValue();
                     postInvalidate();
                 }
             });
+            translationYAnim.start();
 
             animators.add(translationXAnim);
             animators.add(translationYAnim);
@@ -79,25 +81,27 @@ public class CubeTransitionIndicator extends Indicator {
         scaleAnim.setDuration(1600);
         scaleAnim.setInterpolator(new LinearInterpolator());
         scaleAnim.setRepeatCount(-1);
-        addUpdateListener(scaleAnim,new ValueAnimator.AnimatorUpdateListener() {
+        scaleAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 scaleFloat = (float) animation.getAnimatedValue();
                 postInvalidate();
             }
         });
+        scaleAnim.start();
 
         ValueAnimator rotateAnim=ValueAnimator.ofFloat(0,180,360,1.5f*360,2*360);
         rotateAnim.setDuration(1600);
         rotateAnim.setInterpolator(new LinearInterpolator());
         rotateAnim.setRepeatCount(-1);
-        addUpdateListener(rotateAnim,new ValueAnimator.AnimatorUpdateListener() {
+        rotateAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 degrees = (float) animation.getAnimatedValue();
                 postInvalidate();
             }
         });
+        rotateAnim.start();
 
         animators.add(scaleAnim);
         animators.add(rotateAnim);

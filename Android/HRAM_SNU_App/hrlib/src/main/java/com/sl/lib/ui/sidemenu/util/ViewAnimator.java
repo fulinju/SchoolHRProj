@@ -10,8 +10,8 @@ import android.widget.ImageView;
 
 import com.sl.lib.R;
 import com.sl.lib.ui.sidemenu.animation.FlipAnimation;
-import com.sl.lib.ui.sidemenu.interfaces.Resourceble;
-import com.sl.lib.ui.sidemenu.interfaces.ScreenShotable;
+import com.sl.lib.ui.sidemenu.interfaces.ResourceAble;
+import com.sl.lib.ui.sidemenu.interfaces.ScreenShotAble;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Created by Konstantin on 12.01.2015.
  */
-public class ViewAnimator<T extends Resourceble> {
+public class ViewAnimator<T extends ResourceAble> {
     private final int ANIMATION_DURATION = 175;
     public static final int CIRCULAR_REVEAL_ANIMATION_DURATION = 500;
 
@@ -29,20 +29,20 @@ public class ViewAnimator<T extends Resourceble> {
     private List<T> list;
 
     private List<View> viewList = new ArrayList<>();
-    private ScreenShotable screenShotable;
+    private ScreenShotAble screenShotAble;
     private DrawerLayout drawerLayout;
     private ViewAnimatorListener animatorListener;
 
 
     public ViewAnimator(AppCompatActivity activity,
                         List<T> items,
-                        ScreenShotable screenShotable,
+                        ScreenShotAble screenShotAble,
                         final DrawerLayout drawerLayout,
                         ViewAnimatorListener animatorListener) {
         this.appCompatActivity = activity;
 
         this.list = items;
-        this.screenShotable = screenShotable;
+        this.screenShotAble = screenShotAble;
         this.drawerLayout = drawerLayout;
         this.animatorListener = animatorListener;
     }
@@ -77,7 +77,7 @@ public class ViewAnimator<T extends Resourceble> {
                         animateView((int) position);
                     }
                     if (position == viewList.size() - 1) {
-                        screenShotable.takeScreenShot();
+                        screenShotAble.takeScreenShot();
                         setViewsClickable(true);
                     }
                 }
@@ -170,14 +170,14 @@ public class ViewAnimator<T extends Resourceble> {
         view.startAnimation(rotation);
     }
 
-    private void switchItem(Resourceble slideMenuItem, int topPosition) {
-        this.screenShotable = animatorListener.onSwitch(slideMenuItem, screenShotable, topPosition);
+    private void switchItem(ResourceAble slideMenuItem, int topPosition) {
+        this.screenShotAble = animatorListener.onSwitch(slideMenuItem, screenShotAble, topPosition);
         hideMenuContent();
     }
 
     public interface ViewAnimatorListener {
 
-        public ScreenShotable onSwitch(Resourceble slideMenuItem, ScreenShotable screenShotable, int position);
+        public ScreenShotAble onSwitch(ResourceAble slideMenuItem, ScreenShotAble screenShotAble, int position);
 
         public void disableHomeButton();
 

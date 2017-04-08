@@ -1,17 +1,17 @@
 package sl.base.ui.loading.indicators;
 
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-import sl.base.ui.loading.Indicator;
-
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Jack on 2015/10/19.
  */
-public class BallPulseSyncIndicator extends Indicator {
+public class BallPulseSyncIndicator extends BaseIndicatorController {
 
     float[] translateYFloats=new float[3];
 
@@ -30,8 +30,8 @@ public class BallPulseSyncIndicator extends Indicator {
     }
 
     @Override
-    public ArrayList<ValueAnimator> onCreateAnimators() {
-        ArrayList<ValueAnimator> animators=new ArrayList<>();
+    public List<Animator> createAnimation() {
+        List<Animator> animators=new ArrayList<>();
         float circleSpacing=4;
         float radius=(getWidth()-circleSpacing*2)/6;
         int[] delays=new int[]{70,140,210};
@@ -41,17 +41,17 @@ public class BallPulseSyncIndicator extends Indicator {
             scaleAnim.setDuration(600);
             scaleAnim.setRepeatCount(-1);
             scaleAnim.setStartDelay(delays[i]);
-            addUpdateListener(scaleAnim,new ValueAnimator.AnimatorUpdateListener() {
+            scaleAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
                     translateYFloats[index] = (float) animation.getAnimatedValue();
                     postInvalidate();
                 }
             });
+            scaleAnim.start();
             animators.add(scaleAnim);
         }
         return animators;
     }
-
 
 }

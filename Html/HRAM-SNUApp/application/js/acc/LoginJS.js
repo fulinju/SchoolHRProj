@@ -1,3 +1,5 @@
+var IP = "http://10.177.35.144:7777";
+
 if(mui.os.plus) {
 	mui.plusReady(function() {
 		mui.init();
@@ -77,13 +79,14 @@ mui(".link-area").on('tap', '#btnRegister', function() {
 function funcLogin() {
 	var loginStr = $("#edtLoginName").val();
 	var pwdStr = $("#edtPwd").val();
-	console.log(loginStr +" "+ pwdStr)
 	var pwdMd5 = hex_md5(pwdStr).toUpperCase();
 
-	var URL = 'http://192.168.0.100:8888/api/Account/Login/';
+	var URL = IP + '/api/Account/Login/';
+
+	console.log(URL+"  "+loginStr + " " + pwdMd5)
 
 	plus.nativeUI.showWaiting(); //显示原生等待框
-	
+
 	console.log(URL)
 
 	mui.ajax(URL, {
@@ -93,7 +96,8 @@ function funcLogin() {
 		contentType: 'application/json',
 		data: {
 			'uLoginStr': loginStr,
-			'uPassword': pwdMd5
+			'uPassword': pwdMd5,
+			"uClientKey":""
 		},
 		success: function(data) {
 			//服务器返回响应，根据响应结果，分析是否登录成功；
@@ -115,7 +119,7 @@ function funcLogin() {
 				console.log("timeout");
 			} else {
 				var responseJson = JSON.parse(err.response);
-				console.log(responseJson);
+				console.log(JSON.stringify(err));
 			}
 
 		}
@@ -143,7 +147,7 @@ function funcRegisterByMail() {
 	var maibox = $("#edtMaibox").val();
 	console.log(mailbox);
 
-	var URL = 'https://cherry-cafeteria.com:443/api/CSOrder_User/Register/';
+	var URL = IP + '/api/CSOrder_User/Register/';
 
 	plus.nativeUI.showWaiting(); //显示原生等待框
 

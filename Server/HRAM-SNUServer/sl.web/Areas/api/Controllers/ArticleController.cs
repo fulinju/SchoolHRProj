@@ -18,7 +18,7 @@ namespace sl.web.Areas.api.Controllers
     public class ArticleController : ApiController
     {
 
-        //http://localhost:8888/api/Publish/GetPublishsList/?pageIndex=1&pageSize=2
+        //http://localhost:8888/api/Article/GetPublishList/?pageIndex=1&pageSize=2
         /// <summary>
         /// 获取文章列表
         /// </summary>
@@ -28,20 +28,46 @@ namespace sl.web.Areas.api.Controllers
         [HttpGet]
         public HttpResponseMessage GetPublishList(int pageIndex,int pageSize)
         {
- 
-
             Page<PublishInfo> list = HRAMApiService.GetPublishs(pageIndex, pageSize);
 
             //return Json(new { total = list.TotalItems, rows = list.Items });
 
             if (list != null)
             {
-                Console.WriteLine(list);
                 var isLastPage = false;
                 if (list.CurrentPage >= list.TotalPages)
                 {
                     isLastPage = true;
                 }
+                
+                return JsonUtils.toJson(new { totalItems = list.Items.Count, isLastPage = isLastPage, pageIndex = pageIndex, pageSize = pageSize, resultList = list.Items });
+            }
+            else
+            {
+                return JsonUtils.toJson("错误");
+            }
+        }
+
+        /// <summary>
+        /// 获取文章详情
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public HttpResponseMessage GetPublishDetail(int pageIndex, int pageSize)
+        {
+            Page<PublishInfo> list = HRAMApiService.GetPublishs(pageIndex, pageSize);
+            //return Json(new { total = list.TotalItems, rows = list.Items });
+
+            if (list != null)
+            {
+                var isLastPage = false;
+                if (list.CurrentPage >= list.TotalPages)
+                {
+                    isLastPage = true;
+                }
+
                 return JsonUtils.toJson(new { totalItems = list.Items.Count, isLastPage = isLastPage, pageIndex = pageIndex, pageSize = pageSize, resultList = list.Items });
             }
             else

@@ -1,18 +1,18 @@
 package sl.base.ui.loading.indicators;
 
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 
-import sl.base.ui.loading.Indicator;
-
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Jack on 2015/10/16.
  */
-public class BallClipRotateIndicator extends Indicator {
+public class BallClipRotateIndicator extends BaseIndicatorController {
 
     float scaleFloat=1,degrees;
 
@@ -32,28 +32,31 @@ public class BallClipRotateIndicator extends Indicator {
     }
 
     @Override
-    public ArrayList<ValueAnimator> onCreateAnimators() {
-        ArrayList<ValueAnimator> animators=new ArrayList<>();
+    public List<Animator> createAnimation() {
+        List<Animator> animators=new ArrayList<>();
         ValueAnimator scaleAnim=ValueAnimator.ofFloat(1,0.6f,0.5f,1);
         scaleAnim.setDuration(750);
         scaleAnim.setRepeatCount(-1);
-        addUpdateListener(scaleAnim,new ValueAnimator.AnimatorUpdateListener() {
+        scaleAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 scaleFloat = (float) animation.getAnimatedValue();
                 postInvalidate();
             }
         });
+        scaleAnim.start();
+
         ValueAnimator rotateAnim=ValueAnimator.ofFloat(0,180,360);
         rotateAnim.setDuration(750);
         rotateAnim.setRepeatCount(-1);
-        addUpdateListener(rotateAnim,new ValueAnimator.AnimatorUpdateListener() {
+        rotateAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 degrees = (float) animation.getAnimatedValue();
                 postInvalidate();
             }
         });
+        rotateAnim.start();
         animators.add(scaleAnim);
         animators.add(rotateAnim);
         return animators;

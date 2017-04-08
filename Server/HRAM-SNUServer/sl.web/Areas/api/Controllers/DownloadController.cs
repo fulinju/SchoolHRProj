@@ -9,6 +9,7 @@ using sl.service.api;
 namespace sl.web.Areas.api.Controllers
 {
     /// <summary>
+    /// http://localhost:8888/api/Download/GetDownloadList/?pageIndex=1&pageSize=2
     /// 下载管理API
     /// </summary>
     public class DownloadController : ApiController

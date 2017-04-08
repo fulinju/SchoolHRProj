@@ -1,18 +1,18 @@
 package sl.base.ui.loading.indicators;
 
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 
-import sl.base.ui.loading.Indicator;
-
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Jack on 2015/10/19.
  */
-public class LineScaleIndicator extends Indicator {
+public class LineScaleIndicator extends BaseIndicatorController {
 
     public static final float SCALE=1.0f;
 
@@ -37,8 +37,8 @@ public class LineScaleIndicator extends Indicator {
     }
 
     @Override
-    public ArrayList<ValueAnimator> onCreateAnimators() {
-        ArrayList<ValueAnimator> animators=new ArrayList<>();
+    public List<Animator> createAnimation() {
+        List<Animator> animators=new ArrayList<>();
         long[] delays=new long[]{100,200,300,400,500};
         for (int i = 0; i < 5; i++) {
             final int index=i;
@@ -46,13 +46,14 @@ public class LineScaleIndicator extends Indicator {
             scaleAnim.setDuration(1000);
             scaleAnim.setRepeatCount(-1);
             scaleAnim.setStartDelay(delays[i]);
-            addUpdateListener(scaleAnim,new ValueAnimator.AnimatorUpdateListener() {
+            scaleAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
                     scaleYFloats[index] = (float) animation.getAnimatedValue();
                     postInvalidate();
                 }
             });
+            scaleAnim.start();
             animators.add(scaleAnim);
         }
         return animators;

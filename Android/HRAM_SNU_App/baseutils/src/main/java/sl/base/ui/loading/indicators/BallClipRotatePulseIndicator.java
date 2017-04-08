@@ -1,18 +1,18 @@
 package sl.base.ui.loading.indicators;
 
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 
-import sl.base.ui.loading.Indicator;
-
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Jack on 2015/10/16.
  */
-public class BallClipRotatePulseIndicator extends Indicator {
+public class BallClipRotatePulseIndicator extends BaseIndicatorController {
 
     float scaleFloat1,scaleFloat2,degrees;
 
@@ -48,45 +48,47 @@ public class BallClipRotatePulseIndicator extends Indicator {
     }
 
     @Override
-    public ArrayList<ValueAnimator> onCreateAnimators() {
+    public List<Animator> createAnimation() {
         ValueAnimator scaleAnim=ValueAnimator.ofFloat(1,0.3f,1);
         scaleAnim.setDuration(1000);
         scaleAnim.setRepeatCount(-1);
-        addUpdateListener(scaleAnim,new ValueAnimator.AnimatorUpdateListener() {
+        scaleAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 scaleFloat1 = (float) animation.getAnimatedValue();
                 postInvalidate();
             }
         });
+        scaleAnim.start();
 
         ValueAnimator scaleAnim2=ValueAnimator.ofFloat(1,0.6f,1);
         scaleAnim2.setDuration(1000);
         scaleAnim2.setRepeatCount(-1);
-        addUpdateListener(scaleAnim2,new ValueAnimator.AnimatorUpdateListener() {
+        scaleAnim2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 scaleFloat2 = (float) animation.getAnimatedValue();
                 postInvalidate();
             }
         });
+        scaleAnim2.start();
 
         ValueAnimator rotateAnim=ValueAnimator.ofFloat(0, 180,360);
         rotateAnim.setDuration(1000);
         rotateAnim.setRepeatCount(-1);
-        addUpdateListener(rotateAnim,new ValueAnimator.AnimatorUpdateListener() {
+        rotateAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 degrees = (float) animation.getAnimatedValue();
                 postInvalidate();
             }
         });
-        ArrayList<ValueAnimator> animators=new ArrayList<>();
+        rotateAnim.start();
+        List<Animator> animators=new ArrayList<>();
         animators.add(scaleAnim);
         animators.add(scaleAnim2);
         animators.add(rotateAnim);
         return animators;
     }
-
 
 }

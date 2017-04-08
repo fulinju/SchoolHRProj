@@ -15,4 +15,15 @@
     <!-- 顶部按钮文字大小 -->
     <dimen name="pickerView_topBar_btn_textSize">17sp</dimen>
     <dimen name="pickerView_topBar_title_textSize">21sp</dimen>
+
+
+    <!--P2Refresh-->
+    <dimen name="indicator_right_padding">10dp</dimen>
+    <dimen name="indicator_corner_radius">12dp</dimen>
+    <dimen name="indicator_internal_padding">4dp</dimen>
+    <dimen name="header_footer_left_right_padding">24dp</dimen>
+    <dimen name="header_footer_top_bottom_padding">12dp</dimen>
+
+    <!--RecyclerView-->
+    <dimen name="text_and_icon_margin">10dp</dimen>
 </resources>
