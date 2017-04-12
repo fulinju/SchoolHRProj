@@ -33,7 +33,7 @@ namespace sl.model
         public string mName { get; set; }
 
         [Column]
-        [JsonProperty("mtypeid")]
+        [JsonProperty("mTypeID")]
         public string mTypeID { get; set; }
 
         [Column]

@@ -17,13 +17,21 @@ namespace sl.service.api
         public static readonly Database database = new Database("ConnectionString");
 
         #region 文章相关
-        public static Page<PublishInfo> GetPublishs(int pageIndex, int pageSize)
+
+        /// <summary>
+        /// 获取文章列表
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="pmTypeID"></param>
+        /// <returns></returns>
+        public static Page<PublishInfo> GetPublishs(int pageIndex, int pageSize, string pmTypeID)
         {
             Sql sql = Sql.Builder;
 
             //Left join去重 记得uLoginName和pmTypeID唯一性
             sql.Append("Select T_PMType.pmTypeValue,T_User.uUserName,");
-            sql.Append("T_PublishManage.pkId,");
+            sql.Append("T_PublishManage.pkId as publishID,");
             sql.Append("T_PublishManage.pmTypeID,");
             sql.Append("T_PublishManage.uLoginName,");
             sql.Append("SUBSTRING(REPLACE(CAST(T_PublishManage.pmTitle as nvarchar(4000)),' ',''),0,20)+'...'  as pmTitle,");
@@ -34,82 +42,89 @@ namespace sl.service.api
             sql.Append("T_PublishManage.pmPreview");
             sql.Append(" from T_PublishManage left join T_PMType on T_PublishManage.pmTypeID = T_PMType.pmTypeID ");
             sql.Append(" left join T_User on T_User.uLoginName = T_PublishManage.uLoginName ");
-            //sql.Append(" left join T_ADImgList on T_ADImgList.pmADImgListID = T_PublishManage.pmADImgListID  ");
-            sql.Append(" where T_PublishManage.isDeleted = 0 ");
-            //            List<PublishInfo> list = database.Fetch<PublishInfo>(pageIndex, pageSize, sql);
+            sql.Append(" where T_PublishManage.pmTypeID like @0 ",pmTypeID);
+            sql.Append(" and T_PublishManage.isDeleted = 0 ");
             Page<PublishInfo> list = database.Page<PublishInfo>(pageIndex, pageSize, sql);
-
-            for (int i = 0; i < list.Items.Count; i++)
+            if (list != null)
             {
-                if (list.Items[i].pmADImgListID == null)
+                for (int i = 0; i < list.Items.Count; i++)
                 {
-                    list.Items[i].pmADImgList = (new List<ADImgInfo>()); //空列表
-                }
-                else
-                {
-                    if (GetAdImgs(list.Items[i].pmADImgListID) == null)
+                    if (list.Items[i].pmADImgListID == null)
                     {
                         list.Items[i].pmADImgList = (new List<ADImgInfo>()); //空列表
                     }
                     else
                     {
-                        list.Items[i].pmADImgList = (GetAdImgs(list.Items[i].pmADImgListID));
+                        if (GetAdImgs(list.Items[i].pmADImgListID) == null)
+                        {
+                            list.Items[i].pmADImgList = (new List<ADImgInfo>()); //空列表
+                        }
+                        else
+                        {
+                            list.Items[i].pmADImgList = (GetAdImgs(list.Items[i].pmADImgListID));
 
+                        }
                     }
                 }
             }
 
             return list;
         }
-        #endregion
 
-        #region 获取文章详情
-        //public static PublishInfo GetPublishDetail(int pageIndex, int pageSize)
-        //{
-        //    Sql sql = Sql.Builder;
+        /// <summary>
+        /// 获取文章详情
+        /// </summary>
+        /// <param name="publishID"></param>
+        /// <returns></returns>
+        public static PublishInfo GetPublishDetail(string publishID)
+        {
+            Sql sql = Sql.Builder;
 
-        //    //Left join去重 记得uLoginName和pmTypeID唯一性
-        //    sql.Append("Select T_PMType.pmTypeValue,T_User.uUserName,");
-        //    sql.Append("T_PublishManage.pkId,");
-        //    sql.Append("T_PublishManage.pmTypeID,");
-        //    sql.Append("T_PublishManage.uLoginName,");
-        //    sql.Append("SUBSTRING(REPLACE(CAST(T_PublishManage.pmTitle as nvarchar(4000)),' ',''),0,20)+'...'  as pmTitle,");
-        //    sql.Append("T_PublishManage.pmADImgListID,");
-        //    sql.Append("T_PublishManage.pmPublishTime,");
-        //    sql.Append("SUBSTRING(REPLACE(CAST(T_PublishManage.pmText as nvarchar(4000)),' ',''),0,50)+'...'  as pmText,"); //文章内容太长
-        //    sql.Append("T_PublishManage.pmViews,");
-        //    sql.Append("T_PublishManage.pmPreview");
-        //    sql.Append(" from T_PublishManage left join T_PMType on T_PublishManage.pmTypeID = T_PMType.pmTypeID ");
-        //    sql.Append(" left join T_User on T_User.uLoginName = T_PublishManage.uLoginName ");
-        //    //sql.Append(" left join T_ADImgList on T_ADImgList.pmADImgListID = T_PublishManage.pmADImgListID  ");
-        //    sql.Append(" where T_PublishManage.isDeleted = 0 ");
-        //    //            List<PublishInfo> list = database.Fetch<PublishInfo>(pageIndex, pageSize, sql);
-        //    Page<PublishInfo> list = database.Page<PublishInfo>(pageIndex, pageSize, sql);
+            //Left join去重 记得uLoginName和pmTypeID唯一性
+            sql.Select("T_PMType.pmTypeValue,T_User.uUserName,"
+                + "T_PublishManage.pkId as publishID,"
+                + "T_PublishManage.pmTypeID,"
+                + "T_PublishManage.uLoginName,"
+                + "T_PublishManage.pmTitle,"
+                + "T_PublishManage.pmADImgListID,"
+                + "T_PublishManage.pmPublishTime,"
+                + "T_PublishManage.pmText,"
+                + "T_PublishManage.pmViews,"
+                + "T_PublishManage.pmPreview");
 
-        //    for (int i = 0; i < list.Items.Count; i++)
-        //    {
-        //        if (list.Items[i].pmADImgListID == null)
-        //        {
-        //            list.Items[i].pmADImgList = (new List<ADImgInfo>()); //空列表
-        //        }
-        //        else
-        //        {
-        //            if (GetAdImgs(list.Items[i].pmADImgListID) == null)
-        //            {
-        //                list.Items[i].pmADImgList = (new List<ADImgInfo>()); //空列表
-        //            }
-        //            else
-        //            {
-        //                list.Items[i].pmADImgList = (GetAdImgs(list.Items[i].pmADImgListID));
+            sql.From("T_PublishManage");
+            sql.Append(" left join T_PMType on T_PublishManage.pmTypeID = T_PMType.pmTypeID ");
+            sql.Append(" left join T_User on T_User.uLoginName = T_PublishManage.uLoginName ");
+            sql.Where("T_PublishManage.pkId = @0 and T_PublishManage.isDeleted = 0", publishID);
+            PublishInfo publish = database.FirstOrDefault<PublishInfo>(sql);
+            if (publish != null)
+            {
+                if (publish.pmADImgListID == null)
+                {
+                    publish.pmADImgList = (new List<ADImgInfo>()); //空列表
+                }
+                else
+                {
+                    if (GetAdImgs(publish.pmADImgListID) == null)
+                    {
+                        publish.pmADImgList = (new List<ADImgInfo>()); //空列表
+                    }
+                    else
+                    {
+                        publish.pmADImgList = (GetAdImgs(publish.pmADImgListID));
 
-        //            }
-        //        }
-        //    }
+                    }
+                }
+            }
 
-        //    return list;
-        //}
-        #endregion
+            return publish;
+        }
 
+        /// <summary>
+        /// 获取广告图片
+        /// </summary>
+        /// <param name="pmADImgListID"></param>
+        /// <returns></returns>
         public static List<ADImgInfo> GetAdImgs(string pmADImgListID)
         {
             Sql sql = Sql.Builder;
@@ -120,42 +135,86 @@ namespace sl.service.api
             List<ADImgInfo> list = database.Fetch<ADImgInfo>(sql);
             return list;
         }
+        #endregion
+
 
         #region 会员相关
-        public static Page<MemberInfo> GetMembers(int pageIndex, int pageSize)
+        /// <summary>
+        /// 获取会员列表
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public static Page<MemberInfo> GetMembers(int pageIndex, int pageSize, string mTypeID, string mReviewResultID)
         {
             Sql sql = Sql.Builder;
 
-            //Left join去重 记得uLoginName和pmTypeID唯一性
-            sql.Append("select T_PMType.pmTypeValue,T_User.uUserName,T_PublishManage.* ");
-            sql.Append("from T_PublishManage left join T_PMType on T_PublishManage.pmTypeID = T_PMType.pmTypeID ");
-            sql.Append("left join T_User on T_User.uLoginName = T_PublishManage.uLoginName ");
-
-            //List<dynamic> pulishs = UtilsDB.DB.Fetch<dynamic>(sql);
+            sql.Append("Select T_MemberType.mTypeValue,T_ReviewResult.mReviewResultValue,T_User.uUserName,");
+            sql.Append("T_Member.pkId as memberID,");
+            sql.Append("T_Member.*");
+            sql.Append(" from T_Member left join T_MemberType on T_Member.mTypeID = T_MemberType.mTypeID ");
+            sql.Append(" left join T_ReviewResult on T_Member.mReviewResultID = T_ReviewResult.mReviewResultID ");
+            sql.Append(" left join T_User on T_User.uLoginName = T_Member.uLoginName");
+            sql.Append(" where T_Member.isDeleted = 0");
+            sql.Append(" and T_Member.mTypeID like @0", mTypeID);
+            sql.Append(" and T_Member.mReviewResultID like @0", mReviewResultID);
 
             Page<MemberInfo> list = database.Page<MemberInfo>(pageIndex, pageSize, sql);
 
             return list;
         }
-        #endregion
 
-        #region 下载相关
-        public static Page<DownLoadInfo> GetDownloads(int pageIndex, int pageSize)
+        /// <summary>
+        /// 获取会员详情
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public static MemberInfo GetMemberDetail(String memberID)
         {
             Sql sql = Sql.Builder;
 
-            //Left join去重 记得uLoginName和pmTypeID唯一性
-            sql.Append("select T_DMType.dmTypeValue,T_User.uUserName,T_DownloadManage.* ");
+            sql.Append("Select T_MemberType.mTypeValue,T_ReviewResult.mReviewResultValue,T_User.uUserName,");
+            sql.Append("T_Member.pkId as memberID,");
+            sql.Append("T_Member.*");
+            sql.Append(" from T_Member left join T_MemberType on T_Member.mTypeID = T_MemberType.mTypeID ");
+            sql.Append(" left join T_ReviewResult on T_Member.mReviewResultID = T_ReviewResult.mReviewResultID ");
+            sql.Append(" left join T_User on T_User.uLoginName = T_Member.uLoginName");
+            sql.Append(" where T_Member.pkId = @0", memberID);
+            sql.Append(" and T_Member.isDeleted = 0");
+            sql.Append("  order by T_Member.mReviewResultID asc");
+
+            MemberInfo member = database.FirstOrDefault<MemberInfo>(sql);
+
+            return member;
+        }
+        #endregion
+
+
+        #region 下载相关
+        /// <summary>
+        /// 获取下载列表
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="dmTypeID"></param>
+        /// <returns></returns>
+        public static Page<DownLoadInfo> GetDownloads(int pageIndex, int pageSize, string dmTypeID)
+        {
+            Sql sql = Sql.Builder;
+
+            sql.Select("T_DMType.dmTypeValue,T_User.uUserName,T_DownloadManage.*,"
+                + "T_DownloadManage.pkId as downloadID");
             sql.Append("from T_DownloadManage left join T_DMType on T_DownloadManage.dmTypeID = T_DMType.dmTypeID ");
-            sql.Append("left join T_User on T_User.uLoginName = T_DownloadManage.uLoginName ");
-
-            //List<dynamic> pulishs = UtilsDB.DB.Fetch<dynamic>(sql);
-
+            sql.Append("left join T_User on T_User.uLoginName = T_DownloadManage.uLoginName");
+            sql.Append("where T_DownloadManage.dmTypeID like @0", dmTypeID);
+            sql.Append("and T_DownloadManage.isDeleted = 0");
             Page<DownLoadInfo> list = database.Page<DownLoadInfo>(pageIndex, pageSize, sql);
 
             return list;
         }
         #endregion
+
 
         #region 账户相关
 
@@ -234,5 +293,42 @@ namespace sl.service.api
 
         #endregion
 
+
+        #region 类型相关
+
+        public static List<MemberTypeInfo> GetMemberType()
+        {
+            Sql sql = Sql.Builder;
+
+            sql.Append("Select T_MemberType.mTypeValue,T_ReviewResult.mReviewResultValue,");
+            sql.Append("T_Member.pkId as memberID,");
+            sql.Append("T_Member.*");
+            sql.Append(" from T_Member left join T_MemberType on T_Member.mTypeID = T_MemberType.mTypeID ");
+            sql.Append(" left join T_ReviewResult on T_Member.mReviewResultID = T_ReviewResult.mReviewResultID ");
+            sql.Append(" where T_Member.isDeleted = 0");
+
+            List<MemberTypeInfo> list = database.Fetch<MemberTypeInfo>(sql);
+
+            return list;
+        }
+
+        #endregion
+
+        #region 友情链接相关
+        public static Page<FriendlyLinkInfo> GetFriendlyLinks(int pageIndex, int pageSize)
+        {
+            Sql sql = Sql.Builder;
+
+            sql.Append("Select T_User.uUserName,");
+            sql.Append("T_FriendlyLink.pkId as friendlyLinkID,");
+            sql.Append("T_FriendlyLink.*");
+            sql.Append(" from T_FriendlyLink left join T_User on T_User.uLoginName = T_FriendlyLink.uLoginName ");
+            sql.Append(" where T_FriendlyLink.isDeleted = 0");
+
+            Page<FriendlyLinkInfo> list = database.Page<FriendlyLinkInfo>(pageIndex, pageSize, sql);
+
+            return list;
+        }
+        #endregion
     }
 }

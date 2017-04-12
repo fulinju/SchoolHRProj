@@ -5,6 +5,7 @@ using PetaPoco;
 using sl.model;
 using common.utils;
 using sl.service.api;
+using sl.web.ui;
 
 namespace sl.web.Areas.api.Controllers
 {
@@ -15,11 +16,9 @@ namespace sl.web.Areas.api.Controllers
     public class DownloadController : ApiController
     {
         [HttpGet]
-        public HttpResponseMessage GetDownloadList(int pageIndex, int pageSize)
+        public HttpResponseMessage GetDownloadList(int pageIndex, int pageSize, string dmTypeID="%%")
         {
-            Page<DownLoadInfo> list = HRAMApiService.GetDownloads(pageIndex, pageSize);
-
-            //return Json(new { total = list.TotalItems, rows = list.Items });
+            Page<DownLoadInfo> list = HRAMApiService.GetDownloads(pageIndex, pageSize, dmTypeID);
 
             if (list != null)
             {
@@ -28,12 +27,11 @@ namespace sl.web.Areas.api.Controllers
                 {
                     isLastPage = true;
                 }
-                return JsonUtils.toJson(new { pageIndex = pageIndex, pageSize = pageSize, isLastPage = isLastPage, pageItems = list.Items.Count, resultList = list.Items });
-                //return JsonUtils.toJson(new { total = list.TotalItems, pageIndex = pageIndex, pageSize = pageSize, resultList = list.Items });
+                return JsonUtils.toJson(HttpStatusCode.OK, new { pageIndex = pageIndex, pageSize = pageSize, isLastPage = isLastPage, pageItems = list.Items.Count, resultList = list.Items });
             }
             else
             {
-                return JsonUtils.toJson("错误");
+                return JsonUtils.toJson(HttpStatusCode.PreconditionFailed, new JsonTip(ApiCode.GetDownloadListFailedCode, ApiCode.GetDownloadListFailedMessage));
             }
         }
     }

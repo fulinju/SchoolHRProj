@@ -33,14 +33,14 @@ namespace sl.web.Areas.api.Controllers
 
             if (isMail == false)
             {
-                return JsonUtils.toJson(new JsonTip(ApiCode.MailboxValidCode, ApiCode.MailboxValidMessage)); //邮箱格式错误
+                return JsonUtils.toJson(HttpStatusCode.PreconditionFailed, new JsonTip(ApiCode.MailboxValidCode, ApiCode.MailboxValidMessage)); //邮箱格式错误
             }
 
 
             T_User user = HRAMApiService.GetUserByMail(mailbox);
             if (user != null)
             {
-                return JsonUtils.toJson(new JsonTip(ApiCode.MailboxRegisteredCode, ApiCode.MailboxRegisteredMessage)); //邮箱已注册
+                return JsonUtils.toJson(HttpStatusCode.PreconditionFailed, new JsonTip(ApiCode.MailboxRegisteredCode, ApiCode.MailboxRegisteredMessage)); //邮箱已注册
             }
 
             string initPwd = Utils.RandomStr(4, true);
@@ -50,11 +50,11 @@ namespace sl.web.Areas.api.Controllers
             if (insertFlag != null)
             {
                 string result = MailUtils.SendMailByQQ(mailbox, "Hi,HRAM 注册", "HRAM 注册", "欢迎使用HRAM，初始密码是" + initPwd, "初始密码已发送至" + mailbox, "发送失败");
-                return JsonUtils.toJson(new JsonTip(ApiCode.RegisterSuccessedCode, ApiCode.RegisterSuccessedBymailMessage)); //注册成功，密码发送到邮箱
+                return JsonUtils.toJson(HttpStatusCode.OK, new JsonTip(ApiCode.RegisterSuccessedCode, ApiCode.RegisterSuccessedBymailMessage)); //注册成功，密码发送到邮箱
             }
             else
             {
-                return JsonUtils.toJson(new JsonTip(ApiCode.RegisterFailedCode, ApiCode.RegisterFailedMessage)); //注册失败
+                return JsonUtils.toJson(HttpStatusCode.PreconditionFailed, new JsonTip(ApiCode.RegisterFailedCode, ApiCode.RegisterFailedMessage)); //注册失败
             }
         }
 
@@ -70,18 +70,18 @@ namespace sl.web.Areas.api.Controllers
             T_User user = HRAMApiService.GetUserByLoginName(uLoginName);
             if (user != null)
             {
-                return JsonUtils.toJson(new JsonTip(ApiCode.LoginNameRegisteredCode, ApiCode.LoginNameRegisteredMessage)); //用户名已注册
+                return JsonUtils.toJson(HttpStatusCode.PreconditionFailed, new JsonTip(ApiCode.LoginNameRegisteredCode, ApiCode.LoginNameRegisteredMessage)); //用户名已注册
             }
             string initPwdMd5 = Security.MD5Encrypt(uPassword);
             object insertFlag = HRAMApiService.RegisterUserByLoginName(uLoginName, initPwdMd5);
 
             if (insertFlag != null)
             {
-                return JsonUtils.toJson(new JsonTip(ApiCode.RegisterSuccessedCode, ApiCode.RegisterSuccessedMessage)); //注册成功
+                return JsonUtils.toJson(HttpStatusCode.OK, new JsonTip(ApiCode.RegisterSuccessedCode, ApiCode.RegisterSuccessedMessage)); //注册成功
             }
             else
             {
-                return JsonUtils.toJson(new JsonTip(ApiCode.RegisterFailedCode, ApiCode.RegisterFailedMessage)); //注册失败
+                return JsonUtils.toJson(HttpStatusCode.PreconditionFailed, new JsonTip(ApiCode.RegisterFailedCode, ApiCode.RegisterFailedMessage)); //注册失败
             }
 
         }
@@ -99,15 +99,15 @@ namespace sl.web.Areas.api.Controllers
             T_User byMail = HRAMApiService.GetUserByMailAndPwd(loginModel.uLoginStr, loginModel.uPassword);
             if (byName != null)
             {
-                return JsonUtils.toJson(byName);
+                return JsonUtils.toJson(HttpStatusCode.OK, byName);
             }
             else if (byMail != null)
             {
-                return JsonUtils.toJson(byMail);
+                return JsonUtils.toJson(HttpStatusCode.OK, byMail);
             }
             else
             {
-                return JsonUtils.toJson(new JsonTip(ApiCode.LoginFailedCode, ApiCode.LoginFailedMessage)); //登录失败
+                return JsonUtils.toJson(HttpStatusCode.PreconditionFailed, new JsonTip(ApiCode.LoginFailedCode, ApiCode.LoginFailedMessage)); //登录失败
             }
 
         }

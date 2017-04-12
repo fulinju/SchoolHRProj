@@ -121,7 +121,7 @@ namespace sl.web.Areas.Manager.Controllers
             }
             catch (System.Net.Mail.SmtpException ex)
             {
-                str = "发送邮件出错";
+                str = "发送邮件出错"+ex.ToString();
             }
 
             return str;

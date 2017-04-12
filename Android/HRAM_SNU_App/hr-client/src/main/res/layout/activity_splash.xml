@@ -18,7 +18,7 @@
         android:layout_height="64dp"
         android:visibility="visible"
         android:layout_centerInParent="true"
-        app:indicator="BallZigZag"
+        app:indicator="BallScale"
         app:indicatorColor="@color/theme_color"
         />
 </RelativeLayout>

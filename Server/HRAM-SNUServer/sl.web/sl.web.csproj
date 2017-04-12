@@ -2228,7 +2228,9 @@
     <Compile Include="Areas\api\Controllers\AccountController.cs" />
     <Compile Include="Areas\api\Controllers\ArticleController.cs" />
     <Compile Include="Areas\api\Controllers\DownloadController.cs" />
+    <Compile Include="Areas\api\Controllers\FriendlyLinkController.cs" />
     <Compile Include="Areas\api\Controllers\MemberController.cs" />
+    <Compile Include="Areas\api\Controllers\TypeController.cs" />
     <Compile Include="Areas\Manager\Controllers\ConfigController.cs" />
     <Compile Include="Areas\Manager\Controllers\DownloadManagerController.cs" />
     <Compile Include="Areas\Manager\Controllers\ExportToExcelController.cs" />
@@ -2243,7 +2245,6 @@
     <Compile Include="Areas\Manager\Controllers\UserController.cs" />
     <Compile Include="Areas\Manager\ManagerAreaRegistration.cs" />
     <Compile Include="Areas\Manager\Utils\ConstantData.cs" />
-    <Compile Include="Areas\Manager\Utils\ApiCode.cs" />
     <Compile Include="Areas\Manager\Utils\UtilsBind.cs" />
     <Compile Include="Areas\Manager\Utils\UtilsDB.cs" />
     <Compile Include="Controllers\HomeController.cs" />

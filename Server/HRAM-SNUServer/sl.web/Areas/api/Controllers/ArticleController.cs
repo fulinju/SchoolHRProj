@@ -9,6 +9,7 @@ using PetaPoco;
 using sl.model;
 using common.utils;
 using sl.service.api;
+using sl.web.ui;
 
 namespace sl.web.Areas.api.Controllers
 {
@@ -26,9 +27,9 @@ namespace sl.web.Areas.api.Controllers
         /// <param name="pageSize"></param>
         /// <returns></returns>
         [HttpGet]
-        public HttpResponseMessage GetPublishList(int pageIndex,int pageSize)
+        public HttpResponseMessage GetPublishList(int pageIndex, int pageSize, string pmTypeID="%%")
         {
-            Page<PublishInfo> list = HRAMApiService.GetPublishs(pageIndex, pageSize);
+            Page<PublishInfo> list = HRAMApiService.GetPublishs(pageIndex, pageSize,pmTypeID);
 
             //return Json(new { total = list.TotalItems, rows = list.Items });
 
@@ -39,12 +40,12 @@ namespace sl.web.Areas.api.Controllers
                 {
                     isLastPage = true;
                 }
-                
-                return JsonUtils.toJson(new { totalItems = list.Items.Count, isLastPage = isLastPage, pageIndex = pageIndex, pageSize = pageSize, resultList = list.Items });
+
+                return JsonUtils.toJson(HttpStatusCode.OK, new { totalItems = list.Items.Count, isLastPage = isLastPage, pageIndex = pageIndex, pageSize = pageSize, resultList = list.Items });
             }
             else
             {
-                return JsonUtils.toJson("错误");
+                return JsonUtils.toJson(HttpStatusCode.PreconditionFailed,new JsonTip(ApiCode.GetPublishListFailedCode, ApiCode.GetPublishListFailedMessage));
             }
         }
 
@@ -55,24 +56,17 @@ namespace sl.web.Areas.api.Controllers
         /// <param name="pageSize"></param>
         /// <returns></returns>
         [HttpGet]
-        public HttpResponseMessage GetPublishDetail(int pageIndex, int pageSize)
+        public HttpResponseMessage GetPublishDetail(string publishID)
         {
-            Page<PublishInfo> list = HRAMApiService.GetPublishs(pageIndex, pageSize);
-            //return Json(new { total = list.TotalItems, rows = list.Items });
+            PublishInfo publish = HRAMApiService.GetPublishDetail(publishID);
 
-            if (list != null)
+            if (publish != null)
             {
-                var isLastPage = false;
-                if (list.CurrentPage >= list.TotalPages)
-                {
-                    isLastPage = true;
-                }
-
-                return JsonUtils.toJson(new { totalItems = list.Items.Count, isLastPage = isLastPage, pageIndex = pageIndex, pageSize = pageSize, resultList = list.Items });
+                return JsonUtils.toJson(HttpStatusCode.OK, publish);
             }
             else
             {
-                return JsonUtils.toJson("错误");
+                return JsonUtils.toJson(HttpStatusCode.PreconditionFailed, new JsonTip(ApiCode.GetPublishDetailFailedCode, ApiCode.GetPublishDetailFailedMessage));
             }
         }
     }

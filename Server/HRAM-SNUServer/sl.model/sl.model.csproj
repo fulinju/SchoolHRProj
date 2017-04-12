@@ -52,9 +52,14 @@
     <Compile Include="Config\WebSiteConfig.cs" />
     <Compile Include="model\api\ADImgInfo.cs" />
     <Compile Include="model\api\DownloadInfo.cs" />
+    <Compile Include="model\api\DownloadTypeInfo.cs" />
+    <Compile Include="model\api\FriendlyLinkInfo.cs" />
     <Compile Include="model\api\LoginModel.cs" />
     <Compile Include="model\api\MemberInfo.cs" />
+    <Compile Include="model\api\MemberTypeInfo.cs" />
     <Compile Include="model\api\PublishInfo.cs" />
+    <Compile Include="model\api\PublishTypeInfo.cs" />
+    <Compile Include="model\api\ReviewResultInfo.cs" />
     <Compile Include="model\export\PublishExportInfo.cs" />
     <Compile Include="model\FinalData.cs" />
     <Compile Include="model\msg\ApiMsgEntity.cs" />

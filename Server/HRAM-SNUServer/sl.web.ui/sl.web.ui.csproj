@@ -92,6 +92,7 @@
     <Compile Include="Base\BaseController.cs" />
     <Compile Include="Base\BaseManagerController.cs" />
     <Compile Include="Extension\JsonResultExtension.cs" />
+    <Compile Include="Help\ApiCode.cs" />
     <Compile Include="Help\JsonTip.cs" />
     <Compile Include="Help\Key.cs" />
     <Compile Include="ManagerContext.cs" />
