@@ -30,16 +30,18 @@ namespace sl.web.Areas.Manager.Controllers
         //private string ERR_MODIFY_DEFAULTREVIEW = "不能更默认的审核结果";
 
         private string ERR_USERTYPE_EXIST = "用户类型已存在";
-        private string ERR_DMTYPE_EXIST = "下载类型ID已存在";
-        private string ERR_PMTYPE_EXIST = "发布类型ID已存在";
-        private string ERR_MEMBERTYPE_EXIST = "会员类型ID已存在";
-        private string ERR_REVIEW_EXIST = "审核结果ID已存在";
+        private string ERR_DMTYPE_EXIST = "下载类型已存在";
+        private string ERR_PMTYPE_EXIST = "发布类型已存在";
+        private string ERR_MEMBERTYPE_EXIST = "会员类型已存在";
+        private string ERR_REVIEW_EXIST = "审核结果类型已存在";
+        private string ERR_FL_EXIST = "友情链接类型已存在";
 
         private string TYPE_HEAD_USER = "USER_";
-        private string TYPE_HEAD_DM = "dm";
-        private string TYPE_HEAD_PM = "Pm";
+        private string TYPE_HEAD_DM = "DM";
+        private string TYPE_HEAD_PM = "PM";
         private string TYPE_HEAD_MEMBER = "MEMBER_";
         private string TYPE_HEAD_REVIEW = "REVIEW_";
+        private string TYPE_HEAD_FL = "FL_";
 
         //
         //// GET: /Manager/TypeManager/
@@ -170,6 +172,25 @@ namespace sl.web.Areas.Manager.Controllers
         }
         #endregion
 
+        #region 查询友情链接类型
+        public ActionResult GetFLTypes(TypeModels m)
+        {
+            string flTypeValue = "";
+            if (m != null)
+            {
+                if (m.memberType != null)
+                {
+                    if (m.memberType.mTypeValue != null)
+                    {
+                        flTypeValue = m.memberType.mTypeValue;
+                    }
+                }
+            }
+
+            Sql sql = HRAManagerService.GetFLTypeSql(flTypeValue);
+            return CommonPageList<T_FLType>(sql, HRAManagerService.database);
+        }
+        #endregion
 
 
 
@@ -181,6 +202,16 @@ namespace sl.web.Areas.Manager.Controllers
             List<string> listValue = new List<string>();
             foreach (var entity in userEntityList)
             {
+                if (entity.uLoginTypeID == ConstantData.AdminTypeCode)
+                {
+                    return Json(new JsonTip("0", ConstantData.CANT_DEL_ADMIN_TYPE));
+                }
+
+                if (entity.uLoginTypeID == ConstantData.TYPE_NO_ID)
+                {
+                    return Json(new JsonTip("0", ConstantData.CANT_DEL_DEFAULT));
+                }
+
                 if (ExistInTable("T_User", "uLoginTypeID", entity.uLoginTypeID))
                 {
                     listValue.Add(entity.uLoginTypeID); //获取存在于用户表的ID
@@ -199,6 +230,11 @@ namespace sl.web.Areas.Manager.Controllers
             List<string> listValue = new List<string>();
             foreach (var entity in dmEntityList)
             {
+                if (entity.dmTypeID == ConstantData.TYPE_NO_ID)
+                {
+                    return Json(new JsonTip("0", ConstantData.CANT_DEL_DEFAULT));
+                }
+
                 if (ExistInTable("T_DownloadManage", "dmTypeID", entity.dmTypeID))
                 {
                     listValue.Add(entity.dmTypeID); //获取存在于用户表的ID
@@ -217,6 +253,11 @@ namespace sl.web.Areas.Manager.Controllers
             List<string> listValue = new List<string>();
             foreach (var entity in pmEntityList)
             {
+                if (entity.pmTypeID == ConstantData.TYPE_NO_ID)
+                {
+                    return Json(new JsonTip("0", ConstantData.CANT_DEL_DEFAULT));
+                }
+
                 if (ExistInTable("T_PublishManage", "pmTypeID", entity.pmTypeID))
                 {
                     listValue.Add(entity.pmTypeID); //获取存在于用户表的ID
@@ -234,6 +275,11 @@ namespace sl.web.Areas.Manager.Controllers
             List<string> listValue = new List<string>();
             foreach (var entity in reviewEntityList)
             {
+                if (entity.mReviewResultID == ConstantData.TYPE_NO_ID)
+                {
+                    return Json(new JsonTip("0", ConstantData.CANT_DEL_DEFAULT));
+                }
+
                 if (ExistInTable("T_ReviewResult", "mReviewResultID", entity.mReviewResultID))
                 {
                     listValue.Add(entity.mReviewResultID); //获取存在于用户表的ID
@@ -253,12 +299,40 @@ namespace sl.web.Areas.Manager.Controllers
             List<string> listValue = new List<string>();
             foreach (var entity in memberTypes)
             {
+                if (entity.mTypeID == ConstantData.TYPE_NO_ID)
+                {
+                    return Json(new JsonTip("0", ConstantData.CANT_DEL_DEFAULT));
+                }
+
                 if (ExistInTable("T_Member", "pkId", entity.mTypeID))
                 {
                     listValue.Add(entity.mTypeID); //获取存在于用户表的ID
                 }
             }
             return CommonDelete(memberTypes, listValue, "T_MemberType", "pkId", "T_Member", "mTypeID");
+        }
+        #endregion
+
+        #region 删除友情链接类型
+        public ActionResult FLTypesDel(string model)
+        {
+
+            List<T_FLType> flTypes = JsonConvert.DeserializeObject<List<T_FLType>>(model);
+           
+
+            List<string> listValue = new List<string>();
+            foreach (var entity in flTypes)
+            {
+                if (entity.flTypeID == ConstantData.TYPE_NO_ID)
+                {
+                    return Json(new JsonTip("0", ConstantData.CANT_DEL_DEFAULT));
+                }
+                if (ExistInTable("T_FriendlyLink", "flTypeID", entity.flTypeID))
+                {
+                    listValue.Add(entity.flTypeID); //获取存在于友情链接表的ID
+                }
+            }
+            return CommonDelete(flTypes, listValue, "T_FLType", "pkId", "T_FriendlyLink", "flTypeID");
         }
         #endregion
 
@@ -459,6 +533,47 @@ namespace sl.web.Areas.Manager.Controllers
         }
         #endregion
 
+        #region 编辑友情链接类型
+        public ActionResult FLTypeEdit(T_FLType m, string id = "0")
+        {
+            if (id == "0")
+            {
+                if (Request.IsPost())
+                {
+                    m.flTypeID = TYPE_HEAD_FL + Utils.GetRamCode();
+                    m.isDeleted = false;
+
+                    var validate = Model.Valid(m);
+                    if (!validate.Result)
+                    {
+                        return ErrorMessage(validate.Message);
+                    }
+                    else
+                    {
+                        m.isDeleted = false;
+                        object result = HRAManagerService.database.Insert(m);
+                        return SaveMessage(result);
+                    }
+                }
+                return View(m);
+            }
+            else
+            {
+                Object obj = id;
+                T_FLType load = HRAManagerService.database.SingleOrDefault<T_FLType>(obj);
+                if (Request.IsPost())
+                {
+                    load.flTypeValue = m.flTypeValue;
+                    Model valid = Model.Valid(load);
+                    return valid.Result ? SaveMessage(HRAManagerService.database.Update(load)) : ErrorMessage(valid.Message);
+                }
+                return View(load);
+            }
+        }
+        #endregion
+
+
+
         #region 判断是否存在于表中
         /// <summary>
         /// 判断是否存在于表中
@@ -499,6 +614,8 @@ namespace sl.web.Areas.Manager.Controllers
             return DelMessage(flag);
         }
         #endregion
+
+
 
         #region 检查用户类型是否存在
         [HttpPost]
@@ -561,6 +678,19 @@ namespace sl.web.Areas.Manager.Controllers
             if (temp != null)
             {
                 return Json(new { state = false, message = ERR_MEMBERTYPE_EXIST });
+            }
+            return Json(new { state = true, message = string.Empty });
+        }
+        #endregion
+
+        #region 检查友情链接是否存在
+        [HttpPost]
+        public ActionResult CheckFLTypeIsExist(string typeValue)
+        {
+            T_FLType temp = HRAManagerService.FLTypetIsExist(typeValue);
+            if (temp != null)
+            {
+                return Json(new { state = false, message = ERR_FL_EXIST });
             }
             return Json(new { state = true, message = string.Empty });
         }

@@ -16,10 +16,10 @@
       <publishTime>04/08/2017 22:58:28</publishTime>
     </File>
     <File Include="Areas/Manager/Views/DownloadManager/DownloadEdit.cshtml">
-      <publishTime>04/08/2017 22:58:28</publishTime>
+      <publishTime>04/20/2017 13:31:05</publishTime>
     </File>
     <File Include="Areas/Manager/Views/DownloadManager/DownloadManagerView.cshtml">
-      <publishTime>04/08/2017 22:58:28</publishTime>
+      <publishTime>04/19/2017 10:39:03</publishTime>
     </File>
     <File Include="Areas/Manager/Views/ExportToExcel/ToExcelView.cshtml">
       <publishTime>04/08/2017 22:58:28</publishTime>
@@ -28,7 +28,7 @@
       <publishTime>04/08/2017 22:58:28</publishTime>
     </File>
     <File Include="Areas/Manager/Views/FriendLink/LinkEdit.cshtml">
-      <publishTime>04/08/2017 22:58:28</publishTime>
+      <publishTime>04/20/2017 10:05:40</publishTime>
     </File>
     <File Include="Areas/Manager/Views/Login/Login.cshtml">
       <publishTime>04/08/2017 22:58:28</publishTime>
@@ -37,25 +37,25 @@
       <publishTime>04/08/2017 22:58:28</publishTime>
     </File>
     <File Include="Areas/Manager/Views/Member/EditMemberSummary.cshtml">
-      <publishTime>04/08/2017 22:58:28</publishTime>
+      <publishTime>04/20/2017 09:44:19</publishTime>
     </File>
     <File Include="Areas/Manager/Views/Member/MemberEdit.cshtml">
-      <publishTime>04/08/2017 22:58:28</publishTime>
+      <publishTime>04/20/2017 10:00:55</publishTime>
     </File>
     <File Include="Areas/Manager/Views/Member/MemberView.cshtml">
-      <publishTime>04/08/2017 22:58:28</publishTime>
+      <publishTime>04/19/2017 14:16:05</publishTime>
     </File>
     <File Include="Areas/Manager/Views/PublishManager/EditPublishText.cshtml">
-      <publishTime>04/08/2017 22:58:28</publishTime>
+      <publishTime>04/20/2017 09:50:36</publishTime>
     </File>
     <File Include="Areas/Manager/Views/PublishManager/PMAdEdit.cshtml">
-      <publishTime>04/08/2017 22:58:28</publishTime>
+      <publishTime>04/19/2017 14:43:51</publishTime>
     </File>
     <File Include="Areas/Manager/Views/PublishManager/PMAdView.cshtml">
       <publishTime>04/08/2017 22:58:28</publishTime>
     </File>
     <File Include="Areas/Manager/Views/PublishManager/PublishEdit.cshtml">
-      <publishTime>04/08/2017 22:58:28</publishTime>
+      <publishTime>04/20/2017 13:26:01</publishTime>
     </File>
     <File Include="Areas/Manager/Views/PublishManager/PublishManagerView.cshtml">
       <publishTime>04/08/2017 23:00:20</publishTime>
@@ -91,10 +91,10 @@
       <publishTime>04/08/2017 22:58:28</publishTime>
     </File>
     <File Include="Areas/Manager/Views/User/UsersEdit.cshtml">
-      <publishTime>04/08/2017 22:58:28</publishTime>
+      <publishTime>04/20/2017 10:39:29</publishTime>
     </File>
     <File Include="Areas/Manager/Views/User/UsersView.cshtml">
-      <publishTime>04/08/2017 22:58:28</publishTime>
+      <publishTime>04/20/2017 12:55:55</publishTime>
     </File>
     <File Include="Areas/Manager/Views/web.config">
       <publishTime>04/08/2017 22:58:28</publishTime>
@@ -142,28 +142,28 @@
       <publishTime>04/08/2017 22:58:29</publishTime>
     </File>
     <File Include="bin/sl.common.dll">
-      <publishTime>04/12/2017 17:02:02</publishTime>
+      <publishTime>04/20/2017 13:53:56</publishTime>
     </File>
     <File Include="bin/sl.extension.dll">
-      <publishTime>04/12/2017 17:02:03</publishTime>
+      <publishTime>04/20/2017 13:53:59</publishTime>
     </File>
     <File Include="bin/sl.IService.dll">
-      <publishTime>04/12/2017 17:02:05</publishTime>
+      <publishTime>04/20/2017 13:54:02</publishTime>
     </File>
     <File Include="bin/sl.model.dll">
-      <publishTime>04/12/2017 17:02:04</publishTime>
+      <publishTime>04/20/2017 13:54:00</publishTime>
     </File>
     <File Include="bin/sl.service.dll">
-      <publishTime>04/12/2017 17:02:06</publishTime>
+      <publishTime>04/20/2017 13:54:03</publishTime>
     </File>
     <File Include="bin/sl.validate.dll">
-      <publishTime>04/12/2017 17:02:02</publishTime>
+      <publishTime>04/20/2017 13:53:56</publishTime>
     </File>
     <File Include="bin/sl.web.dll">
       <publishTime>04/12/2017 17:02:10</publishTime>
     </File>
     <File Include="bin/sl.web.ui.dll">
-      <publishTime>04/12/2017 17:02:07</publishTime>
+      <publishTime>04/20/2017 13:54:05</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
       <publishTime>04/08/2017 22:58:29</publishTime>
@@ -889,7 +889,7 @@
       <publishTime>04/08/2017 22:58:28</publishTime>
     </File>
     <File Include="Scripts/Easyui/easyui_functions.js">
-      <publishTime>04/08/2017 22:58:28</publishTime>
+      <publishTime>04/20/2017 10:54:00</publishTime>
     </File>
     <File Include="Scripts/Easyui/jquery.easyui.min.js">
       <publishTime>04/08/2017 22:58:28</publishTime>

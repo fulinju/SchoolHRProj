@@ -14,7 +14,18 @@
                 登录名：
             </th>
             <td>
-                @Html.InputFor(m => m.uLoginName, Html.Valid().Required("请输入用户名！").Remote(Url.Action("CheckUserIsExist"), "uLoginName").AsHtmlAttribute())
+                @if (Model.uLoginName == null)
+                {
+                    @Html.InputFor(m => m.uLoginName,
+                    Html.Valid().Required("请输入登录名")
+                    .Remote(Url.Action("CheckUserIsExist"), "uLoginName")
+                    .AsHtmlAttribute())
+                }
+                else
+                {
+                    @Html.DisplayFor(m => m.uLoginName)
+                }
+
             </td>
         </tr>
         <tr>
@@ -30,7 +41,10 @@
                 用户昵称：
             </th>
             <td>
-                @Html.InputFor(m => m.uUserName)
+                @Html.InputFor(m => m.uUserName,
+                Html.Valid().Required("请输入昵称")
+                .Length(3, 20)
+                .AsHtmlAttribute())
             </td>
         </tr>
         <tr>
@@ -38,7 +52,10 @@
                 密码：
             </th>
             <td>
-                @Html.InputFor(m => m.uPassword, new { type = "password" })
+                @Html.PasswordFor(m => m.uPassword,
+                    Html.Valid().Required("请输入密码")
+                    .Length(6, 20)
+                    .AsHtmlAttribute(new { @class = "input" }))
             </td>
         </tr>
 
@@ -47,7 +64,10 @@
                 联系电话：
             </th>
             <td>
-                @Html.InputFor(m => m.uPhone)
+                @Html.InputFor(m => m.uPhone,
+                            Html.Valid().Required("请输入手机号")
+                            .CellPhone()
+                            .AsHtmlAttribute())
             </td>
         </tr>
         <tr>
@@ -55,7 +75,10 @@
                 邮箱：
             </th>
             <td>
-                @Html.InputFor(m => m.uMaiBox)
+                @Html.InputFor(m => m.uMaiBox,
+                         Html.Valid().Required("请输入邮箱")
+                                     .Email("请输入正确的邮箱")
+                                               .AsHtmlAttribute())
             </td>
         </tr>
     </table>

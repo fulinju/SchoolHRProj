@@ -37,6 +37,7 @@ namespace sl.service.manager
             sql.Append(" and T_UserType.uLoginTypeID = T_User.uLoginTypeID");
             return sql;
         }
+
         #endregion
 
         #region 检查用户是否存在
@@ -247,7 +248,12 @@ namespace sl.service.manager
         {
             Sql sql = Sql.Builder;
             flName = "%" + flName + "%";
-            sql.Append("select * from T_FriendlyLink where flName Like @0 and isDeleted = 0", flName);
+            sql.Select("T_FriendlyLink.pkId,T_FriendlyLink.uLoginName,"
+                + "T_FriendlyLink.flName,T_FriendlyLink.flURL,"
+                + "T_FriendlyLink.flImgURL,T_FriendlyLink.flAddTime,"
+                 + "T_FriendlyLink.flTypeID,T_FLType.flTypeValue");
+            sql.From("T_FriendlyLink,T_FLType");
+            sql.Where("flName Like @0 and T_FriendlyLink.flTypeID = T_FLType.flTypeID and T_FriendlyLink.isDeleted = 0", flName);
             return sql;
         }
         #endregion
@@ -363,6 +369,29 @@ namespace sl.service.manager
         }
         #endregion
 
+        #region 查询友情链接类型
+
+        public static List<T_FLType> GetFLTypeList()
+        {
+            List<T_FLType> flTypes = new List<T_FLType>();
+            Sql sql = Sql.Builder;
+            sql.Select("*")
+                .From("T_FLType")
+                .Where("isDeleted = 0")
+                .OrderBy("flTypeValue asc");
+            flTypes = database.Fetch<T_FLType>(sql);
+            return flTypes;
+        }
+
+        public static Sql GetFLTypeSql(string flTypeValue)
+        {
+            Sql sql = Sql.Builder;
+            flTypeValue = "%" + flTypeValue + "%";
+            sql.Append("Select * from T_FLType where flTypeValue Like @0 and isDeleted = 0", flTypeValue);
+            return sql;
+        }
+        #endregion
+
 
         #region 是否存在于表中
         public static int ExistInTable(string tableName, string selectRow, string selectRowValue)
@@ -430,6 +459,17 @@ namespace sl.service.manager
             Sql sql = Sql.Builder;
             sql.Append("Select * from T_MemberType where mTypeValue = @0", typeValue);
             T_MemberType result = database.FirstOrDefault<T_MemberType>(sql);
+            return result;
+        }
+        #endregion
+
+
+        #region 检查友情链接类型是否存在
+        public static T_FLType FLTypetIsExist(string typeValue)
+        {
+            Sql sql = Sql.Builder;
+            sql.Append("Select * from T_FLType where flTypeValue = @0", typeValue);
+            T_FLType result = database.FirstOrDefault<T_FLType>(sql);
             return result;
         }
         #endregion

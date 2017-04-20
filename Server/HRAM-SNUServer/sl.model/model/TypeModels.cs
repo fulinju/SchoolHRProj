@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace sl.model
 {
+    /// <summary>
+    /// 多表一起显示，门户网站上很多表都是采用此种发式
+    /// </summary>
     public class TypeModels
     {
        public List<T_UserType> userTypeList{get;set;}
@@ -27,5 +30,9 @@ namespace sl.model
        public List<T_MemberType> memberTypeList { get; set; }
 
        public T_MemberType memberType { get; set; }
+
+       public List<T_FLType> flTypeList { get; set; }
+
+       public T_FLType flType { get; set; }
     }
 }

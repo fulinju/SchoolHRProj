@@ -18,6 +18,7 @@ using NPOI.HSSF.UserModel;
 using sl.service.manager;
 using sl.extension;
 using common.utils;
+using sl.service;
 
 namespace sl.web.Areas.Manager.Controllers
 {
@@ -74,6 +75,11 @@ namespace sl.web.Areas.Manager.Controllers
                     var validate = Model.Valid(m);
                     if (validate.Result)
                     {
+                        if (m.pmPublishTime == null)
+                        {
+                            m.pmPublishTime = DateTime.Now.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss"); //未选择时间 获取当前时间
+                        }
+                        m.uLoginName = Security.DesDecrypt(CachedConfigContext.Current.WebSiteConfig.WebSiteKey, Utils.GetCookie(Key.MANAGER_NAME));//DES解密
                         m.pmADImgListID = pmAD_HEAD + Utils.GetRamCode();
                         m.pmViews = 0; //初始化浏览次数
                         m.isDeleted = false;
@@ -100,6 +106,11 @@ namespace sl.web.Areas.Manager.Controllers
                 {
                     if (TryUpdateModel(load))
                     {
+                        if (m.pmPublishTime == null)
+                        {
+                            load.pmPublishTime = DateTime.Now.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss"); //未选择时间 获取当前时间
+                        }
+
                         int success = HRAManagerService.database.Update(load);
                         return SaveMessage(success);
                     }

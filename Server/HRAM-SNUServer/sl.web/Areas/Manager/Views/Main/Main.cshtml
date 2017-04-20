@@ -31,7 +31,7 @@
         .cs-navi-tab { padding: 5px; font-size: 13px; display: block; }
         .cs-navi-tab.current{ background: #E47506; color: #fff; text-decoration: none; }
     </style>
-  
+
 </head>
 <body class="easyui-layout">
     <div region="north" border="true" class="cs-north" style="height: 120px;">
@@ -41,7 +41,8 @@
             </div>
 
             <div class="cs-north-right">
-                欢迎您：<span class="red">[ManagerContext.UserInfo.uUserName]</span> <a href="/" target="_blank">
+                欢迎您：<span class="red">[ManagerContext.UserInfo.uUserName]</span>
+                <a href="~/Html/web/HomePage.html" target="_blank">
                     返回首页
                 </a> <a href="@Url.Action("Logout", "Main")">退出</a>
             </div>

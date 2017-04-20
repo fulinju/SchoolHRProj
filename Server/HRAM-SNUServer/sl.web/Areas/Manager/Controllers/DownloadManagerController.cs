@@ -72,10 +72,7 @@ namespace sl.web.Areas.Manager.Controllers
                         }
                         else
                         {
-                            if (m.dmUploadTime == null)
-                            {
-                                m.dmUploadTime = DateTime.Now.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss"); //未选择时间 获取当前时间
-                            }
+                            m.dmUploadTime = DateTime.Now.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss"); //未选择时间 获取当前时间
                             m.dmFileURL = SaveFile(fileBase, HRAManagerService.GetDownloadValueByID(m.dmTypeID));// 存储
                             m.uLoginName = Security.DesDecrypt(CachedConfigContext.Current.WebSiteConfig.WebSiteKey, Utils.GetCookie(Key.MANAGER_NAME));//DES解密
                             m.dmDownloadNum = 0; //初始化下载数量
@@ -123,13 +120,6 @@ namespace sl.web.Areas.Manager.Controllers
                             //string fileName = GetSavedFileName(fileBase);
                             load.dmFileURL = SaveFile(fileBase, HRAManagerService.GetDownloadValueByID(m.dmTypeID));// 存储
                         }
-
-
-                        if (m.dmUploadTime == null)
-                        {
-                            load.dmUploadTime = DateTime.Now.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss"); //未选择时间 获取当前时间
-                        }
-
 
                         Model valid = Model.Valid(load);
                         return valid.Result ? SaveMessage(HRAManagerService.database.Update(load)) : ErrorMessage(valid.Message);

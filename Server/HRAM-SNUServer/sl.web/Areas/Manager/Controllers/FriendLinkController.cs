@@ -30,7 +30,7 @@ namespace sl.web.Areas.Manager.Controllers
         public ActionResult GetLinkList(string flName)
         {
             Sql sql = HRAManagerService.GetLinksSql(flName);
-            return CommonPageList<T_FriendlyLink>(sql, HRAManagerService.database);
+            return CommonPageList<dynamic>(sql, HRAManagerService.database);
         }
         #endregion
 

@@ -115,6 +115,28 @@ namespace sl.web
         }
         #endregion
 
+        #region 绑定友情链接类型
+        public static List<SelectListItem> FLTypes()
+        {
+            List<T_FLType> flTypes = HRAManagerService.GetFLTypeList();
+            List<SelectListItem> list = new List<SelectListItem>();
+            if (flTypes != null)
+            {
+                for (int i = 0; i < flTypes.Count; i++)
+                {
+                    list.Add(new SelectListItem { Text = flTypes[i].flTypeValue, Value = flTypes[i].flTypeID });
+
+                }
+            }
+            else
+            {
+                list.Add(new SelectListItem { Text = ConstantData.ErrorMsg, Value = "" + ConstantData.ErrorCode });
+            }
+
+            return list;
+        }
+        #endregion
+
 
         #region 绑定下载类型
         public static List<SelectListItem> DownloadTypes()

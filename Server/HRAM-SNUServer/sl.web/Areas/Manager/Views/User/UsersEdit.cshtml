@@ -14,7 +14,7 @@
                 登录名：
             </th>
             <td>
-                @if (Model.pkId == null)
+                @if (Model.uLoginName == null)
                 {
                     @Html.InputFor(m => m.uLoginName,
                     Html.Valid().Required("请输入登录名")

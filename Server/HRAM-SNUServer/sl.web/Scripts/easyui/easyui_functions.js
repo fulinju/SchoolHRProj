@@ -183,7 +183,6 @@ function Edit(dgid, title, url, width, height, btnText) {
     }
     var rows = $("#" + dgid).datagrid("getSelections");
 
-    console.log(rows.length);
 
     if (rows.length != 1) {
         parent.$.messager.alert("提示!", "请选择一条记录!", "info");

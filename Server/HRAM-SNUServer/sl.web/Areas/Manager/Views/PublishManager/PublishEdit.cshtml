@@ -10,10 +10,10 @@
 
         <table class="msgtable" title="编辑发布信息" style="width:100%;height:100%">
             <tr>
-                <th>
+                <th style="width: 130px">
                     发布者：
                 </th>
-                <td>
+                <td style="width: 200px">
                     @if (Model.pkId == null)
                     {
                         @Html.Label("暂无")
@@ -30,6 +30,15 @@
                 </th>
                 <td>
                     @Html.DropDownListFor(m => m.pmTypeID, UtilsBind.PublishTypes())
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    上传时间：
+                </th>
+                <td>
+                    @Html.EasyUiDateTimeBoxFor(m => m.pmPublishTime)
                 </td>
             </tr>
 

@@ -68,6 +68,7 @@
     <Compile Include="model\T_ADImgList.cs" />
     <Compile Include="model\T_DMType.cs" />
     <Compile Include="model\T_DownloadManage.cs" />
+    <Compile Include="model\T_FLType.cs" />
     <Compile Include="model\T_FriendlyLink.cs" />
     <Compile Include="model\T_Member.cs" />
     <Compile Include="model\T_MemberType.cs" />

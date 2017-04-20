@@ -24,6 +24,11 @@ namespace sl.model
         [JsonProperty("flName")]
         public string flName { get; set; }
 
+
+        [Column]
+        [JsonProperty("flTypeID")]
+        public string flTypeID { get; set; }
+
         [Column]
         [JsonProperty("flURL")]
         public string flURL { get; set; }
