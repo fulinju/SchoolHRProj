@@ -9,14 +9,14 @@
 }
 <form class="validate" method="post" autocomplete="off" action="" enctype="multipart/form-data">
     <table class="msgtable" title="编辑下载文件" style="width:100%;height:100%">
-        <tr>
+        @*<tr>
             <th>
                 登录名：
             </th>
             <td>
                 @Html.InputFor(m => m.uLoginName, Html.Valid().Required("请输入用户名！").AsHtmlAttribute())
             </td>
-        </tr>
+        </tr>*@
 
 
         @if (Model != null && !string.IsNullOrEmpty(Model.dmFileURL))
@@ -48,7 +48,10 @@
                 文件标题：
             </th>
             <td>
-                @Html.InputFor(m => m.dmTitle, Html.Valid().Required("请输入下载名称！").AsHtmlAttribute())
+                @Html.InputFor(m => m.dmTitle, Html.Valid()
+                .Required("请输入下载名称！")
+                .MaxLength(30,"名称长度不能大于30")
+                .AsHtmlAttribute())
             </td>
         </tr>
 
@@ -61,14 +64,14 @@
             </td>
         </tr>
 
-        <tr>
+        @*<tr>
             <th style="width: 130px">
                 下载数量：
             </th>
             <td>
                 @Html.InputFor(m => m.dmDownloadNum, new { readOnly = "true" })
             </td>
-        </tr>
+        </tr>*@
 
 
         <tr>
@@ -99,7 +102,7 @@
             },
             success: function (data) {
                 //服务器返回响应，根据响应结果
-                $.messager.alert("提示", data.message);
+                $.messager.alert("删除结果", data.message);
                 if (data.state == 1) {
 
                     document.location.reload();//当前页面 

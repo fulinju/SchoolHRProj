@@ -14,8 +14,17 @@
                     发布者：
                 </th>
                 <td>
-                    @Html.InputFor(m => m.uLoginName)
+                    @if (Model.pkId == null)
+                    {
+                        @Html.Label("暂无")
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(m => m.uLoginName)
+                    }
                 </td>
+                </tr>
+            <tr>
                 <th>
                     发布类型：
                 </th>
@@ -32,5 +41,7 @@
                     @Html.DropDownListFor(m => m.pmPreview, UtilsBind.ChooseYesOrNo())
                 </td>
             </tr>
+
+
         </table>
 </form>

@@ -110,7 +110,7 @@ namespace sl.web.Areas.Manager.Controllers
                 entity.uPassword = passwordMd5;
                 flag = HRAManagerService.database.Update(entity);
             }
-            return Json(flag == 1 ? new JsonTip("1", "重置成功") : new JsonTip("0", "重置失败!"));
+            return Json(flag == 1 ? new JsonTip("1", "重置密码为登录名成功") : new JsonTip("0", "重置失败!"));
         }
         #endregion
 
@@ -119,8 +119,6 @@ namespace sl.web.Areas.Manager.Controllers
         [HttpPost]
         public ActionResult CheckUserIsExist(string uLoginName)
         {
-            Sql sql = Sql.Builder;
-            sql.Append("Select * from T_User where uLoginName = @0", uLoginName);
             T_User user = HRAManagerService.CheckUserExist(uLoginName);
             if (user != null)
             {

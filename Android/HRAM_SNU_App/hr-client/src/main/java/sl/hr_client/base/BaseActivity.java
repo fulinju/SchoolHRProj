@@ -1,4 +1,4 @@
-package sl.hr_client.base.activity;
+package sl.hr_client.base;
 
 import android.content.res.Configuration;
 import android.content.res.Resources;

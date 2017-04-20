@@ -17,6 +17,7 @@
     <color name="white">#FFFFFF</color>
 
     <!--主题色-->
+    <color name="DeepSkyBlue">#00BFFF</color>
     <color name="theme_color">#1E90FF</color>
 
     <!--常用颜色-->

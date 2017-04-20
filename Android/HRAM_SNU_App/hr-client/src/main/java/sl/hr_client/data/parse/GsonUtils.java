@@ -10,6 +10,7 @@ import java.util.List;
 
 import sl.hr_client.data.bean.ADImgBean;
 import sl.hr_client.data.bean.NewsBean;
+import sl.hr_client.data.bean.list.DownloadListBean;
 import sl.hr_client.data.bean.list.NewsListBean;
 
 /**
@@ -26,6 +27,12 @@ public class GsonUtils {
         NewsListBean news = null;
         news = getInstance().fromJson(newsListStr, NewsListBean.class);
         return news;
+    }
+
+    public static DownloadListBean parseDownloadList(String downloadListStr){
+        DownloadListBean downloads = null;
+        downloads = getInstance().fromJson(downloadListStr, DownloadListBean.class);
+        return downloads;
     }
 
     public static NewsBean parseNews(String newsStr){

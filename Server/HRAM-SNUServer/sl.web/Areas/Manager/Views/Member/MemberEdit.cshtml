@@ -7,20 +7,40 @@
     Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    .tr-title{
+        width:10%
+    }
+    .td-des{
+        width:40%
+    }
+</style>
+
 <form class="validate" method="post" autocomplete="off" action="" enctype="multipart/form-data">
     <table class="msgtable" style="width:100%;height:100%">
         <tr>
-            <th>
-                审核者：
+            <th class="tr-title">
+                会员名称：
             </th>
-            <td>
-                @Html.InputFor(m => m.uLoginName)
+            <td class="td-des">
+                @if (Model.pkId == null)
+                {
+                    @Html.InputFor(m => m.mName,
+                          Html.Valid().Required("请输入会员名")
+                             .Remote(Url.Action("CheckMemberNameIsExist"), "mName")
+                             .AsHtmlAttribute())
+                }
+                else
+                {
+                    @Html.DisplayFor(m => m.mName);
+                }
+
             </td>
-            <th>
-                审核结果：
+            <th class="tr-title">
+                会员类型：
             </th>
-            <td>
-                @Html.DropDownListFor(m => m.mReviewResultID, UtilsBind.ReviewResults())
+            <td class="td-des">
+                @Html.DropDownListFor(m => m.mTypeID, UtilsBind.MemberTypes())
             </td>
         </tr>
 
@@ -29,85 +49,136 @@
                 申请时间：
             </th>
             <td>
-                @Html.InputFor(m => m.mApplyTime)
-            </td>
-            <th>
-                会员名称：
-            </th>
-            <td>
-                @Html.InputFor(m => m.mName)
-            </td>
-        </tr>
-
-        <tr>
-            <th>
-                会员类型：
-            </th>
-            <td>
-                @Html.DropDownListFor(m => m.mTypeID, UtilsBind.MemberTypes())
+                @if (Model.pkId == null)
+                {
+                    @Html.Label("yyyy-MM-dd HH:mm:ss")
+                }
+                else
+                {
+                    @Html.DisplayFor(m => m.mApplyTime)
+                }
             </td>
 
             <th>
                 组织代码：
             </th>
             <td>
-                @Html.InputFor(m => m.mOrganizationCode)
+                @Html.InputFor(m => m.mOrganizationCode,
+                 Html.Valid().Required("请输入组织代码")
+                             .Length(9, 9, "请输入9位组织代码")
+                             .AsHtmlAttribute())
             </td>
         </tr>
 
         <tr>
+
             <th>
-                会员地址：
+                审核结果：
             </th>
             <td>
-                @Html.InputFor(m => m.mAddress)
+                @Html.DropDownListFor(m => m.mReviewResultID, UtilsBind.ReviewResults())
             </td>
 
+            <th>
+                审核者：
+            </th>
+            <td>
+                @if (Model.pkId == null)
+                {
+                    @Html.Label("暂无")
+                }
+                else
+                {
+                    @Html.DisplayFor(m => m.uLoginName)
+                }
+            </td>
+        </tr>
+
+
+        <tr>
             <th>
                 法人名字：
             </th>
             <td>
-                @Html.InputFor(m => m.mCorporateName)
+                @Html.InputFor(m => m.mCorporateName,
+                 Html.Valid().Required("请输入法人姓名")
+                             .Length(2, 30, "名字长度在2-30个字符")
+                             .AsHtmlAttribute())
             </td>
-        </tr>
 
-        <tr>
             <th>
                 法人身份证号：
             </th>
             <td>
-                @Html.InputFor(m => m.mIDCardNo)
+                @Html.InputFor(m => m.mIDCardNo,
+                 Html.Valid().Required("请输入法人身份证号")
+                             .Length(18, 18, "请输入18位身份证号")
+                             .AsHtmlAttribute())
             </td>
 
+
+        </tr>
+
+        <tr>
             <th>
                 联系人：
             </th>
             <td>
-                @Html.InputFor(m => m.mContacts)
+                @Html.InputFor(m => m.mContacts,
+                 Html.Valid().Required("请输入联系人姓名")
+                                      .Length(2, 30, "名字长度在2-30个字符")
+                             .AsHtmlAttribute())
             </td>
-        </tr>
 
-        <tr>
             <th>
                 联系方式：
             </th>
             <td>
-                @Html.InputFor(m => m.mContactsPhone)
+                @Html.InputFor(m => m.mContactsPhone,
+                 Html.Valid().Required("请输入联系方式")
+                                     .CellPhone()
+                             .AsHtmlAttribute())
             </td>
+        </tr>
+        <tr>
             <th>
-                会员网址：
+                会员地址：
             </th>
-            <td>
-                @Html.InputFor(m => m.mURL)
+            <td colspan="2">
+                @Html.InputFor(m => m.mAddress, InputWidthType.Longest,
+                 Html.Valid().Required("请输入会员地址")
+                                      .Length(2, 50, "会员地址长度在2-50个字符")
+                             .AsHtmlAttribute())
             </td>
         </tr>
 
+
         <tr>
+            <th>
+                会员网址：
+            </th>
+            <td colspan="2">
+                @Html.InputFor(m => m.mURL, InputWidthType.Longest,
+                 Html.Valid()
+                 .Url()
+                 .AsHtmlAttribute())
+            </td>
+        </tr>
+
+
+        <tr>      
             <th>
                 会员图片地址：
             </th>
             <td>
-                <input type="file" id="mImgUrl" name="mImgUrl" />
+                @if (Model.mImgURL==null || Model.mImgURL=="")
+                {
+                     <input type="file" id="mImgUrl" name="mImgUrl" />
+                }
+                else
+                {
+                    @Html.DisplayFor(m => m.mImgURL)
+                }
             </td>
 
         </tr>
@@ -116,11 +187,11 @@
             <th>
                 会员图片：
             </th>
-            <td colspan="2">
+            <td id="memberPic" colspan="2" class="td-max">
                 @if (Model != null && !string.IsNullOrEmpty(Model.mImgURL))
                 {
                     <img src="@Model.mImgURL" alt="" />
-                <a class="btnDelImg" id="@Model.pkId" onclick="delface(@Model.pkId)">删除</a>
+                    <a class="btnDelImg" id="@Model.pkId">删除</a>
                 }
             </td>
         </tr>
@@ -138,9 +209,13 @@
             data: {
                 id: id
             },
-            success: function(data){
+            success: function (data) {
                 //服务器返回响应，根据响应结果
-                $.messager.alert(data.code,data.message);
+                $.messager.alert("删除结果", data.message);
+                if (data.state == 1) {
+                    document.location.reload();//当前页面 
+                    //$("#memberPic").hide();
+                }
             },
             dataType: "json"
         });

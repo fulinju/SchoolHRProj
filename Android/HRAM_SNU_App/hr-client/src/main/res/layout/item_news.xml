@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="[放假]"
+            android:text="[类型]"
             android:layout_toRightOf="@+id/someone_linear"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp" />

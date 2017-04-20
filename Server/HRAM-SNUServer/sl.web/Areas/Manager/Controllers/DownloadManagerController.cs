@@ -10,6 +10,7 @@ using sl.validate;
 using Newtonsoft.Json;
 using PetaPoco;
 using sl.service.manager;
+using sl.service;
 using NPinyin;
 
 namespace sl.web.Areas.Manager.Controllers
@@ -44,8 +45,7 @@ namespace sl.web.Areas.Manager.Controllers
             foreach (var entity in entityList)
             {
                 DirFile.DeleteFile(entity.dmFileURL);
-                entity.isDeleted = true;
-                flag = HRAManagerService.database.Update(entity); //假删除 可以直接删
+                flag = HRAManagerService.database.Delete(entity); //直接删
             }
             return DelMessage(flag);
         }
@@ -64,7 +64,7 @@ namespace sl.web.Areas.Manager.Controllers
                         HttpPostedFileBase fileBase = GetFileBase();
                         if (fileBase == null || fileBase.FileName == "")
                         {
-                            m.dmFileURL = "";
+                            return ErrorMessage("请上传文件");
                         }
                         else if (CheckUploadFile(fileBase))
                         {
@@ -72,7 +72,12 @@ namespace sl.web.Areas.Manager.Controllers
                         }
                         else
                         {
-                            m.dmFileURL = SaveFile(fileBase, m.dmFileURL, HRAManagerService.GetDownloadValueByID(m.dmTypeID));// 存储
+                            if (m.dmUploadTime == null)
+                            {
+                                m.dmUploadTime = DateTime.Now.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss"); //未选择时间 获取当前时间
+                            }
+                            m.dmFileURL = SaveFile(fileBase, HRAManagerService.GetDownloadValueByID(m.dmTypeID));// 存储
+                            m.uLoginName = Security.DesDecrypt(CachedConfigContext.Current.WebSiteConfig.WebSiteKey, Utils.GetCookie(Key.MANAGER_NAME));//DES解密
                             m.dmDownloadNum = 0; //初始化下载数量
                             m.isDeleted = false;
                             object result = HRAManagerService.database.Insert(m);
@@ -83,7 +88,6 @@ namespace sl.web.Areas.Manager.Controllers
                     else
                     {
                         return ErrorMessage(validate.Message);
-
                     }
                 }
                 return View(m);
@@ -93,28 +97,39 @@ namespace sl.web.Areas.Manager.Controllers
                 Object obj = id;
                 T_DownloadManage load = HRAManagerService.database.SingleOrDefault<T_DownloadManage>(obj);
 
+                if (load == null)
+                {
+                    return Json(new JsonTip("0", "找不到该实体"));
+                }
+
                 if (Request.IsPost())
                 {
                     if (TryUpdateModel(load))
                     {
-                        if (Request.Files.Count > 0)
+
+                        if (m.dmFileURL != null)
                         {
                             HttpPostedFileBase fileBase = GetFileBase();
-                            if (fileBase == null || fileBase.FileName =="")
+                            if (fileBase == null || fileBase.FileName == "")
                             {
-                                load.dmFileURL = "";
+                                return ErrorMessage("请上传文件");
                             }
                             else if (CheckUploadFile(fileBase))
                             {
                                 return ErrorMessage("上传格式错误");
                             }
-                            else
-                            {
-                                Utils.DeleteFile(load.dmFileURL);
-                                //string fileName = GetSavedFileName(fileBase);
-                                load.dmFileURL = SaveFile(fileBase, load.dmFileURL, HRAManagerService.GetDownloadValueByID(load.dmTypeID));// 存储
-                            }
+
+                            Utils.DeleteFile(load.dmFileURL);
+                            //string fileName = GetSavedFileName(fileBase);
+                            load.dmFileURL = SaveFile(fileBase, HRAManagerService.GetDownloadValueByID(m.dmTypeID));// 存储
                         }
+
+
+                        if (m.dmUploadTime == null)
+                        {
+                            load.dmUploadTime = DateTime.Now.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss"); //未选择时间 获取当前时间
+                        }
+
 
                         Model valid = Model.Valid(load);
                         return valid.Result ? SaveMessage(HRAManagerService.database.Update(load)) : ErrorMessage(valid.Message);
@@ -156,20 +171,20 @@ namespace sl.web.Areas.Manager.Controllers
         {
             string fileName = "";
 
-            fileName =  Utils.GetRamCode() + "." + Utils.GetFileExt(fileBase.FileName);
-          
+            fileName = Utils.GetRamCode() + "." + Utils.GetFileExt(fileBase.FileName);
+
             return fileName;
         }
 
         /// <summary>
         /// 存储文件
         /// </summary>
-        private string SaveFile(HttpPostedFileBase fileBase,string fileName,string typeName)
+        private string SaveFile(HttpPostedFileBase fileBase, string typeName)
         {
-            //string typeNamePinYin = Pinyin.GetPinyin(typeName);
-            //typeNamePinYin = typeNamePinYin.Replace(" ", "");
+            string typeNamePinYin = Pinyin.GetPinyin(typeName); //转拼音 免得不识别
+            typeNamePinYin = typeNamePinYin.Replace(" ", "");
 
-            string tagetPath = Key.DownloadFilesPath + typeName + "/";
+            string tagetPath = Key.DownloadFilesPath + typeNamePinYin + "/";
             if (!DirFile.IsExistDirectory(tagetPath))
             {
                 DirFile.CreateDir(tagetPath);
@@ -179,7 +194,6 @@ namespace sl.web.Areas.Manager.Controllers
 
             fileBase.SaveAs(Server.MapPath(tagetPath)); //存储操作
             return tagetPath;
-
         }
 
 

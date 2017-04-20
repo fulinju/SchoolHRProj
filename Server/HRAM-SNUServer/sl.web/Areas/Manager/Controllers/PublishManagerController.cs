@@ -136,8 +136,9 @@ namespace sl.web.Areas.Manager.Controllers
             int flag = 0;
             foreach (var entity in publishsList)
             {
-                entity.isDeleted = true; //可以考虑直接删除
-                flag = HRAManagerService.database.Update(entity);
+                //entity.isDeleted = true;
+                Utils.DeleteFile(entity.pmADImgListURL); //删除对应图片 免得太占内存
+                flag = HRAManagerService.database.Delete(entity);//可以考虑直接删除
             }
             return DelMessage(flag);
         }
@@ -155,10 +156,23 @@ namespace sl.web.Areas.Manager.Controllers
                     if (validate.Result)
                     {
                         m.pmADImgListID = aid;
-                        m.pmADImgListURL = UploadFile();
-                        m.isDeleted = false;
-                        object result = HRAManagerService.database.Insert(m);
-                        return SaveMessage(result);
+
+                        HttpPostedFileBase fileBase = GetFileBase();
+                        if (fileBase == null || fileBase.FileName == "")
+                        {
+                            return ErrorMessage("请上传文件");
+                        }
+                        else if (CheckUploadFile(fileBase))
+                        {
+                            return ErrorMessage("上传格式错误");
+                        }
+                        else
+                        {
+                            m.isDeleted = false;
+                            m.pmADImgListURL = SaveFile(fileBase);// 存储
+                            object result = HRAManagerService.database.Insert(m);
+                            return SaveMessage(result);
+                        }
                     }
                     else
                     {
@@ -180,18 +194,26 @@ namespace sl.web.Areas.Manager.Controllers
                 {
                     if (TryUpdateModel(load))
                     {
-                        if (Request.Files.Count > 0)
+                        if (m.pmADImgListURL != null)
                         {
-                            Utils.DeleteFile(load.pmADImgListURL);
-                            string fileName = UploadFile();
-                            if (fileName != "")
-                            {
-                                load.pmADImgListURL = fileName;
-                            }
-                        }
 
-                        int success = HRAManagerService.database.Update(load);
-                        return SaveMessage(success);
+                            HttpPostedFileBase fileBase = GetFileBase();
+                            if (fileBase == null || fileBase.FileName == "")
+                            {
+                                return ErrorMessage("请上传图片");
+                            }
+                            else if (CheckUploadFile(fileBase))
+                            {
+                                return ErrorMessage("上传格式错误");
+                            }
+
+                            Utils.DeleteFile(load.pmADImgListURL);
+                            //string fileName = GetSavedFileName(fileBase);
+                            load.pmADImgListURL = SaveFile(fileBase);// 存储
+                        }
+                        Model valid = Model.Valid(load);
+                        return valid.Result ? SaveMessage(HRAManagerService.database.Update(load)) : ErrorMessage(valid.Message);
+
                     }
                 }
                 return View("PMAdEdit", load);
@@ -199,52 +221,33 @@ namespace sl.web.Areas.Manager.Controllers
         }
         #endregion
 
-        #region 上传图片
-        private string UploadFile()
-        {
-            string fileName = "";
-            if (Request.Files.Count > 0)
-            {
-                HttpPostedFileBase fileBase = Request.Files["pmADImgListURL"];
-                if (fileBase != null && fileBase.FileName != "")
-                {
-                    if (!DirFile.IsExistDirectory(Key.PublishAdImgsPath))
-                    {
-                        DirFile.CreateDir(Key.PublishAdImgsPath);
-                    }
-                    fileName = Key.PublishAdImgsPath + Utils.GetRamCode() + "." + Utils.GetFileExt(fileBase.FileName);
-                    fileBase.SaveAs(Server.MapPath(fileName));
-                }
-            }
-            return fileName;
-        }
-        #endregion
+
 
         //应当加个更换的
-        #region 删除图片
-        [HttpPost]
-        public ActionResult DelImg(string id = "0")
-        {
-            Sql sql = Sql.Builder.Append("Select * from T_ADImgList Where pkId = @0", id);
-            var m = HRAManagerService.database.FirstOrDefault<T_ADImgList>(sql);
-            int success = 0;
-            if (m != null)
-            {
-                Utils.DeleteFile(m.pmADImgListURL);
-                m.pmADImgListURL = string.Empty;
-                success = HRAManagerService.database.Update(m);
-            }
-            //换成 DelMessage
-            if (success == 1)
-            {
-                return Json(Message("删除成功"), JsonRequestBehavior.AllowGet); //删除成功
-            }
-            else
-            {
-                return Json(Message("删除失败"), JsonRequestBehavior.AllowGet); //删除失败
-            }
-        }
-        #endregion
+        //#region 删除图片
+        //[HttpPost]
+        //public ActionResult DelImg(string id = "0")
+        //{
+        //    Sql sql = Sql.Builder.Append("Select * from T_ADImgList Where pkId = @0", id);
+        //    var m = HRAManagerService.database.FirstOrDefault<T_ADImgList>(sql);
+        //    int success = 0;
+        //    if (m != null)
+        //    {
+        //        Utils.DeleteFile(m.pmADImgListURL);
+        //        m.pmADImgListURL = string.Empty;
+        //        success = HRAManagerService.database.Update(m);
+        //    }
+        //    //换成 DelMessage
+        //    if (success == 1)
+        //    {
+        //        return Json(new JsonTip("1", "删除成功"));
+        //    }
+        //    else
+        //    {
+        //        return Json(new JsonTip("0", "删除失败"));
+        //    }
+        //}
+        //#endregion
 
 
         #endregion
@@ -273,11 +276,75 @@ namespace sl.web.Areas.Manager.Controllers
         #endregion
 
 
-        [HttpPost]
-        public string post_test(string str)
+        #region 上传图片
+        private string UploadFile()
         {
-            return "post的字符串是：" + str;
-        }  
+            string fileName = "";
+            if (Request.Files.Count > 0)
+            {
+                HttpPostedFileBase fileBase = Request.Files["pmADImgListURL"];
+                if (fileBase != null && fileBase.FileName != "")
+                {
+                    if (!DirFile.IsExistDirectory(Key.PublishAdImgsPath))
+                    {
+                        DirFile.CreateDir(Key.PublishAdImgsPath);
+                    }
+                    fileName = Key.PublishAdImgsPath + Utils.GetRamCode() + "." + Utils.GetFileExt(fileBase.FileName);
+                    fileBase.SaveAs(Server.MapPath(fileName));
+                }
+            }
+            return fileName;
+        }
+        #endregion
+
+        /// <summary>
+        /// 存储文件
+        /// </summary>
+        private string SaveFile(HttpPostedFileBase fileBase)
+        {
+            if (!DirFile.IsExistDirectory(Key.PublishAdImgsPath))
+            {
+                DirFile.CreateDir(Key.PublishAdImgsPath);
+            }
+
+            string filePath = Key.PublishAdImgsPath + Utils.GetRamCode() + "." + Utils.GetFileExt(fileBase.FileName);
+
+            fileBase.SaveAs(Server.MapPath(filePath)); //存储操作
+            return filePath;
+        }
+
+
+        /// <summary>
+        /// 获取文件FileBase
+        /// </summary>
+        /// <returns></returns>
+        public HttpPostedFileBase GetFileBase()
+        {
+            return Request.Files["pmADImgListURL"];
+        }
+
+
+        #region 检查上传文件
+        public bool CheckUploadFile(HttpPostedFileBase fileBase)
+        {
+            if (Request.Files.Count > 0)
+            {
+                if (fileBase != null && fileBase.FileName != "")
+                {
+                    string extension = Utils.GetFileExt(fileBase.FileName);
+
+                    if (extension == "jpg" || extension == "jpeg"
+                   || extension == "png")
+                    {
+                        return false;
+                    }
+
+                }
+            }
+            return true;
+        }
+        #endregion
+
 
         /// <summary>
         /// 导出选中 导出到word还得定义模板 太麻烦
@@ -304,7 +371,7 @@ namespace sl.web.Areas.Manager.Controllers
 
             dt.Rows.InsertAt(dr, 0);
 
-            ExportToExcel(dt,"导出选中的文章");
+            ExportToExcel(dt, "导出选中的文章");
             //Response.Redirect("ExportSelectPublishAsExcel", true); //在同一个
             //Response.Redirect("http://www.jb51.net", false);
         }

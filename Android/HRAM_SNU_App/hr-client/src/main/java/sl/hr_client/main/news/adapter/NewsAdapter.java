@@ -1,6 +1,8 @@
 package sl.hr_client.main.news.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,6 +18,8 @@ import sl.base.ui.noscroll.NoScrollGridView;
 import sl.hr_client.R;
 import sl.hr_client.data.bean.ADImgBean;
 import sl.hr_client.data.bean.NewsBean;
+import sl.hr_client.main.news.fragment.NewsDetailFragment;
+import sl.hr_client.utils.constant.TransDefine;
 
 /**
  * Created by Administrator on 2017/4/6.
@@ -54,13 +58,13 @@ public class NewsAdapter extends RecyclerView.Adapter {
             publishViews = temp.getPmViews() == null ? ctx.getString(R.string.null_value) : temp.getPmViews();
             ((NewsTextHolder) holder).tvPublishTime.setText(publishTime);
             ((NewsTextHolder) holder).tvUsername.setText(username);
-            ((NewsTextHolder) holder).tvPublishType.setText(String.format(ctx.getString(R.string.mid_bucket_format),publishType));
+            ((NewsTextHolder) holder).tvPublishType.setText(String.format(ctx.getString(R.string.mid_bucket_format), publishType));
             ((NewsTextHolder) holder).tvPublishTitle.setText(publishTitle);
             ((NewsTextHolder) holder).tvPublishText.setText(publishText);
             ((NewsTextHolder) holder).tvPublishViews.setText(publishViews);
 
             // 设置上传的图片
-            if (temp.getPmADImgList()!= null &&temp.getPmADImgList().size() != 0) {//只有一条 且为""
+            if (temp.getPmADImgList() != null && temp.getPmADImgList().size() != 0) {//只有一条 且为""
                 // 动态设置gridview列数
                 ((NewsTextHolder) holder).gvPublishAdImg.setVisibility(View.VISIBLE);
 
@@ -82,12 +86,26 @@ public class NewsAdapter extends RecyclerView.Adapter {
                 // 图片数组转图片集合
 //                final String[] urls = adImgList.toArray(new String[adImgList.size()]);
                 final String[] urls = new String[adImgList.size()];
-                for (int i = 0 ; i< urls.length;i++){
+                for (int i = 0; i < urls.length; i++) {
                     urls[i] = adImgList.get(i).getPmADImgListURL();
                 }
                 ((NewsTextHolder) holder).gvPublishAdImg.setAdapter(new CircleGridAdapter(ctx, urls));
 
-                // 设置点击事件
+                ((NewsTextHolder) holder).tvPublishTitle.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        funcEnterNewsDetail(temp.getPublishID());
+                    }
+                });
+
+                ((NewsTextHolder) holder).tvPublishText.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        funcEnterNewsDetail(temp.getPublishID());
+                    }
+                });
+
+                // 设置照片的点击事件
                 ((NewsTextHolder) holder).gvPublishAdImg.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent,
@@ -96,10 +114,23 @@ public class NewsAdapter extends RecyclerView.Adapter {
                     }
                 });
 
+
             } else {
                 ((NewsTextHolder) holder).gvPublishAdImg.setVisibility(View.GONE);
             }
         }
+    }
+
+    private void funcEnterNewsDetail(String publishID) {
+        Bundle trans = new Bundle();
+        trans.putString(TransDefine.Bundle_NewsID, publishID);
+        NewsDetailFragment transFragment = new NewsDetailFragment();
+
+        transFragment.setArguments(trans);
+        fragmentManager.beginTransaction()
+                .addToBackStack(null)  //将当前fragment加入到返回栈中
+                .replace(R.id.content_frame, transFragment,NewsDetailFragment.NEWS_DETAIL)
+                .commit();
     }
 
     @Override

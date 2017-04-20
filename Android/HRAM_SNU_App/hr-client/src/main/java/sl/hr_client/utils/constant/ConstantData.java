@@ -26,7 +26,7 @@ public class ConstantData {
     public static final String flag_auto_login = "flag_auto_login"; //自动登录
     public static final String flag_ge_tui_clientId = "flag_ge_tui_clientId";//个推的ClientID
 
-
-
     public static String imgCachePath = Environment.getExternalStorageDirectory().getPath()+"/sl/hr_client/cache/image/";
+
+    public static String downloadPath = Environment.getExternalStorageDirectory().getPath()+"/sl/hr_client/download/";
 }

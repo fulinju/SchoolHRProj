@@ -1,7 +1,6 @@
 package sl.hr_client.main.activity;
 
 import android.animation.Animator;
-import android.annotation.TargetApi;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -27,8 +26,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sl.hr_client.R;
-import sl.hr_client.base.activity.BaseActivity;
-import sl.hr_client.main.fragment.ContentFragment;
+import sl.hr_client.base.BaseActivity;
+import sl.hr_client.base.BaseFragment;
+import sl.hr_client.base.ContentFragment;
+import sl.hr_client.main.download.fragment.DownloadFragment;
 import sl.hr_client.main.news.fragment.NewsFragment;
 
 /**
@@ -39,12 +40,12 @@ public class MainActivity extends BaseActivity implements ViewAnimator.ViewAnima
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private List<SlideMenuItem> list = new ArrayList<>();
-    private ContentFragment contentFragment;
     private ViewAnimator viewAnimator;
     private int res = R.mipmap.content_music;
     private LinearLayout linearLayout;
 
     private NewsFragment newsFragment;
+    private DownloadFragment downloadFragment;
 
 
     @Override
@@ -69,21 +70,21 @@ public class MainActivity extends BaseActivity implements ViewAnimator.ViewAnima
         createMenuList();
     }
 
-    private void initFragment(){
+    private void initFragment() {
         newsFragment = new NewsFragment();
+        downloadFragment = new DownloadFragment();
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.content_frame, newsFragment,NewsFragment.NEWS).commit();
+                .add(R.id.content_frame, newsFragment, NewsFragment.NEWS)
+                .commit();
+
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.content_frame, downloadFragment, DownloadFragment.DOWNLOADS)
+                .commit();
 
         getSupportFragmentManager().beginTransaction()
                 .show(newsFragment).commit();
 
         viewAnimator = new ViewAnimator<>(this, list, newsFragment, drawerLayout, this);
-
-
-//        contentFragment = ContentFragment.newInstance(R.mipmap.content_music);
-//        getSupportFragmentManager().beginTransaction()
-//                .replace(R.id.content_frame, contentFragment)
-//                .commit();
     }
 
     private void createMenuList() {
@@ -91,23 +92,8 @@ public class MainActivity extends BaseActivity implements ViewAnimator.ViewAnima
         list.add(menuItem0);
         SlideMenuItem newsItem = new SlideMenuItem(NewsFragment.NEWS, R.mipmap.icn_1);
         list.add(newsItem);
-//        NewsFragment newsFragment = new NewsFragment();
-//        getSupportFragmentManager().beginTransaction().add(R.id.content_frame, newsFragment,NewsFragment.NEWS).commit();
-//        getSupportFragmentManager().beginTransaction().show(newsFragment).commit();
-        SlideMenuItem menuItem = new SlideMenuItem(ContentFragment.BUILDING, R.mipmap.icn_1);
-        list.add(menuItem);
-//        SlideMenuItem menuItem2 = new SlideMenuItem(ContentFragment.BOOK, R.mipmap.icn_2);
-//        list.add(menuItem2);
-//        SlideMenuItem menuItem3 = new SlideMenuItem(ContentFragment.PAINT, R.mipmap.icn_3);
-//        list.add(menuItem3);
-//        SlideMenuItem menuItem4 = new SlideMenuItem(ContentFragment.CASE, R.mipmap.icn_4);
-//        list.add(menuItem4);
-//        SlideMenuItem menuItem5 = new SlideMenuItem(ContentFragment.SHOP, R.mipmap.icn_5);
-//        list.add(menuItem5);
-//        SlideMenuItem menuItem6 = new SlideMenuItem(ContentFragment.PARTY, R.mipmap.icn_6);
-//        list.add(menuItem6);
-//        SlideMenuItem menuItem7 = new SlideMenuItem(ContentFragment.MOVIE, R.mipmap.icn_7);
-//        list.add(menuItem7);
+        SlideMenuItem downloadItem = new SlideMenuItem(DownloadFragment.DOWNLOADS, R.mipmap.icn_2);
+        list.add(downloadItem);
     }
 
 
@@ -179,19 +165,15 @@ public class MainActivity extends BaseActivity implements ViewAnimator.ViewAnima
     }
 
 
-
-
     @Override
     public ScreenShotAble onSwitch(ResourceAble slideMenuItem, ScreenShotAble screenShotAble, int position) {
         switch (slideMenuItem.getName()) {
             case ContentFragment.CLOSE:
                 return screenShotAble;
             case NewsFragment.NEWS:
-
-                return replaceFragment(newsFragment,screenShotAble,position);
-            case ContentFragment.BUILDING:
-                ContentFragment bu = new ContentFragment();
-                return replaceFragment(bu,screenShotAble,position);
+                return replaceFragment(newsFragment, screenShotAble, position);
+            case DownloadFragment.DOWNLOADS:
+                return replaceFragment(downloadFragment, screenShotAble, position);
             default:
                 return screenShotAble;
         }
@@ -199,12 +181,12 @@ public class MainActivity extends BaseActivity implements ViewAnimator.ViewAnima
 
     //    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private ScreenShotAble replaceFragment(ContentFragment targetFragment, ScreenShotAble screenShotAble, int position) {
-//        this.res = this.res == R.mipmap.content_music ? R.mipmap.content_films : R.mipmap.content_music;
-        startAnim(screenShotAble,position);
-//        ContentFragment contentFragment = ContentFragment.newInstance(this.res);
-//        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, targetFragment).commit();
-//        getSupportFragmentManager().findFragmentByTag(NewsFragment.NEWS);
-        getSupportFragmentManager().beginTransaction().show(targetFragment).commit();
+        startAnim(screenShotAble, position);
+//        getSupportFragmentManager().beginTransaction()
+//                .show(targetFragment)
+//                .hide(newsFragment).commit(); //Replace会创建多个对象，但是Add在onPause后就销毁该引用了
+        getSupportFragmentManager().beginTransaction()
+               .replace(R.id.content_frame,targetFragment).commit(); //Replace会创建多个对象，但是Add在onPause后就销毁该引用了
         return targetFragment;
     }
 
@@ -218,12 +200,11 @@ public class MainActivity extends BaseActivity implements ViewAnimator.ViewAnima
         animator.setInterpolator(new AccelerateInterpolator());
         animator.setDuration(ViewAnimator.CIRCULAR_REVEAL_ANIMATION_DURATION);
 
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-//            findViewById(R.id.content_overlay).setBackground(new BitmapDrawable(getResources(), screenShotAble.getBitmap()));
-//        }else{
-//            findViewById(R.id.content_overlay).setBackgroundDrawable(new BitmapDrawable(getResources(), screenShotAble.getBitmap()));
-//        }
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            findViewById(R.id.content_overlay).setBackground(new BitmapDrawable(getResources(), screenShotAble.getBitmap()));
+        } else {
+            findViewById(R.id.content_overlay).setBackgroundDrawable(new BitmapDrawable(getResources(), screenShotAble.getBitmap()));
+        }
         animator.start();
     }
 

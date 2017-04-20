@@ -1,9 +1,6 @@
 package sl.hr_client.main.start;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -11,8 +8,7 @@ import sl.base.utils.UtilsNet;
 import sl.base.utils.UtilsPreference;
 import sl.base.utils.UtilsToast;
 import sl.hr_client.R;
-import sl.hr_client.base.activity.BaseActivity;
-import sl.hr_client.main.account.LoginActivity;
+import sl.hr_client.base.BaseActivity;
 import sl.hr_client.main.activity.MainActivity;
 import sl.hr_client.utils.constant.ConstantData;
 

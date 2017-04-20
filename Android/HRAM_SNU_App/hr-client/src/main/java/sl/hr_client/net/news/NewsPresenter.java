@@ -19,9 +19,6 @@ public class NewsPresenter {
         newsModel = new NewsModel();
     }
 
-    /**
-     * 获取餐厅的时间
-     */
     public void getPNews(Context context,int pageIndex,int pageSize) {
         newsView.showLoading();
 

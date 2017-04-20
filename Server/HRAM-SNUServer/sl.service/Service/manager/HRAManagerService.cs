@@ -61,7 +61,7 @@ namespace sl.service.manager
 
         #endregion
 
-        #region 会员
+        #region 会员相关
         #region 获取会员列表
         public static Sql GetMemberSql(string mName)
         {
@@ -95,6 +95,15 @@ namespace sl.service.manager
             Sql sql = Sql.Builder.Append("Select * from T_Member Where pkId = @0", id);
             return database.FirstOrDefault<T_Member>(sql);
         }
+
+        #region 检查用户是否存在
+        public static T_Member CheckMemberNameExist(string mName)
+        {
+            Sql sql = Sql.Builder;
+            sql.Append("Select * from T_Member where mName = @0", mName);
+            return database.FirstOrDefault<T_Member>(sql);
+        }
+        #endregion
         #endregion
 
         #endregion

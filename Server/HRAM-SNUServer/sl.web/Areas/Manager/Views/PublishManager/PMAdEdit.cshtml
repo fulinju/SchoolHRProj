@@ -13,19 +13,23 @@
                 图片地址：
             </th>
             <td>
-                <input type="file" id="pmADImgListURL" name="pmADImgListURL" />
+                @if (Model.pkId == null)
+                {
+                    <input type="file" id="pmADImgListURL" name="pmADImgListURL" />
+                }
+                else
+                {
+                    @Html.DisplayFor(m => m.pmADImgListURL)
+                }
             </td>
-
-
         <tr>
             <th>
-                会员图片：
+                广告图片：
             </th>
-            <td colspan="2">
+            <td id="adPic" colspan="2">
                 @if (Model != null && !string.IsNullOrEmpty(Model.pmADImgListURL))
                 {
                     <img src="@Model.pmADImgListURL" alt="" />
-                    <a class="btnDelImg" id="@Model.pkId" onclick="delface(@Model.pkId)">删除</a>
                 }
             </td>
         </tr>
@@ -35,28 +39,31 @@
                 位序：
             </th>
             <td>
-                @Html.InputFor(m => m.pmADImgListNum)
+                @Html.EasyUiNumberTextBoxFor(m => m.pmADImgListNum)
             </td>
         </tr>
     </table>
 </form>
 
-<script type="text/javascript">
-    $('.btnDelImg').click(function () {
-        var url = '@Url.Action("DelImg")';
-        var id = $(this).attr('id');
+@*<script type="text/javascript">
+        $('.btnDelImg').click(function () {
+            var url = '@Url.Action("DelImg")';
+            var id = $(this).attr('id');
 
-        $.ajax({
-            type: 'post',
-            url: url,
-            data: {
-                id: id
-            },
-            success: function (data) {
-                //服务器返回响应，根据响应结果
-                $.messager.alert(data.code, data.message);
-            },
-            dataType: "json"
-        });
-    })
-</script>
+            $.ajax({
+                type: 'post',
+                url: url,
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    //服务器返回响应，根据响应结果
+                    $.messager.alert(data.state, data.message);
+                    if(data.state == 1){
+                        $("#adPic").hide();
+                    }
+                },
+                dataType: "json"
+            });
+        })
+    </script>*@

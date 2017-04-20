@@ -1,9 +1,11 @@
-package sl.hr_client.base.application;
+package sl.hr_client.base;
 
 import android.app.Application;
 
 import com.android.volley.toolbox.Volley;
 import com.igexin.sdk.PushManager;
+
+import org.xutils.x;
 
 import sl.hr_client.push.GeTuiIntentService;
 import sl.hr_client.push.GeTuiPushService;
@@ -26,6 +28,8 @@ public class BaseApplication extends Application {
         PushManager.getInstance().initialize(this.getApplicationContext(), GeTuiPushService.class);
         // com.getui.demo.GeTuiIntentService 为第三方自定义的推送服务事件接收类
         PushManager.getInstance().registerPushIntentService(this.getApplicationContext(), GeTuiIntentService.class);
+
+        x.Ext.init(this);
     }
 
     public static BaseApplication getInstances() {

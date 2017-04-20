@@ -9,6 +9,7 @@ using sl.web.ui;
 using sl.validate;
 using Newtonsoft.Json;
 using PetaPoco;
+using sl.service;
 using sl.service.manager;
 
 namespace sl.web.Areas.Manager.Controllers
@@ -62,6 +63,8 @@ namespace sl.web.Areas.Manager.Controllers
                     }
                     else
                     {
+                        m.flAddTime = DateTime.Now.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss"); //未选择时间 获取当前时间
+                        m.uLoginName = Security.DesDecrypt(CachedConfigContext.Current.WebSiteConfig.WebSiteKey, Utils.GetCookie(Key.MANAGER_NAME));//审核者
                         m.isDeleted = false;
                         object result = HRAManagerService.database.Insert(m);
                         return SaveMessage(result);

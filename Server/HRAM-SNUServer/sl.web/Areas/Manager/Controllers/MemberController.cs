@@ -10,6 +10,7 @@ using sl.validate;
 using Newtonsoft.Json;
 using PetaPoco;
 using sl.service.manager;
+using sl.service;
 
 namespace sl.web.Areas.Manager.Controllers
 {
@@ -42,7 +43,9 @@ namespace sl.web.Areas.Manager.Controllers
             int flag = 0;
             foreach (var entity in membersList)
             {
-                flag = HRAManagerService.database.Delete(entity);
+                Utils.DeleteFile(entity.mImgURL);
+                entity.isDeleted = true;
+                flag = HRAManagerService.database.Update(entity);
             }
             return DelMessage(flag);
         }
@@ -60,6 +63,8 @@ namespace sl.web.Areas.Manager.Controllers
                     if (validate.Result)
                     {
                         m.mImgURL = UploadFile();
+                        m.mApplyTime = DateTime.Now.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss"); //未选择时间 获取当前时间
+                        m.uLoginName = Security.DesDecrypt(CachedConfigContext.Current.WebSiteConfig.WebSiteKey, Utils.GetCookie(Key.MANAGER_NAME));//审核者
                         m.isDeleted = false;
                         object result = HRAManagerService.database.Insert(m);
                         return SaveMessage(result);
@@ -141,11 +146,12 @@ namespace sl.web.Areas.Manager.Controllers
             }
             //换成 DelMessage
             if(success == 1){
-                return Json(Message("删除成功"), JsonRequestBehavior.AllowGet); //删除成功
+                return Json(new JsonTip("1", "删除成功"));
+                //return Json(Message("删除成功"), JsonRequestBehavior.AllowGet); //删除成功
             }
             else
             {
-                return Json(Message("删除失败"), JsonRequestBehavior.AllowGet); //删除失败
+                return Json(new JsonTip("0", "删除失败"));//删除失败
             } 
         }
         #endregion
@@ -170,6 +176,20 @@ namespace sl.web.Areas.Manager.Controllers
                 }
             }
             return View("EditMemberSummary", load);
+        }
+        #endregion
+
+
+        #region 检查会员名是否存在
+        [HttpPost]
+        public ActionResult CheckMemberNameIsExist(string mName)
+        {
+            T_Member member = HRAManagerService.CheckMemberNameExist(mName);
+            if (member != null)
+            {
+                return Json(new { state = false, message = "此会员名已存在，请更换" });
+            }
+            return Json(new { state = true, message = string.Empty });
         }
         #endregion
         

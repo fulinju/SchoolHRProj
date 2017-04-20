@@ -15,7 +15,7 @@ import java.util.List;
 
 import sl.base.utils.UtilsPreference;
 import sl.hr_client.R;
-import sl.hr_client.base.activity.BaseActivity;
+import sl.hr_client.base.BaseActivity;
 import sl.hr_client.main.adapter.GuideViewPagerAdapter;
 import sl.hr_client.utils.constant.ConstantData;
 

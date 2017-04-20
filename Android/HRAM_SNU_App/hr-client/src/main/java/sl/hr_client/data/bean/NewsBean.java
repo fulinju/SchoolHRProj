@@ -18,6 +18,7 @@ import org.greenrobot.greendao.annotation.Transient;
 public class NewsBean {
     @Id
     private Long id;
+    private String publishID;
     private String uUserName;
     private String pmPublishTime;
     private String pmTypeValue;
@@ -88,11 +89,20 @@ public class NewsBean {
     public void setPmTypeValue(String pmTypeValue) {
         this.pmTypeValue = pmTypeValue;
     }
-    @Generated(hash = 13241424)
-    public NewsBean(Long id, String uUserName, String pmPublishTime,
-            String pmTypeValue, String pmViews, String pmTitle, String pmText,
-            String pmADImgListJson) {
+
+    public String getPublishID() {
+        return this.publishID;
+    }
+
+    public void setPublishID(String publishID) {
+        this.publishID = publishID;
+    }
+    @Generated(hash = 616635480)
+    public NewsBean(Long id, String publishID, String uUserName,
+            String pmPublishTime, String pmTypeValue, String pmViews,
+            String pmTitle, String pmText, String pmADImgListJson) {
         this.id = id;
+        this.publishID = publishID;
         this.uUserName = uUserName;
         this.pmPublishTime = pmPublishTime;
         this.pmTypeValue = pmTypeValue;

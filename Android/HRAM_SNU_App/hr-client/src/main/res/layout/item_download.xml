@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_gray_under_line_bg"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tv_download_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="[类型]" />
+
+    <TextView
+        android:id="@+id/tv_download_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/tv_download_type"
+        android:text="标题" />
+
+    <TextView
+        android:id="@+id/tv_download_publish_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="发布时间" />
+
+    <TextView
+        android:id="@+id/tv_download_url"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_download_type"
+        android:layout_marginTop="5dp"
+        android:text="链接地址" />
+
+    <TextView
+        android:id="@+id/tv_download_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_download_url"
+        android:layout_marginTop="5dp"
+        android:text="发布者" />
+
+    <TextView
+        android:id="@+id/tv_download_num"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_below="@+id/tv_download_username"
+        android:gravity="center"
+        android:layout_toLeftOf="@+id/btn_download"
+        android:layout_marginRight="5dp"
+        android:text="下载数量" />
+
+    <Button
+        android:id="@+id/btn_download"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:gravity="center"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/button_theme_rect"
+        android:textColor="@color/white"
+        android:layout_below="@+id/tv_download_username"
+        android:text="立即下载" />
+
+</RelativeLayout>

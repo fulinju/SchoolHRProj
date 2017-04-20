@@ -11,10 +11,17 @@
     <table class="msgtable" title="编辑友情链接" style="width:100%;height:100%">
         <tr>
             <th>
-                登录名：
+                添加者：
             </th>
             <td>
-                @Html.InputFor(m => m.uLoginName, Html.Valid().Required("请输入用户名！").AsHtmlAttribute())
+                @if (Model.pkId == null)
+                {
+                    @Html.Label("暂无")
+                }
+                else
+                {
+                    @Html.DisplayFor(m => m.uLoginName)
+                }
             </td>
         </tr>
         <tr>
@@ -22,7 +29,9 @@
                 链接名称：
             </th>
             <td>
-                @Html.InputFor(m => m.flName, Html.Valid().Required("请输入链接名称！").AsHtmlAttribute())
+                @Html.InputFor(m => m.flName, 
+                Html.Valid().Required("请输入链接名称！")
+                .AsHtmlAttribute())
             </td>
         </tr>
 
@@ -31,7 +40,10 @@
                 链接地址：
             </th>
             <td>
-                @Html.InputFor(m => m.flURL, Html.Valid().Required("请输入链接地址！").AsHtmlAttribute())
+                @Html.InputFor(m => m.flURL, 
+                Html.Valid().Required("请输入链接地址！")
+                .Url()
+                .AsHtmlAttribute())
             </td>
         </tr>
 
@@ -40,7 +52,10 @@
                 链接图片地址：
             </th>
             <td>
-                @Html.InputFor(m => m.flImgURL, Html.Valid().Required("请输入链接图片地址！").AsHtmlAttribute())
+                @Html.InputFor(m => m.flImgURL, 
+                Html.Valid().Required("请输入链接图片地址！")
+                .Url()
+                .AsHtmlAttribute())
             </td>
         </tr>
 
@@ -49,7 +64,15 @@
                 添加时间：
             </th>
             <td>
-                @Html.EasyUiDateTimeBoxFor(m => m.flAddTime)
+                @if (Model.pkId == null)
+                {
+                    @Html.Label("暂无")
+                }
+                else
+                {
+                    @Html.DisplayFor(m => m.flAddTime)
+                }
+                @*@Html.EasyUiDateTimeBoxFor(m => m.flAddTime)*@
             </td>
         </tr>
 
