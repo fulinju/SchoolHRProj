@@ -7,6 +7,7 @@ using System.Data;
 using PetaPoco;
 using sl.model;
 
+
 namespace sl.service.api
 {
     public class HRAMApiService
@@ -199,7 +200,7 @@ namespace sl.service.api
         /// <param name="pageSize"></param>
         /// <param name="dmTypeID"></param>
         /// <returns></returns>
-        public static Page<DownLoadInfo> GetDownloads(int pageIndex, int pageSize, string dmTypeID)
+        public static Page<DownLoadInfo> GetDownloads(int pageIndex, int pageSize, string dmTypeValue)
         {
             Sql sql = Sql.Builder;
 
@@ -207,7 +208,7 @@ namespace sl.service.api
                 + "T_DownloadManage.pkId as downloadID");
             sql.Append("from T_DownloadManage left join T_DMType on T_DownloadManage.dmTypeID = T_DMType.dmTypeID ");
             sql.Append("left join T_User on T_User.uLoginName = T_DownloadManage.uLoginName");
-            sql.Append("where T_DownloadManage.dmTypeID like @0", dmTypeID);
+            sql.Append("where T_DMType.dmTypeValue like @0", dmTypeValue);
             sql.Append("and T_DownloadManage.isDeleted = 0");
             Page<DownLoadInfo> list = database.Page<DownLoadInfo>(pageIndex, pageSize, sql);
 
@@ -294,8 +295,47 @@ namespace sl.service.api
         #endregion
 
 
+        #region 友情链接相关
+        public static Page<FriendlyLinkInfo> GetFriendlyLinks(int pageIndex, int pageSize)
+        {
+            Sql sql = Sql.Builder;
+           
+            sql.Select("T_User.uUserName,T_FLType.flTypeValue,T_FriendlyLink.pkId as friendlyLinkID,T_FriendlyLink.*");
+            sql.Append(" from T_FriendlyLink left join T_User on T_User.uLoginName = T_FriendlyLink.uLoginName ");
+            sql.Append(" left join T_FLType on T_FriendlyLink.flTypeID = T_FLType.flTypeID ");
+            sql.Where("T_FriendlyLink.isDeleted = 0");
+
+            Page<FriendlyLinkInfo> list = database.Page<FriendlyLinkInfo>(pageIndex, pageSize, sql);
+
+            return list;
+        }
+
+        /// <summary>
+        /// 根据ID获取友情链接
+        /// </summary>
+        /// <param name="flTypeID"></param>
+        /// <returns></returns>
+        public static List<T_FriendlyLink> GetFriendlyLinksByTypeID(string flTypeID)
+        {
+            Sql sql = Sql.Builder;
+
+            sql.Select("*");
+            sql.From("T_FriendlyLink");
+            sql.Where("T_FriendlyLink.flTypeID = @0 and T_FriendlyLink.isDeleted = 0", flTypeID);
+
+            List<T_FriendlyLink> list = database.Fetch<T_FriendlyLink>(sql);
+
+            return list;
+        }
+        #endregion
+
+
         #region 类型相关
 
+        /// <summary>
+        /// 获取会员类型
+        /// </summary>
+        /// <returns></returns>
         public static List<MemberTypeInfo> GetMemberType()
         {
             Sql sql = Sql.Builder;
@@ -312,23 +352,23 @@ namespace sl.service.api
             return list;
         }
 
-        #endregion
-
-        #region 友情链接相关
-        public static Page<FriendlyLinkInfo> GetFriendlyLinks(int pageIndex, int pageSize)
+        /// <summary>
+        /// 获取友情链接类型
+        /// </summary>
+        /// <returns></returns>
+        public static List<T_FLType> GetFLType()
         {
             Sql sql = Sql.Builder;
 
-            sql.Append("Select T_User.uUserName,");
-            sql.Append("T_FriendlyLink.pkId as friendlyLinkID,");
-            sql.Append("T_FriendlyLink.*");
-            sql.Append(" from T_FriendlyLink left join T_User on T_User.uLoginName = T_FriendlyLink.uLoginName ");
-            sql.Append(" where T_FriendlyLink.isDeleted = 0");
-
-            Page<FriendlyLinkInfo> list = database.Page<FriendlyLinkInfo>(pageIndex, pageSize, sql);
-
+            sql.Select("*");
+            sql.From("T_FLType");
+            sql.Where("isDeleted = 0 and flTypeID != '@0'" ,ConstantData.TYPE_DEFALUT_ID);
+            List<T_FLType> list = database.Fetch<T_FLType>(sql);
             return list;
         }
+
         #endregion
+
+
     }
 }

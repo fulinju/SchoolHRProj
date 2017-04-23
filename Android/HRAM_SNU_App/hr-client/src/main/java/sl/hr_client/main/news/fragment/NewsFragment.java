@@ -56,6 +56,8 @@ public class NewsFragment extends ContentFragment implements NewsView {
         super.onViewCreated(view, savedInstanceState);
         newsPresenter = new NewsPresenter(this);
 
+
+
         xrvNews = (XRecyclerView) view.findViewById(R.id.xrv_news); //把初始化View分开写
 
         //设置布局，不然不显示
@@ -84,6 +86,7 @@ public class NewsFragment extends ContentFragment implements NewsView {
         });
 
     }
+
 
     private void funcGetData(int curIndex, int curSize) {
         if (UtilsNet.isNetworkAvailable(ctx) == true) {

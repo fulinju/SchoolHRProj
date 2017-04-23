@@ -34,17 +34,17 @@
 
 </head>
 <body class="easyui-layout">
-    <div region="north" border="true" class="cs-north" style="height: 120px;">
+    <div region="north" class="cs-north" style="height: 120px; background: #9AFF9A; overflow: hidden;" split="true">
         <div class="cs-north-bg" style="text-align: center;">
             <div class="cs-north-title" style="margin: 0 auto; font-size:50px; line-height: 120px; overflow: hidden; ">
                 人力资源管理系统
             </div>
 
             <div class="cs-north-right">
-                欢迎您：<span class="red">[ManagerContext.UserInfo.uUserName]</span>
+                欢迎您：<span style="text-decoration:underline">&nbsp;@ManagerContext.UserInfo.uUserName &nbsp;</span>
                 <a href="~/Html/web/HomePage.html" target="_blank">
                     返回首页
-                </a> <a href="@Url.Action("Logout", "Main")">退出</a>
+                </a> <a href="@Url.Action("Logout", "Main")">&nbsp;退出&nbsp;</a>
             </div>
         </div>
     </div>
@@ -68,8 +68,7 @@
         </div>
     </div>
 
-    <div id="mainPanle" class="easyui-layout" style="background: #eee; overflow: hidden"
-         region="center" border="false" border="false">
+    <div id="mainPanle" class="easyui-layout" style="background: #eee; overflow: hidden" region="center" border="false">
         <div id="tabs" class="easyui-tabs" fit="true" border="false">
             <div title="首页">
                 <div class="cs-home-remark" style="padding: 10px;">

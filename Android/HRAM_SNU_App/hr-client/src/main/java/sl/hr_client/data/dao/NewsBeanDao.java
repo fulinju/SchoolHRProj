@@ -15,7 +15,7 @@ import sl.hr_client.data.bean.NewsBean;
 /** 
  * DAO for table "NEWS_BEAN".
 */
-public class NewsBeanDao extends AbstractDao<NewsBean, Long> {
+public class NewsBeanDao extends AbstractDao<NewsBean, String> {
 
     public static final String TABLENAME = "NEWS_BEAN";
 
@@ -24,15 +24,14 @@ public class NewsBeanDao extends AbstractDao<NewsBean, Long> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property PublishID = new Property(1, String.class, "publishID", false, "PUBLISH_ID");
-        public final static Property UUserName = new Property(2, String.class, "uUserName", false, "U_USER_NAME");
-        public final static Property PmPublishTime = new Property(3, String.class, "pmPublishTime", false, "PM_PUBLISH_TIME");
-        public final static Property PmTypeValue = new Property(4, String.class, "pmTypeValue", false, "PM_TYPE_VALUE");
-        public final static Property PmViews = new Property(5, String.class, "pmViews", false, "PM_VIEWS");
-        public final static Property PmTitle = new Property(6, String.class, "pmTitle", false, "PM_TITLE");
-        public final static Property PmText = new Property(7, String.class, "pmText", false, "PM_TEXT");
-        public final static Property PmADImgListJson = new Property(8, String.class, "pmADImgListJson", false, "PM_ADIMG_LIST_JSON");
+        public final static Property PublishID = new Property(0, String.class, "publishID", true, "PUBLISH_ID");
+        public final static Property UUserName = new Property(1, String.class, "uUserName", false, "U_USER_NAME");
+        public final static Property PmPublishTime = new Property(2, String.class, "pmPublishTime", false, "PM_PUBLISH_TIME");
+        public final static Property PmTypeValue = new Property(3, String.class, "pmTypeValue", false, "PM_TYPE_VALUE");
+        public final static Property PmViews = new Property(4, String.class, "pmViews", false, "PM_VIEWS");
+        public final static Property PmTitle = new Property(5, String.class, "pmTitle", false, "PM_TITLE");
+        public final static Property PmText = new Property(6, String.class, "pmText", false, "PM_TEXT");
+        public final static Property PmADImgListJson = new Property(7, String.class, "pmADImgListJson", false, "PM_ADIMG_LIST_JSON");
     };
 
 
@@ -48,15 +47,14 @@ public class NewsBeanDao extends AbstractDao<NewsBean, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"NEWS_BEAN\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
-                "\"PUBLISH_ID\" TEXT," + // 1: publishID
-                "\"U_USER_NAME\" TEXT," + // 2: uUserName
-                "\"PM_PUBLISH_TIME\" TEXT," + // 3: pmPublishTime
-                "\"PM_TYPE_VALUE\" TEXT," + // 4: pmTypeValue
-                "\"PM_VIEWS\" TEXT," + // 5: pmViews
-                "\"PM_TITLE\" TEXT," + // 6: pmTitle
-                "\"PM_TEXT\" TEXT," + // 7: pmText
-                "\"PM_ADIMG_LIST_JSON\" TEXT);"); // 8: pmADImgListJson
+                "\"PUBLISH_ID\" TEXT PRIMARY KEY NOT NULL ," + // 0: publishID
+                "\"U_USER_NAME\" TEXT," + // 1: uUserName
+                "\"PM_PUBLISH_TIME\" TEXT," + // 2: pmPublishTime
+                "\"PM_TYPE_VALUE\" TEXT," + // 3: pmTypeValue
+                "\"PM_VIEWS\" TEXT," + // 4: pmViews
+                "\"PM_TITLE\" TEXT," + // 5: pmTitle
+                "\"PM_TEXT\" TEXT," + // 6: pmText
+                "\"PM_ADIMG_LIST_JSON\" TEXT);"); // 7: pmADImgListJson
     }
 
     /** Drops the underlying database table. */
@@ -69,49 +67,44 @@ public class NewsBeanDao extends AbstractDao<NewsBean, Long> {
     protected final void bindValues(DatabaseStatement stmt, NewsBean entity) {
         stmt.clearBindings();
  
-        Long id = entity.getId();
-        if (id != null) {
-            stmt.bindLong(1, id);
-        }
- 
         String publishID = entity.getPublishID();
         if (publishID != null) {
-            stmt.bindString(2, publishID);
+            stmt.bindString(1, publishID);
         }
  
         String uUserName = entity.getUUserName();
         if (uUserName != null) {
-            stmt.bindString(3, uUserName);
+            stmt.bindString(2, uUserName);
         }
  
         String pmPublishTime = entity.getPmPublishTime();
         if (pmPublishTime != null) {
-            stmt.bindString(4, pmPublishTime);
+            stmt.bindString(3, pmPublishTime);
         }
  
         String pmTypeValue = entity.getPmTypeValue();
         if (pmTypeValue != null) {
-            stmt.bindString(5, pmTypeValue);
+            stmt.bindString(4, pmTypeValue);
         }
  
         String pmViews = entity.getPmViews();
         if (pmViews != null) {
-            stmt.bindString(6, pmViews);
+            stmt.bindString(5, pmViews);
         }
  
         String pmTitle = entity.getPmTitle();
         if (pmTitle != null) {
-            stmt.bindString(7, pmTitle);
+            stmt.bindString(6, pmTitle);
         }
  
         String pmText = entity.getPmText();
         if (pmText != null) {
-            stmt.bindString(8, pmText);
+            stmt.bindString(7, pmText);
         }
  
         String pmADImgListJson = entity.getPmADImgListJson();
         if (pmADImgListJson != null) {
-            stmt.bindString(9, pmADImgListJson);
+            stmt.bindString(8, pmADImgListJson);
         }
     }
 
@@ -119,96 +112,88 @@ public class NewsBeanDao extends AbstractDao<NewsBean, Long> {
     protected final void bindValues(SQLiteStatement stmt, NewsBean entity) {
         stmt.clearBindings();
  
-        Long id = entity.getId();
-        if (id != null) {
-            stmt.bindLong(1, id);
-        }
- 
         String publishID = entity.getPublishID();
         if (publishID != null) {
-            stmt.bindString(2, publishID);
+            stmt.bindString(1, publishID);
         }
  
         String uUserName = entity.getUUserName();
         if (uUserName != null) {
-            stmt.bindString(3, uUserName);
+            stmt.bindString(2, uUserName);
         }
  
         String pmPublishTime = entity.getPmPublishTime();
         if (pmPublishTime != null) {
-            stmt.bindString(4, pmPublishTime);
+            stmt.bindString(3, pmPublishTime);
         }
  
         String pmTypeValue = entity.getPmTypeValue();
         if (pmTypeValue != null) {
-            stmt.bindString(5, pmTypeValue);
+            stmt.bindString(4, pmTypeValue);
         }
  
         String pmViews = entity.getPmViews();
         if (pmViews != null) {
-            stmt.bindString(6, pmViews);
+            stmt.bindString(5, pmViews);
         }
  
         String pmTitle = entity.getPmTitle();
         if (pmTitle != null) {
-            stmt.bindString(7, pmTitle);
+            stmt.bindString(6, pmTitle);
         }
  
         String pmText = entity.getPmText();
         if (pmText != null) {
-            stmt.bindString(8, pmText);
+            stmt.bindString(7, pmText);
         }
  
         String pmADImgListJson = entity.getPmADImgListJson();
         if (pmADImgListJson != null) {
-            stmt.bindString(9, pmADImgListJson);
+            stmt.bindString(8, pmADImgListJson);
         }
     }
 
     @Override
-    public Long readKey(Cursor cursor, int offset) {
-        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
+    public String readKey(Cursor cursor, int offset) {
+        return cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0);
     }    
 
     @Override
     public NewsBean readEntity(Cursor cursor, int offset) {
         NewsBean entity = new NewsBean( //
-            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // publishID
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // uUserName
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // pmPublishTime
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // pmTypeValue
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // pmViews
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // pmTitle
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // pmText
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8) // pmADImgListJson
+            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // publishID
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // uUserName
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // pmPublishTime
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // pmTypeValue
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // pmViews
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // pmTitle
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // pmText
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7) // pmADImgListJson
         );
         return entity;
     }
      
     @Override
     public void readEntity(Cursor cursor, NewsBean entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setPublishID(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setUUserName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setPmPublishTime(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setPmTypeValue(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setPmViews(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setPmTitle(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setPmText(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
-        entity.setPmADImgListJson(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setPublishID(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
+        entity.setUUserName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setPmPublishTime(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setPmTypeValue(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setPmViews(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setPmTitle(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setPmText(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setPmADImgListJson(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
      }
     
     @Override
-    protected final Long updateKeyAfterInsert(NewsBean entity, long rowId) {
-        entity.setId(rowId);
-        return rowId;
+    protected final String updateKeyAfterInsert(NewsBean entity, long rowId) {
+        return entity.getPublishID();
     }
     
     @Override
-    public Long getKey(NewsBean entity) {
+    public String getKey(NewsBean entity) {
         if(entity != null) {
-            return entity.getId();
+            return entity.getPublishID();
         } else {
             return null;
         }

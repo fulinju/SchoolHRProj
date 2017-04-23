@@ -1,0 +1,2835 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>服务大厅</title>
+<link href="Service.css" rel="stylesheet" type="text/css" >
+<script src="js/base.js" type="text/javascript"> </script>
+<script src="js/function.js" type="text/javascript"> </script>
+<script src="bar.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <div class="UI">
+    <div id="header">
+       <div id="logo">
+         <!--<img src="images/logo.jpg" alt="图标" style="width:60px; height:60px;">-->
+         <h1>昆明人力资源和社会保障协会</h1> 
+         <h5> KUNMING PROVINCIAL HUMAN RESOURCES AND SOCIAL SECURITY DEPARTMENT</h5>
+       </div>
+       <div id="header_right" >
+           <div class="login"><a href="#">登录</a></div>
+           <div class="reg"><a href="Members.html">注册</a></div>
+           <div class="manage"><a href="#">管理</a></div>
+       </div> 
+    </div> <!--header结束-->
+    
+    <div id="nav">
+        <div id="nav_left">
+            <ul id="first" >
+                <li> <a href="HomePage.html" >首页 </a> </li>
+                 <li class="nav_li1" > <a href="AboutAssociation.html" target="_blank" >关于协会</a> 
+                     <ul class="second1">
+                         <li> <a href="AboutAssociation.html"> 协会工作</a></li>
+                         <li><a href="Assoociation_intro.html"> 协会简介</a></li>
+                     </ul>
+                 </li>
+                 <li  class="nav_li2"> <a href="PolicyReglations.html" target="_blank" >政策法规</a> </li>
+                 <li  class="nav_li3"> <a href="Industry.html" target="_blank" >行业动态</a> </li>
+                 <li  class="nav_li5"> <a href="Service.html" target="_blank" class="on">服务大厅</a> 
+                      <ul class="second2">
+                         <li class="second2_li1" > <a href="#"> 信息查询</a>
+                              <ul class="third1">
+                                  <li><a href="">养老保险</a></li>
+                                  <li><a href="">失业保险</a></li>
+                                  <li><a href="">工伤保险</a></li>
+                                  <li><a href="">生育保险</a></li>
+                                  <li><a href="">医疗保险</a></li>
+                                  <li><a href="">住房公积金</a></li>
+                                  <li><a href="">就业信息</a></li>
+                                  <li><a href="http://www.100job.cn" target="_blank">人才信息</a></li>
+                                  <li><a href="http://www.ynzp.com" target="_blank">招聘信息</a></li>      
+                              </ul>
+                         </li>
+                         <li class="second2_li2"><a href="#"> 协会服务</a>
+                              <ul class="third2">
+                                  <li><a href="">培训服务</a></li>
+                                  <li><a href="">法律援助</a></li>
+                                  <li><a href="">专家咨询</a></li>
+                                  <li><a href="">档案服务</a></li>
+                                  <li><a href="">系统管理</a></li>
+                              </ul>
+                         </li>
+                </ul>
+           </li>
+           <li class="nav_li6"> <a href="MemberShow.html" target="_blank" >会员中心</a> 
+                <ul class="second3">
+                   <li> <a href="Members.html"> 会员申请</a></li>
+                   <li><a href="MemberShow.html"> 会员展示</a></li>
+                </ul>
+           </li>
+           <li> <a href="Download.html" target="_blank" >资料下载</a> </li>
+           <li> <a href="Link.html" target="_blank" >友情链接</a> </li>
+         </ul>
+        </div>
+        <div id="nav_right">
+            <form action="" method="post">
+               <input type="text" class="search_text">
+            </form>
+            <span> 搜索</span>
+        </div>
+    </div> <!--nav导航结束-->
+    <div id="UI">
+    <div id="color">
+    <div id="contents">
+    </div><!--contents结束-->
+    <div id="content">
+       <div id="login">
+            <h2><img src="images/close.png" alt="" class="close" />网站登录</h2>
+            <div class="user">&nbsp;&nbsp;&nbsp; 单位名称：<input type="text" name="user" class="text" /></div>
+            <div class="pass">组织机构代码：<input type="password" name="pass" class="text" /></div>
+            <div class="button"><input type="button" class="submit" value="" /></div>
+            <div class="other">注册新用户 | 忘记密码？</div>
+       </div>
+       <!--服务展示-->
+      <div id="content_table">
+          <!--二级导航开始-->
+          <table id="table_first">
+              <tr id="table_first_tr">
+                  <td width="2" height="40"></td>
+                  <td class="table_first_td  "  id=bg_1_1 onmouseover=showtab(1,1,9)><a class="on2" id=td_1_1  href="#" >就业创业</a></td>
+                  <td width="1"></td>
+                  <td class="table_first_td"  id=bg_1_2 onmouseover=showtab(1,2,9)><a id=td_1_2  href="#">社会保险</a></td>
+                  <td width="1"></td>
+                  <td class="table_first_td"  id=bg_1_3 onmouseover=showtab(1,3,9)><a id=td_1_3  href="#">职业能力培训</a></td>
+                  <td width="1"></td>
+                  <td class="table_first_td"  id=bg_1_4 onmouseover=showtab(1,4,9)><a id=td_1_4  href="#">人才发展</a></td>
+                  <td width="1"></td>
+                  <td class="table_first_td"   id=bg_1_5 onmouseover=showtab(1,5,9)><a id=td_1_5  href="#">公务员管理</a></td>
+                  <td width="1"></td>
+                  <td class="table_first_td"  id=bg_1_6 onmouseover=showtab(1,6,9)><a id=td_1_6  href="#">事业单位人员管理</a></td>
+                  <td width="1"></td>
+                  <td class="table_first_td"  id=bg_1_7 onmouseover=showtab(1,7,9)><a id=td_1_7  href="#">职称评审</a></td>
+                  <td width="1"></td>
+                  <td class="table_first_td"   id=bg_1_8 onmouseover=showtab(1,8,9)><a id=td_1_8  href="#">劳动关系</a></td>
+                  <td width="1"></td>
+              </tr>
+              <tr>
+                  <td colspan="19" bgcolor="#FFFFFF">&nbsp;</td>
+              </tr>
+          </table>  <!--id 为table_first 的table结束-->
+          
+          <!--就业创业开始-->
+          <table class="table_second" id=tab_1_1 >
+            <tr>
+              <td width="313" height="522" valign="top" >
+                <table class="table_second_bar" width="254" >
+                  <tr>
+                     <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td bgcolor="#f5fafe">
+                      <table width="214" >
+                            <tr>
+                                 <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                 <td class="table_second_bar_td on1" id=bg_2_1 onmouseover=showtab(2,1,5)><a class="pl35" id=td_2_1  href="">就业扶持</a> </td>
+                            </tr>
+                            <tr>
+                                 <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                 <td class="table_second_bar_td" id=bg_2_2 onmouseover=showtab(2,2,5)><a class="pl35" id=td_2_2  href="">创业扶持</a> </td>
+                            </tr>
+                            <tr>
+                                 <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                 <td class="table_second_bar_td" id=bg_2_3 onmouseover=showtab(2,3,5)><a class="pl35" id=td_2_3 href="">高校毕业生就业</a> </td>
+                            </tr>
+                            <tr>
+                                 <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                             <!--<td class="table_second_bar_td" id=bg_2_4 onmouseover=showtab(2,4,5)><a class="pl35" id=td_2_4  href="">积分入户</a> </td>-->
+                            </tr>
+                            <tr>
+                                  <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <!--  <td class="table_second_bar_td" id=bg_2_5 onmouseover=showtab(2,5,5) ><a class="pl35" id=td_2_5 >技术工人招调</a> </td>-->
+                            </tr>
+                            <tr>
+                                  <td>&nbsp;</td>
+                            </tr>
+                          </table><!-- table_second1_bar结束-->
+                    </td>
+                  </tr> <!--table_second1第一行结束-->      
+                  <tr><td>&nbsp;</td></tr>
+                </table> <!--table_second1_bar结束-->
+              </td>
+                
+              <td width="17">&nbsp;
+              </td>
+                
+              <td valign="top" class="Border_gray4">   
+                   <table id=tab_2_1 width="94%" >
+                      <tr>
+                        <td height="20" colspan="3"></td>
+                      </tr>
+                        
+                      <tr>
+                        <td width="12" height="28" align="center"></td>
+                        <td><a href='' title='申请就业补贴各类表格（20161028）' target="_blank">申请就业补贴各类表格（20161028）</a></td>
+                        <td width="70" class="date">2016-11-01</td>
+                      </tr>
+                      <tr>
+                        <td height="1" colspan="3" ></td>
+                      </tr>
+                      
+                      <tr>
+                        <td width="12" height="28" align="center"></td>
+                        <td><a href='' title='珠海市就业补贴申领指引' target="_blank">珠海市就业补贴申领指引</a></td>
+                        <td width="70" class="date">2016-12-09</td>
+                      </tr>
+                      <tr>
+                        <td height="1" colspan="3" ></td>
+                      </tr>
+                      
+                      <tr>
+                        <td width="12" height="28" align="center"></td>
+                        <td><a href='' title='一文看懂国家就业补助资金应该怎么发！' target="_blank">一文看懂国家就业补助资金应该怎么发！</a></td>
+                        <td width="70" class="date">2016-12-13</td>
+                      </tr>
+                      <tr>
+                        <td height="1" colspan="3" ></td>
+                      </tr>
+                      
+                      <tr>
+                        <td width="12" height="28" align="center"></td>
+                        <td><a href='./jycy/jyfc/201611/t20161129_15224625.html' title='关于进一步促进高校毕业生在珠海就业创业的通知' target="_blank">关于进一步促进高校毕业生在珠海就业创业的通知</a></td>
+                        <td width="70" class="date">2016-11-29</td>
+                      </tr>
+                       <tr>
+                        <td height="1" colspan="3" ></td>
+                      </tr>
+                      
+                      <tr>
+                        <td width="12" height="28" align="center"></td>
+                        <td><a href='' title='关于举办2016年珠海市“拥军优属”专场招聘会的通告' target="_blank">关于举办2016年珠海市“拥军优属”专场招聘会的通告</a></td>
+                        <td width="70" class="date">2016-07-18</td>
+                      </tr>
+                       <tr>
+                        <td height="1" colspan="3" ></td>
+                      </tr>
+                      
+                      <tr>
+                        <td width="12" height="28" align="center"></td>
+                        <td><a href='' title='珠海市就业补贴申请相关表格' target="_blank">珠海市就业补贴申请相关表格</a></td>
+                        <td width="70" class="date">2016-03-18</td>
+                      </tr>
+                       <tr>
+                        <td height="1" colspan="3" background="../images/dotted.gif"></td>
+                      </tr>
+                    </table> <!--  table_third1结束-->         
+                   <table id=tab_2_2 style="display:none" width="94%" >
+                      <tr>
+                        <td height="20" colspan="3"></td>
+                      </tr>
+                         
+                      <tr>
+                        <td width="12" height="28" align="center"></td>
+                        <td><a href='' title='珠海市创业补贴申领指引' target="_blank">珠海市创业补贴申领指引</a></td>
+                        <td width="70" class="date">2016-12-09</td>
+                      </tr>
+                       <tr>
+                        <td height="1" colspan="3" ></td>
+                      </tr>
+                      
+                      <tr>
+                        <td width="12" height="28" align="center"></td>
+                        <td><a href='' title='关于进一步促进高校毕业生在珠海就业创业的通知' target="_blank">关于进一步促进高校毕业生在珠海就业创业的通知</a></td>
+                        <td width="70" class="date">2016-11-29</td>
+                      </tr>
+                       <tr>
+                        <td height="1" colspan="3" ></td>
+                      </tr>
+                      
+                      <tr>
+                        <td width="12" height="28" align="center"></td>
+                        <td><a href='' title='关于申报2016年（下半年）留学人员创业专项资助的通知' target="_blank">关于申报2016年（下半年）留学人员创业专项资助的通知</a></td>
+                        <td width="70" class="date">2016-11-21</td>
+                      </tr>
+                       <tr>
+                        <td height="1" colspan="3" ></td>
+                      </tr>
+                      
+                      <tr>
+                        <td width="12" height="28" align="center"></td>
+                        <td><a href='' title='申请创业补贴各类表格（20161028）' target="_blank">申请创业补贴各类表格（20161028）</a></td>
+                        <td width="70" class="date">2016-11-01</td>
+                      </tr>
+                       <tr>
+                        <td height="1" colspan="3" ></td>
+                      </tr>
+                      
+                      <tr>
+                        <td width="12" height="28" align="center"></td>
+                        <td><a href='' title='入驻广东珠海大学生创业孵化基地（珠海市大学生创业孵化园）办事指南' target="_blank">入驻广东珠海大学生创业孵化基地（珠海市大学生创业孵化园）办事指南</a></td>
+                        <td width="70" class="date">2016-05-17</td>
+                      </tr>
+                       <tr>
+                        <td height="1" colspan="3" ></td>
+                      </tr>
+                      
+                      <tr>
+                        <td width="12" height="28" align="center"></td>
+                        <td><a href='' title='创业培训讲师选评初审办事指南' target="_blank">创业培训讲师选评初审办事指南</a></td>
+                        <td width="70" class="date">2015-06-23</td>
+                      </tr>
+                       <tr>
+                        <td height="1" colspan="3" ></td>
+                      </tr>
+                      
+                      <tr>
+                        <td width="12" height="28" align="center"></td>
+                        <td><a href='' title='市级创业孵化基地认定办事指南' target="_blank">市级创业孵化基地认定办事指南</a></td>
+                        <td width="70" class="date">2015-06-23</td>
+                      </tr>
+                       <tr>
+                        <td height="1" colspan="3" ></td>
+                      </tr>
+                      
+                      <tr>
+                        <td width="12" height="28" align="center"></td>
+                        <td><a href='' title='申领《SIYB创业培训合格证》办事指南' target="_blank">申领《SIYB创业培训合格证》办事指南</a></td>
+                        <td width="70" class="date">2015-05-27</td>
+                      </tr>
+                       <tr>
+                        <td height="1" colspan="3" ></td>
+                      </tr>
+                      
+                      <tr>
+                        <td width="12" height="28" align="center"></td>
+                        <td><a href='' title='申领《创业培训合格证》业务操作规程' target="_blank">申领《创业培训合格证》业务操作规程</a></td>
+                        <td width="70" class="date">2011-08-19</td>
+                      </tr>
+                       <tr>
+                        <td height="1" colspan="3" ></td>
+                      </tr>
+                      
+                      <tr>
+                        <td height="20" colspan="3"></td>
+                      </tr>
+                    </table>
+                   <table id=tab_2_3 style="display:none" width="94%">
+                      <tr>
+                        <td height="20" colspan="3"></td>
+                      </tr>
+                        
+                      <tr>
+                        <td width="12" height="28" align="center"></td>
+                        <td><a href='' title='珠海市高校毕业生接收报到服务事项办事指南' target="_blank">珠海市高校毕业生接收报到服务事项办事指南</a></td>
+                        <td width="70" class="date">2017-03-17</td>
+                      </tr>
+                       <tr>
+                        <td height="1" colspan="3" ></td>
+                      </tr>
+                      
+                      <tr>
+                        <td width="12" height="28" align="center"></td>
+                        <td><a href='' title='珠海市人才资源与就业服务中心拱北办事处受理新业务的通告' target="_blank">珠海市人才资源与就业服务中心拱北办事处受理新业务的通告</a></td>
+                        <td width="70" class="date">2016-11-29</td>
+                      </tr>
+                       <tr>
+                        <td height="1" colspan="3" ></td>
+                      </tr>
+                      
+                      <tr>
+                        <td width="12" height="28" align="center"></td>
+                        <td><a href='' title='关于珠海市高校毕业生接收报到服务平台上线应用的通告' target="_blank">关于珠海市高校毕业生接收报到服务平台上线应用的通告</a></td>
+                        <td width="70" class="date">2016-06-24</td>
+                      </tr>
+                       <tr>
+                        <td height="1" colspan="3" background="../images/dotted.gif"></td>
+                      </tr>
+                      
+                      <tr>
+                        <td height="20" colspan="3"></td>
+                      </tr>
+                    </table>
+                   <table id=tab_2_4 style="display:none" width="94%">
+                      <tr>
+                       <td height="20" colspan="3"></td>
+                      </tr>
+                        
+                      <tr>
+                        <td height="20" colspan="3"></td>
+                      </tr>
+                    </table>
+                   <table id=tab_2_5 style="display:none" width="94%">
+                      <tr>
+                        <td height="20" colspan="3"></td>
+                      </tr>
+                         
+                      <tr>
+                        <td width="12" height="28" align="center"></td>
+                        <td><a href='' title='珠海市人才资源与就业服务中心拱北办事处受理新业务的通告' target="_blank">珠海市人才资源与就业服务中心拱北办事处受理新业务的通告</a></td>
+                        <td width="70" class="date">2016-11-29</td>
+                      </tr>
+                       <tr>
+                        <td height="1" colspan="3" background="../images/dotted.gif"></td>
+                      </tr>
+                      
+                      
+                      <tr>
+                        <td height="20" colspan="3"></td>
+                      </tr>
+                   </table>
+              </td>
+            </tr>
+         </table>  
+         <!--就业创业结束-->
+         
+         <!--社会保险开始-->
+         <table class="table_second" id=tab_1_2 style="display:none"  >
+            <tr>
+              <td width="313" height="522" valign="top" >
+              <table class="table_second_bar" width="254">
+                <tr>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td bgcolor="#f5fafe">
+                  <table width="214" >
+                    <tr>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td class="table_second_bar_td on1" id=bg_3_1 onmouseover=showtab(3,1,10) ><a class="pl35" id=td_3_1 href=" ">养老保险</a> </td>
+                    </tr>
+                    <tr>
+                      <td height="8"></td>
+                    </tr>
+                    <tr>
+                      <td class="table_second_bar_td" id=bg_3_2 onmouseover=showtab(3,2,10) ><a class="pl35" id=td_3_2  href="">医疗保险</a> </td>
+                    </tr>
+                    <tr>
+                      <td height="8"></td>
+                    </tr>
+                    <tr>
+                      <td class="table_second_bar_td" id=bg_3_3 onmouseover=showtab(3,3,10) ><a class="pl35" id=td_3_3  href="">工伤保险</a> </td>
+                    </tr>
+                    <tr>
+                      <td height="8"></td>
+                    </tr>
+                    <tr>
+                      <td class="table_second_bar_td" id=bg_3_4 onmouseover=showtab(3,4,10) ><a class="pl35" id=td_3_4  href="">失业保险</a> </td>
+                    </tr>
+                    <tr>
+                      <td height="8"></td>
+                    </tr>
+                    <tr>
+                      <td class="table_second_bar_td" id=bg_3_5 onmouseover=showtab(3,5,10) ><a class="pl35" id=td_3_5  href="">生育保险</a> </td>
+                    </tr>
+                    <tr>
+                      <td height="8"></td>
+                    </tr>
+                    <tr>
+                      <td class="table_second_bar_td" id=bg_3_6 onmouseover=showtab(3,6,10) ><a class="pl35" id=td_3_6  href="">企业年金</a> </td>
+                    </tr>
+                    <tr>
+                      <td height="8"></td>
+                    </tr>
+                    <tr>
+                      <td class="table_second_bar_td" id=bg_3_7 onmouseover=showtab(3,7,10) ><a class="pl35" id=td_3_7  href="">基金监督</a> </td>
+                    </tr>
+                    <tr>
+                      <td height="8"></td>
+                    </tr>
+                    <tr>
+                      <td class="table_second_bar_td" id=bg_3_8 onmouseover=showtab(3,8,10) ><a class="pl35" id=td_3_8  href="">社保转移</a> </td>
+                    </tr>
+                    <tr>
+                      <td height="8"></td>
+                    </tr>
+                    <tr>
+                      <td class="table_second_bar_td"  id=bg_3_9 onmouseover=showtab(3,9,10)><a class="pl35" id=td_3_9  href="">社保征收</a> </td>
+                    </tr>
+                    <tr>
+                      <td height="8"></td>
+                    </tr>
+                    <tr>
+                      <td class="table_second_bar_td" id=bg_3_10 onmouseover=showtab(3,10,10) ><a class="pl35" id=td_3_10  href="">社会保障卡</a> </td>
+                    </tr>
+                    <tr>
+                      <td>&nbsp;</td>
+                    </tr>
+                  </table>  <!--table_second_bar_td结束-->
+                  </td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                </tr>
+              </table><!--table_second_bar结束-->
+              </td>
+              <td width="17">&nbsp;</td>
+              <td valign="top" class="Border_gray4">
+      
+              <table id=tab_3_1 width="94%" >
+                <tr>
+                  <td height="20" colspan="3"></td>
+                </tr>
+                 
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='城乡居民基本养老保险死亡待遇申领办事指南' target="_blank">城乡居民基本养老保险死亡待遇申领办事指南</a></td>
+                  <td width="70" class="date">2016-03-31</td>
+                </tr>
+                 <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>   
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='城乡居民基本养老保险个人账户结算办事指南' target="_blank">城乡居民基本养老保险个人账户结算办事指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                 <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='城乡居民养老金恢复领取办事指南' target="_blank">城乡居民养老金恢复领取办事指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                 <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='享受城乡居民养老金人员登记信息变更办事指南' target="_blank">享受城乡居民养老金人员登记信息变更办事指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                 <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='城乡居民养老金申领办事指南' target="_blank">城乡居民养老金申领办事指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                 <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='使用养老保险个人账户专用折温馨指引' target="_blank">使用养老保险个人账户专用折温馨指引</a></td>
+                  <td width="70" class="date">2015-03-27</td>
+                </tr>
+                 <tr>
+                  <td height="1" colspan="3"></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='企业退休人员纳入社会化管理办事指南' target="_blank">企业退休人员纳入社会化管理办事指南</a></td>
+                  <td width="70" class="date">2015-03-27</td>
+                </tr>
+                 <tr>
+                  <td height="1" colspan="3"></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='非退休人员死亡养老保险待遇申请办事指南' target="_blank">非退休人员死亡养老保险待遇申请办事指南</a></td>
+                  <td width="70" class="date">2015-03-27</td>
+                </tr>
+                 <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='非中国国籍人员养老保险个人账户结算办事指南' target="_blank">非中国国籍人员养老保险个人账户结算办事指南</a></td>
+                  <td width="70" class="date">2015-03-27</td>
+                </tr>
+                 <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='离退休人员死亡待遇申请办事指南' target="_blank">离退休人员死亡待遇申请办事指南</a></td>
+                  <td width="70" class="date">2015-03-27</td>
+                </tr>
+                 <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='特殊工种提前退休申请办事指南' target="_blank">特殊工种提前退休申请办事指南</a></td>
+                  <td width="70" class="date">2015-03-27</td>
+                </tr>
+                 <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='市直机关、事业单位工人的退休申请办事指南' target="_blank">市直机关、事业单位工人的退休申请办事指南</a></td>
+                  <td width="70" class="date">2015-03-27</td>
+                </tr>
+                 <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='领取城镇职工基本养老金办事指南' target="_blank">领取城镇职工基本养老金办事指南</a></td>
+                  <td width="70" class="date">2015-03-27</td>
+                </tr>
+                 <tr>
+                  <td height="1" colspan="3"></td>
+                </tr>
+                <tr>
+                  <td height="20" colspan="3"></td>
+                </tr>
+              </table>
+              <table id=tab_3_2 style="display:none" width="94%" >
+                <tr>
+                  <td height="20" colspan="3"></td>
+                </tr>
+                 
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='关于珠海市基本医疗保险办法实施若干问题的通知' target="_blank">关于珠海市基本医疗保险办法实施若干问题的通知</a></td>
+                  <td width="70" class="date">2017-01-04</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='《珠海市基本医疗保险药品目录、诊疗项目和医疗服务设施标准管理办法》政策解答' target="_blank">《珠海市基本医疗保险药品目录、诊疗项目和医疗服务设施标准管理办法》政策解答</a></td>
+                  <td width="70" class="date">2016-12-23</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='关于印发《珠海市基本医疗保险药品目录、诊疗项目和医疗服务设施标准管理办法》的通知' target="_blank">关于印发《珠海市基本医疗保险药品目录、诊疗项目和医疗服务设施标准管理办法》的通知</a></td>
+                  <td width="70" class="date">2016-12-23</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='今后只报社保卡号将无法联网结算医疗费我市“持社会保障卡就医结算系统”15日起上线，结算前需先刷卡验证' target="_blank">今后只报社保卡号将无法联网结算医疗费我市“持社会保障卡就医结算系统”15日起上线，结算前需先刷卡验证</a></td>
+                  <td width="70" class="date">2016-12-15</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='珠人社[2016]281号关于印发珠海市基本医疗保险门诊特定病种认定标准的通知' target="_blank">珠人社[2016]281号关于印发珠海市基本医疗保险门诊特定病种认定标准的通知</a></td>
+                  <td width="70" class="date">2016-11-07</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='珠海市基本医疗保险就医管理政策问答（2016年9月）' target="_blank">珠海市基本医疗保险就医管理政策问答（2016年9月）</a></td>
+                  <td width="70" class="date">2016-07-29</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='珠海市医疗保险门诊统筹定点医疗机构选定及结算办事指南' target="_blank">珠海市医疗保险门诊统筹定点医疗机构选定及结算办事指南</a></td>
+                  <td width="70" class="date">2016-03-23</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='基本医疗保险定点医药机构申请' target="_blank">基本医疗保险定点医药机构申请</a></td>
+                  <td width="70" class="date">2016-02-25</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='珠海市职工医保、大病医保常住异地就医门诊特定病种认定及结算办事指南' target="_blank">珠海市职工医保、大病医保常住异地就医门诊特定病种认定及结算办事指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='珠海市医疗保险门诊特定病种费用前台报销办事指南' target="_blank">珠海市医疗保险门诊特定病种费用前台报销办事指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" background="../images/dotted.gif"></td>
+                </tr>
+                <tr>
+                  <td height="20" colspan="3"></td>
+                </tr>
+              </table>
+              <table id=tab_3_3 style="display:none" width="94%" >
+                <tr>
+                  <td height="20" colspan="3"></td>
+                </tr>
+                 
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='我市五部门将联合开展在建工程项目参加工伤保险情况专项督导' target="_blank">我市五部门将联合开展在建工程项目参加工伤保险情况专项督导</a></td>
+                  <td width="70" class="date">2016-12-02</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='劳动能力鉴定申请须知' target="_blank">劳动能力鉴定申请须知</a></td>
+                  <td width="70" class="date">2015-12-07</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='工伤认定申请须知' target="_blank">工伤认定申请须知</a></td>
+                  <td width="70" class="date">2015-12-07</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='现场证人证明' target="_blank">现场证人证明</a></td>
+                  <td width="70" class="date">2015-07-28</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='工伤认定申请办事指南' target="_blank">工伤认定申请办事指南</a></td>
+                  <td width="70" class="date">2015-05-29</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='工伤职工（职业病）劳动能力鉴定办事指南' target="_blank">工伤职工（职业病）劳动能力鉴定办事指南</a></td>
+                  <td width="70" class="date">2015-05-29</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='工伤职工康复治疗办事指南' target="_blank">工伤职工康复治疗办事指南</a></td>
+                  <td width="70" class="date">2015-05-29</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3"></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='延长医疗期确认办事指南' target="_blank">延长医疗期确认办事指南</a></td>
+                  <td width="70" class="date">2015-05-29</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='工伤复发确认办事指南' target="_blank">工伤复发确认办事指南</a></td>
+                  <td width="70" class="date">2015-05-29</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='非因工伤（因病）职工申请劳动能力鉴定办事指南' target="_blank">非因工伤（因病）职工申请劳动能力鉴定办事指南</a></td>
+                  <td width="70" class="date">2015-05-29</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='安装辅助器具办事指南' target="_blank">安装辅助器具办事指南</a></td>
+                  <td width="70" class="date">2015-05-29</td>
+                </tr>
+                <tr>
+                  <td height="20" colspan="3"></td>
+                </tr>
+              </table>
+              <table id=tab_3_4 style="display:none" width="94%" >
+                <tr>
+                  <td height="20" colspan="3"></td>
+                </tr>
+                
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='失业保险待遇转出办事指南' target="_blank">失业保险待遇转出办事指南</a></td>
+                  <td width="70" class="date">2016-05-18</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='失业死亡待遇申领办事指南' target="_blank">失业死亡待遇申领办事指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='非广东省户籍人员申领一次性失业保险金办事指南' target="_blank">非广东省户籍人员申领一次性失业保险金办事指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='自主创业一次性领取失业保险金办事指南' target="_blank">自主创业一次性领取失业保险金办事指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='稳定就业一次性领取失业保险金办事指南' target="_blank">稳定就业一次性领取失业保险金办事指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='生育加发失业保险金申领办事指南' target="_blank">生育加发失业保险金申领办事指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='领取失业保险金人员信息资料变更办事指南' target="_blank">领取失业保险金人员信息资料变更办事指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='按月领取失业保险金登记办事指南' target="_blank">按月领取失业保险金登记办事指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3"></td>
+                </tr>
+                
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='失业保险金（以及求职补贴）申领办理指南' target="_blank">失业保险金（以及求职补贴）申领办理指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                
+                <tr>
+                  <td height="20" colspan="3"></td>
+                </tr>
+              </table>
+              <table id=tab_3_5 style="display:none" width="94%" >
+                <tr>
+                  <td height="20" colspan="3"></td>
+                </tr>
+                 
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='市内产前检查机构变更登记办事指南（新生育保险办法）' target="_blank">市内产前检查机构变更登记办事指南（新生育保险办法）</a></td>
+                  <td width="70" class="date">2016-05-18</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='计划生育费用报销和津贴申领办理指南（新生育保险办法）' target="_blank">计划生育费用报销和津贴申领办理指南（新生育保险办法）</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='孕产费用报销和津贴申领办理指南（新生育保险办法）' target="_blank">孕产费用报销和津贴申领办理指南（新生育保险办法）</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='市内生育保险待遇联网报销办事指南' target="_blank">市内生育保险待遇联网报销办事指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                
+                <tr>
+                  <td height="20" colspan="3"></td>
+                </tr>
+              </table>
+              <table id=tab_3_6 style="display:none" width="94%" >
+                <tr>
+                  <td height="20" colspan="3"></td>
+                </tr>
+                
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='企业年金方案备案办事指南' target="_blank">企业年金方案备案办事指南</a></td>
+                  <td width="70" class="date">2016-03-21</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                  
+                <tr>
+                  <td height="20" colspan="3"></td>
+                </tr>
+              </table>
+              <table id=tab_3_7 style="display:none" width="94%" >
+                <tr>
+                  <td height="20" colspan="3"></td>
+                </tr>
+                 
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='社会保险欺诈举报奖励办事指南' target="_blank">社会保险欺诈举报奖励办事指南</a></td>
+                  <td width="70" class="date">2016-03-28</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                
+                <tr>
+                  <td height="20" colspan="3"></td>
+                </tr>
+              </table>
+              <table id=tab_3_8 style="display:none" width="94%" >
+                <tr>
+                  <td height="20" colspan="3"></td>
+                </tr>
+                 
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='医疗保险关系转出业务办事指南' target="_blank">医疗保险关系转出业务办事指南</a></td>
+                  <td width="70" class="date">2016-05-18</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='医疗保险关系转入业务办事指南' target="_blank">医疗保险关系转入业务办事指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='失业保险关系转出（无基金转移类型）业务办事指南' target="_blank">失业保险关系转出（无基金转移类型）业务办事指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='失业保险关系转入（无基金转移类型）业务办事指南' target="_blank">失业保险关系转入（无基金转移类型）业务办事指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"> </td>
+                  <td><a href='' title='养老保险关系转出业务办事指南' target="_blank">养老保险关系转出业务办事指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='基本养老保险关系转入业务办理指南' target="_blank">基本养老保险关系转入业务办理指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td height="20" colspan="3"></td>
+                </tr>
+              </table>
+              <table id=tab_3_9 style="display:none" width="94%" >
+                <tr>
+                  <td height="20" colspan="3"></td>
+                </tr>
+                 
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='早期下乡知青一次性缴纳养老保险费办事指南' target="_blank">早期下乡知青一次性缴纳养老保险费办事指南</a></td>
+                  <td width="70" class="date">2016-05-18</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='大学生社会基本医疗保险参保办事指南' target="_blank">大学生社会基本医疗保险参保办事指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='未成年人医疗保险停保办事指南' target="_blank">未成年人医疗保险停保办事指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='未成年人医疗保险参保办事指南' target="_blank">未成年人医疗保险参保办事指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='未成年人医疗保险单位资料修改办事指南' target="_blank">未成年人医疗保险单位资料修改办事指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='未成年人医疗保险登记变更办事指南' target="_blank">未成年人医疗保险登记变更办事指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='未成年人医疗保险单位登记办事指南' target="_blank">未成年人医疗保险单位登记办事指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='城乡居民基本医疗保险个人资料变更办事指南' target="_blank">城乡居民基本医疗保险个人资料变更办事指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='城乡居民基本医疗保险停保办事指南' target="_blank">城乡居民基本医疗保险停保办事指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='城乡居民基本医疗保险参保办事指南' target="_blank">城乡居民基本医疗保险参保办事指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='城乡居民基本养老保险信息变更办事指南' target="_blank">城乡居民基本养老保险信息变更办事指南</a></td>
+                  <td width="70" class="date">2015-04-01</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td height="20" colspan="3"></td>
+                </tr>
+              </table>
+              <table id=tab_3_10 style="display:none" width="94%" >
+                <tr>
+                  <td height="20" colspan="3"></td>
+                </tr>
+                
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='曙光易通指静脉采集认证演示安装程序' target="_blank">曙光易通指静脉采集认证演示安装程序</a></td>
+                  <td width="70" class="date">2016-04-22</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='珠海市人力资源和社会保障网上服务平台说明' target="_blank">珠海市人力资源和社会保障网上服务平台说明</a></td>
+                  <td width="70" class="date">2016-03-14</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='珠海市人力资源和社会保障网上服务平台根证书安装说明手册' target="_blank">珠海市人力资源和社会保障网上服务平台根证书安装说明手册</a></td>
+                  <td width="70" class="date">2015-09-30</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" ></td>
+                </tr>
+                <tr>
+                  <td width="12" height="28" align="center"></td>
+                  <td><a href='' title='珠海社会保障（市民）卡服务指南' target="_blank">珠海社会保障（市民）卡服务指南</a></td>
+                  <td width="70" class="date">2015-07-31</td>
+                </tr>
+                <tr>
+                  <td height="1" colspan="3" background="../images/dotted.gif"></td>
+                </tr>
+                <tr>
+                  <td height="20" colspan="3"></td>
+                </tr>
+              </table>
+              </td>
+            </tr>
+         </table>
+         <!--社会保险结束-->  
+         
+         <!--职业能力培训开始-->
+        <table class="table_second" id=tab_1_3 style="display:none" >
+          <tr>
+            <td width="313" height="522" valign="top" >
+            <table class="table_second_bar" width="254" >
+              <tr>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td bgcolor="#f5fafe">
+                <table width="214" >
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td class="table_second_bar_td on1" id=bg_4_1 onmouseover=showtab(4,1,5) ><a class="pl35" id=td_4_1  href="">专业技术人员继续教育</a> </td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td class="table_second_bar_td" id=bg_4_2 onmouseover=showtab(4,2,5) ><a class="pl35" id=td_4_2  href="">职业培训</a> </td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td class="table_second_bar_td" id=bg_4_3 onmouseover=showtab(4,3,5) ><a class="pl35" id=td_4_3  href="">高技人才</a> </td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td class="table_second_bar_td"  id=bg_4_4 onmouseover=showtab(4,4,5) ><a class="pl35" id=td_4_4  href="">技校管理</a> </td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td class="table_second_bar_td"  id=bg_4_5 onmouseover=showtab(4,5,5) ><a class="pl35" id=td_4_5  href=" ">技能竞赛</a> </td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                </table>
+                </td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+              </tr>
+              
+            </table>
+            </td>
+            <td width="17">&nbsp;</td>
+            <td valign="top" class="Border_gray4">
+            <table id=tab_4_1 width="94%">
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='关于公布珠海市专业技术人员继续教育施教机构（继续教育基地）备案名单的通知' target="_blank">关于公布珠海市专业技术人员继续教育施教机构（继续教育基地）备案名单的通知</a></td>
+                <td width="70" class="date">2016-06-08</td>
+              </tr>
+                <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='省人社厅关于2016年化工等3个专业学习指南' target="_blank">省人社厅关于2016年化工等3个专业学习指南</a></td>
+                <td width="70" class="date">2016-05-09</td>
+              </tr>
+                <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='省人社厅关于2016年农业科学研究等60个行业专技人员专业学习指南的通知' target="_blank">省人社厅关于2016年农业科学研究等60个行业专技人员专业学习指南的通知</a></td>
+                <td width="70" class="date">2016-03-22</td>
+              </tr>
+                <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='2015年广东省中小学教育等31个行业专业技术人员继续教育专业科目学习指南的通知' target="_blank">2015年广东省中小学教育等31个行业专业技术人员继续教育专业科目学习指南的通知</a></td>
+                <td width="70" class="date">2015-04-02</td>
+              </tr>
+                <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='关于举办探索珠海农业现代化发展高级研修班的通知' target="_blank">关于举办探索珠海农业现代化发展高级研修班的通知</a></td>
+                <td width="70" class="date">2015-04-02</td>
+              </tr>
+                <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='广东省专业技术人员继续教育证明式样' target="_blank">广东省专业技术人员继续教育证明式样</a></td>
+                <td width="70" class="date">2014-10-21</td>
+              </tr>
+                <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='施教机构倒入管理系统格式' target="_blank">施教机构倒入管理系统格式</a></td>
+                <td width="70" class="date">2014-10-21</td>
+              </tr>
+                <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='退案后个人的操作' target="_blank">退案后个人的操作</a></td>
+                <td width="70" class="date">2014-10-21</td>
+              </tr>
+                <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='继续教育施教机构备案办事指南' target="_blank">继续教育施教机构备案办事指南</a></td>
+                <td width="70" class="date">2014-10-21</td>
+              </tr>
+                <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='继续教育业务流程' target="_blank">继续教育业务流程</a></td>
+                <td width="70" class="date">2014-10-21</td>
+              </tr>
+                <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+            </table>
+            <table id=tab_4_2 style="display:none" width="94%" >
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+               
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='2016年12月5日职业技能培训鉴定补贴初审情况公示' target="_blank">2016年12月5日职业技能培训鉴定补贴初审情况公示</a></td>
+                <td width="70" class="date">2016-12-05</td>
+              </tr>
+                <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='关于公布广东省认定澳门职业技能证明书职业能力第一目录清单的公告' target="_blank">关于公布广东省认定澳门职业技能证明书职业能力第一目录清单的公告</a></td>
+                <td width="70" class="date">2016-11-09</td>
+              </tr>
+                <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='广东省人力资源社会保障厅关于印发《港澳服务提供者在广东省前海南沙横琴独资举办非学历职业技能培训机构管理办法》的通知' target="_blank">广东省人力资源社会保障厅关于印发《港澳服务提供者在广东省前海南沙横琴独资举办非学历职业技能培训机...</a></td>
+                <td width="70" class="date">2016-11-09</td>
+              </tr>
+                <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='关于复制推广中国（广东）自由贸易试验区第二批改革创新经验的通知（粤府[2016]83号）' target="_blank">关于复制推广中国（广东）自由贸易试验区第二批改革创新经验的通知（粤府[2016]83号）</a></td>
+                <td width="70" class="date">2016-11-09</td>
+              </tr>
+                <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='省属职业培训学校（院）材料备案办事指南' target="_blank">省属职业培训学校（院）材料备案办事指南</a></td>
+                <td width="70" class="date">2016-09-19</td>
+              </tr>
+                <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='省属民办职业培训学校（院）设立审批办事指南' target="_blank">省属民办职业培训学校（院）设立审批办事指南</a></td>
+                <td width="70" class="date">2016-09-19</td>
+              </tr>
+                <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='关于做好省属民办培训学校设立审批、市县属职业技能鉴定机构设立审批等职能下放承接工作的通知(粤人社函〔2015〕1269号)' target="_blank">关于做好省属民办培训学校设立审批、市县属职业技能鉴定机构设立审批等职能下放承接工作的通知(粤人社函...</a></td>
+                <td width="70" class="date">2016-09-19</td>
+              </tr>
+                <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='关于全面使用珠海市职业培训补贴管理系统的通知' target="_blank">关于全面使用珠海市职业培训补贴管理系统的通知</a></td>
+                <td width="70" class="date">2016-09-07</td>
+              </tr>
+                <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='申请劳动力技能晋升培训补贴办事指南（机构）' target="_blank">申请劳动力技能晋升培训补贴办事指南（机构）</a></td>
+                <td width="70" class="date">2016-06-29</td>
+              </tr>
+                <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='申请劳动力技能晋升培训补贴办事指南（个人）' target="_blank">申请劳动力技能晋升培训补贴办事指南（个人）</a></td>
+                <td width="70" class="date">2016-06-29</td>
+              </tr>
+                <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='./zypx/zypx/201602/t20160225_9805191.html' title='在岗职工技能提升培训补贴（个人）' target="_blank">在岗职工技能提升培训补贴（个人）</a></td>
+                <td width="70" class="date">2016-02-25</td>
+              </tr>
+                <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='在岗职工技能提升培训补贴（单位）' target="_blank">在岗职工技能提升培训补贴（单位）</a></td>
+                <td width="70" class="date">2016-02-25</td>
+              </tr>
+                <tr>
+                <td height="1" colspan="3" background="../images/dotted.gif"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='城乡劳动力职业培训和鉴定补贴' target="_blank">城乡劳动力职业培训和鉴定补贴</a></td>
+                <td width="70" class="date">2016-02-25</td>
+              </tr>
+                <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+            </table>
+            <table id=tab_4_3 style="display:none" width="94%" border="0" align="center" cellpadding="0" cellspacing="0">
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+               
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='职业技能鉴定机构设立审批' target="_blank">职业技能鉴定机构设立审批</a></td>
+                <td width="70" class="date">2016-03-21</td>
+              </tr>
+                <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='高技能人才培训鉴定补贴' target="_blank">高技能人才培训鉴定补贴</a></td>
+                <td width="70" class="date">2016-02-25</td>
+              </tr>
+                <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+                    <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+            </table>
+            <table id=tab_4_4 style="display:none" width="94%" >
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+               
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='市属民办技工学校审批办事指南' target="_blank">市属民办技工学校审批办事指南</a></td>
+                <td width="70" class="date">2016-05-09</td>
+              </tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+            </table>
+            <table id=tab_4_5 style="display:none" width="94%" >
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='珠海市技能竞赛办事指南' target="_blank">珠海市技能竞赛办事指南</a></td>
+                <td width="70" class="date">2016-05-18</td>
+              </tr>
+               <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+            </table>
+            </td>
+          </tr>
+        </table>
+        <!--职业能力培训结束-->
+        
+        <!--人才开始-->
+        <table class="table_second" id=tab_1_4 style="display:none" >
+          <tr>
+            <td width="313" height="522" valign="top" >
+            <table class="table_second_bar" width="254" >
+              <tr>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td bgcolor="#f5fafe">
+                <table width="214" >
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td class="table_second_bar_td on1" id=bg_5_1 onmouseover=showtab(5,1,4) > <a id=td_5_1  href="">高层次人才</a> </td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td class="table_second_bar_td" id=bg_5_2 onmouseover=showtab(5,2,4) > <a id=td_5_2  href="">人力资源服务机构管理</a> </td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td class="table_second_bar_td" id=bg_5_3 onmouseover=showtab(5,3,4) height="35" > <a id=td_5_3 href=" ">产业发展与创新人才的奖励</a> </td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td class="table_second_bar_td" id=bg_5_4 onmouseover=showtab(5,4,4) > <a id=td_5_4 href=" ">重点培育企业新引进人才租房补贴</a> </td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                </table> <!--table_second_bar_td结束-->
+                </td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+              </tr>
+              
+            </table><!--table_second_bar结束-->
+            </td>
+            <td width="17">&nbsp;</td>
+            <td valign="top" class="Border_gray4">
+            <table id=tab_5_1 width="94%">
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+               
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href=' ' title='关于开展我市高层次（青优）人才2016年度考核工作的通知' target="_blank">关于开展我市高层次（青优）人才2016年度考核工作的通知</a></td>
+                <td width="70" class="date">2017-03-22</td>
+              </tr>
+              <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='关于申请大镜山馨园54套人才住房的通告' target="_blank">关于申请大镜山馨园54套人才住房的通告</a></td>
+                <td width="70" class="date">2016-12-01</td>
+              </tr>
+              <tr>
+                <td height="1" colspan="3"  ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='关于申报2016年（下半年）留学人员创业专项资助的通知' target="_blank">关于申报2016年（下半年）留学人员创业专项资助的通知</a></td>
+                <td width="70" class="date">2016-11-21</td>
+              </tr>
+              <tr>
+                <td height="1" colspan="3"  ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='关于举办“2016年广东省第八届海外专家南粤行珠海专场活动”的通告' target="_blank">关于举办“2016年广东省第八届海外专家南粤行珠海专场活动”的通告</a></td>
+                <td width="70" class="date">2016-11-21</td>
+              </tr>
+              <tr>
+                <td height="1" colspan="3"  ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='珠海市高层次创业人才、青年优秀人才（创业类）申请工作场地租金补贴办事指南' target="_blank">珠海市高层次创业人才、青年优秀人才（创业类）申请工作场地租金补贴办事指南</a></td>
+                <td width="70" class="date">2016-09-29</td>
+              </tr>
+              <tr>
+                <td height="1" colspan="3"  ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='关于开展珠海高层次创业人才、青年优秀人才（创业类）工作场地租金补贴申请工作的通告' target="_blank">关于开展珠海高层次创业人才、青年优秀人才（创业类）工作场地租金补贴申请工作的通告</a></td>
+                <td width="70" class="date">2016-09-29</td>
+              </tr>
+              <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='2016年广东省“珠江人才计划”引进创新创业团队和领军人才申报公告' target="_blank">2016年广东省“珠江人才计划”引进创新创业团队和领军人才申报公告</a></td>
+                <td width="70" class="date">2016-07-25</td>
+              </tr>
+              <tr>
+                <td height="1" colspan="3"  ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='关于2016年度珠海市高层次人才、青年优秀人才网上申报延期的通知' target="_blank">关于2016年度珠海市高层次人才、青年优秀人才网上申报延期的通知</a></td>
+                <td width="70" class="date">2016-07-25</td>
+              </tr>
+              <tr>
+                <td height="1" colspan="3"  ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='2016年市高层次人才、青年优秀人才评审申报有关问题解答' target="_blank">2016年市高层次人才、青年优秀人才评审申报有关问题解答</a></td>
+                <td width="70" class="date">2016-06-30</td>
+              </tr>
+              <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='关于开展2016年珠海市创新创业团队、高层次人才和青年优秀人才申报工作的通告' target="_blank">关于开展2016年珠海市创新创业团队、高层次人才和青年优秀人才申报工作的通告</a></td>
+                <td width="70" class="date">2016-06-15</td>
+              </tr>
+              <tr>
+                <td height="1" colspan="3" background="../images/dotted.gif"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='珠海市高层次创业人才/青年优秀人才（创业类）申请研发费用补贴办事指南' target="_blank">珠海市高层次创业人才/青年优秀人才（创业类）申请研发费用补贴办事指南</a></td>
+                <td width="70" class="date">2016-01-27</td>
+              </tr>
+              <tr>
+                <td height="1" colspan="3"  ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href='' title='市高层次人才申报评审业务事项办事指南' target="_blank">市高层次人才申报评审业务事项办事指南</a></td>
+                <td width="70" class="date">2015-06-08</td>
+              </tr>
+              <tr>
+                <td height="1" colspan="3"  ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='市青年优秀人才申报评审业务事项办事指南' target="_blank">市青年优秀人才申报评审业务事项办事指南</a></td>
+                <td width="70" class="date">2015-06-08</td>
+              </tr>
+              <tr>
+                <td height="1" colspan="3"  ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='珠海市青年优秀人才申领工作津贴办事指南' target="_blank">珠海市青年优秀人才申领工作津贴办事指南</a></td>
+                <td width="70" class="date">2015-04-28</td>
+              </tr>
+              <tr>
+                <td height="1" colspan="3"  ></td>
+              </tr>
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='珠海市高层次人才申请住房保障办事指南' target="_blank">珠海市高层次人才申请住房保障办事指南</a></td>
+                <td width="70" class="date">2015-04-28</td>
+              </tr>
+              <tr>
+                <td height="1" colspan="3"  ></td>
+              </tr>
+            </table>
+            <table id=tab_5_2 style="display:none" width="94%" >
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href=' ' title='转发省人社厅关于做好2016年人力资源市场统计和人力资源服务机构年度报告的通知' target="_blank">转发省人社厅关于做好2016年人力资源市场统计和人力资源服务机构年度报告的通知</a></td>
+                <td width="70" class="date">2017-01-23</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"  ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='珠海市劳务派遣单位有关情况的通告' target="_blank">珠海市劳务派遣单位有关情况的通告</a></td>
+                <td width="70" class="date">2017-01-12</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"  ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='搬迁通告' target="_blank">搬迁通告</a></td>
+                <td width="70" class="date">2017-01-05</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='2016年度我市经营性人力资源服务机构诚信评估工作的情况通报' target="_blank">2016年度我市经营性人力资源服务机构诚信评估工作的情况通报</a></td>
+                <td width="70" class="date">2016-12-23</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"  ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='珠海市人才资源与就业服务中心拱北办事处受理新业务的通告' target="_blank">珠海市人才资源与就业服务中心拱北办事处受理新业务的通告</a></td>
+                <td width="70" class="date">2016-11-29</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='关于印发《珠海市人力资源服务行政许可及综合事项办理指南》的通知（珠人社[2016]239号）' target="_blank">关于印发《珠海市人力资源服务行政许可及综合事项办理指南》的通知（珠人社[2016]239号）</a></td>
+                <td width="70" class="date">2016-09-14</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"  ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='申请冠以“广东”名头的人力资源服务机构设立审批办事指南' target="_blank">申请冠以“广东”名头的人力资源服务机构设立审批办事指南</a></td>
+                <td width="70" class="date">2016-09-14</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"  ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='申请冠以“广东”名头的人力资源服务机构设立审批办事指南' target="_blank">申请冠以“广东”名头的人力资源服务机构设立审批办事指南</a></td>
+                <td width="70" class="date">2016-01-12</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+            </table>
+            <table id=tab_5_3 style="display:none" width="94%"  >
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='转发省人社厅关于做好2016年南粤突出贡献奖和南粤创新奖申报工作的通知' target="_blank">转发省人社厅关于做好2016年南粤突出贡献奖和南粤创新奖申报工作的通知</a></td>
+                <td width="70" class="date">2016-11-16</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='2016年广东省“珠江人才计划”引进创新创业团队和领军人才申报公告' target="_blank">2016年广东省“珠江人才计划”引进创新创业团队和领军人才申报公告</a></td>
+                <td width="70" class="date">2016-07-25</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"  ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='2016年度珠海市产业发展与创新人才奖励申报指南' target="_blank">2016年度珠海市产业发展与创新人才奖励申报指南</a></td>
+                <td width="70" class="date">2016-06-24</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"  ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='2016年度珠海市产业发展与创新人才奖励申报指南' target="_blank">2016年度珠海市产业发展与创新人才奖励申报指南</a></td>
+                <td width="70" class="date">2016-06-24</td>
+              </tr>            
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+            </table>
+            <table id=tab_5_4 style="display:none" width="94%"  >
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='2015年度（下半年）珠海市重点培育企业新引进人才租房补贴符合申请条件的人员名单（补充）公示' target="_blank">2015年度（下半年）珠海市重点培育企业新引进人才租房补贴符合申请条件的人员名单（补充）公示</a></td>
+                <td width="70" class="date">2016-08-05</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"  ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='关于开展2015年度（下半年）珠海市重点培育企业新引进人才租房补贴申请工作的通知' target="_blank">关于开展2015年度（下半年）珠海市重点培育企业新引进人才租房补贴申请工作的通知</a></td>
+                <td width="70" class="date">2016-01-22</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+            </table>
+            </td>
+          </tr>
+        </table>
+        <!--人才结束-->
+        
+        <!--公务员管理开始-->
+        <table class="table_second" id=tab_1_5 style="display:none" >
+          <tr>
+            <td width="313" height="522" valign="top" >
+            <table class="table_second_bar" width="254" >
+              <tr>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td bgcolor="#f5fafe">
+                <table width="214" >
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td class="table_second_bar_td on1" id=bg_6_1 onmouseover=showtab(6,1,3) ><a class="pl35" id=td_6_1 href=" ">任免</a> </td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td class="table_second_bar_td" id=bg_6_2 onmouseover=showtab(6,2,3) ><a class="pl35" id=td_6_2 href=" ">招考</a> </td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td class="table_second_bar_td" id=bg_6_3 onmouseover=showtab(6,3,3) ><a class="pl35" id=td_6_3  href=" ">管理</a> </td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                </table>
+                </td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+              </tr>
+            </table><!--table_second_bar结束-->
+            </td>
+            <td width="17">&nbsp;</td>
+            <td valign="top" class="Border_gray4">
+            <table id=tab_6_1 width="94%">
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='公务员科级职务晋升备案办事指南' target="_blank">公务员科级职务晋升备案办事指南</a></td>
+                <td width="70" class="date">2016-03-21</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+            </table>
+            
+            <table id=tab_6_2 width="94%"  >
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='珠海18日面试职位入围体检人员名单（18日公告）' target="_blank">珠海18日面试职位入围体检人员名单（18日公告）</a></td>
+                <td width="70" class="date">2016-06-20</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"  ></td>
+              </tr>
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='珠海16日面试职位入围体检人员名单（17日公告）' target="_blank">珠海16日面试职位入围体检人员名单（17日公告）</a></td>
+                <td width="70" class="date">2016-06-20</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href=' ' title='珠海市2016年考试录用公务员体检公告' target="_blank">珠海市2016年考试录用公务员体检公告</a></td>
+                <td width="70" class="date">2016-06-20</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"  ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='珠海市公务员招考流程' target="_blank">珠海市公务员招考流程</a></td>
+                <td width="70" class="date">2016-03-20</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+            </table>
+            <table id=tab_6_3 style="display:none" width="94%" >
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+                
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='公务员统计系统V6.0.2' target="_blank">公务员统计系统V6.0.2</a></td>
+                <td width="70" class="date">2016-12-19</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='2016公务员统计相关资料' target="_blank">2016公务员统计相关资料</a></td>
+                <td width="70" class="date">2016-12-19</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" background="../images/dotted.gif"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='广东省珠海市调动人员情况登记表' target="_blank">广东省珠海市调动人员情况登记表</a></td>
+                <td width="70" class="date">2015-04-10</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"  ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='公务员调（转）任审批办事指南' target="_blank">公务员调（转）任审批办事指南</a></td>
+                <td width="70" class="date">2014-10-29</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='公务员科级职务晋升备案办事指南' target="_blank">公务员科级职务晋升备案办事指南</a></td>
+                <td width="70" class="date">2016-03-21</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" background="../images/dotted.gif"></td>
+              </tr>
+              
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+            </table>
+            </td>
+          </tr>
+        </table>
+        <!--公务员管理结束-->
+        
+        <!--事业单位人员管理开始-->
+        <table class="table_second" id=tab_1_6 style="display:none" >
+          <tr>
+            <td width="313" height="522" valign="top" >
+            <table class="table_second_bar" width="254" >
+              <tr>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td bgcolor="#f5fafe">
+                <table width="214" >
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td class="table_second_bar_td on1" id=bg_7_1 onmouseover=showtab(7,1,4)><a class="pl35" id=td_7_1 href=" ">公开招聘</a> </td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td class="table_second_bar_td" id=bg_7_2 onmouseover=showtab(7,2,4) ><a class="pl35" id=td_7_2 href=" ">岗位管理</a> </td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td class="table_second_bar_td" id=bg_7_3 onmouseover=showtab(7,3,4) ><a class="pl35" id=td_7_3 href=" ">考核奖惩</a> </td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td class="table_second_bar_td" id=bg_7_4 onmouseover=showtab(7,4,4) ><a class="pl35" id=td_7_4   href=" ">其他</a> </td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                </table>
+                </td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+              </tr>
+            </table>
+            </td>
+            <td width="17">&nbsp;</td>
+            <td valign="top" class="Border_gray4">
+            
+            <table id=tab_7_1 width="94%" >
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='办理事业单位公开招聘结果认定业务材料清单（2015修订）' target="_blank">办理事业单位公开招聘结果认定业务材料清单（2015修订）</a></td>
+                <td width="70" class="date">2016-03-19</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"  ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center">  </td>
+                <td><a href=' ' title='办理事业单位人员调动有关手续材料清单（2015修订）' target="_blank">办理事业单位人员调动有关手续材料清单（2015修订）</a></td>
+                <td width="70" class="date">2015-08-19</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='珠海市事业单位公开招聘人员报名表' target="_blank">珠海市事业单位公开招聘人员报名表</a></td>
+                <td width="70" class="date">2015-08-19</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='广东省事业单位工作人员聘用体检表' target="_blank">广东省事业单位工作人员聘用体检表</a></td>
+                <td width="70" class="date">2015-05-05</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"  ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='事业单位公开招聘结果认定公函参考样式' target="_blank">事业单位公开招聘结果认定公函参考样式</a></td>
+                <td width="70" class="date">2015-04-10</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='珠海市事业单位公开招聘工作人员情况汇总表（2012修订）' target="_blank">珠海市事业单位公开招聘工作人员情况汇总表（2012修订）</a></td>
+                <td width="70" class="date">2015-04-10</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"  ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='随军安置家属调动函模板' target="_blank">随军安置家属调动函模板</a></td>
+                <td width="70" class="date">2015-04-10</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='珠海市法定机构聘用人员审核表' target="_blank">珠海市法定机构聘用人员审核表</a></td>
+                <td width="70" class="date">2015-04-10</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='事业单位工作人员流动申报表（2012修订）' target="_blank">事业单位工作人员流动申报表（2012修订）</a></td>
+                <td width="70" class="date">2015-04-10</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='法定机构工作人员流动申报表' target="_blank">法定机构工作人员流动申报表</a></td>
+                <td width="70" class="date">2015-04-10</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>  
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+            </table>
+            <table id=tab_7_2 style="display:none" width="94%" >
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+               
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='报送事业单位岗位设置方案所需材料' target="_blank">报送事业单位岗位设置方案所需材料</a></td>
+                <td width="70" class="date">2016-03-12</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='报送事业单位人员聘用结果认定所需材料' target="_blank">报送事业单位人员聘用结果认定所需材料</a></td>
+                <td width="70" class="date">2015-08-12</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='专业技术岗位结构比例控制标准' target="_blank">专业技术岗位结构比例控制标准</a></td>
+                <td width="70" class="date">2015-04-09</td>
+              </tr>
+              <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='珠海市事业单位岗位设置实施方案参考样本' target="_blank">珠海市事业单位岗位设置实施方案参考样本</a></td>
+                <td width="70" class="date">2015-04-09</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='珠海市事业单位岗位设置方案参考样本' target="_blank">珠海市事业单位岗位设置方案参考样本</a></td>
+                <td width="70" class="date">2015-04-09</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='特设岗位审核表' target="_blank">特设岗位审核表</a></td>
+                <td width="70" class="date">2015-04-09</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='珠海市事业单位岗位变动申报表' target="_blank">珠海市事业单位岗位变动申报表</a></td>
+                <td width="70" class="date">2015-04-09</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='珠海市事业单位岗位设置审核表（2014版）' target="_blank">珠海市事业单位岗位设置审核表（2014版）</a></td>
+                <td width="70" class="date">2015-04-09</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='珠海市事业单位管理岗位聘用人员认定表（2014版）' target="_blank">珠海市事业单位管理岗位聘用人员认定表（2014版）</a></td>
+                <td width="70" class="date">2015-04-09</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='珠海市事业单位专业技术岗位聘用人员认定表（2014版）' target="_blank">珠海市事业单位专业技术岗位聘用人员认定表（2014版）</a></td>
+                <td width="70" class="date">2015-04-09</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='广东省事业单位工勤技能技术工一级岗位拟聘人员审核表' target="_blank">广东省事业单位工勤技能技术工一级岗位拟聘人员审核表</a></td>
+                <td width="70" class="date">2015-04-09</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='广东省事业单位专业技术正高二级岗位拟聘人员审核表' target="_blank">广东省事业单位专业技术正高二级岗位拟聘人员审核表</a></td>
+                <td width="70" class="date">2015-04-09</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='专业技术职务聘书（模版）' target="_blank">专业技术职务聘书（模版）</a></td>
+                <td width="70" class="date">2015-04-09</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='岗位调整通知书' target="_blank">岗位调整通知书</a></td>
+                <td width="70" class="date">2015-04-09</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='事业单位聘用合同（范本）' target="_blank">事业单位聘用合同（范本）</a></td>
+                <td width="70" class="date">2015-04-09</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+            </table>
+            <table id=tab_7_3 style="display:none" width="94%" >
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+               
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='珠海市事业单位工作人员年度考核登记表' target="_blank">珠海市事业单位工作人员年度考核登记表</a></td>
+                <td width="70" class="date">2016-05-18</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='珠海市事业单位工作人员年度考核备案呈报表、各等次人员名册表' target="_blank">珠海市事业单位工作人员年度考核备案呈报表、各等次人员名册表</a></td>
+                <td width="70" class="date">2015-04-30</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='珠海市各区事业单位工作人员年度考核结果汇总表' target="_blank">珠海市各区事业单位工作人员年度考核结果汇总表</a></td>
+                <td width="70" class="date">2015-04-30</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+            </table>
+            <table id=tab_7_4 style="display:none" width="94%">
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+               
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='珠海市单位编码' target="_blank">珠海市单位编码</a></td>
+                <td width="70" class="date">2016-05-18</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='统计工作有关说明（★ 统计工作必看）' target="_blank">统计工作有关说明（★ 统计工作必看）</a></td>
+                <td width="70" class="date">2015-04-30</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='事业单位人员PS封面' target="_blank">事业单位人员PS封面</a></td>
+                <td width="70" class="date">2015-04-30</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='事业单位工作人员统计报表审核要点' target="_blank">事业单位工作人员统计报表审核要点</a></td>
+                <td width="70" class="date">2015-04-30</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='事业单位表指标解释' target="_blank">事业单位表指标解释</a></td>
+                <td width="70" class="date">2015-04-30</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+            </table>
+            </td>
+          </tr>
+        </table>
+        <!--事业单位人员管理结束-->
+        <!--职称评审开始-->
+        <table class="table_second" id=tab_1_7 style="display:none" >
+          <tr>
+            <td width="313" height="522" valign="top" >
+            <table class="table_second_bar" width="254" >
+              <tr>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td bgcolor="#f5fafe">
+                <table width="214" >
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td class="table_second_bar_td on1" id=bg_8_1 onmouseover=showtab(8,1,3) ><a class="pl35" id=td_8_1 href=" ">职称</a> </td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td class="table_second_bar_td" id=bg_8_2 onmouseover=showtab(8,2,3) ><a class="pl35" id=td_8_2 href=" ">专家</a> </td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td class="table_second_bar_td" id=bg_8_3 onmouseover=showtab(8,3,3) ><a class="pl35" id=td_8_3  href=" ">博士</a > </td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                </table>
+                </td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+              </tr>
+              
+            </table>
+            </td>
+            <td width="17">&nbsp;</td>
+            <td valign="top" class="Border_gray4">
+            <table id=tab_8_1 width="94%">
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+               
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='关于做好“广东省专业技术人才网上申报系统”部门及单位账户设置工作的通知' target="_blank">关于做好“广东省专业技术人才网上申报系统”部门及单位账户设置工作的通知</a></td>
+                <td width="70" class="date">2016-07-12</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='关于做好2016年度我市职称评审工作的通知' target="_blank">关于做好2016年度我市职称评审工作的通知</a></td>
+                <td width="70" class="date">2016-07-04</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='评审一览表' target="_blank">评审一览表</a></td>
+                <td width="70" class="date">2016-07-01</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='补（换）发专业技术资格证书、职（执）业资格证书办事指南' target="_blank">补（换）发专业技术资格证书、职（执）业资格证书办事指南</a></td>
+                <td width="70" class="date">2016-03-28</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='2015年我省各专业系列专业技术资格评审通知汇编' target="_blank">2015年我省各专业系列专业技术资格评审通知汇编</a></td>
+                <td width="70" class="date">2016-03-28</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='我国专业技术资格制度简介' target="_blank">我国专业技术资格制度简介</a></td>
+                <td width="70" class="date">2015-06-19</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='省外来珠海人员专业技术资格确认办事指南' target="_blank">省外来珠海人员专业技术资格确认办事指南</a></td>
+                <td width="70" class="date">2015-06-08</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='大中专院校毕业生初次专业技术资格考核认定办事指南' target="_blank">大中专院校毕业生初次专业技术资格考核认定办事指南</a></td>
+                <td width="70" class="date">2015-06-08</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+            </table>
+            <table id=tab_8_2 style="display:none" width="94%" >
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+               
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='申报国家级、省级各类专家办事指南' target="_blank">申报国家级、省级各类专家办事指南</a></td>
+                <td width="70" class="date">2016-05-18</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+            </table>
+            <table id=tab_8_3 style="display:none" width="94%">
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='申请市博士后补贴经费办事指南' target="_blank">申请市博士后补贴经费办事指南</a></td>
+                <td width="70" class="date">2016-03-30</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='申报设立博士后科研工作站（分站、创新实践基地）办事指南' target="_blank">申报设立博士后科研工作站（分站、创新实践基地）办事指南</a></td>
+                <td width="70" class="date">2015-06-08</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+            </table>
+            </td>
+          </tr>
+        </table>
+        <!--职称评审结束-->
+        <!--劳动关系开始-->
+        <table class="table_second" id=tab_1_8 style="display:none"  >
+          <tr>
+            <td width="313" height="522" valign="top"  >
+            <table  class="table_second_bar" width="254" >
+              <tr>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td bgcolor="#f5fafe">
+                <table width="214" >
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td class="table_second_bar_td on1" id=bg_10_1 onmouseover=showtab(10,1,3) ><a class="pl35" id=td_10_1 href=" ">劳动监察</a> </td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td class="table_second_bar_td" id=bg_10_2 onmouseover=showtab(10,2,3) ><a class="pl35" id=td_10_2 href=" ">劳动关系</a> </td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td class="table_second_bar_td" id=bg_10_3 onmouseover=showtab(10,3,3) ><a class="pl35" id=td_10_3 >劳动人事仲裁</a> </td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                </table>
+                </td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+              </tr>
+              
+            </table>
+            </td>
+            <td width="17">&nbsp;</td>
+            <td valign="top" class="Border_gray4">
+            <table id=tab_10_1 width="94%">
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+               
+              <tr>
+                <td width="12" height="28" align="center"> </td>
+                <td><a href=' ' title='关于劳动保障监察投诉举报受理机构调整事项通告' target="_blank">关于劳动保障监察投诉举报受理机构调整事项通告</a></td>
+                <td width="70" class="date">2016-12-23</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='关于用人单位三年内是否存在劳动保障违法记录的证明' target="_blank">关于用人单位三年内是否存在劳动保障违法记录的证明</a></td>
+                <td width="70" class="date">2016-05-18</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='劳动保障监察信息网络申报操作指南' target="_blank">劳动保障监察信息网络申报操作指南</a></td>
+                <td width="70" class="date">2016-03-29</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+            </table>
+            <table id=tab_10_2 style="display:none" width="94%" >
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+               
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='珠海市劳务派遣单位有关情况的通告' target="_blank">珠海市劳务派遣单位有关情况的通告</a></td>
+                <td width="70" class="date">2017-01-12</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='珠海市人才资源与就业服务中心关于实行市属用人单位招用工登记备案与就业失业登记业务通办的通告' target="_blank">珠海市人才资源与就业服务中心关于实行市属用人单位招用工登记备案与就业失业登记业务通办的通告</a></td>
+                <td width="70" class="date">2016-08-03</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='劳动合同制工人合同期满、终止、解除的手续办理' target="_blank">劳动合同制工人合同期满、终止、解除的手续办理</a></td>
+                <td width="70" class="date">2016-05-18</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='珠海市劳务派遣行政许可办事指南' target="_blank">珠海市劳务派遣行政许可办事指南</a></td>
+                <td width="70" class="date">2016-03-12</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='市综合统计年报网上申报系统' target="_blank">市综合统计年报网上申报系统</a></td>
+                <td width="70" class="date">2015-03-04</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='劳动合同指引' target="_blank">劳动合同指引</a></td>
+                <td width="70" class="date">2011-03-17</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='办理辞退费、离职费、经济补偿金业务' target="_blank">办理辞退费、离职费、经济补偿金业务</a></td>
+                <td width="70" class="date">2011-08-19</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='企业裁员指引' target="_blank">企业裁员指引</a></td>
+                <td width="70" class="date">2011-08-19</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+            </table>
+            <table id=tab_10_3 style="display:none" width="94%">
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+               
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='珠海市人民政府办公室关于调整珠海市劳动人事争议仲裁委员会成员的通知' target="_blank">珠海市人民政府办公室关于调整珠海市劳动人事争议仲裁委员会成员的通知</a></td>
+                <td width="70" class="date">2016-12-28</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='全市劳动人事争议仲裁机构一览表' target="_blank">全市劳动人事争议仲裁机构一览表</a></td>
+                <td width="70" class="date">2016-10-21</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='劳动人事争议仲裁办事指南' target="_blank">劳动人事争议仲裁办事指南</a></td>
+                <td width="70" class="date">2016-08-26</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='劳动保障监察信息网络申报操作指南' target="_blank">劳动保障监察信息网络申报操作指南</a></td>
+                <td width="70" class="date">2016-05-18</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='劳动人事争议仲裁文书范本下载' target="_blank">劳动人事争议仲裁文书范本下载</a></td>
+                <td width="70" class="date">2016-03-30</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3" ></td>
+              </tr>
+              
+              <tr>
+                <td width="12" height="28" align="center"></td>
+                <td><a href='' title='劳动人事争议仲裁空白文书下载' target="_blank">劳动人事争议仲裁空白文书下载</a></td>
+                <td width="70" class="date">2015-04-30</td>
+              </tr>
+               <tr>
+                <td height="1" colspan="3"></td>
+              </tr>
+              
+              <tr>
+                <td height="20" colspan="3"></td>
+              </tr>
+            </table>
+            </td>
+          </tr>
+        </table>
+        <!--劳动关系结束-->
+
+      </div><!--conten结束-->
+      
+      <div id="service_loby">
+      
+
+          <div id="search">
+              <div class="search_bar">
+                  <span> 信息查询</span>
+              </div>          
+              <ul>
+                <li><a href="#" target="_blank">养老保险</a></li>
+                <li><a href="#" target="_blank">生育保险</a></li>
+                <li><a href="#" target="_blank">就业信息</a></li>
+              </ul>
+              <ul>
+                <li><a href="#" target="_blank">失业保险</a></li>
+                <li><a href="#" target="_blank"> 医疗保险 </a></li>
+                <li><a href="#" target="_blank"> 人才信息 </a></li>
+              </ul>
+              <ul>
+                <li><a href="#" target="_blank"> 工伤保险 </a></li>
+                <li><a href="#" target="_blank"> 住房公积金 </a></li>
+                <li><a href="#" target="_blank"> 招聘信息  </a></li>
+              </ul>
+          </div>  <!--search结束-->
+          
+
+          <div id="service">
+              <div class="service_bar">
+                   <span> 协会服务</span>
+              </div>        
+              <ul>
+                <li><a href="#" target="_blank">培训服务</a></li>
+                <li><a href="#" target="_blank">档案服务</a></li>
+                <li><a href="#" target="_blank"> 专家咨询 </a></li>
+              </ul>
+              <ul>
+                <li><a href="#" target="_blank">法律援助</a></li>
+                <li><a href="#" target="_blank"> 档案管理 </a></li>
+                <li><a href="#" target="_blank"> 系统管理 </a></li>
+              </ul>
+          </div> <!--service结束-->
+      </div><!--service_loby结束-->
+      
+    </div><!--content结束-->
+    </div>
+    </div><!--UI结束-->
+    <footer>
+      <div class="copyRight">
+         <p>copyright © 2001-2035 | WWW.KMHRSS.COM || WWW.KMHRSS.COM | All Rights Reserved.&nbsp;&nbsp;&nbsp;&nbsp;</p>
+         <p>ICP备12000825号 | 版权所有：昆明市人力资源和社会保障协会 | 通信地址：云南省昆明市官渡区民航路229号 | 邮编编码：650041</p>
+      </div>
+    </footer>
+
+</div>
+</body>
+</html>

@@ -15,6 +15,7 @@
     <color name="bgColor_overlay">#60000000</color>
 
     <color name="white">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
 
     <!--主题色-->
     <color name="DeepSkyBlue">#00BFFF</color>

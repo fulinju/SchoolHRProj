@@ -20,7 +20,9 @@ public class VolleyUtils {
 
     //新闻列表
     public static final String newsUrl = ServerIP + "/api/Article/GetPublishList/";
-//下载列表
+    //下载列表
     public static final String downloadsUrl = ServerIP + "/api/Download/GetDownloadList/";
+
+    public static final String newsDetailUrl = ServerIP + "/api/Article/GetPublishDetail/";
 
 }

@@ -15,10 +15,17 @@ namespace sl.web.Areas.api.Controllers
     /// </summary>
     public class DownloadController : ApiController
     {
+        /// <summary>
+        /// 分页获取所有下载列表
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="dmTypeID"></param>
+        /// <returns></returns>
         [HttpGet]
-        public HttpResponseMessage GetDownloadList(int pageIndex, int pageSize, string dmTypeID="%%")
+        public HttpResponseMessage GetDownloadList(int pageIndex, int pageSize, string dmTypeValue = "%%")
         {
-            Page<DownLoadInfo> list = HRAMApiService.GetDownloads(pageIndex, pageSize, dmTypeID);
+            Page<DownLoadInfo> list = HRAMApiService.GetDownloads(pageIndex, pageSize, dmTypeValue);
 
             if (list != null)
             {
@@ -34,5 +41,13 @@ namespace sl.web.Areas.api.Controllers
                 return JsonUtils.toJson(HttpStatusCode.PreconditionFailed, new JsonTip(ApiCode.GetDownloadListFailedCode, ApiCode.GetDownloadListFailedMessage));
             }
         }
+
+        ///
+        //public HttpResponseMessage GetDownloadList(int pageIndex, int pageSize, string dmTypeID = "%%")
+        //{
+        //    return JsonUtils.toJson(HttpStatusCode.PreconditionFailed, new JsonTip(ApiCode.GetDownloadListFailedCode, ApiCode.GetDownloadListFailedMessage));
+        //}
     }
+
+
 }

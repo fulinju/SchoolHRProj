@@ -32,19 +32,21 @@
                 var loginBtn = $("#loginBtn");
                 loginBtn.linkbutton('disable');
                 var url = "@Url.Action("LoginCheck", "Login")";
-                $.post(url, $(".form").serialize(), function(data) {
-                    if(data.state!="1") {
-                        $.messager.alert("友情提示",data.message);
+                $.post(url, $(".form").serialize(), function (data) {
+                    if (data.state != "1") {
+                        //刷新验证码
+                        refreshCode();
+                        $.messager.alert("友情提示", data.message);
                         loginBtn.linkbutton('enable');
-                    }else {
+                    } else {
                         location.href = data.message;
                     }
-                },"json");
+                }, "json");
             };
         });
     </script>
 
-    
+
 </head>
 <body>
 
@@ -63,29 +65,32 @@
                         密码：
                     </th>
                     <td>
-                        <input name="loginPwd" type="password" class="easyui-textbox" style="width: 173px;" value="123" />
+                        <input name="loginPwd" type="password" onpaste="return false" oncopy="return false;" oncut="return false;" class="easyui-textbox" style="width: 173px;" value="123" />
                     </td>
                 </tr>
                 <tr>
-                    <th style ="padding-top:10px; text-align: right;">
+                    <th style="padding-top:10px; text-align: right;">
                         验证码：
                     </th>
                     <td style="padding-top:10px;">
-                        <input name=" checkcode" class="easyui-textbox" style="width: 90px;" oninput="if(value.length>5)value=value.slice(0,5)" />
-                        <img id="GL_StandardCode" style="cursor: pointer; width: 80px;vertical-align:middle" src="@Url.Action("VerifyCode", "Login")?t=@DateTime.Now.Ticks" title="看不清，点击换一张" />
+                        <input name="checkcode" class="easyui-textbox" style="width: 90px;" oninput="if(value.length>5)value=value.slice(0,5)" />
+                        <img id="verifyCode" style="cursor: pointer; width: 80px;vertical-align:middle" onclick="refreshCode()" src="@Url.Action("VerifyCode", "Login")?t=@DateTime.Now.Ticks" title="看不清，点击换一张" />
                     </td>
                 </tr>
             </table>
         </form>
     </div>
 
-</body>
-</html>
+    <script>
 
-<script>
-        $("#GL_StandardCode").click(function () {
+        function refreshCode() {
             var newSrc = "@Url.Action("VerifyCode", "Login")" + "?t=" + (new Date()).getTime();
-            this.src=newSrc;
+            document.getElementById("verifyCode").src = newSrc;
             return false;
-        });
-</script>
+        }
+    </script>
+
+</body>
+
+
+</html>

@@ -11,6 +11,11 @@
     <string name="null_value">暂无</string>
     <string name="mid_bucket_format">[%1$s]</string>
 
+    <string name="default_value">默认值</string>
+    <!--文章相关-->
+    <string name="publish_detail">发布详情</string>
+    <string name="cant_get_publishId">未能获得此文章</string>
+
     <!--下载相关-->
     <string name="download_num">下载数量:%1$d</string>
 

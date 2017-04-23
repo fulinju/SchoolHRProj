@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_layout_head"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_title_gray_under_line">
+
+
+    <LinearLayout
+        android:id="@+id/ll_head_left"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        >
+
+        <ImageView
+            android:id="@+id/tv_head_left"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/head_back_img"
+            android:layout_gravity="center_vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:visibility="visible" />
+        <TextView
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:textSize="15sp"
+            android:textColor="@drawable/theme_text_click"
+            android:layout_gravity="center_vertical" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/default_value"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_head_right"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:textColor="@drawable/theme_text_click"
+        android:layout_marginRight="5dp"
+        android:visibility="gone"
+         />
+</RelativeLayout>
+

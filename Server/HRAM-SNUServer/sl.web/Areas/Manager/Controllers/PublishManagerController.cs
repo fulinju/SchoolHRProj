@@ -45,7 +45,7 @@ namespace sl.web.Areas.Manager.Controllers
         }
         #endregion
 
-        #region 删除发布信息
+        #region 删除发布信息 文章内容长
         public ActionResult PublishDel(string model)
         {
             List<T_PublishManage> publishsList = JsonConvert.DeserializeObject<List<T_PublishManage>>(model);
@@ -53,9 +53,17 @@ namespace sl.web.Areas.Manager.Controllers
             foreach (var entity in publishsList)
             {
                 entity.isDeleted = true;
-                //搜索相关联的发布广告图片列表 
+                //搜索相关联的发布广告图片列表 直接删除吧
+                List<T_ADImgList> ads = HRAManagerService.GetPublishADIMGS(entity.pmADImgListID);
+                for (int i = 0; i < ads.Count;i++)
+                {
+                    Utils.DeleteFile(ads[i].pmADImgListURL); //删除对应图片 免得太占内存
+                    flag = HRAManagerService.database.Delete(ads[i]);//可以考虑直接删除
+                }
+
                 Sql sql = Sql.Builder;
                 sql.Append("Update T_ADImgList set isDeleted = 1 where pmADImgListID = @0", entity.pmADImgListID);
+
                 HRAManagerService.database.Execute(sql);
 
                 flag = HRAManagerService.database.Update(entity);
@@ -203,11 +211,11 @@ namespace sl.web.Areas.Manager.Controllers
 
                 if (Request.IsPost())
                 {
-                    if (TryUpdateModel(load))
+              
+                    if (TryUpdateModel(load) || m.pmADImgListNum == 0)
                     {
                         if (m.pmADImgListURL != null)
                         {
-
                             HttpPostedFileBase fileBase = GetFileBase();
                             if (fileBase == null || fileBase.FileName == "")
                             {
@@ -222,6 +230,7 @@ namespace sl.web.Areas.Manager.Controllers
                             //string fileName = GetSavedFileName(fileBase);
                             load.pmADImgListURL = SaveFile(fileBase);// 存储
                         }
+
                         Model valid = Model.Valid(load);
                         return valid.Result ? SaveMessage(HRAManagerService.database.Update(load)) : ErrorMessage(valid.Message);
 

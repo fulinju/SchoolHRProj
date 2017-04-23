@@ -111,16 +111,16 @@
             android:textColor="@color/theme_orange"
             android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/tv_publishGoodCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@mipmap/ico_circle_heart_normal"
-            android:drawablePadding="5dp"
-            android:layout_toLeftOf="@+id/tv_publishViews"
-            android:gravity="center"
-            android:text="0"
-            android:textColor="#b5b5b5" />
+        <!--<TextView-->
+            <!--android:id="@+id/tv_publishGoodCount"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:drawableLeft="@mipmap/ico_circle_heart_normal"-->
+            <!--android:drawablePadding="5dp"-->
+            <!--android:layout_toLeftOf="@+id/tv_publishViews"-->
+            <!--android:gravity="center"-->
+            <!--android:text="0"-->
+            <!--android:textColor="#b5b5b5" />-->
 
         <TextView
             android:id="@+id/tv_publishViews"

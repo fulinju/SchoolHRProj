@@ -14,6 +14,8 @@ namespace sl.model
 
         public string uUserName { get; set; }   //外层嵌套用户名
 
+        public string flTypeValue { get; set; }
+
         public string flName { get; set; }
 
         public string flURL { get; set; }

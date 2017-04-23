@@ -41,13 +41,17 @@ namespace sl.web.ui
         public static string GetDownloadListFailedMessage = "获取下载列表失败"; //
         #endregion
 
-
         #region 会员相关
         public static string GetMemberListFailedCode = "40001"; //获取会员列表失败
         public static string GetMemberListFailedMessage = "获取会员列表失败"; //
 
         public static string GetMemberDetailFailedCode = "40002"; //获取会员详情失败
         public static string GetMemberDetailFailedMessage = "获取会员详情失败"; //
+        #endregion
+
+        #region 类型相关
+        public static string GetFLTypeListFailedCode = "90001"; //获取友情链接类型列表失败
+        public static string GetFLTypeListFailedMessage = "90001"; //获取友情链接类型列表失败
         #endregion
     }
 }

@@ -29,15 +29,20 @@ namespace sl.web.Areas.Manager.Controllers
             string errormessage;
 
             //验证码判断
-            if (!string.IsNullOrEmpty(checkCode) && !string.IsNullOrEmpty(CreateCheckCodeImage.checkCode))
-            {
 
-                if (!checkCode.ToUpper().Equals(CreateCheckCodeImage.checkCode.ToUpper())) //不区分大小写
-                {
-                    errormessage = "验证码错误!";
-                    return Json(new JsonTip("0", errormessage));
-                }
+            if (string.IsNullOrEmpty(checkCode))
+            {
+                errormessage = "请输入验证码!";
+                return Json(new JsonTip("0", errormessage));
             }
+
+
+            if (string.IsNullOrEmpty(CreateCheckCodeImage.checkCode) || !checkCode.ToUpper().Equals(CreateCheckCodeImage.checkCode.ToUpper())) //不区分大小写
+            {
+                errormessage = "验证码错误!";
+                return Json(new JsonTip("0", errormessage));
+            }
+
 
             //账户判断
             if (string.IsNullOrEmpty(loginName) || string.IsNullOrEmpty(loginPwd))
@@ -48,7 +53,7 @@ namespace sl.web.Areas.Manager.Controllers
 
             string passwordMd5 = Security.MD5Encrypt(loginPwd); //一般MD5密码登录
 
-            T_User loginer =  HRAManagerService.CheckLogin(loginName, passwordMd5);
+            T_User loginer = HRAManagerService.CheckLogin(loginName, passwordMd5);
 
             if (loginer == null)
             {

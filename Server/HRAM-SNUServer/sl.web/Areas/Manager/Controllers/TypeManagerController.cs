@@ -207,7 +207,7 @@ namespace sl.web.Areas.Manager.Controllers
                     return Json(new JsonTip("0", ConstantData.CANT_DEL_ADMIN_TYPE));
                 }
 
-                if (entity.uLoginTypeID == ConstantData.TYPE_NO_ID)
+                if (entity.uLoginTypeID == ConstantData.TYPE_DEFALUT_ID)
                 {
                     return Json(new JsonTip("0", ConstantData.CANT_DEL_DEFAULT));
                 }
@@ -230,7 +230,7 @@ namespace sl.web.Areas.Manager.Controllers
             List<string> listValue = new List<string>();
             foreach (var entity in dmEntityList)
             {
-                if (entity.dmTypeID == ConstantData.TYPE_NO_ID)
+                if (entity.dmTypeID == ConstantData.TYPE_DEFALUT_ID)
                 {
                     return Json(new JsonTip("0", ConstantData.CANT_DEL_DEFAULT));
                 }
@@ -253,7 +253,7 @@ namespace sl.web.Areas.Manager.Controllers
             List<string> listValue = new List<string>();
             foreach (var entity in pmEntityList)
             {
-                if (entity.pmTypeID == ConstantData.TYPE_NO_ID)
+                if (entity.pmTypeID == ConstantData.TYPE_DEFALUT_ID)
                 {
                     return Json(new JsonTip("0", ConstantData.CANT_DEL_DEFAULT));
                 }
@@ -275,7 +275,7 @@ namespace sl.web.Areas.Manager.Controllers
             List<string> listValue = new List<string>();
             foreach (var entity in reviewEntityList)
             {
-                if (entity.mReviewResultID == ConstantData.TYPE_NO_ID)
+                if (entity.mReviewResultID == ConstantData.TYPE_DEFALUT_ID)
                 {
                     return Json(new JsonTip("0", ConstantData.CANT_DEL_DEFAULT));
                 }
@@ -299,12 +299,12 @@ namespace sl.web.Areas.Manager.Controllers
             List<string> listValue = new List<string>();
             foreach (var entity in memberTypes)
             {
-                if (entity.mTypeID == ConstantData.TYPE_NO_ID)
+                if (entity.mTypeID == ConstantData.TYPE_DEFALUT_ID)
                 {
                     return Json(new JsonTip("0", ConstantData.CANT_DEL_DEFAULT));
                 }
 
-                if (ExistInTable("T_Member", "pkId", entity.mTypeID))
+                if (ExistInTable("T_Member", "mTypeID", entity.mTypeID))
                 {
                     listValue.Add(entity.mTypeID); //获取存在于用户表的ID
                 }
@@ -323,7 +323,7 @@ namespace sl.web.Areas.Manager.Controllers
             List<string> listValue = new List<string>();
             foreach (var entity in flTypes)
             {
-                if (entity.flTypeID == ConstantData.TYPE_NO_ID)
+                if (entity.flTypeID == ConstantData.TYPE_DEFALUT_ID)
                 {
                     return Json(new JsonTip("0", ConstantData.CANT_DEL_DEFAULT));
                 }
@@ -603,7 +603,7 @@ namespace sl.web.Areas.Manager.Controllers
             //把删除的ID初始化置为TYPE_NO_ID:-0000
             for (int i = 0; i < listValue.Count; i++)
             {
-                HRAManagerService.CommonDelete(refTableName, refSelectRow, ConstantData.TYPE_NO_ID, listValue[i]);
+                HRAManagerService.CommonDelete(refTableName, refSelectRow, ConstantData.TYPE_DEFALUT_ID, listValue[i]);
             }
 
             foreach (var entity in m)
@@ -616,12 +616,15 @@ namespace sl.web.Areas.Manager.Controllers
         #endregion
 
 
+        /// <summary>
+        /// 可以考虑把传入类型值和类型 switch判断
+        /// </summary>
 
         #region 检查用户类型是否存在
         [HttpPost]
-        public ActionResult CheckUserTypeIsExist(string typeValue)
+        public ActionResult CheckUserTypeIsExist(string uLoginTypeValue)
         {
-            T_UserType temp = HRAManagerService.UserTypeIsExist(typeValue);
+            T_UserType temp = HRAManagerService.UserTypeIsExist(uLoginTypeValue);
             if (temp != null)
             {
                 return Json(new { state = false, message = ERR_USERTYPE_EXIST });
@@ -632,9 +635,9 @@ namespace sl.web.Areas.Manager.Controllers
 
         #region 检查下载类型是否存在
         [HttpPost]
-        public ActionResult CheckDMTypeIsExist(string typeValue)
+        public ActionResult CheckDMTypeIsExist(string dmTypeValue)
         {
-            T_DMType temp = HRAManagerService.DownloadTypeIsExist(typeValue);
+            T_DMType temp = HRAManagerService.DownloadTypeIsExist(dmTypeValue);
             if (temp != null)
             {
                 return Json(new { state = false, message = ERR_DMTYPE_EXIST });
@@ -645,9 +648,9 @@ namespace sl.web.Areas.Manager.Controllers
 
         #region 检查发布类型是否存在
         [HttpPost]
-        public ActionResult CheckPMTypeIsExist(string typeValue)
-        {
-            T_PMType temp = HRAManagerService.PublishTypeIsExist(typeValue);
+        public ActionResult CheckPMTypeIsExist(string pmTypeValue)
+       {
+           T_PMType temp = HRAManagerService.PublishTypeIsExist(pmTypeValue);
             if (temp != null)
             {
                 return Json(new { state = false, message = ERR_PMTYPE_EXIST });
@@ -658,10 +661,10 @@ namespace sl.web.Areas.Manager.Controllers
 
         #region 检查审核结果是否存在
         [HttpPost]
-        public ActionResult CheckReviewResultIsExist(string typeValue)
+        public ActionResult CheckReviewResultIsExist(string mReviewResultValue)
         {
 
-            T_ReviewResult temp = HRAManagerService.ReviewResultIsExist(typeValue);
+            T_ReviewResult temp = HRAManagerService.ReviewResultIsExist(mReviewResultValue);
             if (temp != null)
             {
                 return Json(new { state = false, message = ERR_REVIEW_EXIST });
@@ -672,9 +675,9 @@ namespace sl.web.Areas.Manager.Controllers
 
         #region 检查会员类型是否存在
         [HttpPost]
-        public ActionResult CheckMTypeIsExist(string typeValue)
+        public ActionResult CheckMTypeIsExist(string mTypeValue)
         {
-            T_MemberType temp = HRAManagerService.MemberTypetIsExist(typeValue);
+            T_MemberType temp = HRAManagerService.MemberTypetIsExist(mTypeValue);
             if (temp != null)
             {
                 return Json(new { state = false, message = ERR_MEMBERTYPE_EXIST });
@@ -685,9 +688,9 @@ namespace sl.web.Areas.Manager.Controllers
 
         #region 检查友情链接是否存在
         [HttpPost]
-        public ActionResult CheckFLTypeIsExist(string typeValue)
+        public ActionResult CheckFLTypeIsExist(string flTypeValue)
         {
-            T_FLType temp = HRAManagerService.FLTypetIsExist(typeValue);
+            T_FLType temp = HRAManagerService.FLTypetIsExist(flTypeValue);
             if (temp != null)
             {
                 return Json(new { state = false, message = ERR_FL_EXIST });
@@ -695,6 +698,7 @@ namespace sl.web.Areas.Manager.Controllers
             return Json(new { state = true, message = string.Empty });
         }
         #endregion
+
     }
 
 

@@ -55,7 +55,7 @@
                 @Html.PasswordFor(m => m.uPassword,
                     Html.Valid().Required("请输入密码")
                     .Length(6, 20)
-                    .AsHtmlAttribute(new { @class = "input" }))
+                    .AsHtmlAttribute(new {  onpaste="return false", oncopy="return false;", oncut="return false;"}))
             </td>
         </tr>
 
@@ -67,7 +67,7 @@
                 @Html.InputFor(m => m.uPhone,
                             Html.Valid().Required("请输入手机号")
                             .CellPhone()
-                            .AsHtmlAttribute())
+                                     .AsHtmlAttribute(new { onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" ,onafterpaste="this.value=this.value.replace(/[^0-9]/g,'')" }))
             </td>
         </tr>
         <tr>

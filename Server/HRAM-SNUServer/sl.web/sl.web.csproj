@@ -189,6 +189,11 @@
     <Content Include="Html\web\Industry.html" />
     <Content Include="Html\web\js\base.js" />
     <Content Include="Html\web\js\function.js" />
+    <Content Include="Html\web\js\func\download\download.js" />
+    <Content Include="Html\web\js\func\home\home.js" />
+    <Content Include="Html\web\js\func\link\link.js" />
+    <Content Include="Html\web\js\func\member\member.js" />
+    <Content Include="Html\web\js\jquery-1.10.2.min.js" />
     <Content Include="Html\web\js\mf-pattern\img\mF_51xflash\play.gif" />
     <Content Include="Html\web\js\mf-pattern\img\mF_51xflash\tit-ar.gif" />
     <Content Include="Html\web\js\mf-pattern\img\mF_classicHB\btn-blue.gif" />
@@ -2529,9 +2534,7 @@
     <Compile Include="Areas\Manager\Controllers\TypeManagerController.cs" />
     <Compile Include="Areas\Manager\Controllers\UserController.cs" />
     <Compile Include="Areas\Manager\ManagerAreaRegistration.cs" />
-    <Compile Include="Areas\Manager\Utils\ConstantData.cs" />
     <Compile Include="Areas\Manager\Utils\UtilsBind.cs" />
-    <Compile Include="Areas\Manager\Utils\UtilsDB.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

@@ -275,6 +275,58 @@
             </table>
             <table id="reviewresult_dg"></table>
         </div>
+
+        @* 友情链接类型管理 *@
+        <div title="友情链接类型管理" data-options="iconCls:'icon-ok'">
+            <fieldset>
+                <legend>信息查询</legend>
+                <form id="searchFL" action="GetFLTypes" method="post">
+                    <table>
+                        <tr>
+                            <td>
+                                友情链接类型：
+                            </td>
+                            <td>
+                                @Html.InputFor(m => m.flType.flTypeValue)
+                            </td>
+                            <td>
+                                @Html.EasyuiLinkButtonForSearch("fltype_dg", "searchFL")
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </fieldset>
+
+            <table>
+                <tr>
+                    <td>
+                        @Html.EasyuiLinkButtonForAdd("fltype_dg", "添加友情链接类型", Url.Action("FLTypeEdit"), 700, 400)
+                    </td>
+                    <td>
+                        <div class="datagrid-btn-separator">
+                        </div>
+                    </td>
+                    <td>
+                        @Html.EasyuiLinkButtonForEdit("fltype_dg", "修改友情链接类型", Url.Action("FLTypeEdit"), 700, 400)
+                    </td>
+                    <td>
+                        <div class="datagrid-btn-separator">
+                        </div>
+                    </td>
+                    <td>
+                        @Html.EasyuiLinkButtonForDel("fltype_dg", Url.Action("FLTypesDel"))
+                    </td>
+                    <td>
+                        <div class="datagrid-btn-separator">
+                        </div>
+                    </td>
+                    <td>
+                        @Html.EasyuiLinkButtonForReload("fltype_dg")
+                    </td>
+                </tr>
+            </table>
+            <table id="fltype_dg"></table>
+        </div>
     </div>
 </body>
 
@@ -329,10 +381,21 @@
         initGrid('reviewresult_dg', url, "pkId", "pkId", columns, true, false); //不排序
     }
 
+    //显示友情链接
+    function showFlTypeList() {
+        var url = '@Url.Action("GetFLTypes")';
+        var columns = [[
+                            { field: 'flTypeID', title: '友情链接类型ID', width: '20%', sortable: true },
+                            { field: 'flTypeValue', title: '友情链接类型', width: '20%', sortable: true }
+        ]];
+        initGrid('fltype_dg', url, "pkId", "pkId", columns, true, false); //不排序
+    }
+
     //延时加载
     setTimeout(showUserTypeList, 0);
     setTimeout(showMemberTypeList, 500);
     setTimeout(showPMTypeList, 1000);
     setTimeout(showDMTypeList, 1500);
     setTimeout(showReviewResultList, 2000);
+    setTimeout(showFlTypeList, 2500);
 </script>

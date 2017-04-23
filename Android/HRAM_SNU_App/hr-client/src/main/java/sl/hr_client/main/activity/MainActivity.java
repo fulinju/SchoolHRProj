@@ -30,6 +30,7 @@ import sl.hr_client.base.BaseActivity;
 import sl.hr_client.base.BaseFragment;
 import sl.hr_client.base.ContentFragment;
 import sl.hr_client.main.download.fragment.DownloadFragment;
+import sl.hr_client.main.link.LinkFragment;
 import sl.hr_client.main.news.fragment.NewsFragment;
 
 /**
@@ -46,6 +47,7 @@ public class MainActivity extends BaseActivity implements ViewAnimator.ViewAnima
 
     private NewsFragment newsFragment;
     private DownloadFragment downloadFragment;
+    private LinkFragment linkFragment;
 
 
     @Override
@@ -73,12 +75,17 @@ public class MainActivity extends BaseActivity implements ViewAnimator.ViewAnima
     private void initFragment() {
         newsFragment = new NewsFragment();
         downloadFragment = new DownloadFragment();
+        linkFragment = new LinkFragment();
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.content_frame, newsFragment, NewsFragment.NEWS)
                 .commit();
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.content_frame, downloadFragment, DownloadFragment.DOWNLOADS)
+                .commit();
+
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.content_frame, linkFragment, LinkFragment.LINKS)
                 .commit();
 
         getSupportFragmentManager().beginTransaction()
@@ -94,6 +101,8 @@ public class MainActivity extends BaseActivity implements ViewAnimator.ViewAnima
         list.add(newsItem);
         SlideMenuItem downloadItem = new SlideMenuItem(DownloadFragment.DOWNLOADS, R.mipmap.icn_2);
         list.add(downloadItem);
+        SlideMenuItem linksItem = new SlideMenuItem(LinkFragment.LINKS, R.mipmap.icn_3);
+        list.add(linksItem);
     }
 
 

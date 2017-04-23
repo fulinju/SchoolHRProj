@@ -49,6 +49,7 @@ namespace sl.web.Areas.Manager.Controllers
         }
         #endregion
 
+
         #region 编辑链接
         public ActionResult LinkEdit(T_FriendlyLink m, string id = "0")
         {
@@ -89,5 +90,9 @@ namespace sl.web.Areas.Manager.Controllers
             }
         }
         #endregion
+
+
+        ///////////////////////////////////////////////////////////////
+
 	}
 }

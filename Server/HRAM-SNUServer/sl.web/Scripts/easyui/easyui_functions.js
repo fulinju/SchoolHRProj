@@ -146,7 +146,9 @@ function Delete(dgid, url) {
     } else {
         parent.$.messager.confirm('提示', '确定要删除?', function (r) {
             if (r) {
-                $.post(url, { model: JSON.stringify(row) }, function (data) {
+                var chosen = JSON.stringify(row);
+                console.log(chosen)
+                $.post(url, { model: chosen }, function (data) {
                     if (data.state == "1") {
                         $("#" + dgid).datagrid('reload').datagrid('clearSelections').datagrid('clearChecked');
                         try {

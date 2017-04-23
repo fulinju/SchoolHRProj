@@ -10,7 +10,6 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity
 public class DownloadBean {
     @Id
-    private Long id;
     private String downloadID;
     private String uLoginName;
     private String uUserName;
@@ -74,17 +73,10 @@ public class DownloadBean {
     public void setDownloadID(String downloadID) {
         this.downloadID = downloadID;
     }
-    public Long getId() {
-        return this.id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    @Generated(hash = 1771300858)
-    public DownloadBean(Long id, String downloadID, String uLoginName,
-            String uUserName, String dmTitle, String dmTypeID, String dmTypeValue,
-            String dmFileURL, int dmDownloadNum, String dmUploadTime) {
-        this.id = id;
+    @Generated(hash = 59474437)
+    public DownloadBean(String downloadID, String uLoginName, String uUserName,
+            String dmTitle, String dmTypeID, String dmTypeValue, String dmFileURL,
+            int dmDownloadNum, String dmUploadTime) {
         this.downloadID = downloadID;
         this.uLoginName = uLoginName;
         this.uUserName = uUserName;
@@ -98,5 +90,6 @@ public class DownloadBean {
     @Generated(hash = 2040406903)
     public DownloadBean() {
     }
+
 
 }

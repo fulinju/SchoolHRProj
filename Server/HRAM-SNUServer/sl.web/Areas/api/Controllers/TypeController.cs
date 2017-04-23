@@ -15,27 +15,21 @@ namespace sl.web.Areas.api.Controllers
 {
     public class TypeController : ApiController
     {
-        //[HttpGet]
-        //public HttpResponseMessage GetTypeList()
-        //{
-        //    Page<PublishInfo> list = HRAMApiService.GetPublishs(pageIndex, pageSize, pmTypeID);
+        [HttpGet]
+        public HttpResponseMessage GetTypeList()
+        {
+            List<T_FLType> list = HRAMApiService.GetFLType();
 
-        //    //return Json(new { total = list.TotalItems, rows = list.Items });
+            //return Json(new { total = list.TotalItems, rows = list.Items });
 
-        //    if (list != null)
-        //    {
-        //        var isLastPage = false;
-        //        if (list.CurrentPage >= list.TotalPages)
-        //        {
-        //            isLastPage = true;
-        //        }
-
-        //        return JsonUtils.toJson(HttpStatusCode.OK, new { totalItems = list.Items.Count, isLastPage = isLastPage, pageIndex = pageIndex, pageSize = pageSize, resultList = list.Items });
-        //    }
-        //    else
-        //    {
-        //        return JsonUtils.toJson(HttpStatusCode.PreconditionFailed, new JsonTip(ApiCode.GetPublishListFailedCode, ApiCode.GetPublishListFailedMessage));
-        //    }
-        //}
+            if (list != null)
+            {
+                return JsonUtils.toJson(HttpStatusCode.OK, new {item = list.Count, result = list });
+            }
+            else
+            {
+                return JsonUtils.toJson(HttpStatusCode.PreconditionFailed, new JsonTip(ApiCode.GetFLTypeListFailedCode, ApiCode.GetFLTypeListFailedMessage));
+            }
+        }
     }
 }

@@ -124,7 +124,7 @@ namespace sl.service.manager
             sql.Append("SUBSTRING(REPLACE(CAST(T_PublishManage.pmTitle as nvarchar(4000)),' ',''),0,20)+'...'  as pmTitle,");
             sql.Append("T_PublishManage.pmADImgListID,");
             sql.Append("T_PublishManage.pmPublishTime,");
-            sql.Append("SUBSTRING(REPLACE(CAST(T_PublishManage.pmText as nvarchar(4000)),' ',''),0,20)+'...'  as pmText,"); //文章内容太长
+            //sql.Append("SUBSTRING(REPLACE(CAST(T_PublishManage.pmText as nvarchar(4000)),' ',''),0,20)+'...'  as pmText,"); //文章内容太长
             sql.Append("T_PublishManage.pmViews,");
             sql.Append("T_PublishManage.pmPreview");
             sql.Append(" from T_PMType,T_PublishManage where uLoginName Like @0 and T_PublishManage.isDeleted = 0", uLoginName);
@@ -196,7 +196,15 @@ namespace sl.service.manager
             return database.Fetch<PublishExportInfo>(sql);
         }
 
+        public static List<T_ADImgList> GetPublishADIMGS(string pmADImgListID)
+        {
+            Sql sql = Sql.Builder;
+            sql.Select("*");
+            sql.From("T_ADImgList");
+            sql.Where("pmADImgListID = @0", pmADImgListID);
+            return database.Fetch<T_ADImgList>(sql);
 
+        }
 
         #endregion
 
@@ -267,6 +275,7 @@ namespace sl.service.manager
             Sql sql = Sql.Builder;
             sql.Select("*")
                 .From("T_UserType")
+                .Where("isDeleted = 0")
                 .OrderBy("uLoginTypeValue asc");
             userTypes = database.Fetch<T_UserType>(sql);
             return userTypes;
@@ -291,6 +300,7 @@ namespace sl.service.manager
             Sql sql = Sql.Builder;
             sql.Select("*")
                 .From("T_ReviewResult")
+                .Where("isDeleted = 0")
                 .OrderBy("mReviewResultID asc");
             reviewResults = database.Fetch<T_ReviewResult>(sql);
             return reviewResults;
@@ -313,6 +323,7 @@ namespace sl.service.manager
             Sql sql = Sql.Builder;
             sql.Select("*")
                 .From("T_MemberType")
+                .Where("isDeleted = 0")
                 .OrderBy("mTypeID asc");
             reviewResults = database.Fetch<T_MemberType>(sql);
             return reviewResults;
@@ -334,6 +345,7 @@ namespace sl.service.manager
             Sql sql = Sql.Builder;
             sql.Select("*")
                 .From("T_DMType")
+                .Where("isDeleted = 0")
                 .OrderBy("dmTypeValue asc");
             types = database.Fetch<T_DMType>(sql);
             return types;
@@ -355,6 +367,7 @@ namespace sl.service.manager
             Sql sql = Sql.Builder;
             sql.Select("*")
                 .From("T_PMType")
+                .Where("isDeleted = 0")
                 .OrderBy("pmTypeID asc");
             publishTypes = database.Fetch<T_PMType>(sql);
             return publishTypes;
@@ -462,7 +475,6 @@ namespace sl.service.manager
             return result;
         }
         #endregion
-
 
         #region 检查友情链接类型是否存在
         public static T_FLType FLTypetIsExist(string typeValue)

@@ -27,7 +27,7 @@ namespace sl.model
 
         [Column]
         [JsonProperty("pmADImgListNum")]
-        public string pmADImgListNum { get; set; }
+        public int pmADImgListNum { get; set; }
 
         [JsonIgnore]
         [Column]

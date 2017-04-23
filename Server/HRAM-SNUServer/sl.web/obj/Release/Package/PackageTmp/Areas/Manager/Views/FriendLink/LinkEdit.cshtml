@@ -37,6 +37,15 @@
 
         <tr>
             <th style="width: 130px">
+                链接类型：
+            </th>
+            <td>
+                @Html.DropDownListFor(m => m.flTypeID, UtilsBind.FLTypes())
+            </td>
+        </tr>
+
+        <tr>
+            <th style="width: 130px">
                 链接地址：
             </th>
             <td>
