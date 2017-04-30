@@ -43,7 +43,7 @@ namespace sl.service.api
             sql.Append("T_PublishManage.pmPreview");
             sql.Append(" from T_PublishManage left join T_PMType on T_PublishManage.pmTypeID = T_PMType.pmTypeID ");
             sql.Append(" left join T_User on T_User.uLoginName = T_PublishManage.uLoginName ");
-            sql.Append(" where T_PublishManage.pmTypeID like @0 ",pmTypeID);
+            sql.Append(" where T_PublishManage.pmTypeID like @0 ", pmTypeID);
             sql.Append(" and T_PublishManage.isDeleted = 0 ");
             Page<PublishInfo> list = database.Page<PublishInfo>(pageIndex, pageSize, sql);
             if (list != null)
@@ -80,6 +80,11 @@ namespace sl.service.api
         public static PublishInfo GetPublishDetail(string publishID)
         {
             Sql sql = Sql.Builder;
+
+            //因为查看了次详情 浏览+1
+            Sql sql2 = Sql.Builder;
+            sql2.Append("UPDATE T_PublishManage SET pmViews = (pmViews+1) WHERE pkId = @0", publishID);
+            database.Execute(sql2);
 
             //Left join去重 记得uLoginName和pmTypeID唯一性
             sql.Select("T_PMType.pmTypeValue,T_User.uUserName,"
@@ -232,13 +237,17 @@ namespace sl.service.api
             return user;
         }
 
-        public static T_User GetUserByMailAndPwd(string uMaiBox, string uPassword)
-        {
-            Sql sql = Sql.Builder;
-            sql.Append("select * from T_User where uMaiBox = @0 and uPassword = @1", uMaiBox, uPassword);
-            T_User user = database.FirstOrDefault<T_User>(sql);
-            return user;
-        }
+        //public static LoginModel GetUserByMailAndPwd(string uMaiBox, string uPassword)
+        //{
+        //    Sql sql = Sql.Builder;
+        //    sql.Select("uLoginName as uLoginStr,uClientKey"
+        //    + ",uUserName,uPhone"
+        //    + ",uMaiBox");
+        //    sql.From("T_User");
+        //    sql.Where(" uMaiBox = @0 and uPassword = @1", uMaiBox, uPassword);
+        //    LoginModel user = database.FirstOrDefault<LoginModel>(sql);
+        //    return user;
+        //}
 
         /// <summary>
         /// 用邮箱注册
@@ -249,8 +258,9 @@ namespace sl.service.api
         {
             T_User user = new T_User();
             user.uMaiBox = mail;
+            user.uLoginName = mail;
             user.uPassword = pwdMD5;
-            user.uLoginTypeID = FinalData.TypeUserID;
+            user.uLoginTypeID = ConstantData.TYPE_DEFALUT_ID;
             object id = database.Insert(user);
             return id;
         }
@@ -268,12 +278,42 @@ namespace sl.service.api
             return user;
         }
 
-        public static T_User GetUserByLoginNameAndPwd(string uLoginName, string uPassword)
+        public static UserModel GetUserByLoginNameAndPwd(LoginModel loginInfo)
         {
             Sql sql = Sql.Builder;
-            sql.Append("select * from T_User where uLoginName = @0 and uPassword = @1", uLoginName, uPassword);
-            T_User user = database.FirstOrDefault<T_User>(sql);
-            return user;
+            sql.Select("pkId as uID,uLoginName as uLoginStr,uClientKey,uUserName,uPhone,uMaiBox");
+            sql.From("T_User");
+            sql.Where(" uLoginName = @0 and uPassword = @1", loginInfo.uLoginStr, loginInfo.uPassword);
+            UserModel user = database.FirstOrDefault<UserModel>(sql);
+
+            if (user != null)
+            {
+                UpdateClientKey(user.uID,loginInfo.uClientKey);
+                user.uClientKey = loginInfo.uClientKey;
+                return user;
+            }
+
+            Sql sql2 = Sql.Builder;
+            sql2.Select("uLoginName as uLoginStr,uClientKey,uUserName,uPhone,uMaiBox");
+            sql2.From("T_User");
+            sql2.Where(" uMaiBox = @0 and uPassword = @1", loginInfo.uLoginStr, loginInfo.uPassword);
+            UserModel user2 = database.FirstOrDefault<UserModel>(sql2);
+
+            if (user2 != null)
+            {
+                UpdateClientKey(user2.uID, loginInfo.uClientKey);
+                user2.uClientKey = loginInfo.uClientKey;
+                return user2;
+            }
+
+            return null;
+        }
+
+        public static void UpdateClientKey(string uID, string uClientKey)
+        {
+            Sql sql = Sql.Builder;
+            sql.Append("UPDATE T_User SET uClientKey = @0 WHERE pkId = @1", uClientKey,uID);
+            database.Execute(sql);
         }
 
         /// <summary>
@@ -287,7 +327,7 @@ namespace sl.service.api
             T_User user = new T_User();
             user.uLoginName = uLoginName;
             user.uPassword = pwdMD5;
-            user.uLoginTypeID = FinalData.TypeUserID;
+            user.uLoginTypeID = ConstantData.TYPE_DEFALUT_ID;
             object id = database.Insert(user);
             return id;
         }
@@ -299,7 +339,7 @@ namespace sl.service.api
         public static Page<FriendlyLinkInfo> GetFriendlyLinks(int pageIndex, int pageSize)
         {
             Sql sql = Sql.Builder;
-           
+
             sql.Select("T_User.uUserName,T_FLType.flTypeValue,T_FriendlyLink.pkId as friendlyLinkID,T_FriendlyLink.*");
             sql.Append(" from T_FriendlyLink left join T_User on T_User.uLoginName = T_FriendlyLink.uLoginName ");
             sql.Append(" left join T_FLType on T_FriendlyLink.flTypeID = T_FLType.flTypeID ");
@@ -362,7 +402,7 @@ namespace sl.service.api
 
             sql.Select("*");
             sql.From("T_FLType");
-            sql.Where("isDeleted = 0 and flTypeID != '@0'" ,ConstantData.TYPE_DEFALUT_ID);
+            sql.Where("isDeleted = 0 and flTypeID != '@0'", ConstantData.TYPE_DEFALUT_ID);
             List<T_FLType> list = database.Fetch<T_FLType>(sql);
             return list;
         }

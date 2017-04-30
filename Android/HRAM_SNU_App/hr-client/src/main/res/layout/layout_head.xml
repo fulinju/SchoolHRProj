@@ -50,7 +50,7 @@
 
     <TextView
         android:id="@+id/tv_head_right"
-        android:layout_width="36dp"
+        android:layout_width="wrap_content"
         android:layout_height="36dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"

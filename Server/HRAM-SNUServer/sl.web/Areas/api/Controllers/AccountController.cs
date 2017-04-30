@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web;
 using PetaPoco;
 using sl.model;
 using sl.validate;
@@ -20,16 +21,16 @@ namespace sl.web.Areas.api.Controllers
     /// </summary>
     public class AccountController : ApiController
     {
-    
+
         /// <summary>
         /// 通过邮箱注册
         /// </summary>
         /// <param name="mailbox"></param>
         /// <returns></returns>
         [HttpPost]
-        public HttpResponseMessage RegisterByMailbox(string mailbox)
+        public HttpResponseMessage RegisterByMailbox([FromBody]RegisterModel register)
         {
-            bool isMail = Validate.IsEmail(mailbox);
+            bool isMail = Validate.IsEmail(register.mailbox);
 
             if (isMail == false)
             {
@@ -37,7 +38,7 @@ namespace sl.web.Areas.api.Controllers
             }
 
 
-            T_User user = HRAMApiService.GetUserByMail(mailbox);
+            T_User user = HRAMApiService.GetUserByMail(register.mailbox);
             if (user != null)
             {
                 return JsonUtils.toJson(HttpStatusCode.PreconditionFailed, new JsonTip(ApiCode.MailboxRegisteredCode, ApiCode.MailboxRegisteredMessage)); //邮箱已注册
@@ -46,10 +47,10 @@ namespace sl.web.Areas.api.Controllers
             string initPwd = Utils.RandomStr(4, true);
             string initPwdMd5 = Security.MD5Encrypt(initPwd);
 
-            object insertFlag = HRAMApiService.RegisterUserByMail(mailbox,initPwdMd5);
+            object insertFlag = HRAMApiService.RegisterUserByMail(register.mailbox, initPwdMd5);
             if (insertFlag != null)
             {
-                string result = MailUtils.SendMailByQQ(mailbox, "Hi,HRAM 注册", "HRAM 注册", "欢迎使用HRAM，初始密码是" + initPwd, "初始密码已发送至" + mailbox, "发送失败");
+                string result = MailUtils.SendMailByQQ(register.mailbox, "Hi,HRAM 注册", "HRAM 注册", "欢迎使用HRAM，账户：" + register.mailbox + "，初始密码：" + initPwd, "初始密码已发送至" + register.mailbox, "发送失败");
                 return JsonUtils.toJson(HttpStatusCode.OK, new JsonTip(ApiCode.RegisterSuccessedCode, ApiCode.RegisterSuccessedBymailMessage)); //注册成功，密码发送到邮箱
             }
             else
@@ -65,15 +66,15 @@ namespace sl.web.Areas.api.Controllers
         /// <param name="uPassword"></param>
         /// <returns></returns>
         [HttpPost]
-        public HttpResponseMessage RegisterByNameAndPwd(string uLoginName, string uPassword)
+        public HttpResponseMessage RegisterByNameAndPwd([FromBody] RegisterModel register)
         {
-            T_User user = HRAMApiService.GetUserByLoginName(uLoginName);
+            T_User user = HRAMApiService.GetUserByLoginName(register.uLoginName);
             if (user != null)
             {
                 return JsonUtils.toJson(HttpStatusCode.PreconditionFailed, new JsonTip(ApiCode.LoginNameRegisteredCode, ApiCode.LoginNameRegisteredMessage)); //用户名已注册
             }
-            string initPwdMd5 = Security.MD5Encrypt(uPassword);
-            object insertFlag = HRAMApiService.RegisterUserByLoginName(uLoginName, initPwdMd5);
+            string initPwdMd5 = Security.MD5Encrypt(register.uPassword);
+            object insertFlag = HRAMApiService.RegisterUserByLoginName(register.uLoginName, initPwdMd5);
 
             if (insertFlag != null)
             {
@@ -93,17 +94,24 @@ namespace sl.web.Areas.api.Controllers
         /// <param name="uPassword"></param>
         /// <returns></returns>
         [HttpPost]
-        public HttpResponseMessage Login([FromBody] LoginModel loginModel)
+        public HttpResponseMessage Login([FromBody]LoginModel loginInfo)
         {
-            T_User byName = HRAMApiService.GetUserByLoginNameAndPwd(loginModel.uLoginStr, loginModel.uPassword);
-            T_User byMail = HRAMApiService.GetUserByMailAndPwd(loginModel.uLoginStr, loginModel.uPassword);
-            if (byName != null)
+            //LoginModel loginInfo = new LoginModel();
+            //loginInfo.uLoginStr = uLoginStr;
+            //loginInfo.uPassword = uPassword;
+            //loginInfo.uClientKey = uClientKey;
+
+            UserModel login = HRAMApiService.GetUserByLoginNameAndPwd(loginInfo);
+
+            if (login != null)
             {
-                return JsonUtils.toJson(HttpStatusCode.OK, byName);
-            }
-            else if (byMail != null)
-            {
-                return JsonUtils.toJson(HttpStatusCode.OK, byMail);
+                login = TokenUtils.UpdateToken(login);
+                //login.uTokenActiveTime = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                //login.uTokenExpiredTime = DateTime.Parse(DateTime.Now.AddMinutes(60).ToString("yyyy-MM-dd HH:mm:ss"));
+                //login.uToken = Security.MD5Encrypt(login.uID.ToString() + login.uUserName + DateTime.UtcNow.ToString() + Guid.NewGuid().ToString());
+
+                HttpContext.Current.Session[login.uID.ToString()] = login;
+                return JsonUtils.toJson(HttpStatusCode.OK, login);
             }
             else
             {

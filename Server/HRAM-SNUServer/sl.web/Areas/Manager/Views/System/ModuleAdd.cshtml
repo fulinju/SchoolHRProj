@@ -27,7 +27,8 @@
                 控制器:
             </th>
             <td>
-                @Html.DropDownListFor(m => m.mController, UtilsBind.ControllerNames())
+                @Html.InputFor(m => m.mController)
+                @*@Html.DropDownListFor(m => m.mController, UtilsBind.ControllerNames())*@
             </td>
             <th>
                 属性:

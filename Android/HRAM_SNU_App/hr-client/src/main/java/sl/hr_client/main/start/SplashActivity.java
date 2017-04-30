@@ -9,7 +9,7 @@ import sl.base.utils.UtilsPreference;
 import sl.base.utils.UtilsToast;
 import sl.hr_client.R;
 import sl.hr_client.base.BaseActivity;
-import sl.hr_client.main.activity.MainActivity;
+import sl.hr_client.main.MainActivity;
 import sl.hr_client.utils.constant.ConstantData;
 
 /**

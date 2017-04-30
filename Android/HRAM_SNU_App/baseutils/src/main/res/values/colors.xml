@@ -14,12 +14,13 @@
     <color name="pickerView_wheelView_textColor_divider">#d5d5d5</color>
     <color name="bgColor_overlay">#60000000</color>
 
+
+    <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
-    <color name="transparent">#00000000</color>
 
     <!--主题色-->
-    <color name="DeepSkyBlue">#00BFFF</color>
     <color name="theme_color">#1E90FF</color>
+    <color name="theme_color_pressed">#c2daf5</color>
 
     <!--常用颜色-->
     <color name="light_white">#EEEEEE</color>

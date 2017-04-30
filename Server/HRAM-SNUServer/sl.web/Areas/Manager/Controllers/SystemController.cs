@@ -143,17 +143,17 @@ namespace sl.web.Areas.Manager.Controllers
         }
 
 
-       //搜寻Controller的名称列表 可以放在页面初始化里面 点击后获得一个下拉列表
-        public void searchControllerName()
-        {
-            var controllerPath = HttpContext.Server.MapPath("~/Areas/Manager/Controllers"); //Controller的路径
+       ////搜寻Controller的名称列表 可以放在页面初始化里面 点击后获得一个下拉列表
+       // public void searchControllerName()
+       // {
+       //     var controllerPath = HttpContext.Server.MapPath("~/Areas/Manager/Controllers"); //Controller的路径
 
-            var files = Directory.GetFiles(controllerPath, "*.cs");
+       //     var files = Directory.GetFiles(controllerPath, "*.cs");
 
-            for (int i = 0; i < files.Length; i++)
-            {
-                System.Diagnostics.Debug.WriteLine(files[i]);
-            }
-        }
+       //     for (int i = 0; i < files.Length; i++)
+       //     {
+       //         System.Diagnostics.Debug.WriteLine(files[i]);
+       //     }
+       // }
     }
 }

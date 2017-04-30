@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_white_under_line_bg"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ll_member"
+        android:weightSum="5"
+        >
+
+        <ImageView
+            android:id="@+id/iv_member"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:padding="5dp"
+            android:scaleType="centerInside"
+            android:layout_weight="1"
+            />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="4">
+
+            <TextView
+                android:id="@+id/tv_member_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_member_applyTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_member_name"
+                android:gravity="right"
+                android:padding="5dp"
+                android:textColor="@color/theme_orange"
+                android:textSize="12sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

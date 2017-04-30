@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_gray">
+
+    <View
+        android:id="@+id/v_split"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/dark_gray"></View>
+
+    <LinearLayout
+        android:id="@+id/ll_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/v_split">
+
+        <include layout="@layout/layout_head"></include>
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ll_title">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <RelativeLayout
+                android:id="@+id/rl_member_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_member"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/tv_memberName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_member"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/default_value"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/dark_gray"
+                    android:layout_toLeftOf="@+id/tv_memberType"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tv_memberType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/theme_orange"
+                    android:layout_alignTop="@+id/tv_memberName"
+                    android:text="@string/default_value" />
+
+                <TextView
+                    android:id="@+id/tv_memberSummary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_memberName"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/default_value"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_memberOrganizationCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:layout_below="@+id/tv_memberSummary" />
+
+                <TextView
+                    android:id="@+id/tv_memberAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:layout_below="@+id/tv_memberOrganizationCode" />
+
+                <TextView
+                    android:id="@+id/tv_memberCorporateName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:layout_below="@+id/tv_memberAddress" />
+
+                <TextView
+                    android:id="@+id/tv_memberContacts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:layout_below="@+id/tv_memberCorporateName" />
+
+                <TextView
+                    android:id="@+id/tv_memberContactsPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:layout_below="@+id/tv_memberContacts" />
+
+                <Button
+                    android:id="@+id/btn_visit_url"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_memberContactsPhone"
+                    android:background="@drawable/button_theme_rect"
+                    android:textColor="@color/white"
+                    android:text="@string/visit_home_page"/>
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

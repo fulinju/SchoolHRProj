@@ -14,7 +14,7 @@ public class ConstantData {
 
     public static final int requestTimeOut = 6000;
 
-
+    public static final int PWD_LIMITED_LENGTH = 50;
 
     //语言设置
     public static final String languageKey = "languageKey";
@@ -25,6 +25,8 @@ public class ConstantData {
     public static final String flag_first_open = "flag_first_open";//第一次打开
     public static final String flag_auto_login = "flag_auto_login"; //自动登录
     public static final String flag_ge_tui_clientId = "flag_ge_tui_clientId";//个推的ClientID
+
+    public static String cachePathForUIL = Environment.getExternalStorageDirectory().getPath()+"/sl/hr_client/uil/cache";
 
     public static String imgCachePath = Environment.getExternalStorageDirectory().getPath()+"/sl/hr_client/cache/image/";
 

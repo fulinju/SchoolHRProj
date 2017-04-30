@@ -20,6 +20,7 @@ import sl.hr_client.utils.net.VolleyUtils;
  */
 
 public class NewsModel {
+
     public Observable<String> getNews(final Context context,final int pageIndex,final int pageSize) {
         return Observable.create(new Observable.OnSubscribe<String>() {
             @Override

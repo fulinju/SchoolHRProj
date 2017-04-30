@@ -45,7 +45,7 @@ namespace sl.web.Areas.api.Controllers
         }
 
         /// <summary>
-        /// 获取会员列表
+        /// 获取会员详情
         /// </summary>
         /// <param name="memberID"></param>
         /// <returns></returns>

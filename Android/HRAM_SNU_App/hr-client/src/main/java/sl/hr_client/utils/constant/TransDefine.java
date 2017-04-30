@@ -7,5 +7,8 @@ package sl.hr_client.utils.constant;
 public class TransDefine {
     public static final String Bundle_NewsID = "Bundle_NewsID";
 
-    public static final String TAG_NEWS_DETAIL_FRAGMENT = "TAG_NEWS_DETAIL_FRAGMENT";
+    public static final String Bundle_Link_Title = "Bundle_Link_Title";
+    public static final String Bundle_Link_URL = "Bundle_Link_URL";
+
+    public static final String Bundle_Member_ID = "Bundle_Member_ID";
 }

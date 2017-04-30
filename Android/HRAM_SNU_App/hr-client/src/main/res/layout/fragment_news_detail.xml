@@ -61,13 +61,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_publishText"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="5dp"
-                    android:horizontalSpacing="5dp"
-                    android:numColumns="3"
                     android:stretchMode="columnWidth"
-                    android:verticalSpacing="5dp"
+                    android:numColumns="3"
                     android:visibility="gone" />
             </RelativeLayout>
 

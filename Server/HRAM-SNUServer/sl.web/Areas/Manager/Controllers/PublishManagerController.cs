@@ -57,7 +57,7 @@ namespace sl.web.Areas.Manager.Controllers
                 List<T_ADImgList> ads = HRAManagerService.GetPublishADIMGS(entity.pmADImgListID);
                 for (int i = 0; i < ads.Count;i++)
                 {
-                    Utils.DeleteFile(ads[i].pmADImgListURL); //删除对应图片 免得太占内存
+                    sl.common.Utils.DeleteFile(ads[i].pmADImgListURL); //删除对应图片 免得太占内存
                     flag = HRAManagerService.database.Delete(ads[i]);//可以考虑直接删除
                 }
 

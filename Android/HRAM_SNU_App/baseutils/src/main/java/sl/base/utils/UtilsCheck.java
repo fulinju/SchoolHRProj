@@ -10,13 +10,30 @@ import java.util.regex.Pattern;
 public class UtilsCheck {
 
     /**
-     * 验证输入长度
+     * 验证输入最大长度
+     *
      * @param targetString
      * @param limitedNum
      * @return
      */
-    public static boolean checkInputNum(String targetString, int limitedNum) {
+    public static boolean checkInputMaxNum(String targetString, int limitedNum) {
         if (targetString.length() > limitedNum) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean checkInputMinNum(String targetString, int limitedNum) {
+        if (targetString.length() < limitedNum) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean checkInputRange(String targetString, int limitedMin, int limitedMax) {
+        if (targetString.length() > limitedMin && targetString.length() < limitedMax) {
             return true;
         } else {
             return false;

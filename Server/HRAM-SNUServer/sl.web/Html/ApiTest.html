@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="../Scripts/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+    <button id="btnRegisterByMail">邮箱注册</button>
+
+    <script>
+        $("#btnRegisterByMail").click(function () {
+            $.ajax({
+                type: 'POST',
+                url: '/api/Account/RegisterByNameAndPwd/',
+                data: {
+                    "mailbox": "ccc.surpass@qq.com",
+                    "uLoginName": "ccc.surpass@qq.com",
+                    "uPassword": "ccc.surpass@qq.com"
+                },
+                dataType: 'json',
+                success: function (data, textStatus) {
+                    console.log(JSON.stringify(data))
+                },
+                error: function (xmlHttpRequest, textStatus, errorThrown) {
+                    console.log(xmlHttpRequest+"  "+textStatus+"  "+errorThrown)
+                }
+            });
+        })
+    </script>
+</body>
+</html>

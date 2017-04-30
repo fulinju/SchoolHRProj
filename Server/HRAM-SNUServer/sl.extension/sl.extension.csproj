@@ -71,12 +71,6 @@
   <ItemGroup>
     <Compile Include="DataExtentions\DTExtensions.cs" />
     <Compile Include="EnumDescription.cs" />
-    <Compile Include="Models\Generated\Database.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PetaPoco.cs" />
     <Compile Include="MvcExtensions\Controlls\TreeNode.cs" />
     <Compile Include="MvcExtensions\EasyUIExtensions\ButtonExtensions.cs" />
     <Compile Include="MvcExtensions\EasyUIExtensions\InputExtensions.cs" />
@@ -91,12 +85,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Models\Generated\Database.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Database.cs</LastGenOutput>
-    </None>
-    <None Include="Models\Generated\PetaPoco.Core.ttinclude" />
-    <None Include="Models\Generated\PetaPoco.Generator.ttinclude" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

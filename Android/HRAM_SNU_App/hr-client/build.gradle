@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+//apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion 23
@@ -36,6 +37,10 @@ dependencies {
     compile 'io.reactivex:rxjava:1.2.3'
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'org.xutils:xutils:3.5.0'
+    compile files('libs/universal-image-loader-1.9.5.jar')
+
+//    compile 'com.jakewharton:butterknife:8.5.1'
+//    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 }
 
 buildscript {
@@ -54,3 +59,5 @@ greendao {
     daoPackage 'sl.hr_client.data.dao'
     targetGenDir 'src/main/java'
 }
+
+

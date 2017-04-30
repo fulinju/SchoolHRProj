@@ -11,10 +11,18 @@ using sl.web.ui;
 using System.Web.Http;
 using Autofac.Integration.Mvc; //必须是.net 4.5.1
 
+using System.Web.SessionState; //SessionStateBehavior
+
 namespace sl.web
 {
     public class Global : HttpApplication
     {
+        public override void Init()
+        {
+            this.PostAuthenticateRequest += (sender, e) => HttpContext.Current.SetSessionStateBehavior(SessionStateBehavior.Required);
+            base.Init();
+        }
+
         protected void Application_Start()
         {
             // 在应用程序启动时运行的代码

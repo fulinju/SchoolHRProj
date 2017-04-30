@@ -19,6 +19,7 @@ import sl.hr_client.R;
  */
 public class ContentFragment extends BaseFragment implements ScreenShotAble {
     public static final String CLOSE = "Close";
+    public static final String EXIT = "Exit";
 
     private View containerView;
     protected ImageView mImageView;

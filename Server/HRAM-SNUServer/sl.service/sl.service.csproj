@@ -46,7 +46,7 @@
   <ItemGroup>
     <Compile Include="CachedConfigContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\manager\ServiceUser.cs" />
+    <Compile Include="Service\manager\ServiceCollection.cs" />
     <Compile Include="Service\api\HRAMApiService.cs" />
     <Compile Include="Service\manager\HRAManagerService.cs" />
     <Compile Include="Service\manager\SysModuleService.cs" />

@@ -1,1 +1,1 @@
-include ':hrlib', ':baseutils', ':hr-client'
+include ':hrlib', ':hr-client', ':baseutils'

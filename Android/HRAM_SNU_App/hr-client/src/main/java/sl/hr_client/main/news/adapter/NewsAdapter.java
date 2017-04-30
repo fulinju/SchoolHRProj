@@ -19,7 +19,9 @@ import sl.hr_client.R;
 import sl.hr_client.data.bean.ADImgBean;
 import sl.hr_client.data.bean.NewsBean;
 import sl.hr_client.main.news.fragment.NewsDetailFragment;
+import sl.hr_client.main.photo.ImagePagerActivity;
 import sl.hr_client.utils.constant.TransDefine;
+import sl.hr_client.utils.net.VolleyUtils;
 
 /**
  * Created by Administrator on 2017/4/6.
@@ -97,11 +99,9 @@ public class NewsAdapter extends RecyclerView.Adapter {
 
                 //根据图片数量设置GV
                 ((NewsTextHolder) holder).gvPublishAdImg.setNumColumns(imgGvColumn);
-                // 图片数组转图片集合
-//                final String[] urls = adImgList.toArray(new String[adImgList.size()]);
                 final String[] urls = new String[adImgList.size()];
                 for (int i = 0; i < urls.length; i++) {
-                    urls[i] = adImgList.get(i).getPmADImgListURL();
+                    urls[i] = VolleyUtils.ServerIP + adImgList.get(i).getPmADImgListURL();
                 }
                 ((NewsTextHolder) holder).gvPublishAdImg.setAdapter(new CircleGridAdapter(ctx, urls));
 
@@ -110,7 +110,7 @@ public class NewsAdapter extends RecyclerView.Adapter {
                     @Override
                     public void onItemClick(AdapterView<?> parent,
                                             View view, int position, long id) {
-//                        enterPhotoDetailed(urls, position);
+                        enterPhotoDetailed(urls, position);
                     }
                 });
 
@@ -129,7 +129,8 @@ public class NewsAdapter extends RecyclerView.Adapter {
         transFragment.setArguments(trans);
         fragmentManager.beginTransaction()
                 .addToBackStack(null)  //将当前fragment加入到返回栈中
-                .replace(R.id.content_frame, transFragment,NewsDetailFragment.NEWS_DETAIL)
+                .setCustomAnimations(R.anim.push_bottom_in, R.anim.push_bottom_out, R.anim.push_right_in, R.anim.push_right_out)
+                .replace(R.id.content_frame, transFragment, NewsDetailFragment.NEWS_DETAIL)
                 .commit();
     }
 
@@ -146,7 +147,7 @@ public class NewsAdapter extends RecyclerView.Adapter {
         private TextView tvPublishTime;
         private TextView tvPublishText;
         private NoScrollGridView gvPublishAdImg;
-//        private TextView tvPublishGoodCount;
+        //        private TextView tvPublishGoodCount;
         private TextView tvPublishViews;
 
 
@@ -162,5 +163,19 @@ public class NewsAdapter extends RecyclerView.Adapter {
 //            tvPublishGoodCount = (TextView) itemView.findViewById(R.id.tv_publishGoodCount);
             tvPublishViews = (TextView) itemView.findViewById(R.id.tv_publishViews);
         }
+    }
+
+
+    /**
+     * 进入图片详情页
+     *
+     * @param urls     图片数组
+     * @param position 角标
+     */
+    protected void enterPhotoDetailed(String[] urls, int position) {
+        Intent intent = new Intent(ctx, ImagePagerActivity.class);
+        intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_URLS, urls);
+        intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_INDEX, position);
+        ctx.startActivity(intent);
     }
 }
