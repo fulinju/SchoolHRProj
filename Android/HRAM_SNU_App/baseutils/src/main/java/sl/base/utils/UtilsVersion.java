@@ -26,4 +26,13 @@ public class UtilsVersion {
             return context.getString(R.string.can_not_find_version_name);
         }
     }
+
+    /**
+     * 获取当前系统SDK版本号
+     */
+    public static int getSystemVersion(){
+		/*获取当前系统的android版本号*/
+        int version= android.os.Build.VERSION.SDK_INT;
+        return version;
+    }
 }

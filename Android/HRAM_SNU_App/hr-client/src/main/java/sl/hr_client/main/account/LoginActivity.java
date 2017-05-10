@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import sl.base.ui.loading.AVLoadingIndicatorView;
 import sl.base.utils.UtilsCheck;
+import sl.base.utils.UtilsKeyBoard;
 import sl.base.utils.UtilsLog;
 import sl.base.utils.UtilsMD5;
 import sl.base.utils.UtilsNet;
@@ -16,14 +17,19 @@ import sl.base.utils.UtilsPreference;
 import sl.base.utils.UtilsToast;
 import sl.hr_client.R;
 import sl.hr_client.base.BaseActivity;
+import sl.hr_client.data.DataUtils;
+import sl.hr_client.data.bean.UserBean;
+import sl.hr_client.data.GsonUtils;
+import sl.hr_client.main.MainActivity;
 import sl.hr_client.net.acc.login.LoginPresenter;
 import sl.hr_client.net.acc.login.LoginView;
 import sl.hr_client.utils.constant.ConstantData;
+import sl.hr_client.utils.net.ResponseUtils;
 
 /**
  * Created by xuzhijix on 2017/3/28.
  */
-public class LoginActivity extends BaseActivity implements LoginView{
+public class LoginActivity extends BaseActivity implements LoginView {
 
 //    @BindView(R.id.tv_head)
 //    TextView tvHead;
@@ -47,6 +53,7 @@ public class LoginActivity extends BaseActivity implements LoginView{
     private TextView tvLogin;
     private TextView tvTitle;
     private TextView tvRight;
+    private TextView tvForgetPwd;
     private AVLoadingIndicatorView vLoading;
 
     private LoginPresenter loginPresenter;
@@ -57,13 +64,13 @@ public class LoginActivity extends BaseActivity implements LoginView{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 //        ButterKnife.bind(this);
-        ctx= this;
+        ctx = this;
         loginPresenter = new LoginPresenter(this);
         initView();
 
     }
 
-    private void initView(){
+    private void initView() {
         edtUser = (EditText) findViewById(R.id.edt_user);
         edtPassword = (EditText) findViewById(R.id.edt_password);
         tvLogin = (TextView) findViewById(R.id.tv_login);
@@ -72,7 +79,7 @@ public class LoginActivity extends BaseActivity implements LoginView{
         tvRight = (TextView) findViewById(R.id.tv_head_right);
 
         vLoading = (AVLoadingIndicatorView) findViewById(R.id.v_loading);
-
+        tvForgetPwd = (TextView) findViewById(R.id.tv_forget_pwd);
 //        vLoading.setVisibility(View.VISIBLE);
 
         tvTitle.setText(ctx.getString(R.string.login));
@@ -92,18 +99,28 @@ public class LoginActivity extends BaseActivity implements LoginView{
                 funcLogin();
             }
         });
+
+        tvForgetPwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                funcForgetPwd();
+            }
+        });
     }
+
+
     /**
      * 登录
      */
     private void funcLogin() {
+
         if (UtilsNet.isNetworkAvailable(ctx)) {
             String user = edtUser.getText().toString();
             String pwd = edtPassword.getText().toString();
             boolean inputFlag = checkInput(pwd);
             if (inputFlag) {
                 String pwdMd5 = UtilsMD5.getMD5_UpperCase(pwd);
-                loginPresenter.pLogin(ctx, user, pwdMd5, UtilsPreference.getString(ConstantData.flag_ge_tui_clientId,ConstantData.default_String));
+                loginPresenter.pLogin(ctx, user, pwdMd5, UtilsPreference.getString(ConstantData.FLAG_GE_TUI_CLIENTID, ConstantData.default_String));
             }
         } else {
             UtilsToast.showToast(ctx, getString(R.string.network_err));
@@ -112,9 +129,11 @@ public class LoginActivity extends BaseActivity implements LoginView{
 
     /**
      * 检查输入
+     *
      * @return
      */
     private boolean checkInput(String pwd) {
+        UtilsKeyBoard.hideKeyBoard(this);
 
         if (!UtilsCheck.checkInputRange(pwd, 0, ConstantData.PWD_LIMITED_LENGTH)) {
             UtilsToast.showToast(ctx, "请输入长度为1-" + ConstantData.PWD_LIMITED_LENGTH + "位密码");
@@ -123,25 +142,45 @@ public class LoginActivity extends BaseActivity implements LoginView{
         return true;
     }
 
+    private void funcForgetPwd() {
+        startActivity(new Intent(ctx, ForgetPwdActivity.class));
+    }
 
     @Override
     public void loginSuccessView(String str) {
         UtilsLog.logE(UtilsLog.getSte(), str);
+        UserBean login = GsonUtils.parseUser(str);
+
+        UserBean had = DataUtils.getUserByUID(login.getUID());
+        if (had != null) {
+            DataUtils.updateUser(login);
+        } else {
+            DataUtils.addUser(login);//添加一个 可以优化成已登陆过列表的
+        }
+
+        UtilsPreference.commitString(ConstantData.FLAG_NOW_USER_ID, login.getUID()); //提交当前登录的
+
+        startActivity(new Intent(ctx, MainActivity.class));
+        finish();
     }
 
     @Override
     public void showLoading() {
-
+        tvLogin.setVisibility(View.GONE);
+        vLoading.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-
+        tvLogin.setVisibility(View.VISIBLE);
+        vLoading.setVisibility(View.GONE);
     }
 
     @Override
     public void showError(String msg) {
         UtilsLog.logE(UtilsLog.getSte(), msg);
+        ResponseUtils.showResponseOperate(ctx, msg);
+        hideLoading(); //自行执行
     }
 
 //    @OnClick({R.id.tv_login})

@@ -31,7 +31,7 @@ public class NewsBeanDao extends AbstractDao<NewsBean, String> {
         public final static Property PmViews = new Property(4, String.class, "pmViews", false, "PM_VIEWS");
         public final static Property PmTitle = new Property(5, String.class, "pmTitle", false, "PM_TITLE");
         public final static Property PmText = new Property(6, String.class, "pmText", false, "PM_TEXT");
-        public final static Property PmADImgListJson = new Property(7, String.class, "pmADImgListJson", false, "PM_ADIMG_LIST_JSON");
+        public final static Property PmADImgListID = new Property(7, String.class, "pmADImgListID", false, "PM_ADIMG_LIST_ID");
     };
 
 
@@ -54,7 +54,7 @@ public class NewsBeanDao extends AbstractDao<NewsBean, String> {
                 "\"PM_VIEWS\" TEXT," + // 4: pmViews
                 "\"PM_TITLE\" TEXT," + // 5: pmTitle
                 "\"PM_TEXT\" TEXT," + // 6: pmText
-                "\"PM_ADIMG_LIST_JSON\" TEXT);"); // 7: pmADImgListJson
+                "\"PM_ADIMG_LIST_ID\" TEXT);"); // 7: pmADImgListID
     }
 
     /** Drops the underlying database table. */
@@ -102,9 +102,9 @@ public class NewsBeanDao extends AbstractDao<NewsBean, String> {
             stmt.bindString(7, pmText);
         }
  
-        String pmADImgListJson = entity.getPmADImgListJson();
-        if (pmADImgListJson != null) {
-            stmt.bindString(8, pmADImgListJson);
+        String pmADImgListID = entity.getPmADImgListID();
+        if (pmADImgListID != null) {
+            stmt.bindString(8, pmADImgListID);
         }
     }
 
@@ -147,9 +147,9 @@ public class NewsBeanDao extends AbstractDao<NewsBean, String> {
             stmt.bindString(7, pmText);
         }
  
-        String pmADImgListJson = entity.getPmADImgListJson();
-        if (pmADImgListJson != null) {
-            stmt.bindString(8, pmADImgListJson);
+        String pmADImgListID = entity.getPmADImgListID();
+        if (pmADImgListID != null) {
+            stmt.bindString(8, pmADImgListID);
         }
     }
 
@@ -168,7 +168,7 @@ public class NewsBeanDao extends AbstractDao<NewsBean, String> {
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // pmViews
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // pmTitle
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // pmText
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7) // pmADImgListJson
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7) // pmADImgListID
         );
         return entity;
     }
@@ -182,7 +182,7 @@ public class NewsBeanDao extends AbstractDao<NewsBean, String> {
         entity.setPmViews(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setPmTitle(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
         entity.setPmText(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setPmADImgListJson(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setPmADImgListID(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
      }
     
     @Override

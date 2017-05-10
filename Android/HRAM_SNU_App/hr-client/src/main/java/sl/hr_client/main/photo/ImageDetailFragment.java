@@ -8,20 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
-import sl.base.utils.UtilsMeasure;
 import sl.base.utils.UtilsToast;
 import sl.hr_client.R;
-import sl.hr_client.utils.photoview.PhotoViewAttacher;
+import sl.hr_client.utils.ui.photoview.PhotoViewAttacher;
 
 
 public class ImageDetailFragment extends Fragment {

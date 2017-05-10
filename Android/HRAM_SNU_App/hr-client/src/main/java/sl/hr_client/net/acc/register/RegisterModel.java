@@ -12,7 +12,8 @@ import java.util.Map;
 
 import rx.Observable;
 import rx.Subscriber;
-import sl.hr_client.utils.net.SLStringRequest;
+import sl.hr_client.utils.net.ResponseUtils;
+import sl.hr_client.utils.net.XStringRequest;
 import sl.hr_client.utils.net.VolleyUtils;
 
 /**
@@ -28,7 +29,7 @@ public class RegisterModel {
                 String targetUrl = VolleyUtils.registerByMailUrl;
 
                 VolleyUtils.requestQueue = Volley.newRequestQueue(context);
-                SLStringRequest sr = new SLStringRequest(VolleyUtils.VOLLEY_POST, targetUrl, new Response.Listener<String>() {
+                XStringRequest sr = new XStringRequest(VolleyUtils.VOLLEY_POST, targetUrl, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
                         subscriber.onNext(s);
@@ -37,13 +38,45 @@ public class RegisterModel {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-
+                        subscriber.onError(new Exception(ResponseUtils.responseOperate(volleyError)));
                     }
                 }) {
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> map = new HashMap<String, String>();
                         map.put("mailbox", mailbox);
+                        return map;
+                    }
+                };
+                VolleyUtils.requestQueue.add(sr);
+            }
+        });
+    }
+
+    public Observable<String> registerByRegisterByNameAndPwd(final Context context, final String uLoginName,final String uPassword) {
+        return Observable.create(new Observable.OnSubscribe<String>() {
+            @Override
+            public void call(final Subscriber<? super String> subscriber) {
+                String targetUrl = VolleyUtils.registerByNameAndPwdUrl;
+
+                VolleyUtils.requestQueue = Volley.newRequestQueue(context);
+                XStringRequest sr = new XStringRequest(VolleyUtils.VOLLEY_POST, targetUrl, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        subscriber.onNext(s);
+                        subscriber.onCompleted();
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        subscriber.onError(new Exception(ResponseUtils.responseOperate(volleyError)));
+                    }
+                }) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> map = new HashMap<String, String>();
+                        map.put("uLoginName", uLoginName);
+                        map.put("uPassword", uPassword);
                         return map;
                     }
                 };

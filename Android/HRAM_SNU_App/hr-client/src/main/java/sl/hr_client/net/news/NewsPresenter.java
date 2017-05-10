@@ -42,4 +42,28 @@ public class NewsPresenter {
                     }
                 });
     }
+
+    public void loadMorePNews(Context context,int pageIndex,int pageSize) {
+        newsView.showLoading();
+
+        newsModel.getNews(context,pageIndex,pageSize)
+                .subscribeOn(Schedulers.io())// 在非UI线程中执行getUser
+                .observeOn(AndroidSchedulers.mainThread())// 在UI线程中执行结果
+                .subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onNext(String s) {
+                        newsView.loadMoreNewsView(s);
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                        newsView.hideLoading();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        newsView.showError(e.getMessage());
+                    }
+                });
+    }
 }

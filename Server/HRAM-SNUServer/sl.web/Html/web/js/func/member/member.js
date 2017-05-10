@@ -7,7 +7,7 @@ function funcGetMember() {
     $.ajax({
         type: "get",
         dataType: "json",
-        url: '/api/Member/GetMemberList/?pageIndex=1&pageSize=20',
+        url: 'http://123.57.26.127/api/Member/GetMemberList/?pageIndex=1&pageSize=20',
         data: {},
         success: function (data) {
             funcInitMember(data);

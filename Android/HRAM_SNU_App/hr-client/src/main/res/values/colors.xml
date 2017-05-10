@@ -13,7 +13,11 @@
     <color name="dark_gray">#333333</color>
 
     <color name="title_gray">#F7F7F7</color>
+    <color name="MistyRose">#FFE4E1</color>
 
     <color name="DeepSkyBlue">#87CEFF</color>
+
+    <color name="danger_red">#DD524D</color>
+    <color name="danger_red_pressed">#FF3030</color>
 
 </resources>

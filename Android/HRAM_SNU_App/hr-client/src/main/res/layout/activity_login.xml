@@ -68,8 +68,8 @@
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/tv_user"
                         android:background="@color/white"
-                        android:hint="@string/user_hint"
                         android:digits="0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@."
+                        android:hint="@string/user_hint"
                         android:padding="10dp" />
                 </RelativeLayout>
 
@@ -116,7 +116,7 @@
 
 
             <RelativeLayout
-                android:id="@+id/rl_load"
+                android:id="@+id/rl_login"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_below="@+id/rl_input"
@@ -144,6 +144,21 @@
                     android:visibility="gone"
                     app:indicator="LineScalePulseOut"
                     app:indicatorColor="@color/white" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_login">
+
+                <TextView
+                    android:id="@+id/tv_forget_pwd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:text="@string/forget_pwd_1"
+                    android:textColor="@drawable/theme_text_click" />
             </RelativeLayout>
 
         </RelativeLayout>

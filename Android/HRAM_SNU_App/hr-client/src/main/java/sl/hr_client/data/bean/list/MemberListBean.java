@@ -9,6 +9,16 @@ import sl.hr_client.data.bean.MemberBean;
  */
 
 public class MemberListBean {
+    private boolean isLastPage;
+
+    public boolean isLastPage() {
+        return isLastPage;
+    }
+
+    public void setLastPage(boolean lastPage) {
+        isLastPage = lastPage;
+    }
+
     private List<MemberBean> resultList;
 
     public List<MemberBean> getResultList() {

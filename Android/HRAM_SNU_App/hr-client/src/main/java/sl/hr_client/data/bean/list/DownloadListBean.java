@@ -10,6 +10,16 @@ import sl.hr_client.data.bean.NewsBean;
  */
 
 public class DownloadListBean {
+    private boolean isLastPage;
+
+    public boolean isLastPage() {
+        return isLastPage;
+    }
+
+    public void setLastPage(boolean lastPage) {
+        isLastPage = lastPage;
+    }
+
     private List<DownloadBean> resultList;
 
     public List<DownloadBean> getResultList() {

@@ -42,4 +42,29 @@ public class MemberPresenter {
                     }
                 });
     }
+
+
+    public void loadMorePMember(Context context, int pageIndex, int pageSize) {
+        memberView.showLoading();
+
+        memberModel.getMembers(context,pageIndex,pageSize)
+                .subscribeOn(Schedulers.io())// 在非UI线程中执行getUser
+                .observeOn(AndroidSchedulers.mainThread())// 在UI线程中执行结果
+                .subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onNext(String s) {
+                        memberView.loadMoreMembersView(s);
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                        memberView.hideLoading();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        memberView.showError(e.getMessage());
+                    }
+                });
+    }
 }

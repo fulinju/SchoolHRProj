@@ -25,28 +25,10 @@ public class NewsBean {
     private String pmTitle;
     private String pmText;
 
-    private String pmADImgListJson; //pmADImgList的JSON
+    private String pmADImgListID;
 
     @Transient
     public List<ADImgBean> pmADImgList;
-
-    @Generated(hash = 233967757)
-    public NewsBean(String publishID, String uUserName, String pmPublishTime,
-            String pmTypeValue, String pmViews, String pmTitle, String pmText,
-            String pmADImgListJson) {
-        this.publishID = publishID;
-        this.uUserName = uUserName;
-        this.pmPublishTime = pmPublishTime;
-        this.pmTypeValue = pmTypeValue;
-        this.pmViews = pmViews;
-        this.pmTitle = pmTitle;
-        this.pmText = pmText;
-        this.pmADImgListJson = pmADImgListJson;
-    }
-
-    @Generated(hash = 1662878226)
-    public NewsBean() {
-    }
 
     public List<ADImgBean> getPmADImgList() {
         return pmADImgList;
@@ -56,12 +38,12 @@ public class NewsBean {
         this.pmADImgList = pmADImgList;
     }
 
-    public String getPmADImgListJson() {
-        return this.pmADImgListJson;
+    public String getPmADImgListID() {
+        return this.pmADImgListID;
     }
 
-    public void setPmADImgListJson(String pmADImgListJson) {
-        this.pmADImgListJson = pmADImgListJson;
+    public void setPmADImgListID(String pmADImgListID) {
+        this.pmADImgListID = pmADImgListID;
     }
 
     public String getPmText() {
@@ -120,6 +102,24 @@ public class NewsBean {
         this.publishID = publishID;
     }
 
+    @Generated(hash = 1024909861)
+    public NewsBean(String publishID, String uUserName, String pmPublishTime,
+            String pmTypeValue, String pmViews, String pmTitle, String pmText,
+            String pmADImgListID) {
+        this.publishID = publishID;
+        this.uUserName = uUserName;
+        this.pmPublishTime = pmPublishTime;
+        this.pmTypeValue = pmTypeValue;
+        this.pmViews = pmViews;
+        this.pmTitle = pmTitle;
+        this.pmText = pmText;
+        this.pmADImgListID = pmADImgListID;
+    }
 
+    @Generated(hash = 1662878226)
+    public NewsBean() {
+    }
+
+   
 
 }

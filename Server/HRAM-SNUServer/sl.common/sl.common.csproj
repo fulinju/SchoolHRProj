@@ -57,7 +57,7 @@
     <Compile Include="StringPlus.cs" />
     <Compile Include="Thumbnail.cs" />
     <Compile Include="Utils.cs" />
-    <Compile Include="Validate.cs" />
+    <Compile Include="CommonValidate.cs" />
     <Compile Include="ValueUtility.cs" />
     <Compile Include="WaterMark.cs" />
   </ItemGroup>

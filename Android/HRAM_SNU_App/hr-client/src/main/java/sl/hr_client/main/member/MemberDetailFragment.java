@@ -18,11 +18,12 @@ import sl.base.utils.UtilsToast;
 import sl.hr_client.R;
 import sl.hr_client.base.BaseFragment;
 import sl.hr_client.data.bean.MemberBean;
-import sl.hr_client.data.parse.GsonUtils;
+import sl.hr_client.data.GsonUtils;
 import sl.hr_client.main.webview.WebViewFragment;
 import sl.hr_client.net.member.detail.MemberDetailPresenter;
 import sl.hr_client.net.member.detail.MemberDetailView;
 import sl.hr_client.utils.constant.TransDefine;
+import sl.hr_client.utils.net.VolleyUtils;
 
 /**
  * Created by Administrator on 2017/4/24.
@@ -131,7 +132,7 @@ public class MemberDetailFragment extends BaseFragment implements View.OnClickLi
         memberURL = member.getMURL() == null ? ctx.getString(R.string.null_value) : member.getMURL();
 
         Glide.with(ctx)
-                .load(memberImgURL)
+                .load(VolleyUtils.ServerIP + memberImgURL)
                 .placeholder(R.mipmap.img_load)
                 .error(R.mipmap.img_load_failed)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -186,7 +187,7 @@ public class MemberDetailFragment extends BaseFragment implements View.OnClickLi
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.tv_head_right:
                 funcBack();
                 break;

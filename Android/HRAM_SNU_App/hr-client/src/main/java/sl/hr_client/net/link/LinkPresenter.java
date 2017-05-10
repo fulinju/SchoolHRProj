@@ -42,4 +42,28 @@ public class LinkPresenter {
                     }
                 });
     }
+
+    public void loadMorePLink(Context context, int pageIndex, int pageSize) {
+        linkView.showLoading();
+
+        linkModel.getLinks(context,pageIndex,pageSize)
+                .subscribeOn(Schedulers.io())// 在非UI线程中执行getUser
+                .observeOn(AndroidSchedulers.mainThread())// 在UI线程中执行结果
+                .subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onNext(String s) {
+                        linkView.updateLoadMoreLinksView(s);
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                        linkView.hideLoading();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        linkView.showError(e.getMessage());
+                    }
+                });
+    }
 }

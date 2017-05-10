@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
     android:gravity="center"
-    android:padding="3dp">
+    android:padding="5dp">
     <ProgressBar
         android:id="@+id/listview_foot_progress"
         android:layout_width="30dip"

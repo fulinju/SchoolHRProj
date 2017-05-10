@@ -116,3 +116,4 @@ D:\School\SchoolHRProj\Server\HRAM-SNUServer\sl.validate\bin\Debug\zh-Hans\Syste
 D:\School\SchoolHRProj\Server\HRAM-SNUServer\sl.validate\bin\Debug\zh-Hans\System.Web.WebPages.Razor.resources.dll
 D:\School\SchoolHRProj\Server\HRAM-SNUServer\sl.validate\obj\Debug\sl.validate.dll
 D:\School\SchoolHRProj\Server\HRAM-SNUServer\sl.validate\obj\Debug\sl.validate.pdb
+D:\School\SchoolHRProj\Server\HRAM-SNUServer\sl.validate\obj\Debug\sl.validate.csprojResolveAssemblyReference.cache

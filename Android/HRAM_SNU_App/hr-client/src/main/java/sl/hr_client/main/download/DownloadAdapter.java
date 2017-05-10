@@ -38,8 +38,9 @@ public class DownloadAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof DownloadsHolder) {
             final DownloadBean temp = downloadsList.get(position);
-             String dmType, dmTitle,dmUploadTime ,uUserName;
-            final String dmFileURL;
+            String dmType, dmUploadTime, uUserName;
+            final String dmTitle, downloadID, dmFileURL;
+            downloadID = temp.getDownloadID() == null ? ctx.getString(R.string.null_value) : temp.getDownloadID();
             dmType = temp.getDmTypeValue() == null ? ctx.getString(R.string.null_value) : temp.getDmTypeValue();
             dmTitle = temp.getDmTitle() == null ? ctx.getString(R.string.null_value) : temp.getDmTitle();
             dmUploadTime = temp.getDmUploadTime() == null ? ctx.getString(R.string.null_value) : temp.getDmUploadTime();
@@ -47,17 +48,17 @@ public class DownloadAdapter extends RecyclerView.Adapter {
             uUserName = temp.getUUserName() == null ? ctx.getString(R.string.null_value) : temp.getUUserName();
             int dmDownloadNum = temp == null ? 0 : temp.getDmDownloadNum();
 
-            ((DownloadsHolder) holder).tvDownloadType.setText(String.format(ctx.getString(R.string.mid_bucket_format),dmDownloadNum));
+            ((DownloadsHolder) holder).tvDownloadType.setText(String.format(ctx.getString(R.string.mid_bucket_format), dmType));
             ((DownloadsHolder) holder).tvDownloadTitle.setText(dmTitle);
             ((DownloadsHolder) holder).tvDownloadPublishTime.setText(dmUploadTime);
             ((DownloadsHolder) holder).tvDownloadUrl.setText(dmFileURL);
             ((DownloadsHolder) holder).tvDownloadUsername.setText(uUserName);
-            ((DownloadsHolder) holder).tvDownloadNum.setText(String.format(ctx.getString(R.string.download_num),dmDownloadNum));
+            ((DownloadsHolder) holder).tvDownloadNum.setText(String.format(ctx.getString(R.string.download_num), dmDownloadNum));
 
             ((DownloadsHolder) holder).btnDownload.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    DownloadUtils.downloadFile(ctx,dmFileURL, ConstantData.downloadPath);
+                    DownloadUtils.downloadFile(ctx, dmFileURL, ConstantData.downloadPath, dmTitle, downloadID);
                 }
             });
         }

@@ -8,7 +8,7 @@ import com.android.volley.toolbox.Volley;
 
 import rx.Observable;
 import rx.Subscriber;
-import sl.hr_client.utils.net.SLStringRequest;
+import sl.hr_client.utils.net.XStringRequest;
 import sl.hr_client.utils.net.VolleyUtils;
 
 /**
@@ -27,7 +27,7 @@ public class DownloadModel {
                 }
 
                 VolleyUtils.requestQueue = Volley.newRequestQueue(context);
-                SLStringRequest sr = new SLStringRequest(VolleyUtils.VOLLEY_GET, targetUrl, new Response.Listener<String>() {
+                XStringRequest sr = new XStringRequest(VolleyUtils.VOLLEY_GET, targetUrl, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
                         subscriber.onNext(s);
@@ -39,7 +39,32 @@ public class DownloadModel {
 
                     }
                 }) {
+                };
+                VolleyUtils.requestQueue.add(sr);
+            }
+        });
+    }
 
+
+    public Observable<String> updateDownloadNum(final Context context,final String downloadID) {
+        return Observable.create(new Observable.OnSubscribe<String>() {
+            @Override
+            public void call(final Subscriber<? super String> subscriber) {
+                String targetUrl = VolleyUtils.updateDownloadNumUrl + "?downloadID=" + downloadID;
+
+                VolleyUtils.requestQueue = Volley.newRequestQueue(context);
+                XStringRequest sr = new XStringRequest(VolleyUtils.VOLLEY_GET, targetUrl, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        subscriber.onNext(s);
+                        subscriber.onCompleted();
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+
+                    }
+                }) {
                 };
                 VolleyUtils.requestQueue.add(sr);
             }

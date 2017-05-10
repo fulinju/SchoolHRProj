@@ -497,3 +497,6 @@ D:\School\SchoolHRProj\Server\HRAM-SNUServer\sl.web\bin\zh-Hans\System.Web.WebPa
 D:\School\SchoolHRProj\Server\HRAM-SNUServer\sl.web\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
 D:\School\SchoolHRProj\Server\HRAM-SNUServer\sl.web\obj\Debug\sl.web.dll
 D:\School\SchoolHRProj\Server\HRAM-SNUServer\sl.web\obj\Debug\sl.web.pdb
+D:\School\SchoolHRProj\Server\HRAM-SNUServer\sl.web\bin\zh-Hans\System.Net.Http.Formatting.resources.dll
+D:\School\SchoolHRProj\Server\HRAM-SNUServer\sl.web\bin\zh-Hans\System.Web.Http.resources.dll
+D:\School\SchoolHRProj\Server\HRAM-SNUServer\sl.web\bin\zh-Hans\System.Web.Http.WebHost.resources.dll

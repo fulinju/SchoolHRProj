@@ -32,6 +32,8 @@
                 var loginBtn = $("#loginBtn");
                 loginBtn.linkbutton('disable');
                 var url = "@Url.Action("LoginCheck", "Login")";
+                var str = $(".form").serialize()
+                console.log(str);
                 $.post(url, $(".form").serialize(), function (data) {
                     if (data.state != "1") {
                         //刷新验证码
@@ -57,7 +59,7 @@
                     <th style="width: 80px; height: 35px; line-height: 35px; text-align: right;padding-top:10px">登录名：</th>
 
                     <td>
-                        <input name="loginName" class="easyui-textbox" style="width: 173px;" value="admin" />
+                        <input name="loginName" class="easyui-textbox" style="width: 173px;"  />
                     </td>
                 </tr>
                 <tr>
@@ -65,7 +67,7 @@
                         密码：
                     </th>
                     <td>
-                        <input name="loginPwd" type="password" onpaste="return false" oncopy="return false;" oncut="return false;" class="easyui-textbox" style="width: 173px;" value="123" />
+                        <input name="loginPwd" type="password" onpaste="return false" oncopy="return false;" oncut="return false;" class="easyui-textbox" style="width: 173px;"  />
                     </td>
                 </tr>
                 <tr>
@@ -73,7 +75,7 @@
                         验证码：
                     </th>
                     <td style="padding-top:10px;">
-                        <input name="checkcode" class="easyui-textbox" style="width: 90px;" oninput="if(value.length>5)value=value.slice(0,5)" />
+                        <input name="checkCode" class="easyui-textbox" style="width: 90px;" oninput="if(value.length>5)value=value.slice(0,5)" />
                         <img id="verifyCode" style="cursor: pointer; width: 80px;vertical-align:middle" onclick="refreshCode()" src="@Url.Action("VerifyCode", "Login")?t=@DateTime.Now.Ticks" title="看不清，点击换一张" />
                     </td>
                 </tr>

@@ -9,6 +9,15 @@ import sl.hr_client.data.bean.LinkBean;
  */
 
 public class LinkListBean {
+    private boolean isLastPage;
+
+    public boolean isLastPage() {
+        return isLastPage;
+    }
+
+    public void setLastPage(boolean lastPage) {
+        isLastPage = lastPage;
+    }
 
     private List<LinkBean> resultList;
 

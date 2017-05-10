@@ -1,6 +1,7 @@
 package sl.hr_client.main.webview;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.KeyEvent;
@@ -8,12 +9,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import sl.base.ui.loading.AVLoadingIndicatorView;
+import sl.base.ui.progressbar.HorizontalProgressBarWithNumber;
 import sl.base.utils.UtilsToast;
 import sl.hr_client.R;
 import sl.hr_client.base.BaseFragment;
@@ -23,7 +30,7 @@ import sl.hr_client.utils.constant.TransDefine;
  * Created by Administrator on 2017/4/24.
  */
 
-public class WebViewFragment extends BaseFragment {
+public class WebViewFragment extends BaseFragment implements View.OnClickListener {
     public static final String WEB_VIEW = "WEB_VIEW";
 
     private Context ctx;
@@ -36,6 +43,18 @@ public class WebViewFragment extends BaseFragment {
 
     private TextView tvTitle;
     private TextView tvClose;
+
+    private ImageView ivPre;
+    private ImageView ivNext;
+    private ImageView ivRefresh;
+
+    //加载处理
+    private RelativeLayout rlLoading; //加载区域
+    private ImageView ivLoadFailed; //加载失败
+    private AVLoadingIndicatorView vLoading;//加载中
+    private TextView tvLoadState; //加载文字
+
+    private HorizontalProgressBarWithNumber hpbLoading;
 
     @Nullable
     @Override
@@ -66,7 +85,15 @@ public class WebViewFragment extends BaseFragment {
         tvTitle = (TextView) webView.findViewById(R.id.tv_head);
         tvClose = (TextView) webView.findViewById(R.id.tv_head_right);
         wv = (WebView) webView.findViewById(R.id.wv);
+        ivPre = (ImageView) webView.findViewById(R.id.iv_pre);
+        ivNext = (ImageView) webView.findViewById(R.id.iv_next);
+        ivRefresh = (ImageView) webView.findViewById(R.id.iv_refresh);
 
+        rlLoading = (RelativeLayout) webView.findViewById(R.id.rl_loading);
+        ivLoadFailed = (ImageView) webView.findViewById(R.id.iv_load_failed);
+        vLoading = (AVLoadingIndicatorView) webView.findViewById(R.id.v_loading);
+        tvLoadState = (TextView) webView.findViewById(R.id.tv_load_state);
+        hpbLoading = (HorizontalProgressBarWithNumber) webView.findViewById(R.id.hpb_loading);
 
         tvTitle.setText(title);
         tvClose.setVisibility(View.VISIBLE);
@@ -84,14 +111,7 @@ public class WebViewFragment extends BaseFragment {
             }
         });
 
-
-        tvClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                funcBack();
-            }
-        });
-
+        addListener();
 
         wv.getSettings().setJavaScriptEnabled(true);
         wv.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
@@ -105,19 +125,103 @@ public class WebViewFragment extends BaseFragment {
         wv.getSettings().setLoadWithOverviewMode(true);
         wv.getSettings().setLayoutAlgorithm(LayoutAlgorithm.NARROW_COLUMNS);
         wv.getSettings().setSupportMultipleWindows(true);
-        wv.setWebViewClient(new WebViewClient());
-        wv.setWebChromeClient(new WebChromeClient());
+        wv.setWebChromeClient(new WebChromeClient() {
+
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                if (newProgress < 100) {
+                    hpbLoading.setProgress(newProgress);
+                } else {
+                    hpbLoading.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        wv.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+                super.onReceivedError(view, request, error);
+                showLoadingFailed();
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                hideLoading();
+
+                if (wv.canGoBack()) {
+                    ivPre.setBackgroundResource(R.drawable.button_web_left);
+                } else {
+                    ivPre.setBackgroundResource(R.mipmap.ico_left_pressed);
+                }
+
+                if (wv.canGoForward()) {
+                    ivNext.setBackgroundResource(R.drawable.button_web_right);
+                } else {
+                    ivNext.setBackgroundResource(R.mipmap.ico_right_pressed);
+                }
+            }
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                showLoading();
+            }
+
+        });
 
         wv.loadUrl(targetURL);
+    }
+
+    private void addListener() {
+        tvClose.setOnClickListener(this);
+        ivPre.setOnClickListener(this);
+        ivNext.setOnClickListener(this);
+        ivRefresh.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tv_head_right:
+                funcBack();
+                break;
+            case R.id.iv_pre:
+                funcGoPre();
+                break;
+            case R.id.iv_next:
+                funcGoNext();
+                break;
+            case R.id.iv_refresh:
+                funcRefresh();
+            default:
+                break;
+        }
     }
 
     private void funcBack() {
         getFragmentManager().popBackStack();
     }
 
+    private void funcGoPre() {
+        if (wv.canGoBack()) {
+            wv.goBack();//返回上一页面
+        }
+    }
+
+    private void funcGoNext() {
+        if (wv.canGoForward()) {
+            wv.goForward();//返回上一页面
+        }
+    }
+
     public void onResume() {
         super.onResume();
         getFocus();
+    }
+
+    private void funcRefresh(){
+        wv.reload();
     }
 
     //主界面获取焦点
@@ -140,6 +244,23 @@ public class WebViewFragment extends BaseFragment {
                 return false;
             }
         });
+    }
+
+    public void showLoading() {
+        hpbLoading.setVisibility(View.VISIBLE);
+    }
+
+    public void showLoadingFailed() {
+        hpbLoading.setVisibility(View.GONE);
+        rlLoading.setVisibility(View.VISIBLE);
+        ivLoadFailed.setVisibility(View.VISIBLE);
+        vLoading.setVisibility(View.GONE);
+        tvLoadState.setText(ctx.getString(R.string.load_failed));
+    }
+
+    public void hideLoading() {
+        rlLoading.setVisibility(View.GONE);
+        hpbLoading.setVisibility(View.GONE);
     }
 
 }

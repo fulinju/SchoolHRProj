@@ -5,7 +5,6 @@ import android.content.Context;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import java.util.HashMap;
@@ -13,7 +12,8 @@ import java.util.Map;
 
 import rx.Observable;
 import rx.Subscriber;
-import sl.hr_client.utils.net.SLStringRequest;
+import sl.hr_client.utils.net.ResponseUtils;
+import sl.hr_client.utils.net.XStringRequest;
 import sl.hr_client.utils.net.VolleyUtils;
 
 /**
@@ -29,7 +29,7 @@ public class LoginModel {
                 String targetUrl = VolleyUtils.loginUrl;
 
                 VolleyUtils.requestQueue = Volley.newRequestQueue(context);
-                SLStringRequest sr = new SLStringRequest(VolleyUtils.VOLLEY_POST, targetUrl, new Response.Listener<String>() {
+                XStringRequest sr = new XStringRequest(VolleyUtils.VOLLEY_POST, targetUrl, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
                         subscriber.onNext(s);
@@ -38,7 +38,7 @@ public class LoginModel {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-
+                        subscriber.onError(new Exception(ResponseUtils.responseOperate(volleyError)));
                     }
                 }) {
                     @Override

@@ -19,9 +19,8 @@ import sl.hr_client.R;
 import sl.hr_client.base.BaseFragment;
 import sl.hr_client.data.bean.ADImgBean;
 import sl.hr_client.data.bean.NewsBean;
-import sl.hr_client.data.parse.GsonUtils;
+import sl.hr_client.data.GsonUtils;
 import sl.hr_client.main.news.adapter.CircleGridAdapter;
-import sl.hr_client.main.news.adapter.NewsAdapter;
 import sl.hr_client.main.photo.ImagePagerActivity;
 import sl.hr_client.net.news.detail.NewsDetailPresenter;
 import sl.hr_client.net.news.detail.NewsDetailView;
@@ -53,7 +52,7 @@ public class NewsDetailFragment extends BaseFragment implements NewsDetailView {
 
     private NewsBean news;
 
-    private int imgGvColumn = -1;//图片的GV的列数
+    private int imgGvColumn = -1;//图片的GridView的列数
 
 
     @Nullable
@@ -65,7 +64,7 @@ public class NewsDetailFragment extends BaseFragment implements NewsDetailView {
         newsDetailPresenter= new NewsDetailPresenter(this);
 
         funcGetIntent();
-        initView();
+//        initView();
         return newsDetailView;
     }
 
@@ -77,7 +76,10 @@ public class NewsDetailFragment extends BaseFragment implements NewsDetailView {
         }
     }
 
-    private void initView(){
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         tvTitle = (TextView) newsDetailView.findViewById(R.id.tv_head);
         tvClose = (TextView) newsDetailView.findViewById(R.id.tv_head_right);
 
@@ -99,6 +101,10 @@ public class NewsDetailFragment extends BaseFragment implements NewsDetailView {
         });
         funcGetData();
     }
+
+//    private void initView(){
+//
+//    }
 
     private void funcGetData() {
         if (UtilsNet.isNetworkAvailable(ctx) == true) {
@@ -128,7 +134,7 @@ public class NewsDetailFragment extends BaseFragment implements NewsDetailView {
 
 
         if (news.getPmADImgList() != null && news.getPmADImgList().size() != 0) {//只有一条 且为""
-            // 动态设置gridview列数
+            // 动态设置GridView列数
             gvPublishAdImg.setVisibility(View.VISIBLE);
 
             List<ADImgBean> adImgList = news.getPmADImgList();

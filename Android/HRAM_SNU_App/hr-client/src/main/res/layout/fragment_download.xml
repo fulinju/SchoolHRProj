@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/white" android:layout_width="match_parent"
     android:id="@+id/container"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <sl.base.ui.recyclerview.XRecyclerView
         android:id="@+id/xrv_download"
@@ -10,5 +11,15 @@
         android:layout_height="match_parent">
 
     </sl.base.ui.recyclerview.XRecyclerView>
+
+    <RelativeLayout
+        android:id="@+id/rl_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <include layout="@layout/layout_loading"></include>
+    </RelativeLayout>
+
 
 </RelativeLayout>

@@ -7,6 +7,8 @@ package sl.hr_client.net.link;
 public interface LinkView {
     void updateLinksView(String str);
 
+    void updateLoadMoreLinksView(String str);
+
     void showLoading();
 
     void showLoadingFailed();

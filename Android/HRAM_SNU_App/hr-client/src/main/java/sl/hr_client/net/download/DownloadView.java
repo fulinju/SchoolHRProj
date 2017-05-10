@@ -7,6 +7,8 @@ package sl.hr_client.net.download;
 public interface DownloadView {
     void updateDownloadsView(String str);
 
+    void loadMoreDownloadsView(String str);
+
     void showLoading();
 
     void showLoadingFailed();

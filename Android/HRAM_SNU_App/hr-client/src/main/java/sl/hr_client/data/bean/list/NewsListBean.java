@@ -1,11 +1,9 @@
 package sl.hr_client.data.bean.list;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.Transient;
+
 
 import java.util.List;
-import org.greenrobot.greendao.annotation.Generated;
+
 
 import sl.hr_client.data.bean.NewsBean;
 
@@ -14,6 +12,16 @@ import sl.hr_client.data.bean.NewsBean;
  */
 
 public class NewsListBean {
+    private boolean isLastPage;
+
+    public boolean isLastPage() {
+        return isLastPage;
+    }
+
+    public void setLastPage(boolean lastPage) {
+        isLastPage = lastPage;
+    }
+
     private List<NewsBean> resultList;
 
     public List<NewsBean> getResultList() {

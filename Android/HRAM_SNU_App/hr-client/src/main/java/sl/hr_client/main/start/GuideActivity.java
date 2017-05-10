@@ -78,7 +78,7 @@ public class GuideActivity extends BaseActivity implements View.OnClickListener{
     protected void onPause() {
         super.onPause();
         // 如果切换到后台，就设置下次不进入功能引导页
-        UtilsPreference.commitBoolean(ConstantData.flag_first_open, true);
+        UtilsPreference.commitBoolean(ConstantData.FLAG_FIRST_OPEN, true);
         finish();
     }
 
@@ -153,7 +153,7 @@ public class GuideActivity extends BaseActivity implements View.OnClickListener{
         Intent intent = new Intent(GuideActivity.this,
                 SplashActivity.class);
         startActivity(intent);
-        UtilsPreference.commitBoolean(ConstantData.flag_first_open, true);
+        UtilsPreference.commitBoolean(ConstantData.FLAG_FIRST_OPEN, true);
         finish();
     }
 
@@ -171,7 +171,6 @@ public class GuideActivity extends BaseActivity implements View.OnClickListener{
             // arg0 :当前页面，及你点击滑动的页面
             // arg1:当前页面偏移的百分比
             // arg2:当前页面偏移的像素位置
-
         }
 
         // 当新的页面被选中时调用

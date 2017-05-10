@@ -51,9 +51,6 @@ namespace sl.web.Areas.api.Controllers
         /// <summary>
         /// 根据类型获得友情链接 前12条
         /// </summary>
-        /// <param name="pageIndex"></param>
-        /// <param name="pageSize"></param>
-        /// <returns></returns>
         [HttpPost]
         public HttpResponseMessage FindFriendlyLinkListByTypeTop12(string[] ids)
         {

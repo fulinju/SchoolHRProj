@@ -7,6 +7,8 @@ package sl.hr_client.net.news;
 public interface NewsView {
     void updateNewsView(String str);
 
+    void loadMoreNewsView(String str);
+
     void showLoading();
 
     void showLoadingFailed();

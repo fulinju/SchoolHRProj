@@ -1,6 +1,8 @@
 package sl.hr_client.base;
 
 import android.app.Application;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
 import com.android.volley.toolbox.Volley;
 import com.igexin.sdk.PushManager;
@@ -12,10 +14,13 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 
+import org.greenrobot.eventbus.EventBus;
 import org.xutils.x;
 
 import java.io.File;
 
+import sl.hr_client.data.dao.DaoMaster;
+import sl.hr_client.data.dao.DaoSession;
 import sl.hr_client.push.GeTuiIntentService;
 import sl.hr_client.push.GeTuiPushService;
 import sl.hr_client.utils.constant.ConstantData;
@@ -27,10 +32,18 @@ import sl.hr_client.utils.net.VolleyUtils;
 public class BaseApplication extends Application {
     public static BaseApplication instances;
 
+    private DaoMaster.DevOpenHelper mHelper;
+    private SQLiteDatabase db;
+    private DaoMaster mDaoMaster;
+    private DaoSession mDaoSession;
+
     @Override
     public void onCreate() {
         super.onCreate();
         instances = this;//单例模式
+
+        createDir();
+
         //1. 创建一个RequestQueue对象。
         VolleyUtils.requestQueue = Volley.newRequestQueue(getApplicationContext());
 
@@ -38,16 +51,30 @@ public class BaseApplication extends Application {
         PushManager.getInstance().initialize(this.getApplicationContext(), GeTuiPushService.class);
         // com.getui.demo.GeTuiIntentService 为第三方自定义的推送服务事件接收类
         PushManager.getInstance().registerPushIntentService(this.getApplicationContext(), GeTuiIntentService.class);
+
+        setDatabase();
         initUIL();
+
+
+
         x.Ext.init(this);
     }
 
-    private void initUIL(){
-        // 配置ImageLoad
+    private void createDir() {
         File cacheDir = new File(ConstantData.cachePathForUIL);
         if (!cacheDir.exists()) {
             cacheDir.mkdirs();
         }
+
+        File downloadDir = new File(ConstantData.downloadPath);
+        if (!downloadDir.exists()) {
+            downloadDir.mkdirs();
+        }
+    }
+
+    private void initUIL() {
+        // 配置ImageLoad
+        File cacheDir = new File(ConstantData.cachePathForUIL);
 
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .cacheInMemory(true).cacheOnDisk(true).build();
@@ -74,4 +101,24 @@ public class BaseApplication extends Application {
     public static BaseApplication getInstances() {
         return instances;
     }
+
+    /**
+     * 设置greenDao
+     */
+    private void setDatabase() {
+        mHelper = new DaoMaster.DevOpenHelper(this, "hram-db", null);
+        db = mHelper.getWritableDatabase();
+        mDaoMaster = new DaoMaster(db);
+        mDaoSession = mDaoMaster.newSession();
+    }
+
+    public DaoSession getDaoSession() {
+        return mDaoSession;
+    }
+
+    public SQLiteDatabase getDb() {
+        return db;
+    }
+
+
 }

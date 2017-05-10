@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:zhy="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
     <View
         android:id="@+id/v_split"
         android:layout_width="match_parent"
@@ -9,18 +12,69 @@
         android:background="@color/dark_gray"></View>
 
     <LinearLayout
-        android:layout_below="@id/v_split"
         android:id="@+id/ll_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/v_split">
 
-        <include
-            layout="@layout/layout_head"></include>
+        <include layout="@layout/layout_head"></include>
     </LinearLayout>
+
+    <sl.base.ui.progressbar.HorizontalProgressBarWithNumber
+        android:layout_below="@+id/ll_title"
+        android:id="@+id/hpb_loading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:progress="50"
+        zhy:progress_text_color="@color/theme_blue"
+        zhy:progress_unreached_color="@color/theme_gray" />
 
     <WebView
         android:id="@+id/wv"
-        android:layout_below="@+id/ll_title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></WebView>
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rl_operate"
+        android:layout_below="@+id/hpb_loading"></WebView>
+
+    <RelativeLayout
+        android:id="@+id/rl_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rl_operate"
+        android:layout_below="@+id/hpb_loading"
+        android:visibility="gone">
+
+        <include layout="@layout/layout_loading"></include>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_operate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/shape_gray_top_line_bg"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/iv_pre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/ico_left_pressed" />
+
+        <ImageView
+            android:id="@+id/iv_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_toRightOf="@+id/iv_pre"
+            android:background="@mipmap/ico_right_pressed" />
+
+        <ImageView
+            android:id="@+id/iv_refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/button_refresh"/>
+    </RelativeLayout>
 </RelativeLayout>

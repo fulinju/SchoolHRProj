@@ -1226,7 +1226,7 @@ namespace sl.common
         }
         public static string GetDate(DateTime date)
         {
-            if (Validate.IsDateTime(date.ToString()))
+            if (CommonValidate.IsDateTime(date.ToString()))
             {
                 return date.ToString("yyyy-MM-dd");
             }
@@ -1694,7 +1694,7 @@ namespace sl.common
             {
                 string urlHost = HttpContext.Current.Request.Url.Host.ToLower();
                 string[] urlHostArray = urlHost.Split(new[] { '.' });
-                if ((urlHostArray.Length < 3) || Validate.IsIP(urlHost))
+                if ((urlHostArray.Length < 3) || CommonValidate.IsIP(urlHost))
                 {
                     return urlHost;
                 }

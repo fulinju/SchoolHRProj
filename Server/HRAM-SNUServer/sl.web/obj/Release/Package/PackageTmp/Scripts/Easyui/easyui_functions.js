@@ -194,9 +194,9 @@ function Edit(dgid, title, url, width, height, btnText) {
     //var id = getId();
     var id = rows[0].pkId; //获取pkId (怎么改写成通用的？暂时把主键都用pkId表示),pkId也传入
     //var id = getId(dgid);
-    console.log(dgid);
-    console.log(id);
-    console.log(rows.length);
+    //console.log(dgid);
+    //console.log(id);
+    //console.log(rows.length);
     if (id) {
         var dialog = parent.sy.modalDialog({
             title: "&nbsp;" + title,

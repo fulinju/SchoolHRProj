@@ -7,6 +7,8 @@ package sl.hr_client.net.member;
 public interface MemberView {
     void updateMembersView(String str);
 
+    void loadMoreMembersView(String str);
+
     void showLoading();
 
     void showLoadingFailed();

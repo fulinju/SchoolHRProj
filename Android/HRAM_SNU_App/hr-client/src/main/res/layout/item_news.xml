@@ -25,6 +25,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:scaleType="centerCrop"
+                android:background="@drawable/shape_gray_frame"
                 android:src="@mipmap/ic_launcher" />
 
             <TextView

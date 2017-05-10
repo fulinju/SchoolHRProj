@@ -8,7 +8,7 @@ import com.android.volley.toolbox.Volley;
 
 import rx.Observable;
 import rx.Subscriber;
-import sl.hr_client.utils.net.SLStringRequest;
+import sl.hr_client.utils.net.XStringRequest;
 import sl.hr_client.utils.net.VolleyUtils;
 
 /**
@@ -23,7 +23,7 @@ public class NewsDetailModel {
                 String targetUrl = VolleyUtils.newsDetailUrl + "?publishID=" + publishID;
 
                 VolleyUtils.requestQueue = Volley.newRequestQueue(context);
-                SLStringRequest sr = new SLStringRequest(VolleyUtils.VOLLEY_GET, targetUrl, new Response.Listener<String>() {
+                XStringRequest sr = new XStringRequest(VolleyUtils.VOLLEY_GET, targetUrl, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
                         subscriber.onNext(s);

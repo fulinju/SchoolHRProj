@@ -45,6 +45,7 @@ namespace sl.service.api
             sql.Append(" left join T_User on T_User.uLoginName = T_PublishManage.uLoginName ");
             sql.Append(" where T_PublishManage.pmTypeID like @0 ", pmTypeID);
             sql.Append(" and T_PublishManage.isDeleted = 0 ");
+            sql.OrderBy("T_PublishManage.pmPublishTime desc");
             Page<PublishInfo> list = database.Page<PublishInfo>(pageIndex, pageSize, sql);
             if (list != null)
             {
@@ -164,6 +165,7 @@ namespace sl.service.api
             sql.Append(" where T_Member.isDeleted = 0");
             sql.Append(" and T_Member.mTypeID like @0", mTypeID);
             sql.Append(" and T_Member.mReviewResultID like @0", mReviewResultID);
+            sql.OrderBy("T_Member.mApplyTime desc");
 
             Page<MemberInfo> list = database.Page<MemberInfo>(pageIndex, pageSize, sql);
 
@@ -215,9 +217,26 @@ namespace sl.service.api
             sql.Append("left join T_User on T_User.uLoginName = T_DownloadManage.uLoginName");
             sql.Append("where T_DMType.dmTypeValue like @0", dmTypeValue);
             sql.Append("and T_DownloadManage.isDeleted = 0");
+            sql.OrderBy("T_DownloadManage.dmUploadTime desc");
             Page<DownLoadInfo> list = database.Page<DownLoadInfo>(pageIndex, pageSize, sql);
 
             return list;
+        }
+
+        /// <summary>
+        /// 获得单个下载
+        /// </summary>
+        /// <param name="downloadID"></param>
+        /// <returns></returns>
+        public static T_DownloadManage GetDownload(string downloadID)
+        {
+            Sql sql = Sql.Builder;
+            sql.Select("*");
+            sql.From("T_DownloadManage");
+            sql.Where("T_DownloadManage.pkId = @0", downloadID);
+            T_DownloadManage target = database.FirstOrDefault<T_DownloadManage>( sql);
+
+            return target;
         }
         #endregion
 
@@ -233,6 +252,19 @@ namespace sl.service.api
         {
             Sql sql = Sql.Builder;
             sql.Append("select * from T_User where uMaiBox = @0", uMaiBox);
+            T_User user = database.FirstOrDefault<T_User>(sql);
+            return user;
+        }
+
+        /// <summary>
+        /// 根据手机号获取用户
+        /// </summary>
+        /// <param name="uPhone"></param>
+        /// <returns></returns>
+        public static T_User GetUserByPhone(string uPhone)
+        {
+            Sql sql = Sql.Builder;
+            sql.Append("select * from T_User where uPhone = @0", uPhone);
             T_User user = database.FirstOrDefault<T_User>(sql);
             return user;
         }
@@ -273,11 +305,79 @@ namespace sl.service.api
         public static T_User GetUserByLoginName(string uLoginName)
         {
             Sql sql = Sql.Builder;
-            sql.Append("select * from T_User where uLoginName = @0", uLoginName);
+            sql.Select("*");
+            sql.From("T_User");
+            sql.Where("uLoginName = @0", uLoginName);
             T_User user = database.FirstOrDefault<T_User>(sql);
             return user;
         }
 
+        /// <summary>
+        /// 根据ID获取
+        /// </summary>
+        /// <param name="uID"></param>
+        /// <returns></returns>
+        public static T_User GetUserByID(string uID)
+        {
+            Sql sql = Sql.Builder;
+            sql.Select("*");
+            sql.From("T_User");
+            sql.Where("pkId = @0", uID);
+            T_User user = database.FirstOrDefault<T_User>(sql);
+            return user;
+        }
+
+        /// <summary>
+        /// 根据ID、用户名、密码获取用户
+        /// </summary>
+        /// <param name="uID"></param>
+        /// <param name="loginName"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public static T_User GetUserByIDAndLoginNameAndPassword(string uID,string loginName,string password)
+        {
+            Sql sql = Sql.Builder;
+            sql.Select("*");
+            sql.From("T_User");
+            sql.Where("pkId = @0 and uLoginName = @1 and uPassword = @2", uID,loginName,password);
+            T_User user = database.FirstOrDefault<T_User>(sql);
+            return user;
+        }
+
+        /// <summary>
+        /// 根据ID、用户名、邮箱获取用户
+        /// </summary>
+        /// <param name="uID"></param>
+        /// <param name="loginName"></param>
+        /// <param name="uMaiBox"></param>
+        /// <returns></returns>
+        public static T_User GetUserByIDAndLoginNameAndMailBox(string uID, string loginName, string uMaiBox)
+        {
+            Sql sql = Sql.Builder;
+            sql.Select("*");
+            sql.From("T_User");
+            sql.Where("pkId = @0 and uLoginName = @1 and uMaiBox = @2", uID, loginName, uMaiBox);
+            T_User user = database.FirstOrDefault<T_User>(sql);
+            return user;
+        }
+
+
+        public static T_User GetUserByLoginNameAndMailBox( string loginName, string uMaiBox)
+        {
+            Sql sql = Sql.Builder;
+            sql.Select("*");
+            sql.From("T_User");
+            sql.Where("uLoginName = @0 and uMaiBox = @1", loginName, uMaiBox);
+            T_User user = database.FirstOrDefault<T_User>(sql);
+            return user;
+        }
+
+
+        /// <summary>
+        /// 根据用户名密码获取用户
+        /// </summary>
+        /// <param name="loginInfo"></param>
+        /// <returns></returns>
         public static UserModel GetUserByLoginNameAndPwd(LoginModel loginInfo)
         {
             Sql sql = Sql.Builder;
@@ -344,6 +444,7 @@ namespace sl.service.api
             sql.Append(" from T_FriendlyLink left join T_User on T_User.uLoginName = T_FriendlyLink.uLoginName ");
             sql.Append(" left join T_FLType on T_FriendlyLink.flTypeID = T_FLType.flTypeID ");
             sql.Where("T_FriendlyLink.isDeleted = 0");
+            sql.OrderBy("T_FriendlyLink.flAddTime desc");
 
             Page<FriendlyLinkInfo> list = database.Page<FriendlyLinkInfo>(pageIndex, pageSize, sql);
 

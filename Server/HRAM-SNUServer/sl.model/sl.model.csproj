@@ -60,6 +60,7 @@
     <Compile Include="model\api\DownloadInfo.cs" />
     <Compile Include="model\api\DownloadTypeInfo.cs" />
     <Compile Include="model\api\FriendlyLinkInfo.cs" />
+    <Compile Include="model\ModifyPasswordModel.cs" />
     <Compile Include="model\RegisterModel.cs" />
     <Compile Include="model\api\UserModel.cs" />
     <Compile Include="model\api\MemberInfo.cs" />

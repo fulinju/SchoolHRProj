@@ -42,4 +42,29 @@ public class RegisterPresenter {
                     }
                 });
     }
+
+
+    public void pRegisterByRegisterByNameAndPwd(Context context, String uLoginName, String uPassword) {
+        registerView.showLoading();
+
+        registerModel.registerByRegisterByNameAndPwd(context, uLoginName, uPassword)
+                .subscribeOn(Schedulers.io())// 在非UI线程中执行getUser
+                .observeOn(AndroidSchedulers.mainThread())// 在UI线程中执行结果
+                .subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onNext(String s) {
+                        registerView.registerSuccessView(s);
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                        registerView.hideLoading();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        registerView.showError(e.getMessage());
+                    }
+                });
+    }
 }

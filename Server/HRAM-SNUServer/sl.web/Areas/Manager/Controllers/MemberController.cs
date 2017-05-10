@@ -64,7 +64,14 @@ namespace sl.web.Areas.Manager.Controllers
                     {
                         m.mImgURL = UploadFile();
                         m.mApplyTime = DateTime.Now.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss"); //未选择时间 获取当前时间
-                        m.uLoginName = Security.DesDecrypt(CachedConfigContext.Current.WebSiteConfig.WebSiteKey, Utils.GetCookie(Key.MANAGER_NAME));//审核者
+                        if (CachedConfigContext.Current.WebSiteConfig.WebSiteKey != null) //加密Key不为空
+                        {
+                            m.uLoginName = Security.DesDecrypt(CachedConfigContext.Current.WebSiteConfig.WebSiteKey, Utils.GetCookie(Key.MANAGER_NAME));//DES解密
+                        }
+                        else
+                        {
+                            m.uLoginName = Utils.GetCookie(Key.MANAGER_NAME);
+                        }
                         m.isDeleted = false;
                         object result = HRAManagerService.database.Insert(m);
                         return SaveMessage(result);

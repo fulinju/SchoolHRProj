@@ -15,7 +15,9 @@ public class UtilsKeyBoard {
      */
     public static void hideKeyBoard(Activity activity){
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-        // 隐藏软键盘
-        imm.hideSoftInputFromWindow(activity.getWindow().getDecorView().getWindowToken(), 0);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(activity.getWindow().getDecorView().getWindowToken(),
+                    0);
+        }
     }
 }

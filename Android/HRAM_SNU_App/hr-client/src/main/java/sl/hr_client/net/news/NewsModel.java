@@ -2,17 +2,13 @@ package sl.hr_client.net.news;
 
 import android.content.Context;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import rx.Observable;
 import rx.Subscriber;
-import sl.hr_client.utils.net.SLStringRequest;
+import sl.hr_client.utils.net.XStringRequest;
 import sl.hr_client.utils.net.VolleyUtils;
 
 /**
@@ -28,7 +24,7 @@ public class NewsModel {
                 String targetUrl = VolleyUtils.newsUrl + "?pageIndex=" + pageIndex + "&pageSize="+pageSize;
 
                 VolleyUtils.requestQueue = Volley.newRequestQueue(context);
-                SLStringRequest sr = new SLStringRequest(VolleyUtils.VOLLEY_GET, targetUrl, new Response.Listener<String>() {
+                XStringRequest sr = new XStringRequest(VolleyUtils.VOLLEY_GET, targetUrl, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
                         subscriber.onNext(s);

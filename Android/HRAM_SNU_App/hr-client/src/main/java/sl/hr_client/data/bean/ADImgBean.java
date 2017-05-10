@@ -1,8 +1,5 @@
 package sl.hr_client.data.bean;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.Generated;
 
 import java.io.Serializable;
 

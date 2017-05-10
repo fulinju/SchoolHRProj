@@ -8,7 +8,7 @@ function funcGetFlType() {
     $.ajax({
         type: "get",
         dataType: "json",
-        url: '/api/Type/GetTypeList',
+        url: 'http://123.57.26.127/api/Type/GetTypeList',
         data: {},
         success: function (data) {
             funcInitFlType(data);
@@ -46,9 +46,10 @@ function funcGetFl(flTypeIds) {
     var models = JSON.stringify(flTypeIds);
     console.log(models)
 
+
     $.ajax({
-        type: 'POST',
-        url: '/api/FriendlyLink/FindFriendlyLinkListByTypeTop12',
+        type: 'post',
+        url: 'http://123.57.26.127/api/FriendlyLink/FindFriendlyLinkListByTypeTop12',
         contentType: "application/json",  //加上这个
         data: models,
         dataType: 'json',

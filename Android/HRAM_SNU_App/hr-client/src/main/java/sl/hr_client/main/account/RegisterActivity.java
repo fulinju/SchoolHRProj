@@ -15,6 +15,7 @@ import android.widget.TextView;
 import sl.base.ui.loading.AVLoadingIndicatorView;
 import sl.base.ui.segment.SegmentedGroup;
 import sl.base.utils.UtilsCheck;
+import sl.base.utils.UtilsKeyBoard;
 import sl.base.utils.UtilsLog;
 import sl.base.utils.UtilsMD5;
 import sl.base.utils.UtilsNet;
@@ -22,9 +23,11 @@ import sl.base.utils.UtilsPreference;
 import sl.base.utils.UtilsToast;
 import sl.hr_client.R;
 import sl.hr_client.base.BaseActivity;
+import sl.hr_client.data.bean.ResponseBean;
 import sl.hr_client.net.acc.register.RegisterPresenter;
 import sl.hr_client.net.acc.register.RegisterView;
 import sl.hr_client.utils.constant.ConstantData;
+import sl.hr_client.utils.net.ResponseUtils;
 
 /**
  * Created by Administrator on 2017/4/25.
@@ -126,10 +129,11 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     registerPresenter.pRegisterByMail(ctx, mailbox);
                     break;
                 case IS_BY_USERNAME:
-//                    String pwdMd5 = UtilsMD5.getMD5_UpperCase(pwd);
-//                    registerPresenter.pRegisterByMail(ctx, user, pwdMd5, UtilsPreference.getString(ConstantData.flag_ge_tui_clientId, ConstantData.default_String));
+                    String pwdMd5 = UtilsMD5.getMD5_UpperCase(password);
+                    registerPresenter.pRegisterByRegisterByNameAndPwd(ctx, username, pwdMd5);
                     break;
                 case IS_ERROR:
+
                     break;
                 default:
                     break;
@@ -141,6 +145,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     private int checkInput(String mail, String username, String password, String surePwd) {
+        UtilsKeyBoard.hideKeyBoard(this);
         if (rdoBtnByMail.isChecked()) {
             if (mail.length() <= 0) {
                 UtilsToast.showToast(ctx, "请输入邮箱");
@@ -200,20 +205,27 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void registerSuccessView(String str) {
         UtilsLog.logE(UtilsLog.getSte(), str);
+        ResponseUtils.showResponseOperate(ctx, str);
+//        UtilsToast.showToast(ctx, edtPhone.getText().toString() + " " + ok.getMessage());
+        finish();
     }
 
     @Override
     public void showLoading() {
-
+        tvRegister.setVisibility(View.GONE);
+        vLoading.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-
+        tvRegister.setVisibility(View.VISIBLE);
+        vLoading.setVisibility(View.GONE);
     }
 
     @Override
     public void showError(String msg) {
         UtilsLog.logE(UtilsLog.getSte(), msg);
+        ResponseUtils.showResponseOperate(ctx, msg);
+        hideLoading();
     }
 }

@@ -42,6 +42,27 @@ namespace sl.web.Areas.api.Controllers
             }
         }
 
+        /// <summary>
+        /// 用GET 简单些（可考虑用URL拦截做下载增加）
+        /// </summary>
+        /// <param name="downloadFile"></param>
+        [HttpGet]
+        public HttpResponseMessage AddDownloadNum(string downloadID)
+        {
+            T_DownloadManage target = HRAMApiService.GetDownload(downloadID);
+            if (target != null)
+            {
+                target.dmDownloadNum = target.dmDownloadNum+1;
+                HRAMApiService.database.Update(target);
+                return JsonUtils.toJson(HttpStatusCode.OK, new JsonTip(ApiCode.UpdateDownloadNumSucceedCode, ApiCode.UpdateDownloadNumSucceedMessage));
+            }
+            else
+            {
+                return JsonUtils.toJson(HttpStatusCode.PreconditionFailed, new JsonTip(ApiCode.UpdateDownloadNumFailedCode, ApiCode.UpdateDownloadNumFailedMessage));
+            }
+            
+
+        }
          
 
         ///

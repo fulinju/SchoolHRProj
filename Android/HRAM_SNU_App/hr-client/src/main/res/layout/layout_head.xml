@@ -10,30 +10,30 @@
         android:id="@+id/ll_head_left"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:orientation="horizontal"
         android:layout_centerVertical="true"
-        android:visibility="gone"
-        >
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/tv_head_left"
-            android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@drawable/head_back_img"
             android:layout_gravity="center_vertical"
-            android:paddingTop="8dp"
+            android:layout_weight="2"
             android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:src="@drawable/head_back_img"
             android:visibility="visible" />
+
         <TextView
-            android:layout_weight="3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:textSize="15sp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="3"
             android:textColor="@drawable/theme_text_click"
-            android:layout_gravity="center_vertical" />
+            android:textSize="15sp"
+            android:visibility="gone" />
     </LinearLayout>
 
     <TextView
@@ -46,23 +46,20 @@
         android:gravity="center"
         android:padding="10dp"
         android:text="@string/default_value"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
+
 
     <TextView
         android:id="@+id/tv_head_right"
         android:layout_width="wrap_content"
-        android:layout_height="36dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
         android:gravity="center"
-        android:paddingBottom="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="5dp"
         android:textColor="@drawable/theme_text_click"
-        android:layout_marginRight="5dp"
-        android:visibility="gone"
-         />
+        android:visibility="gone" />
+
 </RelativeLayout>
 
