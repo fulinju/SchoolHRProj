@@ -102,7 +102,11 @@ namespace sl.web.Areas.api.Controllers
             {
                 login = TokenUtils.UpdateToken(login);
 
+               
                 HttpContext.Current.Session[login.uID.ToString()] = login;
+
+                UserModel currentUser = HttpContext.Current.Session[login.uID.ToString()] as UserModel;
+
 
                 return JsonUtils.toJson(HttpStatusCode.OK, login);
             }
@@ -118,14 +122,14 @@ namespace sl.web.Areas.api.Controllers
         /// </summary>
         /// <param name="userInfo"></param>
         /// <returns></returns>
-        //[TokenValidateAttribute]
+        [TokenValidateAttribute]
         [HttpPost]
         public HttpResponseMessage ModifyUserInfo([FromBody]UserModel userInfo)
         {
             string uID = userInfo.uID;
             T_User target = HRAMApiService.GetUserByID(uID); //安全验证有点弱 获取原来的
 
-            T_User userByMaiBox = HRAMApiService.GetUserByPhone(userInfo.uMaiBox);
+            T_User userByMaiBox = HRAMApiService.GetUserByMail(userInfo.uMaiBox);
             if (userByMaiBox != null && userInfo.uMaiBox != target.uMaiBox) //排除自己的
             {
                 return JsonUtils.toJson(HttpStatusCode.PreconditionFailed, new JsonTip(ApiCode.MailboxRegisteredCode, ApiCode.MailboxRegisteredMessage)); //邮箱已注册

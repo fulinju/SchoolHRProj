@@ -6,8 +6,11 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
+import sl.base.ui.jazzyviewpager.JazzyViewPager;
 import sl.hr_client.R;
 
 
@@ -27,7 +30,10 @@ public class ImagePagerActivity extends FragmentActivity {
         pagerPosition = getIntent().getIntExtra(EXTRA_IMAGE_INDEX, 0);
         String[] urls = getIntent().getStringArrayExtra(EXTRA_IMAGE_URLS);
 
-        mPager = (HackyViewPager) findViewById(R.id.pager);
+        mPager = (HackyViewPager) findViewById(R.id.photo_pager);
+
+        mPager.setTransitionEffect(JazzyViewPager.TransitionEffect.ZoomIn);
+
         ImagePagerAdapter mAdapter = new ImagePagerAdapter(getSupportFragmentManager(), urls);
         mPager.setAdapter(mAdapter);
         indicator = (TextView) findViewById(R.id.indicator);
@@ -83,6 +89,24 @@ public class ImagePagerActivity extends FragmentActivity {
         public Fragment getItem(int position) {
             String url = fileList[position];
             return ImageDetailFragment.newInstance(url);
+        }
+
+        //**************加上下面的两行即可实现换页时的动画效果*********************************//
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            Object obj = super.instantiateItem(container, position);
+            mPager.setObjectForPosition(obj, position);
+            return obj;
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            if (object != null) {
+                return ((Fragment) object).getView() == view;
+            } else {
+                return false;
+            }
         }
     }
 }

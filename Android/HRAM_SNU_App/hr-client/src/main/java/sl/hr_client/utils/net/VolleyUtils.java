@@ -10,8 +10,8 @@ import com.android.volley.toolbox.ImageLoader;
 public class VolleyUtils {
     public static final String ErrVolleyType = "ErrVolleyType";//Volley返回data为空的ID
 
-    public static final String ServerIP = "http://123.57.26.127";
-//    public static final String ServerIP = "http://192.168.1.103:7777";
+//    public static final String ServerIP = "http://123.57.26.127";
+    public static final String ServerIP = "http://192.168.1.107:666";
 
     public static final int VOLLEY_POST = Request.Method.POST; //POST请求
     public static final int VOLLEY_GET = Request.Method.GET; //GET请求

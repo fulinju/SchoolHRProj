@@ -2,8 +2,6 @@ package sl.hr_client.main.account;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -14,13 +12,13 @@ import android.widget.TextView;
 
 import sl.base.ui.loading.AVLoadingIndicatorView;
 import sl.base.ui.segment.SegmentedGroup;
-import sl.base.utils.UtilsCheck;
 import sl.base.utils.UtilsKeyBoard;
 import sl.base.utils.UtilsLog;
 import sl.base.utils.UtilsMD5;
 import sl.base.utils.UtilsNet;
 import sl.base.utils.UtilsPreference;
 import sl.base.utils.UtilsToast;
+import sl.base.utils.UtilsValidate;
 import sl.hr_client.R;
 import sl.hr_client.base.BaseActivity;
 import sl.hr_client.data.bean.ResponseBean;
@@ -147,33 +145,31 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private int checkInput(String mail, String username, String password, String surePwd) {
         UtilsKeyBoard.hideKeyBoard(this);
         if (rdoBtnByMail.isChecked()) {
-            if (mail.length() <= 0) {
-                UtilsToast.showToast(ctx, "请输入邮箱");
+            if (!UtilsValidate.isEmail(mail)) {
+                UtilsToast.showToast(ctx, String.format(getString(R.string.format_error),
+                        getString(R.string.mailbox)));
                 return IS_ERROR;
             }
-            if (!UtilsCheck.checkEmail(mail)) {
-                UtilsToast.showToast(ctx, "请输入正确的邮箱");
-                return IS_ERROR;
-            }
+
             return IS_BY_MAIL;
         }
 
         if (!rdoBtnByMail.isChecked()
                 ) {
-            if (username.length() <= 0
-                    || password.length() <= 0
-                    || surePwd.length() <= 0) {
-                UtilsToast.showToast(ctx, "请完善输入");
+            if (!UtilsValidate.isUsername(username)) {
+                UtilsToast.showToast(ctx, String.format(getString(R.string.format_error),
+                        getString(R.string.username)));
                 return IS_ERROR;
             }
 
-            if (username.length() < USERNAME_MIN_LENGTH) {
-                UtilsToast.showToast(ctx, "用户名必须大于" + USERNAME_MIN_LENGTH + "位");
+            if (!UtilsValidate.isPassword(password)) {
+                UtilsToast.showToast(ctx, String.format(getString(R.string.format_error),
+                        getString(R.string.password)));
                 return IS_ERROR;
             }
 
             if (!password.equals(surePwd)) {
-                UtilsToast.showToast(ctx, "两次输入的密码不同");
+                UtilsToast.showToast(ctx, getString(R.string.password_different));
                 return IS_ERROR;
             }
 

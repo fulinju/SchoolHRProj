@@ -10,11 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
 
 import sl.base.ui.noscroll.NoScrollGridView;
+import sl.base.utils.UtilsHTMLSpirit;
 import sl.hr_client.R;
 import sl.hr_client.data.bean.ADImgBean;
 import sl.hr_client.data.bean.NewsBean;
@@ -62,26 +64,23 @@ public class NewsAdapter extends RecyclerView.Adapter {
             ((NewsTextHolder) holder).tvUsername.setText(username);
             ((NewsTextHolder) holder).tvPublishType.setText(String.format(ctx.getString(R.string.mid_bucket_format), publishType));
             ((NewsTextHolder) holder).tvPublishTitle.setText(publishTitle);
+
+            publishText = UtilsHTMLSpirit.delHTMLTag(publishText);//去除HTML标签
+
             ((NewsTextHolder) holder).tvPublishText.setText(publishText);
             ((NewsTextHolder) holder).tvPublishViews.setText(publishViews);
 
-            ((NewsTextHolder) holder).tvPublishTitle.setOnClickListener(new View.OnClickListener() {
+            ((NewsTextHolder) holder).rlPublishInfo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     funcEnterNewsDetail(temp.getPublishID());
                 }
             });
 
-            ((NewsTextHolder) holder).tvPublishText.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    funcEnterNewsDetail(temp.getPublishID());
-                }
-            });
 
             // 设置上传的图片
             if (temp.getPmADImgList() != null && temp.getPmADImgList().size() != 0) {//只有一条 且为""
-                // 动态设置gridview列数
+                // 动态设置GridView列数
                 ((NewsTextHolder) holder).gvPublishAdImg.setVisibility(View.VISIBLE);
 
                 List<ADImgBean> adImgList = temp.getPmADImgList();
@@ -148,6 +147,7 @@ public class NewsAdapter extends RecyclerView.Adapter {
         private TextView tvPublishText;
         private NoScrollGridView gvPublishAdImg;
         //        private TextView tvPublishGoodCount;
+        private RelativeLayout rlPublishInfo;
         private TextView tvPublishViews;
 
 
@@ -162,6 +162,7 @@ public class NewsAdapter extends RecyclerView.Adapter {
             gvPublishAdImg = (NoScrollGridView) itemView.findViewById(R.id.gv_publishAdImg);
 //            tvPublishGoodCount = (TextView) itemView.findViewById(R.id.tv_publishGoodCount);
             tvPublishViews = (TextView) itemView.findViewById(R.id.tv_publishViews);
+            rlPublishInfo = (RelativeLayout) itemView.findViewById(R.id.rl_publish_info);
         }
     }
 

@@ -14,6 +14,10 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import sl.base.ui.loading.AVLoadingIndicatorView;
 import sl.base.utils.UtilsKeyBoard;
 import sl.base.utils.UtilsLog;
@@ -21,20 +25,26 @@ import sl.base.utils.UtilsMD5;
 import sl.base.utils.UtilsNet;
 import sl.base.utils.UtilsPreference;
 import sl.base.utils.UtilsToast;
+import sl.base.utils.UtilsValidate;
 import sl.hr_client.R;
 import sl.hr_client.base.BaseFragment;
 import sl.hr_client.data.DataUtils;
 import sl.hr_client.data.bean.UserBean;
+import sl.hr_client.event.TransferEvent;
+import sl.hr_client.imp.FragmentBackListener;
+import sl.hr_client.main.MainActivity;
 import sl.hr_client.net.acc.modifyinfo.ModifyInfoPresenter;
 import sl.hr_client.net.acc.modifyinfo.ModifyInfoView;
 import sl.hr_client.utils.constant.ConstantData;
+import sl.hr_client.utils.constant.TransDefine;
 import sl.hr_client.utils.net.ResponseUtils;
+import sl.hr_client.utils.ui.WaitingDialog;
 
 /**
  * Created by Administrator on 2017/5/3.
  */
 
-public class UserSafeFragment extends BaseFragment implements TextWatcher, View.OnClickListener, ModifyInfoView {
+public class UserSafeFragment extends BaseFragment implements TextWatcher, View.OnClickListener, ModifyInfoView, FragmentBackListener {
     public static final String USER_SAFE = "User_Safe";
 
     private View userSafeView;
@@ -81,6 +91,8 @@ public class UserSafeFragment extends BaseFragment implements TextWatcher, View.
         addListener();
 
         initChooseDialog();
+
+        WaitingDialog.createWaitingDlg(ctx, getString(R.string.saving));
     }
 
     @Override
@@ -89,6 +101,11 @@ public class UserSafeFragment extends BaseFragment implements TextWatcher, View.
         userSafeView = inflater.inflate(R.layout.fragment_user_safe, container, false);
 
         ctx = userSafeView.getContext();
+
+        //注册EventBus
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
 
         modifyInfoPresenter = new ModifyInfoPresenter(this);
         return userSafeView;
@@ -142,6 +159,8 @@ public class UserSafeFragment extends BaseFragment implements TextWatcher, View.
             boolean inputFlag = checkInput(uMailbox, uPhone);
             if (inputFlag) {
                 modifyInfoPresenter.pModifyInfo(ctx, uID, uMailbox, uPhone, uUsername, uClientKey);
+
+                WaitingDialog.showWaitingDlg();
             }
         } else {
             UtilsToast.showToast(ctx, getString(R.string.network_err));
@@ -151,12 +170,24 @@ public class UserSafeFragment extends BaseFragment implements TextWatcher, View.
     private boolean checkInput(String uMailbox, String uPhone) {
         UtilsKeyBoard.hideKeyBoard(getActivity());
 
+        if (!UtilsValidate.isEmail(uMailbox)) {
+            UtilsToast.showToast(ctx, String.format(getString(R.string.format_error),
+                    getString(R.string.mailbox)));
+            return false;
+        }
+
+        if (!UtilsValidate.isMobile(uPhone)) {
+            UtilsToast.showToast(ctx, String.format(getString(R.string.format_error),
+                    getString(R.string.phone)));
+            return false;
+        }
+
         return true;
     }
 
     private void funcModifyPwd() {
         Bundle trans = new Bundle();
-//        trans.putString(TransDefine.Bundle_NewsID, publishID);
+        trans.putString(TransDefine.Bundle_Should_Reset_Back_Listener,TransDefine.Bundle_Should_Reset_Back_Listener_True); //需要重置
 
         ModifyPwdFragment transFragment = new ModifyPwdFragment();
 
@@ -189,11 +220,6 @@ public class UserSafeFragment extends BaseFragment implements TextWatcher, View.
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
     public void modifyInfoSuccessView(String str) {
         UtilsLog.logE(UtilsLog.getSte(), str);
         ResponseUtils.showResponseOperate(ctx, str);
@@ -207,6 +233,8 @@ public class UserSafeFragment extends BaseFragment implements TextWatcher, View.
         DataUtils.updateUser(user);
 
         rlSave.setVisibility(View.GONE);
+
+        WaitingDialog.dismissWaitingDlg();
     }
 
     @Override
@@ -223,7 +251,7 @@ public class UserSafeFragment extends BaseFragment implements TextWatcher, View.
     public void showError(String msg) {
         UtilsLog.logE(UtilsLog.getSte(), msg);
         ResponseUtils.showResponseOperate(ctx, msg);
-        hideLoading();
+        WaitingDialog.dismissWaitingDlg();
     }
 
     @Override
@@ -244,4 +272,42 @@ public class UserSafeFragment extends BaseFragment implements TextWatcher, View.
             rlSave.setVisibility(View.VISIBLE);
         }
     }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (context instanceof MainActivity) {
+            ((MainActivity) context).setBackListener(this);
+            ((MainActivity) context).setInterception(true);
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        if (getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).setBackListener(null);
+            ((MainActivity) getActivity()).setInterception(false);
+        }
+    }
+
+    @Override
+    public void onBackForward() {
+        funcBack();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventResetBackListener(TransferEvent event) {
+        if (event.getTargetTag().equals(TransDefine.EVENT_RESET_USER_SAFE_PRESS_BACK_LISTENER)) {
+            onAttach(ctx);
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
 }

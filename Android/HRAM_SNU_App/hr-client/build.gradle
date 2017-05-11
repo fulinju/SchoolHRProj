@@ -33,16 +33,14 @@ dependencies {
     compile project(':hrlib')
     compile 'com.android.support:support-v4:23.3.0'
     compile files('libs/GetuiSDK2.9.5.0.jar')
-
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'org.greenrobot:greendao:3.0.1'
     compile 'io.reactivex:rxjava:1.2.3'
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'org.xutils:xutils:3.5.0'
     compile files('libs/universal-image-loader-1.9.5.jar')
-
-//    compile 'com.jakewharton:butterknife:8.5.1'
-//    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    //    compile 'com.jakewharton:butterknife:8.5.1'
+    //    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 }
 
 buildscript {

@@ -5,6 +5,7 @@
 <html>
 <head>
     <title>系统登录</title>
+    <script src="~/Scripts/md5.js"></script>
     <script type="text/javascript">
         $(function () {
             $('#loginDialog').show().dialog({
@@ -20,21 +21,46 @@
                     }
                 }],
                 onOpen: function () {
-                    $('form :input:first').focus();
-                    $('form :input').keyup(function (event) {
-                        if (event.keyCode == 13) {
-                            loginFun();
-                        }
-                    });
+                    document.onkeydown = keyDownSearch;
+
+                    //$('form :input:first').focus();
+                    //$('form :input').keyup(function (event) {
+                    //    if (event.keyCode == 13) {
+                    //        loginFun();
+                    //    }
+                    //});
                 }
             });
+
+            function keyDownSearch(e) {
+                // 兼容FF和IE和Opera
+                var theEvent = e || window.event;
+                var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
+                if (code == 13) {
+                    $("input").blur(); //必须移除焦点 不然验证码的值获取不到
+                    loginFun();
+                    return false;
+                }
+                return true;
+            }
+
             var loginFun = function () {
                 var loginBtn = $("#loginBtn");
                 loginBtn.linkbutton('disable');
                 var url = "@Url.Action("LoginCheck", "Login")";
-                var str = $(".form").serialize()
-                console.log(str);
-                $.post(url, $(".form").serialize(), function (data) {
+                //var str = $(".form").serialize()
+                //console.log(str);
+                var loginName = $("#edt_loginName").val();
+
+                var loginPwd = hex_md5($('#edt_loginPwd').val()).toUpperCase();
+                var checkCode = $("#edt_checkCode").val();
+
+
+                $.post(url, {
+                    "loginName": loginName,
+                    "loginPwd": loginPwd,
+                    "checkCode": checkCode
+                }, function (data) {
                     if (data.state != "1") {
                         //刷新验证码
                         refreshCode();
@@ -46,41 +72,40 @@
                 }, "json");
             };
         });
+
     </script>
 
 
 </head>
 <body>
 
-    <div id="loginDialog" title="系统登录" style="display: none; width: 300px; height: 200px;overflow: hidden;">
-        <form method="post" class="form">
-            <table style="width: 100%; height: 100%;">
-                <tr>
-                    <th style="width: 80px; height: 35px; line-height: 35px; text-align: right;padding-top:10px">登录名：</th>
+    <div id="loginDialog" title="系统登录" style="display: none; width: 300px; height: 180px;overflow: hidden;">
+        <table style="width: 100%; height: 100%;">
+            <tr>
+                <th style="width: 80px; height: 35px; line-height: 35px; text-align: right;padding-top:10px">登录名：</th>
 
-                    <td>
-                        <input name="loginName" class="easyui-textbox" style="width: 173px;"  />
-                    </td>
-                </tr>
-                <tr>
-                    <th style="text-align: right;">
-                        密码：
-                    </th>
-                    <td>
-                        <input name="loginPwd" type="password" onpaste="return false" oncopy="return false;" oncut="return false;" class="easyui-textbox" style="width: 173px;"  />
-                    </td>
-                </tr>
-                <tr>
-                    <th style="padding-top:10px; text-align: right;">
-                        验证码：
-                    </th>
-                    <td style="padding-top:10px;">
-                        <input name="checkCode" class="easyui-textbox" style="width: 90px;" oninput="if(value.length>5)value=value.slice(0,5)" />
-                        <img id="verifyCode" style="cursor: pointer; width: 80px;vertical-align:middle" onclick="refreshCode()" src="@Url.Action("VerifyCode", "Login")?t=@DateTime.Now.Ticks" title="看不清，点击换一张" />
-                    </td>
-                </tr>
-            </table>
-        </form>
+                <td>
+                    <input id="edt_loginName" class="easyui-textbox" style="width: 173px;" />
+                </td>
+            </tr>
+            <tr>
+                <th style="text-align: right;">
+                    密码：
+                </th>
+                <td>
+                    <input id="edt_loginPwd" type="password" onpaste="return false;" oncopy="    return false;" oncut="    return false;" class="easyui-textbox" style="width: 173px;" />
+                </td>
+            </tr>
+            <tr>
+                <th style="text-align: right;">
+                    验证码：
+                </th>
+                <td >
+                    <input id="edt_checkCode" class="easyui-textbox" style="width: 90px;" oninput="if(value.length>5)value=value.slice(0,5)" />
+                    <img id="verifyCode" style="cursor: pointer; width: 80px;vertical-align:middle" onclick="refreshCode()" src="@Url.Action("VerifyCode", "Login")?t=@DateTime.Now.Ticks" title="看不清，点击换一张" />
+                </td>
+            </tr>
+        </table>
     </div>
 
     <script>

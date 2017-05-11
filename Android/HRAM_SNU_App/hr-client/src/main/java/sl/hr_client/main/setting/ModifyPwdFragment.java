@@ -11,27 +11,34 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
+import org.greenrobot.eventbus.EventBus;
+
 import sl.base.ui.loading.AVLoadingIndicatorView;
 import sl.base.utils.UtilsKeyBoard;
 import sl.base.utils.UtilsLog;
 import sl.base.utils.UtilsNet;
 import sl.base.utils.UtilsPreference;
 import sl.base.utils.UtilsToast;
+import sl.base.utils.UtilsValidate;
 import sl.hr_client.R;
 import sl.hr_client.base.BaseFragment;
 import sl.hr_client.data.DataUtils;
 import sl.hr_client.data.bean.UserBean;
+import sl.hr_client.event.TransferEvent;
+import sl.hr_client.imp.FragmentBackListener;
+import sl.hr_client.main.MainActivity;
 import sl.hr_client.main.account.LoginActivity;
 import sl.hr_client.net.acc.modifypwd.ModifyPwdPresenter;
 import sl.hr_client.net.acc.modifypwd.ModifyPwdView;
 import sl.hr_client.utils.constant.ConstantData;
+import sl.hr_client.utils.constant.TransDefine;
 import sl.hr_client.utils.net.ResponseUtils;
 
 /**
  * Created by Administrator on 2017/5/3.
  */
 
-public class ModifyPwdFragment extends BaseFragment implements View.OnClickListener, ModifyPwdView {
+public class ModifyPwdFragment extends BaseFragment implements View.OnClickListener, ModifyPwdView, FragmentBackListener {
     public static final String MODIFY_PWD = " Modify_Pwd";
 
     private View modifyPwdView;
@@ -48,6 +55,7 @@ public class ModifyPwdFragment extends BaseFragment implements View.OnClickListe
     private AVLoadingIndicatorView vLoading;
 
     private ModifyPwdPresenter modifyPwdPresenter;
+    private String shouldResetListener;
 
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -57,7 +65,7 @@ public class ModifyPwdFragment extends BaseFragment implements View.OnClickListe
         tvBack = (TextView) modifyPwdView.findViewById(R.id.tv_head_right);
         edtOldPwd = (EditText) modifyPwdView.findViewById(R.id.edt_old_pwd);
         edtNewPwd = (EditText) modifyPwdView.findViewById(R.id.edt_new_pwd);
-        edtSurePwd = (EditText) modifyPwdView.findViewById(R.id.edt_new_pwd);
+        edtSurePwd = (EditText) modifyPwdView.findViewById(R.id.edt_sure_pwd);
         tvModifyPwd = (TextView) modifyPwdView.findViewById(R.id.tv_modify_pwd);
         vLoading = (AVLoadingIndicatorView) modifyPwdView.findViewById(R.id.v_loading);
 
@@ -75,6 +83,9 @@ public class ModifyPwdFragment extends BaseFragment implements View.OnClickListe
 
         ctx = modifyPwdView.getContext();
         modifyPwdPresenter = new ModifyPwdPresenter(this);
+
+        shouldResetListener = getArguments().getString(TransDefine.Bundle_Should_Reset_Back_Listener)
+                == null ? getString(R.string.null_value) : getArguments().getString(TransDefine.Bundle_Should_Reset_Back_Listener);
         return modifyPwdView;
     }
 
@@ -126,6 +137,28 @@ public class ModifyPwdFragment extends BaseFragment implements View.OnClickListe
     private boolean checkInput(String oldPwd, String newPwd, String surePwd) {
         UtilsKeyBoard.hideKeyBoard(getActivity());
 
+        if (!UtilsValidate.isPassword(oldPwd)) {
+            UtilsToast.showToast(ctx, String.format(getString(R.string.format_error),
+                    getString(R.string.old_password)));
+            return false;
+        }
+
+        if (!UtilsValidate.isPassword(newPwd)) {
+            UtilsToast.showToast(ctx, String.format(getString(R.string.format_error),
+                    getString(R.string.new_password)));
+            return false;
+        }
+
+        if (!newPwd.equals(surePwd)) {
+            UtilsToast.showToast(ctx, getString(R.string.password_different));
+            return false;
+        }
+
+        if (oldPwd.equals(newPwd)) {
+            UtilsToast.showToast(ctx, getString(R.string.password_different));
+            return false;
+        }
+
         return true;
     }
 
@@ -146,17 +179,49 @@ public class ModifyPwdFragment extends BaseFragment implements View.OnClickListe
 
     @Override
     public void showLoading() {
-
+        tvModifyPwd.setVisibility(View.GONE);
+        vLoading.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-
+        tvModifyPwd.setVisibility(View.VISIBLE);
+        vLoading.setVisibility(View.GONE);
     }
 
     @Override
     public void showError(String msg) {
         UtilsLog.logE(UtilsLog.getSte(), msg);
         ResponseUtils.showResponseOperate(ctx, msg);
+        hideLoading();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (context instanceof MainActivity) {
+            ((MainActivity) context).setBackListener(this);
+            ((MainActivity) context).setInterception(true);
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        if (getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).setBackListener(null);
+            ((MainActivity) getActivity()).setInterception(false);
+        }
+
+        if (shouldResetListener.equals(TransDefine.Bundle_Should_Reset_Back_Listener_True)) {
+            EventBus.getDefault().post(
+                    new TransferEvent(TransDefine.EVENT_RESET_USER_SAFE_PRESS_BACK_LISTENER)); //重置友情链接的返回键监听
+        }
+    }
+
+    @Override
+    public void onBackForward() {
+        funcBack();
     }
 }

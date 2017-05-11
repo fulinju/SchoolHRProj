@@ -1,4 +1,4 @@
-package sl.hr_client.push;
+package sl.hr_client.main.push;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;

@@ -14,11 +14,11 @@
 
     <sl.base.ui.loading.AVLoadingIndicatorView
         android:id="@+id/v_loading"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
         android:visibility="visible"
         android:layout_centerInParent="true"
-        app:indicator="BallScale"
-        app:indicatorColor="@color/theme_color"
+        app:indicator="BallScaleMultiple"
+        app:indicatorColor="@color/white"
         />
 </RelativeLayout>

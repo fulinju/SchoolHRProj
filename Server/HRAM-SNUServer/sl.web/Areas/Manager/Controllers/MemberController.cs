@@ -21,16 +21,16 @@ namespace sl.web.Areas.Manager.Controllers
     {
         //
         // GET: /Manager/Member/
-      
+
         public ActionResult MemberView()
         {
             return View();
         }
 
         #region 查询
-        public ActionResult GetMembersList(string mName = "")
+        public ActionResult GetMembersList(string mName = "", string mMethod = "")
         {
-            Sql sql = HRAManagerService.GetMemberSql(mName);
+            Sql sql = HRAManagerService.GetMemberSql(mName,mMethod);
 
             return CommonPageList<dynamic>(sql, HRAManagerService.database);
         }
@@ -64,6 +64,13 @@ namespace sl.web.Areas.Manager.Controllers
                     {
                         m.mImgURL = UploadFile();
                         m.mApplyTime = DateTime.Now.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss"); //未选择时间 获取当前时间
+
+                        //为了测试，暂时不验证身份证
+                        //if (!CommonValidate.IsIDCard18(m.mIDCardNo))
+                        //{
+                        //    return Json(new JsonTip("0", "身份证号码错误"));
+                        //}
+
                         if (CachedConfigContext.Current.WebSiteConfig.WebSiteKey != null) //加密Key不为空
                         {
                             m.uLoginName = Security.DesDecrypt(CachedConfigContext.Current.WebSiteConfig.WebSiteKey, Utils.GetCookie(Key.MANAGER_NAME));//DES解密
@@ -94,6 +101,12 @@ namespace sl.web.Areas.Manager.Controllers
 
                 if (Request.IsPost())
                 {
+                    //为了测试，暂时不验证身份证
+                    //if (!CommonValidate.IsIDCard18(m.mIDCardNo))
+                    //{
+                    //    return Json(new JsonTip("0", "身份证号码错误"));
+                    //}
+
                     if (TryUpdateModel(load))
                     {
                         if (Request.Files.Count > 0)
@@ -152,14 +165,15 @@ namespace sl.web.Areas.Manager.Controllers
                 success = HRAManagerService.database.Update(m);
             }
             //换成 DelMessage
-            if(success == 1){
+            if (success == 1)
+            {
                 return Json(new JsonTip("1", "删除成功"));
                 //return Json(Message("删除成功"), JsonRequestBehavior.AllowGet); //删除成功
             }
             else
             {
                 return Json(new JsonTip("0", "删除失败"));//删除失败
-            } 
+            }
         }
         #endregion
 
@@ -199,6 +213,6 @@ namespace sl.web.Areas.Manager.Controllers
             return Json(new { state = true, message = string.Empty });
         }
         #endregion
-        
+
     }
 }

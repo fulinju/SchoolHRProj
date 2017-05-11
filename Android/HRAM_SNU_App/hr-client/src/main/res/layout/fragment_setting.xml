@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/container"
     android:background="@color/white">
 
     <ScrollView
@@ -15,14 +16,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
+            <sl.base.ui.imageview.CircleImageView
                 android:id="@+id/iv_icon"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
-                android:background="@mipmap/ic_launcher"
-                android:src="@drawable/shape_round_black_frame_bg" />
+                android:src="@mipmap/ic_launcher"
+                app:border_color="@color/dark_gray"
+                app:border_width="1dp" />
 
             <TextView
                 android:id="@+id/tv_nickname"
@@ -75,10 +77,10 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:layout_below="@+id/rl_account_info"
                     android:id="@+id/rl_account_safe"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/rl_account_info"
                     android:background="@drawable/shape_white_under_line_bg">
 
                     <TextView
@@ -103,10 +105,34 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/rl_protect_screen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_below="@+id/rl_account_safe"
+                    android:background="@drawable/shape_white_under_line_bg">
+
+                    <TextView
+                        android:id="@+id/tv_protect_screen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left|center"
+                        android:padding="10dp"
+                        android:text="@string/protect_screen"
+                        android:textSize="18sp" />
+
+                    <sl.base.ui.switchbtn.SwitchView
+                        android:id="@+id/sv_protect_screen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="10dp" />
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:id="@+id/rl_about"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/rl_protect_screen"
                     android:background="@color/white">
 
                     <TextView
@@ -117,7 +143,6 @@
                         android:padding="10dp"
                         android:text="@string/about"
                         android:textSize="18sp" />
-
                 </RelativeLayout>
             </RelativeLayout>
 

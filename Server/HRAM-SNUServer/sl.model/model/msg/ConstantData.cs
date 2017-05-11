@@ -20,5 +20,10 @@ namespace sl.model
         public static string CANT_DEL_DEFAULT = "不允许删除默认类型";
 
         public static string CANT_DEL_ADMIN_TYPE = "不允许删除管理员类型";
+
+        public static string All_TYPE_TEXT = "全部类型";
+        public static string All_TYPE_VALUE = "";
+
+
     }
 }

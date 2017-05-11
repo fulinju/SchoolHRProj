@@ -18,11 +18,14 @@ import sl.base.utils.UtilsLog;
 import sl.base.utils.UtilsNet;
 import sl.base.utils.UtilsPreference;
 import sl.base.utils.UtilsToast;
+import sl.base.utils.UtilsValidate;
 import sl.hr_client.R;
 import sl.hr_client.base.BaseFragment;
 import sl.hr_client.data.DataUtils;
 import sl.hr_client.data.bean.UserBean;
 import sl.hr_client.event.TransferEvent;
+import sl.hr_client.imp.FragmentBackListener;
+import sl.hr_client.main.MainActivity;
 import sl.hr_client.net.acc.modifyinfo.ModifyInfoPresenter;
 import sl.hr_client.net.acc.modifyinfo.ModifyInfoView;
 import sl.hr_client.utils.constant.ConstantData;
@@ -34,7 +37,7 @@ import sl.hr_client.utils.ui.WaitingDialog;
  * Created by Administrator on 2017/5/3.
  */
 
-public class UserInfoFragment extends BaseFragment implements View.OnClickListener, ModifyInfoView {
+public class UserInfoFragment extends BaseFragment implements View.OnClickListener, ModifyInfoView ,FragmentBackListener{
     public static final String USER_INFO = "User_Info";
 
     private View userInfoView;
@@ -132,13 +135,18 @@ public class UserInfoFragment extends BaseFragment implements View.OnClickListen
         }
     }
 
-    private void funcModifyUsername(){
-        UtilsToast.showToast(ctx,String.format(getString(R.string.cant_modify),getString(R.string.username)));
+    private void funcModifyUsername() {
+        UtilsToast.showToast(ctx, String.format(getString(R.string.cant_modify), getString(R.string.username)));
     }
 
     private boolean checkInput(String uUsername) {
         UtilsKeyBoard.hideKeyBoard(getActivity());
 
+        if (!UtilsValidate.checkInputRange(uUsername, ConstantData.NICKNAME_MIN_LENGTH, ConstantData.NICKNAME_MAX_LENGTH)) {
+            UtilsToast.showToast(ctx, String.format(getString(R.string.input_length_between),
+                    getString(R.string.nickname), ConstantData.NICKNAME_MIN_LENGTH, ConstantData.NICKNAME_MAX_LENGTH));
+            return false;
+        }
         return true;
     }
 
@@ -152,7 +160,7 @@ public class UserInfoFragment extends BaseFragment implements View.OnClickListen
         user.setUUserName(uUsername);
         DataUtils.updateUser(user);
         EventBus.getDefault().post(
-                new TransferEvent(TransDefine.EVENT_MODIFY_USERINFO)); //发送EventBus消息
+                new TransferEvent(TransDefine.EVENT_MODIFY_USER_INFO)); //发送EventBus消息
 
         WaitingDialog.dismissWaitingDlg();
 
@@ -173,5 +181,29 @@ public class UserInfoFragment extends BaseFragment implements View.OnClickListen
         UtilsLog.logE(UtilsLog.getSte(), msg);
         ResponseUtils.showResponseOperate(ctx, msg);
         WaitingDialog.dismissWaitingDlg();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (context instanceof MainActivity) {
+            ((MainActivity) context).setBackListener(this);
+            ((MainActivity) context).setInterception(true);
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        if(getActivity() instanceof MainActivity){
+            ((MainActivity)getActivity()).setBackListener(null);
+            ((MainActivity)getActivity()).setInterception(false);
+        }
+    }
+
+    @Override
+    public void onBackForward() {
+        funcBack();
     }
 }

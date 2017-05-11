@@ -58,6 +58,28 @@ namespace sl.web
 
             return list;
         }
+
+        public static List<SelectListItem> ReviewResultsWithAll()
+        {
+            List<T_ReviewResult> reviewResults = HRAManagerService.GetReviewResults();
+            List<SelectListItem> list = new List<SelectListItem>();
+
+            list.Add(new SelectListItem { Text = ConstantData.All_TYPE_TEXT, Value = ConstantData.All_TYPE_VALUE });
+
+            if (reviewResults != null)
+            {
+                for (int i = 0; i < reviewResults.Count; i++)
+                {
+                    list.Add(new SelectListItem { Text = reviewResults[i].mReviewResultValue, Value = reviewResults[i].mReviewResultID });
+                }
+            }
+            else
+            {
+                list.Add(new SelectListItem { Text = ConstantData.ErrorMsg, Value = "" + ConstantData.ErrorCode });
+            }
+
+            return list;
+        }
         #endregion
 
         #region 绑定是否操作

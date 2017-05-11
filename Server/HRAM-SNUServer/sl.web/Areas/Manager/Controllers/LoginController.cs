@@ -51,9 +51,9 @@ namespace sl.web.Areas.Manager.Controllers
                 return Json(new JsonTip("0", errormessage));
             }
 
-            string passwordMd5 = Security.MD5Encrypt(loginPwd); //一般MD5密码登录
 
-            T_User loginer = HRAManagerService.CheckLogin(loginName, passwordMd5);
+
+            T_User loginer = HRAManagerService.CheckLogin(loginName, loginPwd);
 
             if (loginer == null)
             {
@@ -81,7 +81,7 @@ namespace sl.web.Areas.Manager.Controllers
                     {
                         Utils.WriteCookie(Key.MANAGER_NAME, loginer.uLoginName);
                     }
-                    Utils.WriteCookie(Key.MANAGER_PASS, passwordMd5);
+                    Utils.WriteCookie(Key.MANAGER_PASS, loginPwd);
                 }
                 return Json(new JsonTip("1", Url.Action("Main", "Main", new { area = "Manager" })));
             }

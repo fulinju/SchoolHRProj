@@ -12,16 +12,20 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -38,8 +42,11 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
+import sl.base.utils.UtilsIntent;
 import sl.base.utils.UtilsNet;
+import sl.base.utils.UtilsNowLanguage;
 import sl.base.utils.UtilsPreference;
 import sl.base.utils.UtilsToast;
 import sl.hr_client.R;
@@ -47,6 +54,7 @@ import sl.hr_client.base.BaseActivity;
 import sl.hr_client.base.ContentFragment;
 import sl.hr_client.data.DataUtils;
 import sl.hr_client.event.TransferEvent;
+import sl.hr_client.imp.FragmentBackListener;
 import sl.hr_client.main.download.DownloadFragment;
 import sl.hr_client.main.link.LinkFragment;
 import sl.hr_client.main.member.MemberFragment;
@@ -55,7 +63,6 @@ import sl.hr_client.main.setting.AccountFragment;
 import sl.hr_client.utils.constant.ConstantData;
 import sl.hr_client.utils.constant.TransDefine;
 
-import static com.igexin.sdk.GTServiceManager.context;
 
 /**
  * Created by xuzhijix on 2017/2/25.
@@ -169,13 +176,13 @@ public class MainActivity extends BaseActivity implements ViewAnimator.ViewAnima
     private void createMenuList() {
         SlideMenuItem closeItem = new SlideMenuItem(ContentFragment.CLOSE, R.mipmap.icn_close);
         list.add(closeItem);
-        SlideMenuItem newsItem = new SlideMenuItem(NewsFragment.NEWS, R.mipmap.icn_1);
+        SlideMenuItem newsItem = new SlideMenuItem(NewsFragment.NEWS, R.mipmap.ico_publish);
         list.add(newsItem);
-        SlideMenuItem downloadItem = new SlideMenuItem(DownloadFragment.DOWNLOADS, R.mipmap.icn_2);
+        SlideMenuItem downloadItem = new SlideMenuItem(DownloadFragment.DOWNLOADS, R.mipmap.ico_download);
         list.add(downloadItem);
-        SlideMenuItem linksItem = new SlideMenuItem(LinkFragment.LINKS, R.mipmap.icn_3);
+        SlideMenuItem linksItem = new SlideMenuItem(LinkFragment.LINKS, R.mipmap.ico_friendly_link);
         list.add(linksItem);
-        SlideMenuItem membersItem = new SlideMenuItem(MemberFragment.MEMBERS, R.mipmap.icn_4);
+        SlideMenuItem membersItem = new SlideMenuItem(MemberFragment.MEMBERS, R.mipmap.ico_member);
         list.add(membersItem);
         SlideMenuItem accountItem = new SlideMenuItem(AccountFragment.ACCOUNT, R.mipmap.ico_account);
         list.add(accountItem);
@@ -247,8 +254,21 @@ public class MainActivity extends BaseActivity implements ViewAnimator.ViewAnima
             return true;
         }
         switch (item.getItemId()) {
-            case R.id.action_settings:
+            case R.id.action_switch_language:
+                if (UtilsNowLanguage.getNowLanguage(ctx).equals(Locale.ENGLISH)) {
+                    switchLanguage(ConstantData.languageZH);
+                    finish();
+                    UtilsIntent.actToAct(MainActivity.this, MainActivity.class);
+                } else {
+                    switchLanguage(ConstantData.languageEN);
+                    finish();
+                    UtilsIntent.actToAct(MainActivity.this, MainActivity.class);
+                }
+                return true;
+            case R.id.action_rest_guide:
                 UtilsPreference.commitBoolean(ConstantData.FLAG_FIRST_OPEN, false);
+
+                UtilsToast.showToast(ctx, getString(R.string.reset_guide) + getString(R.string.success));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -377,10 +397,71 @@ public class MainActivity extends BaseActivity implements ViewAnimator.ViewAnima
     }
 
 
-
     @Override
     public void addViewToContainer(View view) {
         leftDrawer.addView(view);
+    }
+
+
+//    private boolean isCaptured = false;
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void onEventCapturePressBackKey (TransferEvent event) {
+//        if (event.getTargetTag().equals(TransDefine.EVENT_CAPTURE_PRESS_BACK_KEY)) {
+//            isCaptured = true;
+//        }
+//    }
+
+    private void funcJudgeNet() {
+        if (UtilsNet.isNetworkAvailable(ctx) == true) {
+            llNoNet.setVisibility(View.GONE);
+        } else {
+            llNoNet.setVisibility(View.VISIBLE);
+        }
+    }
+
+
+    private FragmentBackListener backListener;
+    private boolean isInterception = false;
+
+    public FragmentBackListener getBackListener() {
+        return backListener;
+    }
+
+    public void setBackListener(FragmentBackListener backListener) {
+        this.backListener = backListener;
+    }
+
+    public boolean isInterception() {
+        return isInterception;
+    }
+
+    public void setInterception(boolean isInterception) {
+        this.isInterception = isInterception;
+    }
+
+    //记录用户首次点击返回键的时间
+    private long firstTime = 0;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            List<Fragment> list = getSupportFragmentManager().getFragments();
+            if (isInterception()) {
+                if (backListener != null) {
+                    backListener.onBackForward();
+                    return false;
+                }
+            } else {
+                if (System.currentTimeMillis() - firstTime > 2000) {
+                    Toast.makeText(MainActivity.this, getString(R.string.press_again_exit), Toast.LENGTH_SHORT).show();
+                    firstTime = System.currentTimeMillis();
+                } else {
+                    finish();
+                    System.exit(0);
+                }
+            }
+        }
+        return false;
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -390,13 +471,6 @@ public class MainActivity extends BaseActivity implements ViewAnimator.ViewAnima
         }
     }
 
-    private void funcJudgeNet() {
-        if (UtilsNet.isNetworkAvailable(ctx) == true) {
-            llNoNet.setVisibility(View.GONE);
-        } else {
-            llNoNet.setVisibility(View.VISIBLE);
-        }
-    }
 
     @Override
     public void onDestroy() {

@@ -13,12 +13,11 @@ import sl.base.utils.UtilsLog;
 import sl.base.utils.UtilsNet;
 import sl.base.utils.UtilsPreference;
 import sl.base.utils.UtilsToast;
+import sl.base.utils.UtilsValidate;
 import sl.hr_client.R;
 import sl.hr_client.base.BaseActivity;
-import sl.hr_client.data.DataUtils;
 import sl.hr_client.net.acc.forgetpwd.ForgetPwdPresenter;
 import sl.hr_client.net.acc.forgetpwd.ForgetPwdView;
-import sl.hr_client.net.acc.login.LoginPresenter;
 import sl.hr_client.utils.constant.ConstantData;
 import sl.hr_client.utils.net.ResponseUtils;
 
@@ -80,7 +79,7 @@ public class ForgetPwdActivity extends BaseActivity implements ForgetPwdView {
     }
 
     private void funcBack() {
-        getFragmentManager().popBackStack();
+        finish();
     }
 
     private void funcSendToMail() {
@@ -102,6 +101,18 @@ public class ForgetPwdActivity extends BaseActivity implements ForgetPwdView {
     private boolean checkInput(String uLoginStr, String uMailbox) {
         UtilsKeyBoard.hideKeyBoard(this);
 
+        if (!UtilsValidate.isUsername(uLoginStr)) {
+            UtilsToast.showToast(ctx, String.format(getString(R.string.format_error),
+                    getString(R.string.username)));
+            return false;
+        }
+
+        if (!UtilsValidate.isEmail(uMailbox)) {
+            UtilsToast.showToast(ctx, String.format(getString(R.string.format_error),
+                    getString(R.string.mailbox)));
+            return false;
+        }
+
         return true;
     }
 
@@ -115,17 +126,20 @@ public class ForgetPwdActivity extends BaseActivity implements ForgetPwdView {
 
     @Override
     public void showLoading() {
-
+        tvSendToMail.setVisibility(View.GONE);
+        vLoading.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-
+        tvSendToMail.setVisibility(View.VISIBLE);
+        vLoading.setVisibility(View.GONE);
     }
 
     @Override
     public void showError(String msg) {
         UtilsLog.logE(UtilsLog.getSte(), msg);
         ResponseUtils.showResponseOperate(ctx, msg);
+        hideLoading(); //自行执行
     }
 }

@@ -54,27 +54,30 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/shape_gray_top_line_bg"
-        android:padding="10dp">
+        >
 
         <ImageView
             android:id="@+id/iv_pre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@mipmap/ico_left_pressed" />
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="12dp"
+            android:src="@mipmap/ico_left_pressed" />
 
         <ImageView
             android:id="@+id/iv_next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginLeft="30dp"
+            android:padding="12dp"
             android:layout_toRightOf="@+id/iv_pre"
-            android:background="@mipmap/ico_right_pressed" />
+            android:src="@mipmap/ico_right_pressed" />
 
         <ImageView
             android:id="@+id/iv_refresh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="12dp"
             android:layout_alignParentRight="true"
-            android:background="@drawable/button_refresh"/>
+            android:src="@drawable/button_refresh"/>
     </RelativeLayout>
 </RelativeLayout>

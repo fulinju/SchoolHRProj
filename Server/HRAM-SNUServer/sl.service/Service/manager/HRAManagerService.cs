@@ -64,11 +64,12 @@ namespace sl.service.manager
 
         #region 会员相关
         #region 获取会员列表
-        public static Sql GetMemberSql(string mName)
+        public static Sql GetMemberSql(string mName, string mReviewResultID)
         {
             Sql sql = Sql.Builder;
 
             mName = "%" + mName + "%";
+            mReviewResultID = "%" + mReviewResultID + "%";
             sql.Append("Select T_ReviewResult.mReviewResultValue,T_MemberType.mTypeValue,");
             sql.Append("T_Member.pkId,");
             sql.Append("T_Member.uLoginName,");
@@ -84,7 +85,7 @@ namespace sl.service.manager
             sql.Append("T_Member.mContactsphone,");
             sql.Append("T_Member.mImgURL,");
             sql.Append("T_Member.mURL");
-            sql.Append(" from T_Member,T_ReviewResult,T_MemberType where mName Like @0 and T_Member.isDeleted = 0", mName);
+            sql.Append(" from T_Member,T_ReviewResult,T_MemberType where T_Member.mName Like @0 and T_Member.mReviewResultID Like @1 and T_Member.isDeleted = 0", mName, mReviewResultID);
             sql.Append(" and T_Member.mReviewResultID = T_ReviewResult.mReviewResultID and T_Member.mTypeID = T_MemberType.mTypeID");
             return sql;
         }

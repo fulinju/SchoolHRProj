@@ -7,14 +7,15 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import sl.base.ui.edttext.NoMenuEditText;
 import sl.base.ui.loading.AVLoadingIndicatorView;
-import sl.base.utils.UtilsCheck;
 import sl.base.utils.UtilsKeyBoard;
 import sl.base.utils.UtilsLog;
 import sl.base.utils.UtilsMD5;
 import sl.base.utils.UtilsNet;
 import sl.base.utils.UtilsPreference;
 import sl.base.utils.UtilsToast;
+import sl.base.utils.UtilsValidate;
 import sl.hr_client.R;
 import sl.hr_client.base.BaseActivity;
 import sl.hr_client.data.DataUtils;
@@ -49,7 +50,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
     private Context ctx;
 
     private EditText edtUser;
-    private EditText edtPassword;
+    private NoMenuEditText edtPassword;
     private TextView tvLogin;
     private TextView tvTitle;
     private TextView tvRight;
@@ -72,7 +73,8 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
     private void initView() {
         edtUser = (EditText) findViewById(R.id.edt_user);
-        edtPassword = (EditText) findViewById(R.id.edt_password);
+        //出于安全考虑 密码防复制粘贴
+        edtPassword = (NoMenuEditText) findViewById(R.id.edt_password);
         tvLogin = (TextView) findViewById(R.id.tv_login);
 
         tvTitle = (TextView) findViewById(R.id.tv_head);
@@ -117,7 +119,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
         if (UtilsNet.isNetworkAvailable(ctx)) {
             String user = edtUser.getText().toString();
             String pwd = edtPassword.getText().toString();
-            boolean inputFlag = checkInput(pwd);
+            boolean inputFlag = checkInput(user, pwd);
             if (inputFlag) {
                 String pwdMd5 = UtilsMD5.getMD5_UpperCase(pwd);
                 loginPresenter.pLogin(ctx, user, pwdMd5, UtilsPreference.getString(ConstantData.FLAG_GE_TUI_CLIENTID, ConstantData.default_String));
@@ -132,13 +134,21 @@ public class LoginActivity extends BaseActivity implements LoginView {
      *
      * @return
      */
-    private boolean checkInput(String pwd) {
+    private boolean checkInput(String user, String pwd) {
         UtilsKeyBoard.hideKeyBoard(this);
 
-        if (!UtilsCheck.checkInputRange(pwd, 0, ConstantData.PWD_LIMITED_LENGTH)) {
-            UtilsToast.showToast(ctx, "请输入长度为1-" + ConstantData.PWD_LIMITED_LENGTH + "位密码");
+        if (!UtilsValidate.isUsername(user)) {
+            UtilsToast.showToast(ctx, String.format(getString(R.string.format_error),
+                    getString(R.string.username)));
             return false;
         }
+
+        if (!UtilsValidate.isPassword(pwd)) {
+            UtilsToast.showToast(ctx, String.format(getString(R.string.format_error),
+                    getString(R.string.password)));
+            return false;
+        }
+
         return true;
     }
 

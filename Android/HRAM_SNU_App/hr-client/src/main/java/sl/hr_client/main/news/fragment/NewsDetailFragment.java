@@ -13,6 +13,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import sl.base.ui.noscroll.NoScrollGridView;
+import sl.base.utils.UtilsHTMLSpirit;
 import sl.base.utils.UtilsNet;
 import sl.base.utils.UtilsToast;
 import sl.hr_client.R;
@@ -20,6 +21,8 @@ import sl.hr_client.base.BaseFragment;
 import sl.hr_client.data.bean.ADImgBean;
 import sl.hr_client.data.bean.NewsBean;
 import sl.hr_client.data.GsonUtils;
+import sl.hr_client.imp.FragmentBackListener;
+import sl.hr_client.main.MainActivity;
 import sl.hr_client.main.news.adapter.CircleGridAdapter;
 import sl.hr_client.main.photo.ImagePagerActivity;
 import sl.hr_client.net.news.detail.NewsDetailPresenter;
@@ -31,7 +34,7 @@ import sl.hr_client.utils.net.VolleyUtils;
  * Created by Administrator on 2017/4/12.
  */
 
-public class NewsDetailFragment extends BaseFragment implements NewsDetailView {
+public class NewsDetailFragment extends BaseFragment implements NewsDetailView, FragmentBackListener {
     public static final String NEWS_DETAIL = "NEWS_DETAIL";
 
     public String newsID;
@@ -61,17 +64,17 @@ public class NewsDetailFragment extends BaseFragment implements NewsDetailView {
         newsDetailView = inflater.inflate(R.layout.fragment_news_detail, container, false);
 
         ctx = newsDetailView.getContext();
-        newsDetailPresenter= new NewsDetailPresenter(this);
+        newsDetailPresenter = new NewsDetailPresenter(this);
 
         funcGetIntent();
 //        initView();
         return newsDetailView;
     }
 
-    private void funcGetIntent(){
+    private void funcGetIntent() {
         newsID = getArguments().getString(TransDefine.Bundle_NewsID);
-        if(newsID == null){
-            UtilsToast.showToast(ctx,getString(R.string.cant_get_publishId));
+        if (newsID == null) {
+            UtilsToast.showToast(ctx, getString(R.string.cant_get_publishId));
             funcBack();
         }
     }
@@ -114,7 +117,7 @@ public class NewsDetailFragment extends BaseFragment implements NewsDetailView {
         }
     }
 
-    private void funcBack(){
+    private void funcBack() {
         getFragmentManager().popBackStack();
     }
 
@@ -126,6 +129,8 @@ public class NewsDetailFragment extends BaseFragment implements NewsDetailView {
         publishTitle = news.getPmTitle() == null ? ctx.getString(R.string.null_value) : news.getPmTitle();
         publishText = news.getPmText() == null ? ctx.getString(R.string.null_value) : news.getPmText();
         publishViews = news.getPmViews() == null ? ctx.getString(R.string.null_value) : news.getPmViews();
+
+        publishText = UtilsHTMLSpirit.delHTMLTag(publishText);//去除HTML标签
 
         tvPublishTitle.setText(publishTitle);
         tvPublishText.setText(publishText);
@@ -205,5 +210,30 @@ public class NewsDetailFragment extends BaseFragment implements NewsDetailView {
         intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_URLS, urls);
         intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_INDEX, position);
         ctx.startActivity(intent);
+    }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (context instanceof MainActivity) {
+            ((MainActivity) context).setBackListener(this);
+            ((MainActivity) context).setInterception(true);
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        if(getActivity() instanceof MainActivity){
+            ((MainActivity)getActivity()).setBackListener(null);
+            ((MainActivity)getActivity()).setInterception(false);
+        }
+    }
+
+    @Override
+    public void onBackForward() {
+        funcBack();
     }
 }

@@ -1,18 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">HR-See</string>
-    <string name="reset">重置</string>
+    <string name="reset_guide">重置引导页</string>
+    <string name="success">成功</string>
+
+    <string name="protect_screen">截屏防护</string>
+    <string name="switch_language">切换语言</string>
+
+    <string name="protect_screen_open">截屏防护已开启，下次启动生效</string>
+    <string name="protect_screen_close">截屏防护已关闭，下次启动生效</string>
+
+
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
 
     <string name="version">版本：</string>
     <string name="back">返回</string>
 
+    <string name="input_length_between">%1$s的长度是%2$d-%3$d</string>
+    <string name="input_length_min">%1$s的最小长度是%2$d</string>
+    <string name="input_length_max">%1$s的最大长度是%2$d</string>
+
+    <string name="format_error">%1$s格式错误</string>
+
+
+    <string name="press_again_exit">再按一次退出程序</string>
 
     <!--登录-->
+    <string name="password">密码</string>
+    <string name="old_password">密码</string>
+    <string name="new_password">密码</string>
     <string name="user_hint">请输入用户名/邮箱</string>
     <string name="password_hint">请输入密码</string>
     <string name="login">登录</string>
+
+    <string name="password_different">两次输入的密码不相同</string>
+    <string name="password_not_change">新旧密码相同，无需修改</string>
 
     <!--注册-->
     <string name="register">注册</string>
@@ -72,7 +95,7 @@
     <string name="account_safe">账户安全</string>
 
     <string name="mailbox">邮箱</string>
-    <string name="phone">手机</string>
+    <string name="phone">手机号</string>
     <string name="safe_setting">安全设置</string>
     <string name="password_modify">密码修改</string>
     <string name="modify_password">修改密码</string>

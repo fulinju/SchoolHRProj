@@ -24,7 +24,7 @@
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:visibility="visible"
-            app:indicator="LineScalePulseOut"
+            app:indicator="SquareSpin"
             app:indicatorColor="@color/theme_blue"
             />
 

@@ -11,13 +11,15 @@ import android.widget.TextView;
 import sl.base.utils.UtilsVersion;
 import sl.hr_client.R;
 import sl.hr_client.base.BaseFragment;
+import sl.hr_client.imp.FragmentBackListener;
+import sl.hr_client.main.MainActivity;
 import sl.hr_client.utils.constant.ConstantData;
 
 /**
  * Created by Administrator on 2017/5/3.
  */
 
-public class AboutFragment extends BaseFragment {
+public class AboutFragment extends BaseFragment implements FragmentBackListener{
     public static final String ABOUT = "About";
 
     private View aboutView;
@@ -70,4 +72,27 @@ public class AboutFragment extends BaseFragment {
         getFragmentManager().popBackStack();
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (context instanceof MainActivity) {
+            ((MainActivity) context).setBackListener(this);
+            ((MainActivity) context).setInterception(true);
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        if(getActivity() instanceof MainActivity){
+            ((MainActivity)getActivity()).setBackListener(null);
+            ((MainActivity)getActivity()).setInterception(false);
+        }
+    }
+
+    @Override
+    public void onBackForward() {
+        funcBack();
+    }
 }

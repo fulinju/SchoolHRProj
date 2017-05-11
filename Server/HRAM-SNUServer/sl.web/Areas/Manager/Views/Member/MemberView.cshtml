@@ -10,14 +10,28 @@
         <form id="searchForm" action="GetMembersList" method="post">
             <table>
                 <tr>
+                    @*<td>
+                        <input class="easyui-searchbox" data-options="prompt:'请输入查询条件',menu:'#mm',searcher:doSearch" style="width:300px" />
+                        <div id="mm">
+                            <div data-options="name:'by_title',iconCls:'icon-ok'">单位名称</div>
+                            <div data-options="name:'by_type',iconCls:'icon-cut'">单位类型</div>
+                        </div>
+                    </td>*@
+                    
                     <td>
                         单位名称：
                     </td>
+                 
                     <td>
                         @Html.Input("mName")
                     </td>
+             
                     <td>
                         @Html.EasyuiLinkButtonForSearch("member_dg", "searchForm")
+                    </td>
+
+                    <td>
+                        @Html.DropDownList("mMethod", UtilsBind.ReviewResultsWithAll())
                     </td>
                 </tr>
             </table>
@@ -57,6 +71,8 @@
             <td>
                 @Html.EasyuiLinkButton("edit_summary", "编辑会员单位简介", new LinkButton { Icon = "icon-edit", OnClick = string.Format("EditSummary('{0}','{1}','{2}',{3},{4})", "member_dg", Url.Action("EditMemberSummary"), "编辑会员单位简介", 900, 600) })
             </td>
+
+
         </tr>
     </table>
 </div>
@@ -66,16 +82,16 @@
     var url = '@Url.Action("GetMembersList")';
     var columns = [[
                     { field: 'uLoginName', title: '登录名', width: '10%', sortable: true },
-                    { field: 'mReviewResultValue', title: '审核结果', width: '10%', sortable: true },
-                    { field: 'mApplyTime', title: '申请时间', width: '20%', sortable: true },
-                    { field: 'mName', title: '单位名称', width: '12%', sortable: true },
-                    { field: 'mTypeValue', title: '单位性质', width: '20%', sortable: true },
-                    { field: 'mOrganizationCode', title: '组织代码', width: '25%', sortable: true },
-                    { field: 'mAddress', title: '地址', width: '25%', sortable: true },
-                    { field: 'mCorporateName', title: '法人代表', width: '25%', sortable: true },
-                    { field: 'mIDCardNo', title: '身份证号码', width: '25%', sortable: true },
-                    { field: 'mContacts', title: '联系人', width: '25%', sortable: true },
-                    { field: 'mContactsphone', title: '联系方式', width: '25%', sortable: true },
+                    { field: 'mReviewResultValue', title: '审核结果', width: '8%', sortable: true },
+                    { field: 'mApplyTime', title: '申请时间', width: '15%', sortable: true },
+                    { field: 'mName', title: '单位名称', width: '15%', sortable: true },
+                    { field: 'mTypeValue', title: '单位性质', width: '8%', sortable: true },
+                    { field: 'mOrganizationCode', title: '组织代码', width: '10%', sortable: true },
+                    { field: 'mAddress', title: '地址', width: '20%', sortable: true },
+                    { field: 'mCorporateName', title: '法人代表', width: '8%', sortable: true },
+                    { field: 'mIDCardNo', title: '身份证号码', width: '15%', sortable: true },
+                    { field: 'mContacts', title: '联系人', width: '8%', sortable: true },
+                    { field: 'mContactsphone', title: '联系方式', width: '10%', sortable: true },
                     { field: 'mImgURL', title: '图片地址', width: '25%', sortable: true },
                     { field: 'mURL', title: '地址', width: '25%', sortable: true }
     ]];
@@ -127,5 +143,29 @@
         } else {
             alert("id not found please check you initGrid()")
         }
+    }
+</script>
+
+<script>
+    function doSearch(value, method) {
+
+        alert('You input: ' + value + '(' + method + ')');
+        //"user_dg", 
+
+        var url = Url.Action("GetMembersList")
+
+        $.post(url, {
+            "mName": mName,
+            "mMethod": mMethod
+        }, function (data) {
+            if (data.state == "1") {
+                $("#" + dgid).datagrid('reload').datagrid('clearSelections').datagrid('clearChecked');
+                try {
+                    $("#" + dgid).treegrid('reload').treegrid('clearSelections').treegrid('clearChecked');
+                } catch (e) { }
+            } else {
+                $.messager.alert('错误', data.message);
+            }
+        }, 'json');
     }
 </script>

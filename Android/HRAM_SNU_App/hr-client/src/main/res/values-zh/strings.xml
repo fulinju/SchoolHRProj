@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HR-See</string>
+    <string name="reset_guide">重置引导页</string>
+    <string name="protect_screen">截屏防护</string>
+    <string name="switch_language">切换语言</string>
+
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <string name="version">版本：</string>
+    <string name="back">返回</string>
+
+    <string name="input_length_between">%1$s的长度是%2$d-%3$d</string>
+    <string name="input_length_min">%1$s的最小长度是%2$d</string>
+    <string name="input_length_max">%1$s的最大长度是%2$d</string>
+
+    <string name="format_error">%1$s格式错误</string>
+
+
+    <string name="press_again_exit">再按一次退出程序</string>
+
+    <!--登录-->
+    <string name="password">密码</string>
+    <string name="old_password">密码</string>
+    <string name="new_password">密码</string>
+    <string name="user_hint">请输入用户名/邮箱</string>
+    <string name="password_hint">请输入密码</string>
+    <string name="login">登录</string>
+
+    <string name="password_different">两次输入的密码不相同</string>
+    <string name="password_not_change">新旧密码相同，无需修改</string>
+
+    <!--注册-->
+    <string name="register">注册</string>
+    <string name="register_by_mailbox">邮箱注册</string>
+    <string name="register_by_username">用户密码</string>
+    <string name="mailbox_hint">请输入邮箱</string>
+    <string name="username_hint">请输入用户名</string>
+    <string name="sure_password_hint">请确认密码</string>
+
+
+    <string name="downloads">下载列表</string>
+    <string name="friendly_link">友情链接</string>
+    <string name="member">会员单位</string>
+    <string name="account">账户</string>
+
+
+    <string name="start_now">立即体验</string>
+    <string name="network_err">当前网络不可用</string>
+
+    <string name="null_value">暂无</string>
+    <string name="mid_bucket_format">[%1$s]</string>
+
+    <string name="default_value">默认值</string>
+    <!--文章相关-->
+    <string name="publish_detail">发布详情</string>
+    <string name="cant_get_publishId">未能获得此文章</string>
+
+    <!--下载相关-->
+    <string name="download_num">下载数量:%1$d</string>
+
+    <string name="cant_get_url">未能获得有效链接</string>
+
+    <string name="member_detail">会员详情</string>
+
+    <string name="visit_home_page">访问主页</string>
+
+    <string name="friendly_link_detail">友情链接详情</string>
+    <string name="member_home_page">会员主页</string>
+
+    <string name="cant_get_memberId">未能获得会员详情</string>
+    <string name="member_summary">描述:%1$s</string>
+    <string name="member_organizationCode">组织代码:%1$s</string>
+    <string name="member_address">地址:%1$s</string>
+    <string name="member_corporateName">法人代表:%1$s</string>
+    <string name="member_contacts">联系人:%1$s</string>
+    <string name="member_contactsPhone">联系方式:%1$s</string>
+
+    <string name="downloading">正在下载:</string>
+    <string name="sign_percent">%</string>
+    <string name="download_succeed">已经下载完成</string>
+    <string name="download_failed">下载失败，请检查网络和SD卡</string>
+    <string name="open">打开</string>
+
+
+    <!--账户-->
+    <string name="account_info">账户信息</string>
+    <string name="account_safe">账户安全</string>
+
+    <string name="mailbox">邮箱</string>
+    <string name="phone">手机号</string>
+    <string name="safe_setting">安全设置</string>
+    <string name="password_modify">密码修改</string>
+    <string name="modify_password">修改密码</string>
+
+    <string name="username">用户名</string>
+    <string name="nickname">昵称</string>
+
+    <string name="exit_app">退出</string>
+    <string name="log_off">注销账户</string>
+
+    <string name="save">保存</string>
+
+    <string name="about">关于</string>
+
+    <string name="exit">退出</string>
+
+    <!--忘记密码-->
+    <string name="forget_pwd">忘记密码</string>
+    <string name="forget_pwd_1">忘记密码？</string>
+    <string name="forget_password_des">请输入您的用户名和对应的邮箱来获取重置密码</string>
+    <string name="send">发送</string>
+
+    <!--修改密码-->
+    <string name="please_enter_the_original_password">请输入原来的密码</string>
+    <string name="please_enter_a_new_password">请输入新的密码</string>
+    <string name="please_confirm_the_new_password">请确认新的密码</string>
+
+    <!--关于-->
+    <string name="sure">确认</string>
+    <string name="cancel">取消</string>
+    <string name="warm_prompt">温馨提示</string>
+    <string name="save_info_exit">暂未保存，确认退出？</string>
+    <string name="saving">保存中...</string>
+    <string name="cant_modify">%1$s不可修改</string>
+
+    <string name="no_net">网络不给力，请检查网络设置。</string>
+    <string name="loading">加载中</string>
+    <string name="load_failed">加载失败</string>
+    <string name="viewpager_indicator">%1$d/%2$d</string>
+
+</resources>

@@ -28,14 +28,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
+            <sl.base.ui.imageview.CircleImageView
                 android:id="@+id/user_icon"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
-                android:background="@mipmap/ic_launcher"
-                android:src="@drawable/shape_round_black_frame_bg" />
+                android:src="@mipmap/ic_launcher"
+                app:border_color="@color/dark_gray"
+                app:border_width="1dp" />
 
             <RelativeLayout
                 android:id="@+id/rl_input"
@@ -98,7 +99,7 @@
                         android:layout_margin="10dp"
                         android:background="@mipmap/ico_password" />
 
-                    <EditText
+                    <sl.base.ui.edttext.NoMenuEditText
                         android:id="@+id/edt_password"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

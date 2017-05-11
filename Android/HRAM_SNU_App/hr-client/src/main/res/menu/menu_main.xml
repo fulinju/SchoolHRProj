@@ -1,10 +1,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto"
-      xmlns:tools="http://schemas.android.com/tools"
-      tools:context="yalantis.com.sidemenu.MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
     <item
-        android:id="@+id/action_settings"
-        android:title="@string/reset"
+        android:id="@+id/action_switch_language"
         android:orderInCategory="100"
-        app:showAsAction="never"/>
+        android:title="@string/switch_language"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_rest_guide"
+        android:orderInCategory="100"
+        android:title="@string/reset_guide"
+        app:showAsAction="never" />
 </menu>

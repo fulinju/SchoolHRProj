@@ -1,4 +1,4 @@
-package sl.hr_client.push;
+package sl.hr_client.main.push;
 
 import android.content.Context;
 import com.igexin.sdk.GTIntentService;

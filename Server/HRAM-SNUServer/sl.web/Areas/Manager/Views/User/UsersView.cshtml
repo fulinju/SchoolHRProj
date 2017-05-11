@@ -92,10 +92,10 @@
     var url = '@Url.Action("GetUsersList")';
     var columns = [[
                     { field: 'uLoginName', title: '登录名', width: '10%', sortable: true },
-                    { field: 'uLoginTypeValue', title: '类型', width: '10%', sortable: true },
+                    { field: 'uLoginTypeValue', title: '类型', width: '7%', sortable: true },
                     { field: 'uPassword', title: '密码', width: '20%' },
                     { field: 'uUserName', title: '用户名', width: '12%', sortable: true },
-                    { field: 'uPhone', title: '联系电话', width: '20%', sortable: true },
+                    { field: 'uPhone', title: '联系电话', width: '15%', sortable: true },
                     { field: 'uMaiBox', title: '邮箱', width: '25%', sortable: true }
     ]];
     initGrid("user_dg", url, "pkId", "T_User.pkId", columns, true, false);

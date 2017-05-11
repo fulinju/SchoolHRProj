@@ -120,10 +120,10 @@
         <!-- 个推SDK配置结束 -->
 
 
-        <service android:name=".push.GeTuiIntentService" />
+        <service android:name=".main.push.GeTuiIntentService" />
 
         <service
-            android:name=".push.GeTuiPushService"
+            android:name=".main.push.GeTuiPushService"
             android:exported="true"
             android:label="PushService"
             android:process=":pushservice"></service>

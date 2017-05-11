@@ -18,8 +18,11 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import sl.base.ui.switchbtn.SwitchView;
+import sl.base.utils.UtilsIntent;
 import sl.base.utils.UtilsLog;
 import sl.base.utils.UtilsPreference;
+import sl.base.utils.UtilsToast;
 import sl.hr_client.R;
 import sl.hr_client.base.ContentFragment;
 import sl.hr_client.data.DataUtils;
@@ -46,6 +49,8 @@ public class AccountFragment extends ContentFragment implements View.OnClickList
     private RelativeLayout rlAbout;
     private Button btnExit;
 
+    private SwitchView svProtectScreen;
+
     private ExitPopMenu exitPopMenu;//退出的PopMenu
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -55,11 +60,13 @@ public class AccountFragment extends ContentFragment implements View.OnClickList
         rlAccountInfo = (RelativeLayout) view.findViewById(R.id.rl_account_info);
         rlAccountSafe = (RelativeLayout) view.findViewById(R.id.rl_account_safe);
         rlAbout = (RelativeLayout) view.findViewById(R.id.rl_about);
+        svProtectScreen = (SwitchView) view.findViewById(R.id.sv_protect_screen);
         btnExit = (Button) view.findViewById(R.id.btn_exit);
 
         String nickName = DataUtils.getNowUserByUID().getUUserName() == null ? getString(R.string.null_value) : DataUtils.getNowUserByUID().getUUserName();
         tvNickName.setText(nickName);
         exitPopMenu = new ExitPopMenu(ctx);
+
 
         addListener();
     }
@@ -96,6 +103,28 @@ public class AccountFragment extends ContentFragment implements View.OnClickList
         rlAccountInfo.setOnClickListener(this);
         rlAccountSafe.setOnClickListener(this);
         rlAbout.setOnClickListener(this);
+
+        svProtectScreen.setOpened(UtilsPreference.getBoolean(ConstantData.FLAG_PROTECT_SCREEN, ConstantData.default_boolean));
+        svProtectScreen.setOnStateChangedListener(new SwitchView.OnStateChangedListener() {
+            @Override
+            public void toggleToOn(SwitchView view) {
+                svProtectScreen.setOpened(true);
+
+                if (UtilsPreference.getBoolean(ConstantData.FLAG_PROTECT_SCREEN, ConstantData.default_boolean) == false) {
+                    UtilsPreference.commitBoolean(ConstantData.FLAG_PROTECT_SCREEN, true);
+                    UtilsToast.showToast(ctx, getString(R.string.protect_screen_open));
+                }
+            }
+
+            @Override
+            public void toggleToOff(SwitchView view) {
+                svProtectScreen.setOpened(false);
+                if (UtilsPreference.getBoolean(ConstantData.FLAG_PROTECT_SCREEN, ConstantData.default_boolean) == true) {
+                    UtilsPreference.commitBoolean(ConstantData.FLAG_PROTECT_SCREEN, false);
+                    UtilsToast.showToast(ctx, getString(R.string.protect_screen_close));
+                }
+            }
+        });
     }
 
     @Override
@@ -199,7 +228,7 @@ public class AccountFragment extends ContentFragment implements View.OnClickList
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventModifyUserInfo(TransferEvent event) {
-        if (event.getTargetTag().equals(TransDefine.EVENT_MODIFY_USERINFO)) {
+        if (event.getTargetTag().equals(TransDefine.EVENT_MODIFY_USER_INFO)) {
             String uUsername = DataUtils.getNowUserByUID().getUUserName() == null ? getString(R.string.null_value) : DataUtils.getNowUserByUID().getUUserName();
             tvNickName.setText(uUsername);
         }

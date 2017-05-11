@@ -1,7 +1,6 @@
 package sl.hr_client.base;
 
 import android.app.Application;
-import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.android.volley.toolbox.Volley;
@@ -14,15 +13,14 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 
-import org.greenrobot.eventbus.EventBus;
 import org.xutils.x;
 
 import java.io.File;
 
 import sl.hr_client.data.dao.DaoMaster;
 import sl.hr_client.data.dao.DaoSession;
-import sl.hr_client.push.GeTuiIntentService;
-import sl.hr_client.push.GeTuiPushService;
+import sl.hr_client.main.push.GeTuiIntentService;
+import sl.hr_client.main.push.GeTuiPushService;
 import sl.hr_client.utils.constant.ConstantData;
 import sl.hr_client.utils.net.VolleyUtils;
 

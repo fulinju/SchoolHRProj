@@ -1,5 +1,6 @@
 package sl.hr_client.main.member;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,12 +14,19 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import sl.base.utils.UtilsNet;
 import sl.base.utils.UtilsToast;
 import sl.hr_client.R;
 import sl.hr_client.base.BaseFragment;
 import sl.hr_client.data.bean.MemberBean;
 import sl.hr_client.data.GsonUtils;
+import sl.hr_client.event.TransferEvent;
+import sl.hr_client.imp.FragmentBackListener;
+import sl.hr_client.main.MainActivity;
 import sl.hr_client.main.webview.WebViewFragment;
 import sl.hr_client.net.member.detail.MemberDetailPresenter;
 import sl.hr_client.net.member.detail.MemberDetailView;
@@ -29,7 +37,7 @@ import sl.hr_client.utils.net.VolleyUtils;
  * Created by Administrator on 2017/4/24.
  */
 
-public class MemberDetailFragment extends BaseFragment implements View.OnClickListener, MemberDetailView {
+public class MemberDetailFragment extends BaseFragment implements View.OnClickListener, MemberDetailView, FragmentBackListener {
     public static final String MEMBER_DETAIL = "MEMBER_DETAIL";
 
     public String memberID;
@@ -64,6 +72,11 @@ public class MemberDetailFragment extends BaseFragment implements View.OnClickLi
 
         ctx = newsDetailView.getContext();
         memberDetailPresenter = new MemberDetailPresenter(this);
+
+        //注册EventBus
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
 
         funcGetIntent();
         initView();
@@ -154,6 +167,7 @@ public class MemberDetailFragment extends BaseFragment implements View.OnClickLi
         Bundle trans = new Bundle();
         trans.putString(TransDefine.Bundle_Link_URL, links);
         trans.putString(TransDefine.Bundle_Link_Title, ctx.getString(R.string.member_home_page));
+        trans.putString(TransDefine.Bundle_Should_Reset_Back_Listener,TransDefine.Bundle_Should_Reset_Back_Listener_True); //需要重置
         WebViewFragment transFragment = new WebViewFragment();
 
         transFragment.setArguments(trans);
@@ -197,5 +211,48 @@ public class MemberDetailFragment extends BaseFragment implements View.OnClickLi
             default:
                 break;
         }
+    }
+
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        onAttach(ctx);
+//    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (context instanceof MainActivity) {
+            ((MainActivity) context).setBackListener(this);
+            ((MainActivity) context).setInterception(true);
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        if (getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).setBackListener(null);
+            ((MainActivity) getActivity()).setInterception(false);
+        }
+    }
+
+    @Override
+    public void onBackForward() {
+        funcBack();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventResetBackListener(TransferEvent event) {
+        if (event.getTargetTag().equals(TransDefine.EVENT_RESET_LINK_PRESS_BACK_LISTENER)) {
+            onAttach(ctx);
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

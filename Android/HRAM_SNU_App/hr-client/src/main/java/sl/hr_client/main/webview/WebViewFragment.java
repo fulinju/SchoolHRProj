@@ -1,9 +1,11 @@
 package sl.hr_client.main.webview;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,18 +21,23 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.EventBus;
+
 import sl.base.ui.loading.AVLoadingIndicatorView;
 import sl.base.ui.progressbar.HorizontalProgressBarWithNumber;
 import sl.base.utils.UtilsToast;
 import sl.hr_client.R;
 import sl.hr_client.base.BaseFragment;
+import sl.hr_client.event.TransferEvent;
+import sl.hr_client.imp.FragmentBackListener;
+import sl.hr_client.main.MainActivity;
 import sl.hr_client.utils.constant.TransDefine;
 
 /**
  * Created by Administrator on 2017/4/24.
  */
 
-public class WebViewFragment extends BaseFragment implements View.OnClickListener {
+public class WebViewFragment extends BaseFragment implements View.OnClickListener, FragmentBackListener {
     public static final String WEB_VIEW = "WEB_VIEW";
 
     private Context ctx;
@@ -39,6 +46,9 @@ public class WebViewFragment extends BaseFragment implements View.OnClickListene
 
     private String targetURL;
     private String title;
+
+    private String shouldResetListener;
+
     private WebView wv;
 
     private TextView tvTitle;
@@ -56,6 +66,7 @@ public class WebViewFragment extends BaseFragment implements View.OnClickListene
 
     private HorizontalProgressBarWithNumber hpbLoading;
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -70,6 +81,8 @@ public class WebViewFragment extends BaseFragment implements View.OnClickListene
     private void receiveData() {
         targetURL = getArguments().getString(TransDefine.Bundle_Link_URL);
         title = getArguments().getString(TransDefine.Bundle_Link_Title);
+        shouldResetListener = getArguments().getString(TransDefine.Bundle_Should_Reset_Back_Listener)
+                == null ? getString(R.string.null_value) : getArguments().getString(TransDefine.Bundle_Should_Reset_Back_Listener);
 
         if (targetURL == null) {
             UtilsToast.showToast(ctx, getString(R.string.cant_get_url));
@@ -99,17 +112,17 @@ public class WebViewFragment extends BaseFragment implements View.OnClickListene
         tvClose.setVisibility(View.VISIBLE);
         tvClose.setBackgroundResource(R.mipmap.ico_close);
 
-        wv.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK
-                        && event.getAction() == KeyEvent.ACTION_UP) {
-                    getFocus();
-                    return true;
-                }
-                return false;
-            }
-        });
+//        wv.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                if (keyCode == KeyEvent.KEYCODE_BACK
+//                        && event.getAction() == KeyEvent.ACTION_UP) {
+//                    getFocus();
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
 
         addListener();
 
@@ -150,15 +163,15 @@ public class WebViewFragment extends BaseFragment implements View.OnClickListene
                 hideLoading();
 
                 if (wv.canGoBack()) {
-                    ivPre.setBackgroundResource(R.drawable.button_web_left);
+                    ivPre.setImageResource(R.drawable.button_web_left);
                 } else {
-                    ivPre.setBackgroundResource(R.mipmap.ico_left_pressed);
+                    ivPre.setImageResource(R.mipmap.ico_left_pressed);
                 }
 
                 if (wv.canGoForward()) {
-                    ivNext.setBackgroundResource(R.drawable.button_web_right);
+                    ivNext.setImageResource(R.drawable.button_web_right);
                 } else {
-                    ivNext.setBackgroundResource(R.mipmap.ico_right_pressed);
+                    ivNext.setImageResource(R.mipmap.ico_right_pressed);
                 }
             }
 
@@ -215,36 +228,39 @@ public class WebViewFragment extends BaseFragment implements View.OnClickListene
         }
     }
 
-    public void onResume() {
-        super.onResume();
-        getFocus();
-    }
-
-    private void funcRefresh(){
+    private void funcRefresh() {
         wv.reload();
     }
 
-    //主界面获取焦点
-    private void getFocus() {
-        getView().setFocusableInTouchMode(true);
-        getView().requestFocus();
-        getView().setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-                    // 监听到返回按钮点击事件
-                    if (wv.canGoBack()) {
-                        wv.goBack();//返回上一页面
-                        return true;
-                    } else {
-                        funcBack();
-                    }
-                    return true;
-                }
-                return false;
-            }
-        });
-    }
+//    public void onResume() {
+//        super.onResume();
+//        getFocus();
+//    }
+//
+//    //主界面获取焦点
+//    private void getFocus() {
+//        getView().setFocusableInTouchMode(true);
+//        getView().requestFocus();
+//        getView().setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+//                    EventBus.getDefault().post(
+//                            new TransferEvent(TransDefine.EVENT_CAPTURE_PRESS_BACK_KEY)); //发送截获返回键消息
+//                    // 监听到返回按钮点击事件
+//                    if (wv.canGoBack()) {
+//                        wv.goBack();//返回上一页面
+//                    } else {
+//                        funcBack();
+//                    }
+//                    return true;
+//
+//                }
+//                return false;
+//            }
+//        });
+//    }
+
 
     public void showLoading() {
         hpbLoading.setVisibility(View.VISIBLE);
@@ -263,4 +279,38 @@ public class WebViewFragment extends BaseFragment implements View.OnClickListene
         hpbLoading.setVisibility(View.GONE);
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof MainActivity) {
+            ((MainActivity) context).setBackListener(this);
+            ((MainActivity) context).setInterception(true);
+        }
+
+
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        if (getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).setBackListener(null);
+            ((MainActivity) getActivity()).setInterception(false);
+        }
+
+        if (shouldResetListener.equals(TransDefine.Bundle_Should_Reset_Back_Listener_True)) {
+            EventBus.getDefault().post(
+                    new TransferEvent(TransDefine.EVENT_RESET_LINK_PRESS_BACK_LISTENER)); //重置友情链接的返回键监听
+        }
+
+    }
+
+    @Override
+    public void onBackForward() {
+        if (wv.canGoBack()) {
+            wv.goBack();//返回上一页面
+        } else {
+            funcBack();
+        }
+    }
 }
