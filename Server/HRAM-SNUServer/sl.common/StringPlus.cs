@@ -143,8 +143,6 @@ namespace sl.common
         #endregion
 
 
-
-
         /// <summary>
         /// 转全角的函数(SBC case)
         /// </summary>
@@ -350,6 +348,7 @@ namespace sl.common
         }
 
         #endregion
+
         #region 检查一个字符串是否是纯数字构成的，一般用于查询字符串参数的有效性验证。
         /// <summary>
         /// 检查一个字符串是否是纯数字构成的，一般用于查询字符串参数的有效性验证。(0除外)
@@ -361,6 +360,7 @@ namespace sl.common
             return QuickValidate("^[1-9]*[0-9]*$", _value);
         }
         #endregion
+
         #region 快速验证一个字符串是否符合指定的正则表达式。
         /// <summary>
         /// 快速验证一个字符串是否符合指定的正则表达式。

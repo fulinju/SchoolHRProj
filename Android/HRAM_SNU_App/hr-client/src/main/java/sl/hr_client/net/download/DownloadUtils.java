@@ -2,6 +2,7 @@ package sl.hr_client.net.download;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -78,12 +79,13 @@ public class DownloadUtils {
             @Override
             public void onSuccess(File result) {
                 String fileType = url.substring(url.lastIndexOf(".") + 1);
-                result.renameTo(new File(path + dmTitle + "." + fileType));//重命名
+                File newFile = new File(path + dmTitle + "." + fileType);
+                result.renameTo(newFile);//重命名
 
                 //成功后将setProgress的两个变量设置为0，progress就会消失。setProgress第三个参数的含义是，如果能确定进度条执行的时间，就传入true，否则是false，此处直接传入false即可。
                 mBuilder.setProgress(0, 0, false).setContentTitle(dmTitle).setContentText(context.getString(R.string.download_succeed));
 
-                Intent intent = openAssignFolder(path);
+                Intent intent = openAssignFolder(newFile.getPath());
                 PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
                 mBuilder.setContentIntent(pendingIntent);
                 mNotifyManager.notify(id, mBuilder.build());
@@ -119,20 +121,4 @@ public class DownloadUtils {
         return intent;
     }
 
-//    private void openAssignFolder(String path,Context ctx){
-//        File file = new File(path);
-//        if(null==file || !file.exists()){
-//            return;
-//        }
-//        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-//        intent.addCategory(Intent.CATEGORY_DEFAULT);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        intent.setDataAndType(Uri.fromFile(file), "file/*");
-//        try {
-//            ctx.startActivity(intent);
-//            ctx.startActivity(Intent.createChooser(intent,"选择浏览工具"));
-//        } catch (ActivityNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }

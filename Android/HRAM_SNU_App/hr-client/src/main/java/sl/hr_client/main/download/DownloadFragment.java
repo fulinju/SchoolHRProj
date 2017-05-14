@@ -160,7 +160,7 @@ public class DownloadFragment extends ContentFragment implements DownloadView {
 
     @Override
     public void updateDownloadsView(String str) {
-        UtilsLog.logE(UtilsLog.getSte(), str);
+//        UtilsLog.logE(UtilsLog.getSte(), str);
         DownloadListBean tempBean = GsonUtils.parseDownloadList(str);
 
         if (tempBean != null) {
@@ -214,10 +214,9 @@ public class DownloadFragment extends ContentFragment implements DownloadView {
 
     @Override
     public void showError(String msg) {
-        UtilsLog.logE(UtilsLog.getSte(), msg);
-        UtilsLog.logE(UtilsLog.getSte(), msg);
+//        UtilsLog.logE(UtilsLog.getSte(), msg);
         ResponseUtils.showResponseOperate(ctx, msg);
-        hideLoading(); //自行执行
+        showLoadingFailed(); //自行执行
         xrvDownload.reset();
     }
 

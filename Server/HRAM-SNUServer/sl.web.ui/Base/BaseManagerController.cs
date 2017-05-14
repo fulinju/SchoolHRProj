@@ -43,11 +43,11 @@ namespace sl.web.ui
         {
             T_User user = GetSessionManagerInfo();
             //为了调试取消重定向
-            //if (GetSessionManagerInfo() == null)
-            //{
-            //    filterContext.Result = RedirectToAction("Login", "Login", new { Areas = "Manager" });
-            //    return;
-            //}
+            if (GetSessionManagerInfo() == null)
+            {
+                filterContext.Result = RedirectToAction("Login", "Login", new { Areas = "Manager" }); //有些小bug在子视图里显示logins
+                return;
+            }
             base.OnActionExecuting(filterContext);
         }
 

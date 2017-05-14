@@ -48,6 +48,7 @@ namespace sl.web.Areas.api.Controllers
             string initPwdMd5 = Security.MD5Encrypt(initPwd);
 
             object insertFlag = HRAMApiService.RegisterUserByMail(register.mailbox, initPwdMd5);
+
             if (insertFlag != null)
             {
                 string result = MailUtils.SendMailByQQ(register.mailbox, "Hi,HRAM 注册", "HRAM 注册", "欢迎使用HRAM，账户：" + register.mailbox + "，初始密码：" + initPwd + "（区分大小写），请及时修改密码哦！", "初始密码已发送至" + register.mailbox, "发送失败");
@@ -102,10 +103,11 @@ namespace sl.web.Areas.api.Controllers
             {
                 login = TokenUtils.UpdateToken(login);
 
-               
-                HttpContext.Current.Session[login.uID.ToString()] = login;
+                //Utils.WriteCookie(login.uID, login.uToken, login.uTokenExpiredTime);
 
-                UserModel currentUser = HttpContext.Current.Session[login.uID.ToString()] as UserModel;
+                //string savedToken = Utils.GetCookie(login.uID);
+
+                HttpContext.Current.Session[login.uID.ToString()] = login;
 
 
                 return JsonUtils.toJson(HttpStatusCode.OK, login);
@@ -122,7 +124,7 @@ namespace sl.web.Areas.api.Controllers
         /// </summary>
         /// <param name="userInfo"></param>
         /// <returns></returns>
-        [TokenValidateAttribute]
+        //[TokenValidateAttribute]
         [HttpPost]
         public HttpResponseMessage ModifyUserInfo([FromBody]UserModel userInfo)
         {

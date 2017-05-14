@@ -28,6 +28,7 @@ import sl.hr_client.main.photo.ImagePagerActivity;
 import sl.hr_client.net.news.detail.NewsDetailPresenter;
 import sl.hr_client.net.news.detail.NewsDetailView;
 import sl.hr_client.utils.constant.TransDefine;
+import sl.hr_client.utils.net.ResponseUtils;
 import sl.hr_client.utils.net.VolleyUtils;
 
 /**
@@ -130,7 +131,7 @@ public class NewsDetailFragment extends BaseFragment implements NewsDetailView, 
         publishText = news.getPmText() == null ? ctx.getString(R.string.null_value) : news.getPmText();
         publishViews = news.getPmViews() == null ? ctx.getString(R.string.null_value) : news.getPmViews();
 
-        publishText = UtilsHTMLSpirit.delHTMLTag(publishText);//去除HTML标签
+//        publishText = UtilsHTMLSpirit.delHTMLTag(publishText);//去除HTML标签
 
         tvPublishTitle.setText(publishTitle);
         tvPublishText.setText(publishText);
@@ -196,7 +197,8 @@ public class NewsDetailFragment extends BaseFragment implements NewsDetailView, 
 
     @Override
     public void showError(String msg) {
-
+        ResponseUtils.showResponseOperate(ctx, msg);
+        hideLoading(); //自行执行
     }
 
     /**

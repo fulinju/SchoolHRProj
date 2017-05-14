@@ -30,8 +30,3 @@ F:\School\Code\SchoolHRProj\Server\HRAM-SNUServer\sl.common\bin\Debug\sl.common.
 F:\School\Code\SchoolHRProj\Server\HRAM-SNUServer\sl.common\obj\Debug\sl.common.csprojResolveAssemblyReference.cache
 F:\School\Code\SchoolHRProj\Server\HRAM-SNUServer\sl.common\obj\Debug\sl.common.dll
 F:\School\Code\SchoolHRProj\Server\HRAM-SNUServer\sl.common\obj\Debug\sl.common.pdb
-D:\School\SchoolHRProj\Server\HRAM-SNUServer\sl.common\bin\Debug\sl.common.dll
-D:\School\SchoolHRProj\Server\HRAM-SNUServer\sl.common\bin\Debug\sl.common.pdb
-D:\School\SchoolHRProj\Server\HRAM-SNUServer\sl.common\obj\Debug\sl.common.dll
-D:\School\SchoolHRProj\Server\HRAM-SNUServer\sl.common\obj\Debug\sl.common.pdb
-D:\School\SchoolHRProj\Server\HRAM-SNUServer\sl.common\obj\Debug\sl.common.csprojResolveAssemblyReference.cache

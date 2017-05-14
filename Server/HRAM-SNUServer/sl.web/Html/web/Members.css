@@ -28,7 +28,7 @@ a:hover,a:active
 {
 	width:100%;
 	margin:0 auto;
-	height:1000px;
+	height:800px;
 }
 #color
 {
@@ -42,6 +42,9 @@ a:hover,a:active
 	background:#09F;
 	width:1150px;
 	
+}
+li{
+	list-style:none;
 }
 /*************************以上都是全局样式*******************/
 #header
@@ -62,10 +65,14 @@ a:hover,a:active
 {
 	margin-left:350px;	
 }
-.login,.manage,.reg
+.login,.manage,.reg,#acount
 {
 	float:left;
 	margin:5px;
+}
+#acount
+{
+	display:none;
 }
 /********************************遮罩样式*******************************/
 #screen
@@ -125,8 +132,19 @@ a:hover,a:active
 	right:8px;
 	cursor:pointer;
 }
-#login div.user, #login div.pass {
-	font-size:14px;
+#login table .title{
+	display:block;
+	width:110px;
+	text-align:right;
+	font-size:16px;
+}
+#login table .title span
+{
+	font-size:16px;
+	color:#FFF;
+}
+#login .user, #login .pass {
+	font-size:16px;
 	color:#666;
 	padding:5px 0;
 	text-align:center;
@@ -205,7 +223,10 @@ a:hover,a:active
 	float:left;
 	margin-left:200px;
 	margin-top:-30px;
+	cursor:pointer;
 }
+
+
 /*****************************导航二级菜单和三级菜单样式**************************/
 .nav_li1 ,.nav_li5,.nav_li6,.second2_li1,.second2_li2
 {
@@ -335,8 +356,8 @@ footer
 {
 	margin-left:115px;
 	width:1130px;
-	height:1000px;
-	border:solid 1px #CCCCCC;
+	height:800px;
+	/*border:solid 1px #CCCCCC;*/
 	background:#FFF;
 }
 #content #membership h3
@@ -357,6 +378,7 @@ footer
 	border-top:#00C 1px solid;
 }
 /**********************注册表******************************/
+
 #content #membership table
 {
 	width:800px;
@@ -377,16 +399,19 @@ footer
 }
 #content #membership .selection
 {
-	width:130px;
+	width:100px;
 	height:30px;
 	float:left;
 	margin:5px 0px 5px 0px;
+	
 }
 #content #membership .selection select
 {
-	width:110px;
+	width:100px;
 	height:30px;
+	text-align:center;
 }
+
 .title
 {
 	text-align:right;
@@ -399,7 +424,12 @@ footer
 	height:30px;
 	border:1px solid #CCC;
 	margin-top:5px;
-	color:#CCC;
+	
+}
+#content #membership .button
+{
+	margin-top:60px;
+	height:40px;
 }
 #Button1,#Button2
 {
@@ -422,22 +452,14 @@ footer
 	padding-left:40px;
 	line-height:32px;
 	display:none;
-}
-#content #membership table .info
-{
-	background:url(images/reg_info.png) no-repeat;
-}
-#content #membership table .error
-{
-	background:url(images/reg_error.png) no-repeat;
+	
 }
 #content #membership table .succ
 {
-	background:url(images/reg_succ.png) no-repeat;
+	color:green;
+	line-height:32px;
+	text-indent:-20px;
 }
-
-
-
 #content #membership table .two
 {
 	display:block;
@@ -448,7 +470,262 @@ footer
 	padding-top:5px;
 	padding-left:40px;
 	line-height:20px;
-	display:none;
+
+}
+/*公司名称提示信息背景图*/
+#content #membership table #info1
+{
+	background:url(images/reg_info.png) no-repeat;
+}
+#content #membership table #error1
+{
+	background:url(images/reg_error.png) no-repeat;
+}
+#content #membership table #succ1
+{
+	background:url(images/reg_succ.png) no-repeat;
+}
+/*组织机构代码提示信息背景图*/
+#content #membership table #info2
+{
+	width:244px;
+	height:102px;
+	top:-30px;
+	background:url(images/reg_info3.png) no-repeat;
+	padding:4px 0px 0px 16px;
+	
+	letter-spacing:0px;
+	
+}
+#content #membership table #info2 p
+{
+	height:25px;
+	line-height:20px;
+	color:#666;
+}
+#content #membership table #info2 p strong
+{
+	color:#CCC;
 }
 
+#content #membership table #error2
+{
+	background:url(images/reg_error.png) no-repeat;
+}
+#content #membership table #succ2
+{
+	background:url(images/reg_succ.png) no-repeat;
+}
+/*公司地址提示信息背景图*/
+#content #membership table #info3
+{
+	background:url(images/reg_info.png) no-repeat;
+}
+#content #membership table #error3
+{
+	background:url(images/reg_error.png) no-repeat;
+	
+}
+#content #membership table #succ3
+{
+	background:url(images/reg_succ.png) no-repeat;
+}
+/*法人姓名提示信息背景图*/
+#content #membership table #info4
+{
+	background:url(images/reg_info.png) no-repeat;
+}
+#content #membership table #error4
+{
+	background:url(images/reg_error.png) no-repeat;
+	
+}
+#content #membership table #succ4
+{
+	background:url(images/reg_succ.png) no-repeat;
+}
+/*法人身份证提示信息背景图*/
+#content #membership table #info5
+{
+	background:url(images/reg_info.png) no-repeat;
+}
+#content #membership table #error5
+{
+	background:url(images/reg_error.png) no-repeat;
+	
+}
+#content #membership table #succ5
+{
+	background:url(images/reg_succ.png) no-repeat;
+}
+/*联系电话提示信息背景图*/
+#content #membership table #info6
+{
+	background:url(images/reg_info.png) no-repeat;
+}
+#content #membership table #error6
+{
+	background:url(images/reg_error.png) no-repeat;
+	
+}
+#content #membership table #succ6
+{
+	background:url(images/reg_succ.png) no-repeat;
+}
+/*单位网址提示信息背景图*/
+#content #membership table #info7
+{
+	background:url(images/reg_info.png) no-repeat;
+}
+#content #membership table #error7
+{
+	background:url(images/reg_error.png) no-repeat;
+	
+}
+#content #membership table #succ7
+{
+	background:url(images/reg_succ.png) no-repeat;
+}
 
+/*密码确认提示信息背景图*/
+#content #membership table #info8
+{
+	background:url(images/reg_info.png) no-repeat;
+}
+#content #membership table #error8
+{
+	background:url(images/reg_error.png) no-repeat;
+	text-indent:-10px;
+}
+#content #membership table #succ8
+{
+	background:url(images/reg_succ.png) no-repeat;
+}
+
+#content #membership table #error9
+{
+	background:url(images/reg_error.png) no-repeat;
+	
+}
+
+/*公司简介*/
+#company_info #ps1
+{
+	color:#ccc;
+	display:block;
+}
+#company_info #ps2
+{
+	color:#ccc;
+	display:none;
+}
+#company_info strong num1,num2
+{
+	padding:0px 5px;
+}
+#company_info strong .clear
+{
+	color:#06f;
+}
+
+/*************************公司信息管理****************************************/
+#membership
+{
+	
+	
+}
+
+#member_info
+{
+	width:1130px;
+	height:800px;
+	border:solid 1px #CCCCCC;
+	background:url(images/member_bg.jpg);
+	display:none;
+}
+#member_info_bar
+{
+	
+	height:60px;
+	border-bottom:1px solid #999;
+	/*background-image:linear-gradient(to top, #999,#FFF);*/
+
+}
+#member_info_bar li
+{
+	display:block;
+	float:left;
+	height:60px;
+	line-height:60px;
+	text-align:center;
+	width:180px;
+	font-size:18px;
+}
+#member_info_bar #li1
+{
+	border-right:1px solid #999;
+	background:#FFF;
+}
+#member_info_bar #li2
+{
+	border-right:1px solid #999;
+	
+}
+#member_info #table1
+{
+	width:800px;
+	margin:0px 0px 0px 40px ;
+	margin-left:100px;
+}
+
+#member_info .title1
+{
+	font-size:18px;
+	width:100px;
+}
+#member_info table tr
+{
+	display:block;
+	
+}
+#member_info table td
+{
+	text-align:left;
+	
+}
+#member_info table span
+{
+	display:block;
+	text-indent:30px;
+	font-size:16px;
+}
+#member_info #table2
+{
+	width:800px;
+	margin:0px 0px 0px -150px ;
+    display:none;
+}
+/****注册成功界面***/
+#reg_login
+{
+	display:none;
+	background:url(images/member_bg.jpg);
+	width:1130px;
+	height:800px;
+}
+#reg_login p
+{
+	height:40px;
+	line-height:40px;
+	padding-top:300px;
+	margin-left:200px;
+	font-size:16px;
+}
+#reg_login p a
+{
+	margin-left:20px;
+	text-decoration:underline;
+	color:#00F;
+	font-size:18px;
+	
+}

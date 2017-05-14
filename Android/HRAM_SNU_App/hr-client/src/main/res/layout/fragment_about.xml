@@ -35,6 +35,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textSize="19sp" />
+
+            <TextView
+                android:id="@+id/tv_download_path"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/tv_about"
+                android:textSize="18sp" />
+
+            <!--<Button-->
+                <!--android:id="@+id/btn_open"-->
+                <!--android:layout_width="64dp"-->
+                <!--android:layout_height="32dp"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_below="@+id/tv_download_path"-->
+                <!--android:background="@drawable/button_theme_rect"-->
+                <!--android:layout_margin="10dp"-->
+                <!--android:text="@string/open"-->
+                <!--android:textColor="@color/white" />-->
+
+            <TextView
+                android:id="@+id/tv_contact"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/tv_download_path"
+                android:textSize="18sp" />
         </RelativeLayout>
 
     </ScrollView>

@@ -105,8 +105,19 @@ a:hover,a:active
 	right:8px;
 	cursor:pointer;
 }
-#login div.user, #login div.pass {
-	font-size:14px;
+#login table .title{
+	display:block;
+	width:110px;
+	text-align:right;
+	font-size:16px;
+}
+#login table .title span
+{
+	font-size:16px;
+	color:#FFF;
+}
+#login .user, #login .pass {
+	font-size:16px;
 	color:#666;
 	padding:5px 0;
 	text-align:center;
@@ -186,6 +197,7 @@ a:hover,a:active
 	float:left;
 	margin-left:200px;
 	margin-top:-30px;
+	cursor:pointer;
 }
 /*****************************导航二级菜单和三级菜单样式**************************/
 .nav_li1 ,.nav_li5,.nav_li6,.second2_li1,.second2_li2
@@ -317,108 +329,59 @@ footer
 {
 	margin-left:115px;
 	width:1150px;
-	height:950px;
+	height:845px;
 	border:1px solid #999;;	
 	background:#FFF;
 }
-#content_table
+.news
 {
-	width:1150px;
-	height:630px;
+	float:left;
+	width:574px;
+	height:400px;
+	border-bottom:1px solid #CCC;
+		/*超出隐藏*/
+	 overflow: hidden; 
+	white-space:nowrap; 
+    text-overflow:ellipsis; 
+    -o-text-overflow:ellipsis;
+}
+#news2
+{
+	border-left:1px solid #CCC;
+}
 
-}
-#content_table table
-{
-	border:0; 
-	align:center; 
-	cellpadding:0;
-	cellspacing:0;
-}
-#content_table #table_first #table_first_tr
+.news span
 {
 	display:block;
-	width:1148px;
-	height:42px;
-	background:#CCC;
-	margin-left:-1px;
-	margin-top:-2px;
-	border-bottom:1px solid #999;
-	
-}
-#content_table #table_first,#content #table_first .table_second
-{
-    width:1150px; 
-
-}
-#content_table #table_first .table_first_td
-{
-	text-decoration:none;
-	text-align:center;
-	background:#03a9f4;
-	color:#FFF;
-	width:180px;
-
-}
-#content_table #table_first .table_first_td a
-{	
-    display:block;
 	height:40px;
 	line-height:40px;
-	font-size:14px;
+	background:linear-gradient(to top ,#999,#FFF);
 }
-
-
-#content_table .table_second_bar
-{
-	border:1px solid #999;
-}
-#content_table .table_second_bar .table_second_bar_td
+.news span a
 {
 	display:block;
-	height:35px;
-	color:#1765e5;
-	line-height:35px;
+	width:100px;
+	height:40px;
+	background:#FFF;
 	text-align:center;
-	text-decoration:none;
-	border:1px solid #CCC;
-	margin-left:20px;
-	border-radius:15px;
-	-moz-border-radius:10px; /* Old Firefox */
+	font-size:18px;
 }
-.Border_gray4
+.news ul li
 {
-	height:620px;
-	display:block;
-	width:880px;
-	background:#FFF;
-	
+	list-style:none;
+	text-indent:100px;
+	font-size:16px;
+	margin-top:10px;
 }
-.Border_gray4 tr
-{
-	width:750px;
-}
-.date
-{
-	float:right;
-	margin-right:30px;
-}
-.on2
-{
-	background:#FFF;
 
-}
-.on1
-{
-	background:#03a9f4;
-	color:#FFF;
-}
+
 /*********************************服务大厅样式************************************/
 
 #service_loby
 {
 	width:1150px;
 	float:left;
-	margin-top:20px;
+	margin-top:40px;
 
 }	
 .search_bar span,.service_bar span
@@ -442,7 +405,7 @@ footer
 #search
 {
 	width:646px;
-	height:300px;
+	height:400px;
 	float:left;
 	border-right:1px solid #999;
 
@@ -475,7 +438,7 @@ footer
 #service ul li a,#search ul li a
 {
 	display:block;
-	font-size:16px;
+	font-size:18px;
 	overflow:hidden;
 	margin-top:30px;
 	height:40px;

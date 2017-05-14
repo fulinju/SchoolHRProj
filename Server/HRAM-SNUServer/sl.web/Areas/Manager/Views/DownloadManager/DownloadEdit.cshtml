@@ -38,7 +38,7 @@
                     文件地址：
                 </th>
                 <td>
-                    <input type="file" id="dmFileURL" name="dmFileURL" />
+                    <input type="file" id="dmFileURL" name="dmFileURL" onchange="funcCheck()" />
                 </td>
             </tr>
         }
@@ -113,4 +113,27 @@
             dataType: "json"
         });
     })
+</script>
+
+
+<script>
+    function funcCheck() {
+        var obj = document.getElementById("dmFileURL");
+        var f = obj.files;
+
+        //上次修改时间
+        if (f[0].size > 5 * 1024 * 1024) { //图片不能大于5MB
+            $.messager.alert("上传图片过大", "上传的图片大小不超过5MB");
+
+            var file = $("#dmFileURL")
+            file.after(file.clone().val(""));
+            file.remove(); //还是JQ好用啊
+            //if (f.outerHTML) {
+            //    f.outerHTML = f.outerHTML;
+            //} else { // FF(包括3.5)
+            //    f.value = "";
+            //}
+        }
+    }
+
 </script>

@@ -90,6 +90,17 @@ header h5
 	display:none;
 	z-index:9999;
 }
+#login table .title{
+	display:block;
+	width:110px;
+	text-align:right;
+	font-size:16px;
+}
+#login table .title span
+{
+	font-size:16px;
+	color:#FFF;
+}
 #login h2 {
 	height:40px;
 	line-height:40px;
@@ -110,8 +121,8 @@ header h5
 	right:8px;
 	cursor:pointer;
 }
-#login div.user, #login div.pass {
-	font-size:14px;
+#login .user, #login .pass {
+	font-size:16px;
 	color:#666;
 	padding:5px 0;
 	text-align:center;
@@ -202,6 +213,7 @@ header h5
 	float:left;
 	margin-left:220px;
 	margin-top:-30px;
+	cursor:pointer;
 }
 /**************************************导航二级菜和三级菜单单样式**************************/
 .nav_li1 ,.nav_li5,.nav_li6,.second2_li1,.second2_li2
@@ -272,35 +284,37 @@ footer
 	border: solid 1px #C0C0C0;
 	background:#FFF;
 	margin-top:20px;
+	background:#FFF;
 }
-#inform h3
+#inform span
 {
+	display:block;
 	height:40px;
 	background-image:linear-gradient(to top ,#999,#FFF);
 	line-height:40px;
 	font-size:18px;
-	color:#0041cc;
 	text-indent:20px;
 	border-bottom: solid 1px #0041cc;
 }
-#inform h3 a
+#inform span a
 {
 	float:right;
 	color:#000;
+	
 }
-#inform h3 a:hover
+#inform span a:hover
 {
 	color:#F00;
 }
-#moocbox
-{
-	height:290px;
-	width:300px;
+#con1 {
+	margin-right:15px;
+	height:280px;
+	width:281px;
 	/*超出隐藏*/
-    overflow: hidden; 
+	 overflow: hidden; 
 	white-space:nowrap; 
     text-overflow:ellipsis; 
-    -o-text-overflow:ellipsis; 
+    -o-text-overflow:ellipsis;
 }
 
 #inform ul li
@@ -317,13 +331,19 @@ footer
 /****************************轮播图样式************************************/
 #Slideshow
 {
-	height:334px;
+	height:344px;
 	float:left;
 	overflow:hidden;
 	width:500px;
 	margin-left:8px;
 	margin-top:20px;
+	background:#069;
+	position:relative;
 }
+
+
+
+/*******************************行业动态和政策法规*************************************/
 #news
 {
 	width:330px;
@@ -333,19 +353,19 @@ footer
 	border:solid 1px  #C0C0C0;
 	background:#FFF;
 	margin-top:20px;
+	background:#FFF;
 }
 #news #news_ul
 {
 	height:40px;
-	background-image:linear-gradient(to top ,#999,#FFF);
+	background:#CCC;
 }
 #news #news_ul .news_bar
 {
 	display:block;
 	list-style:none;
 	float:left;
-	position:relative;
-	border-bottom:solid 1px #0041cc;	
+	position:relative;	
 	width:162px;
 	height:40px;
 }
@@ -355,10 +375,11 @@ footer
     font-size:18px;
 	line-height:40px;	
 	display:block;
-	width:162px;
+	width:160px;
 	height:40px;
 	
 }
+
 #news #news_ul .news_bar:hover,#news #news_ul .news_bar:active
 {
 	color:#00F;
@@ -370,12 +391,17 @@ footer
 {
 	position:absolute;
 	top:40px;
-	width:330px;
 	height:300px;
-	
 	z-index:4;
-	
+	width:310px;
+	margin-right:20px;	
+     /*超出隐藏*/
+	 overflow: hidden; 
+	white-space:nowrap; 
+    text-overflow:ellipsis; 
+    -o-text-overflow:ellipsis;
 }
+
 #news_second2
 {
 	display:none;
@@ -400,7 +426,14 @@ footer
 	left:-162px;
 }
 
-
+#news_first1
+{
+	color:#00F;
+	background-color:#FFF;
+}
+#news_first2{
+    border-bottom:solid 1px #0041cc;
+}
 /*
 #policyReglation
 {
@@ -528,8 +561,13 @@ footer
 	height:520px;	
 	background:#FFF;	
 }
-#members_bar h3 
+#members_bar
 {
+	height:40px;
+}
+#members_bar #members_bar_span
+{
+	display:block;
 	font-size:18px;
 	width:100px;
 	height:40px;

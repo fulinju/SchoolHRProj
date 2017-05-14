@@ -200,7 +200,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void registerSuccessView(String str) {
-        UtilsLog.logE(UtilsLog.getSte(), str);
+//        UtilsLog.logE(UtilsLog.getSte(), str);
         ResponseUtils.showResponseOperate(ctx, str);
 //        UtilsToast.showToast(ctx, edtPhone.getText().toString() + " " + ok.getMessage());
         finish();
@@ -220,7 +220,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void showError(String msg) {
-        UtilsLog.logE(UtilsLog.getSte(), msg);
+//        UtilsLog.logE(UtilsLog.getSte(), msg);
         ResponseUtils.showResponseOperate(ctx, msg);
         hideLoading();
     }

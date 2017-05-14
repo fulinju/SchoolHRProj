@@ -60,6 +60,33 @@ namespace sl.service.manager
 
         #endregion
 
+
+        // <summary>
+        /// 根据邮箱获取用户
+        /// </summary>
+        /// <param name="mail"></param>
+        /// <returns></returns>
+        public static T_User GetUserByMail(string uMaiBox)
+        {
+            Sql sql = Sql.Builder;
+            sql.Append("select * from T_User where uMaiBox = @0", uMaiBox);
+            T_User user = database.FirstOrDefault<T_User>(sql);
+            return user;
+        }
+
+        /// <summary>
+        /// 根据手机号获取用户
+        /// </summary>
+        /// <param name="uPhone"></param>
+        /// <returns></returns>
+        public static T_User GetUserByPhone(string uPhone)
+        {
+            Sql sql = Sql.Builder;
+            sql.Append("select * from T_User where uPhone = @0", uPhone);
+            T_User user = database.FirstOrDefault<T_User>(sql);
+            return user;
+        }
+
         #endregion
 
         #region 会员相关

@@ -50,6 +50,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+
         android:theme="@style/AppTheme">
         <!-- 个推SDK配置开始 -->
         <!-- 配置的第三方参数属性 -->

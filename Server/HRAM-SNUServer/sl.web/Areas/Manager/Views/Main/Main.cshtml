@@ -41,7 +41,18 @@
             </div>
 
             <div class="cs-north-right">
-                欢迎您：<span style="text-decoration:underline">&nbsp;@ManagerContext.UserInfo.uUserName &nbsp;</span>
+                欢迎您：
+                @if (@ManagerContext.UserInfo != null)
+                {
+
+                    <span style="text-decoration:underline">&nbsp;@ManagerContext.UserInfo.uUserName &nbsp;</span>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        location.href = "/";
+                    </script>
+                }
                 <a href="~/Html/web/HomePage.html" target="_blank">
                     返回首页
                 </a> <a href="@Url.Action("Logout", "Main")">&nbsp;退出&nbsp;</a>

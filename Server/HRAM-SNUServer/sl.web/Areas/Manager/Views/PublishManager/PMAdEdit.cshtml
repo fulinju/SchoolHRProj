@@ -15,7 +15,7 @@
             <td>
                 @if (Model.pkId == null)
                 {
-                    <input type="file" id="pmADImgListURL" name="pmADImgListURL" />
+                    <input type="file" id="pmADImgListURL" name="pmADImgListURL" onchange="funcCheck()"/>
                 }
                 else
                 {
@@ -44,6 +44,28 @@
         </tr>
     </table>
 </form>
+
+<script>
+    function funcCheck() {
+        var obj = document.getElementById("pmADImgListURL");
+        var f = obj.files;
+
+        //上次修改时间
+        if (f[0].size > 5 * 1024 * 1024) { //图片不能大于5MB
+            $.messager.alert("上传图片过大", "上传的图片大小不超过5MB");
+
+            var file = $("#pmADImgListURL")
+            file.after(file.clone().val(""));
+            file.remove(); //还是JQ好用啊
+            //if (f.outerHTML) {
+            //    f.outerHTML = f.outerHTML;
+            //} else { // FF(包括3.5)
+            //    f.value = "";
+            //}
+        }
+    }
+
+</script>
 
 @*<script type="text/javascript">
         $('.btnDelImg').click(function () {

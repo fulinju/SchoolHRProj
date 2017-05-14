@@ -118,7 +118,7 @@ public class ForgetPwdActivity extends BaseActivity implements ForgetPwdView {
 
     @Override
     public void resetSuccessView(String str) {
-        UtilsLog.logE(UtilsLog.getSte(), str);
+//        UtilsLog.logE(UtilsLog.getSte(), str);
         ResponseUtils.showResponseOperate(ctx, str);
 
         funcBack();
@@ -138,7 +138,7 @@ public class ForgetPwdActivity extends BaseActivity implements ForgetPwdView {
 
     @Override
     public void showError(String msg) {
-        UtilsLog.logE(UtilsLog.getSte(), msg);
+//        UtilsLog.logE(UtilsLog.getSte(), msg);
         ResponseUtils.showResponseOperate(ctx, msg);
         hideLoading(); //自行执行
     }

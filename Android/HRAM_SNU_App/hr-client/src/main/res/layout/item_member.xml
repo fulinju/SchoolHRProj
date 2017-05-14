@@ -18,8 +18,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:padding="5dp"
-            android:scaleType="centerInside"
+            android:scaleType="centerCrop"
+            android:background="@drawable/shape_gray_frame"
             android:layout_weight="1"
             />
 

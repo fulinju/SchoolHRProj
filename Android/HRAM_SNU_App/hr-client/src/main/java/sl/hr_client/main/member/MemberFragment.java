@@ -199,9 +199,9 @@ public class MemberFragment extends ContentFragment implements MemberView {
 
     @Override
     public void showError(String msg) {
-        UtilsLog.logE(UtilsLog.getSte(), msg);
+//        UtilsLog.logE(UtilsLog.getSte(), msg);
         ResponseUtils.showResponseOperate(ctx, msg);
-        hideLoading(); //自行执行
+        showLoadingFailed(); //自行执行
         xrvMember.reset();
     }
 }

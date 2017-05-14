@@ -51,9 +51,19 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DLL\Core.Config.dll</HintPath>
     </Reference>
+    <Reference Include="GetuiServerApiSDK">
+      <HintPath>..\DLL\GetuiServerApiSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.ProtocolBuffers">
+      <HintPath>..\DLL\Google.ProtocolBuffers.dll</HintPath>
+    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
@@ -152,7 +162,6 @@
     <Content Include="Html\web\AboutAssociation.html" />
     <Content Include="Html\web\Assoociation_intro.css" />
     <Content Include="Html\web\Assoociation_intro.html" />
-    <Content Include="Html\web\bar.js" />
     <Content Include="Html\web\Download.css" />
     <Content Include="Html\web\Download.html" />
     <Content Include="Html\web\HomePage.css" />
@@ -184,19 +193,26 @@
     <Content Include="Html\web\images\member1.jpg" />
     <Content Include="Html\web\images\member2.jpg" />
     <Content Include="Html\web\images\member3.jpg" />
+    <Content Include="Html\web\images\member_bg.jpg" />
     <Content Include="Html\web\images\reg_error.png" />
     <Content Include="Html\web\images\reg_info.png" />
     <Content Include="Html\web\images\reg_info2.png" />
+    <Content Include="Html\web\images\reg_info3.png" />
     <Content Include="Html\web\images\reg_succ.png" />
     <Content Include="Html\web\Industry.css" />
     <Content Include="Html\web\Industry.html" />
+    <Content Include="Html\web\js\AboutAssociation.js" />
+    <Content Include="Html\web\js\bar.js" />
     <Content Include="Html\web\js\base.js" />
     <Content Include="Html\web\js\function.js" />
     <Content Include="Html\web\js\func\download\download.js" />
     <Content Include="Html\web\js\func\home\home.js" />
     <Content Include="Html\web\js\func\link\link.js" />
     <Content Include="Html\web\js\func\member\member.js" />
+    <Content Include="Html\web\js\Industry.js" />
     <Content Include="Html\web\js\jquery-1.10.2.min.js" />
+    <Content Include="Html\web\js\jQuery.js" />
+    <Content Include="Html\web\js\member_info.js" />
     <Content Include="Html\web\js\mf-pattern\img\mF_51xflash\play.gif" />
     <Content Include="Html\web\js\mf-pattern\img\mF_51xflash\tit-ar.gif" />
     <Content Include="Html\web\js\mf-pattern\img\mF_classicHB\btn-blue.gif" />
@@ -270,132 +286,40 @@
     <Content Include="Html\web\js\mf-pattern\mF_tbhuabao.js" />
     <Content Include="Html\web\js\mf-pattern\mF_YSlider.css" />
     <Content Include="Html\web\js\mf-pattern\mF_YSlider.js" />
+    <Content Include="Html\web\js\model.js" />
     <Content Include="Html\web\js\myfocus-2.0.1.min.js" />
+    <Content Include="Html\web\js\PolicyReglations.js" />
     <Content Include="Html\web\Link.css" />
     <Content Include="Html\web\Link.html" />
     <Content Include="Html\web\Members.css" />
     <Content Include="Html\web\Members.html" />
     <Content Include="Html\web\MemberShow.css" />
     <Content Include="Html\web\MemberShow.html" />
+    <Content Include="Html\web\model.css" />
+    <Content Include="Html\web\model.html" />
     <Content Include="Html\web\PolicyReglations.css" />
     <Content Include="Html\web\PolicyReglations.html" />
     <Content Include="Html\web\Service.css" />
     <Content Include="Html\web\Service.html" />
     <Content Include="Images\favicon.ico" />
     <Content Include="Images\Home\logo.png" />
-    <Content Include="Images\icons\32X32\address.gif" />
-    <Content Include="Images\icons\32X32\administrative_docs.gif" />
-    <Content Include="Images\icons\32X32\advertising.gif" />
-    <Content Include="Images\icons\32X32\archives.gif" />
-    <Content Include="Images\icons\32X32\attibutes.gif" />
-    <Content Include="Images\icons\32X32\bank.gif" />
-    <Content Include="Images\icons\32X32\basket.gif" />
-    <Content Include="Images\icons\32X32\bestseller.gif" />
-    <Content Include="Images\icons\32X32\billing.gif" />
-    <Content Include="Images\icons\32X32\book.gif" />
-    <Content Include="Images\icons\32X32\book2.gif" />
-    <Content Include="Images\icons\32X32\bookmark.gif" />
-    <Content Include="Images\icons\32X32\brainstorming.gif" />
-    <Content Include="Images\icons\32X32\business_contact.gif" />
-    <Content Include="Images\icons\32X32\busy.gif" />
-    <Content Include="Images\icons\32X32\calendar.gif" />
-    <Content Include="Images\icons\32X32\category.gif" />
-    <Content Include="Images\icons\32X32\check.gif" />
-    <Content Include="Images\icons\32X32\clock.gif" />
-    <Content Include="Images\icons\32X32\collaboration.gif" />
-    <Content Include="Images\icons\32X32\comment.gif" />
-    <Content Include="Images\icons\32X32\communication.gif" />
-    <Content Include="Images\icons\32X32\config.gif" />
-    <Content Include="Images\icons\32X32\consulting.gif" />
-    <Content Include="Images\icons\32X32\contact.gif" />
-    <Content Include="Images\icons\32X32\cost.gif" />
-    <Content Include="Images\icons\32X32\credit.gif" />
-    <Content Include="Images\icons\32X32\credit_card.gif" />
-    <Content Include="Images\icons\32X32\current_work.gif" />
-    <Content Include="Images\icons\32X32\customers.gif" />
-    <Content Include="Images\icons\32X32\cv.gif" />
-    <Content Include="Images\icons\32X32\database.gif" />
-    <Content Include="Images\icons\32X32\date.gif" />
-    <Content Include="Images\icons\32X32\delicious %282%29.gif" />
-    <Content Include="Images\icons\32X32\document_library.gif" />
-    <Content Include="Images\icons\32X32\donate.gif" />
-    <Content Include="Images\icons\32X32\drawings.gif" />
-    <Content Include="Images\icons\32X32\edit.gif" />
-    <Content Include="Images\icons\32X32\email.gif" />
-    <Content Include="Images\icons\32X32\featured.gif" />
-    <Content Include="Images\icons\32X32\feed%281%29.gif" />
-    <Content Include="Images\icons\32X32\feed.gif" />
-    <Content Include="Images\icons\32X32\finished_work.gif" />
-    <Content Include="Images\icons\32X32\flag.gif" />
-    <Content Include="Images\icons\32X32\folder.gif" />
-    <Content Include="Images\icons\32X32\freelance.gif" />
-    <Content Include="Images\icons\32X32\free_for_job.gif" />
-    <Content Include="Images\icons\32X32\full_time.gif" />
-    <Content Include="Images\icons\32X32\future_projects.gif" />
-    <Content Include="Images\icons\32X32\graphic_design.gif" />
-    <Content Include="Images\icons\32X32\heart.gif" />
-    <Content Include="Images\icons\32X32\hire_me.gif" />
-    <Content Include="Images\icons\32X32\home.gif" />
-    <Content Include="Images\icons\32X32\illustration.gif" />
+    <Content Include="Images\icons\32X32\address.png" />
+    <Content Include="Images\icons\32X32\ico_computer.png" />
+    <Content Include="Images\icons\32X32\ico_download.png" />
+    <Content Include="Images\icons\32X32\ico_home.png" />
+    <Content Include="Images\icons\32X32\ico_link.png" />
+    <Content Include="Images\icons\32X32\ico_list.png" />
+    <Content Include="Images\icons\32X32\ico_login.png" />
+    <Content Include="Images\icons\32X32\ico_member.png" />
+    <Content Include="Images\icons\32X32\ico_output.png" />
+    <Content Include="Images\icons\32X32\ico_publish.png" />
+    <Content Include="Images\icons\32X32\ico_setting.png" />
+    <Content Include="Images\icons\32X32\ico_share.png" />
+    <Content Include="Images\icons\32X32\ico_system.png" />
+    <Content Include="Images\icons\32X32\ico_team.png" />
+    <Content Include="Images\icons\32X32\ico_type.png" />
+    <Content Include="Images\icons\32X32\ico_user.png" />
     <Content Include="Images\icons\32X32\import.png" />
-    <Content Include="Images\icons\32X32\information.gif" />
-    <Content Include="Images\icons\32X32\invoice.gif" />
-    <Content Include="Images\icons\32X32\issue.gif" />
-    <Content Include="Images\icons\32X32\lightbulb.gif" />
-    <Content Include="Images\icons\32X32\limited_edition.gif" />
-    <Content Include="Images\icons\32X32\link.gif" />
-    <Content Include="Images\icons\32X32\lock.gif" />
-    <Content Include="Images\icons\32X32\login.gif" />
-    <Content Include="Images\icons\32X32\logout.gif" />
-    <Content Include="Images\icons\32X32\member.gif" />
-    <Content Include="Images\icons\32X32\milestone.gif" />
-    <Content Include="Images\icons\32X32\my_account.gif" />
-    <Content Include="Images\icons\32X32\networking.gif" />
-    <Content Include="Images\icons\32X32\order.gif" />
-    <Content Include="Images\icons\32X32\order_159.gif" />
-    <Content Include="Images\icons\32X32\order_192.gif" />
-    <Content Include="Images\icons\32X32\payment_card.gif" />
-    <Content Include="Images\icons\32X32\paypal.gif" />
-    <Content Include="Images\icons\32X32\pen.gif" />
-    <Content Include="Images\icons\32X32\pencil.gif" />
-    <Content Include="Images\icons\32X32\phone.gif" />
-    <Content Include="Images\icons\32X32\photography.gif" />
-    <Content Include="Images\icons\32X32\plus.gif" />
-    <Content Include="Images\icons\32X32\premium.gif" />
-    <Content Include="Images\icons\32X32\print.gif" />
-    <Content Include="Images\icons\32X32\process.gif" />
-    <Content Include="Images\icons\32X32\product.gif" />
-    <Content Include="Images\icons\32X32\product_169.gif" />
-    <Content Include="Images\icons\32X32\product_193.gif" />
-    <Content Include="Images\icons\32X32\product_design.gif" />
-    <Content Include="Images\icons\32X32\project.gif" />
-    <Content Include="Images\icons\32X32\publish.gif" />
-    <Content Include="Images\icons\32X32\refresh.gif" />
-    <Content Include="Images\icons\32X32\report.gif" />
-    <Content Include="Images\icons\32X32\role.gif" />
-    <Content Include="Images\icons\32X32\search.gif" />
-    <Content Include="Images\icons\32X32\searchtool.gif" />
-    <Content Include="Images\icons\32X32\settings.gif" />
-    <Content Include="Images\icons\32X32\setup.gif" />
-    <Content Include="Images\icons\32X32\shipping.gif" />
-    <Content Include="Images\icons\32X32\showreel.gif" />
-    <Content Include="Images\icons\32X32\sign_in.gif" />
-    <Content Include="Images\icons\32X32\sign_out.gif" />
-    <Content Include="Images\icons\32X32\sign_up.gif" />
-    <Content Include="Images\icons\32X32\sitemap.gif" />
-    <Content Include="Images\icons\32X32\special_offer.gif" />
-    <Content Include="Images\icons\32X32\star.gif" />
-    <Content Include="Images\icons\32X32\statistics.gif" />
-    <Content Include="Images\icons\32X32\suppliers.gif" />
-    <Content Include="Images\icons\32X32\tag.gif" />
-    <Content Include="Images\icons\32X32\ticket.gif" />
-    <Content Include="Images\icons\32X32\Time Machine.gif" />
-    <Content Include="Images\icons\32X32\total.gif" />
-    <Content Include="Images\icons\32X32\twitter%281%29.gif" />
-    <Content Include="Images\icons\32X32\upcoming_work.gif" />
-    <Content Include="Images\icons\32X32\user.gif" />
-    <Content Include="Images\icons\32X32\world.gif" />
-    <Content Include="Images\icons\32X32\zoom.gif" />
     <Content Include="index.html" />
     <Content Include="Scripts\artDialog\artDialog.js" />
     <Content Include="Scripts\artDialog\plugins\iframeTools.js" />
@@ -1962,9 +1886,6 @@
     <Content Include="Areas\api\Views\web.config" />
     <Content Include="Areas\Manager\Views\PublishManager\PMAdEdit.cshtml" />
     <Content Include="Areas\Manager\Views\SendMail\SendView.cshtml" />
-    <Content Include="Html\web\js\mf-pattern\img\mF_51xflash\Thumbs.db" />
-    <Content Include="Html\web\js\mf-pattern\img\mF_kdui\Thumbs.db" />
-    <Content Include="Html\web\js\mf-pattern\img\mF_kiki\Thumbs.db" />
     <Content Include="Areas\Manager\Views\TypeManager\FLTypeEdit.cshtml" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
     <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
@@ -1986,6 +1907,9 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
+    <Content Include="Html\web\js\mf-pattern\img\mF_51xflash\Thumbs.db" />
+    <Content Include="Html\web\js\mf-pattern\img\mF_kdui\Thumbs.db" />
+    <Content Include="Html\web\js\mf-pattern\img\mF_kiki\Thumbs.db" />
     <None Include="Properties\PublishProfiles\HRAM.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\font-awesome\css\font-awesome-ie7.css" />
@@ -2374,7 +2298,6 @@
     <Content Include="upload\ueditor\image\20170114\6362000352072381844155018.jpg" />
     <Content Include="upload\ueditor\image\20170114\6362000361716333441430722.jpg" />
     <Content Include="upload\ueditor\image\20170114\6362000367403858752764660.jpg" />
-    <Content Include="upload\ueditor\video\20170114\6362000402906289373592846.mp4" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -2450,6 +2373,7 @@
     <Compile Include="Utils\ConstantData.cs" />
     <Compile Include="Utils\JsonUtils.cs" />
     <Compile Include="Utils\MailUtils.cs" />
+    <Compile Include="Utils\PushNotificationUtils.cs" />
     <Compile Include="Utils\TokenValidateAttribute.cs" />
     <Compile Include="Utils\UtilsBind.cs" />
     <Compile Include="Utils\WorkbookUtils.cs" />
@@ -2478,6 +2402,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\api\Views\Shared\" />
     <Folder Include="Scripts\UEditor\upload\image\" />
+    <Folder Include="upload\ueditor\video\20170114\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\sl.common\sl.common.csproj">
@@ -2523,11 +2448,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1234</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://192.168.1.107:666/</IISUrl>
+          <IISUrl>http://192.168.1.109:666/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

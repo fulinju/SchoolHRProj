@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-16"?>
-<WebSiteConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<WebSiteConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Id>0</Id>
-  <WebSiteKey>kakaluote</WebSiteKey>
+  <WebSiteKey>kakaxi</WebSiteKey>
   <ImgMaxHeight>0</ImgMaxHeight>
   <ImgMaxWidth>0</ImgMaxWidth>
   <ThumbnailWidth>0</ThumbnailWidth>

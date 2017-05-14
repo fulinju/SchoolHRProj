@@ -118,8 +118,19 @@ a:hover,a:active
 	right:8px;
 	cursor:pointer;
 }
-#login div.user, #login div.pass {
-	font-size:14px;
+#login table .title{
+	display:block;
+	width:110px;
+	text-align:right;
+	font-size:16px;
+}
+#login table .title span
+{
+	font-size:16px;
+	color:#FFF;
+}
+#login .user, #login .pass {
+	font-size:16px;
 	color:#666;
 	padding:5px 0;
 	text-align:center;
@@ -198,6 +209,7 @@ a:hover,a:active
 	float:left;
 	margin-left:200px;
 	margin-top:-30px;
+    cursor:pointer;
 }
 /*****************************导航二级菜单和三级菜单样式**************************/
 .nav_li1 ,.nav_li5,.nav_li6,.second2_li1,.second2_li2

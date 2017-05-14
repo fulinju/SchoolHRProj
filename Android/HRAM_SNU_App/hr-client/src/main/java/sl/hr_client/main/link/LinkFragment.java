@@ -144,7 +144,7 @@ public class LinkFragment extends ContentFragment implements LinkView {
 
     @Override
     public void updateLinksView(String str) {
-        UtilsLog.logE(UtilsLog.getSte(), str);
+//        UtilsLog.logE(UtilsLog.getSte(), str);
         LinkListBean tempBean = GsonUtils.parseLinkList(str);
         if (tempBean != null) {
             linksList = tempBean.getResultList();
@@ -166,7 +166,6 @@ public class LinkFragment extends ContentFragment implements LinkView {
             } else {
                 xrvLinks.setNoMore(true);
             }
-
         }
     }
 
@@ -197,9 +196,9 @@ public class LinkFragment extends ContentFragment implements LinkView {
 
     @Override
     public void showError(String msg) {
-        UtilsLog.logE(UtilsLog.getSte(), msg);
+//        UtilsLog.logE(UtilsLog.getSte(), msg);
         ResponseUtils.showResponseOperate(ctx, msg);
-        hideLoading(); //自行执行
+        showLoadingFailed(); //自行执行
         xrvLinks.reset();
     }
 }

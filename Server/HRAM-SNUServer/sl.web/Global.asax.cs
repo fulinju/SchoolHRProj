@@ -12,6 +12,7 @@ using System.Web.Http;
 using Autofac.Integration.Mvc; //必须是.net 4.5.1
 
 using System.Web.SessionState; //SessionStateBehavior
+using System;
 
 namespace sl.web
 {
@@ -22,6 +23,17 @@ namespace sl.web
             this.PostAuthenticateRequest += (sender, e) => HttpContext.Current.SetSessionStateBehavior(SessionStateBehavior.Required);
             base.Init();
         }
+
+        //public override void Init()
+        //{
+        //    PostAuthenticateRequest += MvcApplication_PostAuthenticateRequest;
+        //    base.Init();
+        //}
+
+        //void MvcApplication_PostAuthenticateRequest(object sender, EventArgs e)
+        //{
+        //    HttpContext.Current.SetSessionStateBehavior(SessionStateBehavior.Required);
+        //}
 
         protected void Application_Start()
         {

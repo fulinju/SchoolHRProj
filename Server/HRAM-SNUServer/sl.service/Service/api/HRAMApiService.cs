@@ -6,6 +6,7 @@ using System.Web;
 using System.Data;
 using PetaPoco;
 using sl.model;
+using sl.common;
 
 
 namespace sl.service.api
@@ -35,22 +36,36 @@ namespace sl.service.api
             sql.Append("T_PublishManage.pkId as publishID,");
             sql.Append("T_PublishManage.pmTypeID,");
             sql.Append("T_PublishManage.uLoginName,");
-            sql.Append("SUBSTRING(REPLACE(CAST(T_PublishManage.pmTitle as nvarchar(4000)),' ',''),0,20)+'...'  as pmTitle,");
+            sql.Append("T_PublishManage.pmTitle,");
+            //sql.Append("SUBSTRING(REPLACE(CAST(T_PublishManage.pmTitle as nvarchar(4000)),' ',''),0,20)+'...'  as pmTitle,");
             sql.Append("T_PublishManage.pmADImgListID,");
             sql.Append("T_PublishManage.pmPublishTime,");
-            sql.Append("SUBSTRING(REPLACE(CAST(T_PublishManage.pmText as nvarchar(4000)),' ',''),0,50)+'...'  as pmText,"); //文章内容太长
+            sql.Append("T_PublishManage.pmText,");
+            //sql.Append("SUBSTRING(REPLACE(CAST(T_PublishManage.pmText as nvarchar(4000)),' ',''),0,50)+'...'  as pmText,"); //文章内容太长
             sql.Append("T_PublishManage.pmViews,");
             sql.Append("T_PublishManage.pmPreview");
             sql.Append(" from T_PublishManage left join T_PMType on T_PublishManage.pmTypeID = T_PMType.pmTypeID ");
             sql.Append(" left join T_User on T_User.uLoginName = T_PublishManage.uLoginName ");
             sql.Append(" where T_PublishManage.pmTypeID like @0 ", pmTypeID);
             sql.Append(" and T_PublishManage.isDeleted = 0 ");
-            sql.OrderBy("T_PublishManage.pmPublishTime desc");
+            sql.OrderBy("T_PublishManage.pmPreview desc, T_PublishManage.pmPublishTime desc");
             Page<PublishInfo> list = database.Page<PublishInfo>(pageIndex, pageSize, sql);
             if (list != null)
             {
                 for (int i = 0; i < list.Items.Count; i++)
                 {
+                    string title = list.Items[i].pmTitle;
+                    string text = Utils.DropHTML(list.Items[i].pmText);//清除HTML标签
+                    if (text.Length > 20)
+                    {
+                        list.Items[i].pmText = text.Substring(0, 20) + "...";
+                    }
+
+                    if (title.Length > 20)
+                    {
+                        list.Items[i].pmTitle = title.Substring(0, 20) + "...";
+                    }
+
                     if (list.Items[i].pmADImgListID == null)
                     {
                         list.Items[i].pmADImgList = (new List<ADImgInfo>()); //空列表
@@ -106,6 +121,8 @@ namespace sl.service.api
             PublishInfo publish = database.FirstOrDefault<PublishInfo>(sql);
             if (publish != null)
             {
+                publish.pmText = Utils.DropHTML(publish.pmText);//清除HTML标签
+
                 if (publish.pmADImgListID == null)
                 {
                     publish.pmADImgList = (new List<ADImgInfo>()); //空列表
@@ -234,7 +251,7 @@ namespace sl.service.api
             sql.Select("*");
             sql.From("T_DownloadManage");
             sql.Where("T_DownloadManage.pkId = @0", downloadID);
-            T_DownloadManage target = database.FirstOrDefault<T_DownloadManage>( sql);
+            T_DownloadManage target = database.FirstOrDefault<T_DownloadManage>(sql);
 
             return target;
         }
@@ -334,12 +351,12 @@ namespace sl.service.api
         /// <param name="loginName"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public static T_User GetUserByIDAndLoginNameAndPassword(string uID,string loginName,string password)
+        public static T_User GetUserByIDAndLoginNameAndPassword(string uID, string loginName, string password)
         {
             Sql sql = Sql.Builder;
             sql.Select("*");
             sql.From("T_User");
-            sql.Where("pkId = @0 and uLoginName = @1 and uPassword = @2", uID,loginName,password);
+            sql.Where("pkId = @0 and uLoginName = @1 and uPassword = @2", uID, loginName, password);
             T_User user = database.FirstOrDefault<T_User>(sql);
             return user;
         }
@@ -362,7 +379,7 @@ namespace sl.service.api
         }
 
 
-        public static T_User GetUserByLoginNameAndMailBox( string loginName, string uMaiBox)
+        public static T_User GetUserByLoginNameAndMailBox(string loginName, string uMaiBox)
         {
             Sql sql = Sql.Builder;
             sql.Select("*");
@@ -388,7 +405,7 @@ namespace sl.service.api
 
             if (user != null)
             {
-                UpdateClientKey(user.uID,loginInfo.uClientKey);
+                UpdateClientKey(user.uID, loginInfo.uClientKey);
                 user.uClientKey = loginInfo.uClientKey;
                 return user;
             }
@@ -412,7 +429,7 @@ namespace sl.service.api
         public static void UpdateClientKey(string uID, string uClientKey)
         {
             Sql sql = Sql.Builder;
-            sql.Append("UPDATE T_User SET uClientKey = @0 WHERE pkId = @1", uClientKey,uID);
+            sql.Append("UPDATE T_User SET uClientKey = @0 WHERE pkId = @1", uClientKey, uID);
             database.Execute(sql);
         }
 

@@ -1,12 +1,18 @@
 package sl.hr_client.main.setting;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+
+import java.io.File;
 
 import sl.base.utils.UtilsVersion;
 import sl.hr_client.R;
@@ -19,7 +25,7 @@ import sl.hr_client.utils.constant.ConstantData;
  * Created by Administrator on 2017/5/3.
  */
 
-public class AboutFragment extends BaseFragment implements FragmentBackListener{
+public class AboutFragment extends BaseFragment implements FragmentBackListener {
     public static final String ABOUT = "About";
 
     private View aboutView;
@@ -29,6 +35,10 @@ public class AboutFragment extends BaseFragment implements FragmentBackListener{
     private TextView tvBack;
 
     private TextView tvAbout;
+    private TextView tvDownloadPath;
+    private TextView tvContact;
+//    private Button btnOpen;
+
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -36,15 +46,20 @@ public class AboutFragment extends BaseFragment implements FragmentBackListener{
         tvTitle = (TextView) aboutView.findViewById(R.id.tv_head);
         tvBack = (TextView) aboutView.findViewById(R.id.tv_head_right);
         tvAbout = (TextView) aboutView.findViewById(R.id.tv_about);
+        tvDownloadPath = (TextView) aboutView.findViewById(R.id.tv_download_path);
+        tvContact = (TextView) aboutView.findViewById(R.id.tv_contact);
+//        btnOpen = (Button) aboutView.findViewById(R.id.btn_open);
 
         tvTitle.setText(getString(R.string.about));
         tvBack.setText(getString(R.string.back));
 
         tvBack.setVisibility(View.VISIBLE);
 
-        tvAbout.setText(getString(R.string.version) + UtilsVersion.getVersion(ctx)
-                + "\n\n" + "文件下载路径：" + ConstantData.downloadPath);
-
+        tvAbout.setText(getString(R.string.version) + UtilsVersion.getVersion(ctx));
+        tvDownloadPath.setText(getString(R.string.download_path) + ConstantData.downloadPath);
+        tvContact.setText(getString(R.string.contact_method) + "\n"
+                + getString(R.string.phone) + ":15196606812" + "\n"
+                + getString(R.string.mailbox) + ":ccc.surpass@qq.com");
         addListener();
     }
 
@@ -66,11 +81,41 @@ public class AboutFragment extends BaseFragment implements FragmentBackListener{
 
 
         });
+
+//        btnOpen.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                openAssignFolder(ConstantData.downloadPath);
+//            }
+//        });
     }
 
     private void funcBack() {
         getFragmentManager().popBackStack();
     }
+
+
+//    private void openAssignFolder(String path) {
+//        File file = new File(path);
+//        if (null == file || !file.exists()) {
+//            return;
+//        }
+//        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+//        intent.addCategory(Intent.CATEGORY_DEFAULT);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        intent.setDataAndType(Uri.fromFile(file), "*/*");
+//
+////        File parentFlie = new File(file.getParent());
+////        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+////        intent.setDataAndType(Uri.fromFile(parentFlie), "*/*");
+////        intent.addCategory(Intent.CATEGORY_OPENABLE);
+//        try {
+//            startActivity(intent);
+////            startActivity(Intent.createChooser(intent, "选择浏览工具"));
+//        } catch (ActivityNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     @Override
     public void onAttach(Context context) {
@@ -85,9 +130,9 @@ public class AboutFragment extends BaseFragment implements FragmentBackListener{
     @Override
     public void onDetach() {
         super.onDetach();
-        if(getActivity() instanceof MainActivity){
-            ((MainActivity)getActivity()).setBackListener(null);
-            ((MainActivity)getActivity()).setInterception(false);
+        if (getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).setBackListener(null);
+            ((MainActivity) getActivity()).setInterception(false);
         }
     }
 

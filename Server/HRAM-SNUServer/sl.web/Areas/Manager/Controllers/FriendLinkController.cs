@@ -72,7 +72,8 @@ namespace sl.web.Areas.Manager.Controllers
                         else
                         {
                             m.uLoginName = Utils.GetCookie(Key.MANAGER_NAME);
-                        } m.isDeleted = false;
+                        }
+                        m.isDeleted = false;
                         object result = HRAManagerService.database.Insert(m);
                         return SaveMessage(result);
                     }
@@ -86,6 +87,8 @@ namespace sl.web.Areas.Manager.Controllers
 
                 if (Request.IsPost())
                 {
+
+
                     if (TryUpdateModel(load))
                     {
                         Model valid = Model.Valid(load);

@@ -59,6 +59,19 @@ namespace sl.web.Areas.Manager.Controllers
                     string passwordMd5 = Security.MD5Encrypt(m.uPassword);
                     m.uPassword = passwordMd5;
 
+                    T_User byMail = HRAManagerService.GetUserByMail(m.uMaiBox);
+                    T_User byPhone = HRAManagerService.GetUserByPhone(m.uPhone);
+
+                    if (byMail != null)
+                    {
+                        return ErrorMessage("该邮箱已被注册");
+                    }
+
+                    if (byPhone != null)
+                    {
+                        return ErrorMessage("该手机已被注册");
+                    }
+
                     var validate = Model.Valid(m);
                     if (!validate.Result)
                     {
@@ -78,16 +91,37 @@ namespace sl.web.Areas.Manager.Controllers
                 Object obj = id;
                 T_User load = HRAManagerService.database.SingleOrDefault<T_User>(obj);
 
-                String oldPwd = load.uPassword;
+                string oldPwd = load.uPassword;
+                string oldMail = load.uMaiBox;
+                string oldPhone = load.uPhone;
                 if (Request.IsPost())
                 {
                     if (TryUpdateModel(load))
                     {
-                        if (!oldPwd.Equals(m.uPassword)) //密码有改动,调用MD5加密
+                        if (oldPwd!=m.uPassword) //密码有改动,调用MD5加密
                         {
                             string passwordMd5 = Security.MD5Encrypt(load.uPassword);
                             load.uPassword = passwordMd5;
                         }
+
+                        if (oldMail != m.uMaiBox) //邮箱改动
+                        {
+                            T_User byMail = HRAManagerService.GetUserByMail(m.uMaiBox);
+                            if (byMail != null)
+                            {
+                                return ErrorMessage("该邮箱已被注册");
+                            }
+                        }
+
+                        if (oldPhone != m.uPhone) //手机改动
+                        {
+                            T_User byPhone = HRAManagerService.GetUserByPhone(m.uPhone);
+                            if (byPhone != null)
+                            {
+                                return ErrorMessage("该手机已被注册");
+                            }
+                        }
+
                         Model valid = Model.Valid(load);
                         return valid.Result ? SaveMessage(HRAManagerService.database.Update(load)) : ErrorMessage(valid.Message);
                     }

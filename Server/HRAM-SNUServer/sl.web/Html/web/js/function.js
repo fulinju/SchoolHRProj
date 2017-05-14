@@ -4,7 +4,7 @@ window.onload = function () {
 	
 	//二级菜单
 	  //关于协会	
-	  $().getClass('nav_li1').hover(function () {
+/*	  $().getClass('nav_li1').hover(function () {
 		$().getClass('second1').show();
 	}, function () {
 		$().getClass('second1').hide();
@@ -36,7 +36,7 @@ window.onload = function () {
 		$().getClass('second3').hide();
 	});
 	
-	
+	*/
 	
 	//登录框
 	var login = $().getId('login');
@@ -58,7 +58,7 @@ window.onload = function () {
 	
 	
 	// 首页 友情链接
-	
+/*	
 	$().getId('link_list1').hover(function () {
 		$().getId('link_second1').show();
 	}, function () {
@@ -81,7 +81,7 @@ window.onload = function () {
 		$().getId('link_second4').show();
 	}, function () {
 		$().getId('link_second4').hide();
-	});
+	});*/
 	
 	//首页  政策法规和行业动态
      $().getId('news_first1').hover(function () {
@@ -121,9 +121,7 @@ window.onload = function () {
      //会员申请表单
 	 	//表单验证
 	
-	//focus, blur
-	//alert($('form').first().user.value);
-	//$('form').form('user').value('bbb');
+
 	
 	$('form').form('user').bind('focus', function () {
 		$('#reg .two').css('display', 'block');

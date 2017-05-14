@@ -24,6 +24,9 @@ public class TransDefine {
 
     public static final String EVENT_DOWNLOAD_SUCCEED = "EVENT_DOWNLOAD_SUCCEED";//下载成功
 
+    public static final String EVENT_GET_PUSH_ID = "EVENT_GET_PUSH_ID";
+
+
     public static final String EVENT_RESET_LINK_PRESS_BACK_LISTENER = "EVENT_RESET_LINK_PRESS_BACK_LISTENER";
 
     public static final String EVENT_RESET_USER_SAFE_PRESS_BACK_LISTENER = "EVENT_RESET_USER_SAFE_PRESS_BACK_LISTENER";

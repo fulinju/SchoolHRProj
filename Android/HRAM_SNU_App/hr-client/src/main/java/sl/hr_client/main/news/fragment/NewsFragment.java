@@ -206,7 +206,7 @@ public class NewsFragment extends ContentFragment implements NewsView {
     public void showError(String msg) {
         UtilsLog.logE(UtilsLog.getSte(), msg);
         ResponseUtils.showResponseOperate(ctx, msg);
-        hideLoading(); //自行执行
+        showLoadingFailed(); //自行执行
         xrvNews.reset();
     }
 }

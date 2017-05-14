@@ -65,7 +65,7 @@ public class NewsAdapter extends RecyclerView.Adapter {
             ((NewsTextHolder) holder).tvPublishType.setText(String.format(ctx.getString(R.string.mid_bucket_format), publishType));
             ((NewsTextHolder) holder).tvPublishTitle.setText(publishTitle);
 
-            publishText = UtilsHTMLSpirit.delHTMLTag(publishText);//去除HTML标签
+//            publishText = UtilsHTMLSpirit.delHTMLTag(publishText);//去除HTML标签
 
             ((NewsTextHolder) holder).tvPublishText.setText(publishText);
             ((NewsTextHolder) holder).tvPublishViews.setText(publishViews);

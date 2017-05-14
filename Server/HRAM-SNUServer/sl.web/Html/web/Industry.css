@@ -29,7 +29,7 @@ a:hover,a:active
 {
 	width:100%;
 	margin:0 auto;
-	height:1200px;
+	height:700px;
 	
 }
 #color
@@ -108,8 +108,19 @@ a:hover,a:active
 	right:8px;
 	cursor:pointer;
 }
-#login div.user, #login div.pass {
-	font-size:14px;
+#login table .title{
+	display:block;
+	width:110px;
+	text-align:right;
+	font-size:16px;
+}
+#login table .title span
+{
+	font-size:16px;
+	color:#FFF;
+}
+#login .user, #login .pass {
+	font-size:16px;
 	color:#666;
 	padding:5px 0;
 	text-align:center;
@@ -188,6 +199,7 @@ a:hover,a:active
 	float:left;
 	margin-left:200px;
 	margin-top:-30px;
+    cursor:pointer;
 }
 /*****************************导航二级菜单和三级菜单样式**************************/
 .nav_li1 ,.nav_li5,.nav_li6,.second2_li1,.second2_li2
@@ -318,16 +330,22 @@ footer
 {
 	margin-left:115px;
 	width:1130px;
-	height:1000px;
+	height:700px;
 	
 }
 #change
 {
 	width:1130px;
-	height:1000px;
+	height:600px;
 	background:#FFF;
 	z-index:1;
 	border:solid 1px #999999;
+	background:#FFF;
+		/*超出隐藏*/
+	 overflow: hidden; 
+	white-space:nowrap; 
+    text-overflow:ellipsis; 
+    -o-text-overflow:ellipsis;
 }
 #change h3
 {
@@ -340,24 +358,30 @@ footer
 	border-bottom:1px solid #0041cc;
 }
 
-#content .conten2_ul
+#content #conten2_ul1,#conten2_ul2
 {
 	float:left;
-	width:550px;
+	width:496px;
 	margin-top:20px;
 	text-indent:30px;	
+	/*超出隐藏*/
+	 overflow: hidden; 
+	white-space:nowrap; 
+    text-overflow:ellipsis; 
+    -o-text-overflow:ellipsis;
+	margin-right:40px;
 }
-#content .conten2_ul li
+#content #conten2_ul1 li,#conten2_ul2 li
 {
 	list-style:none;
 }
-#content .conten2_ul li a
+#content #conten2_ul1 li a,#conten2_ul2 li a
 {
 	display:block;
 	font-size:16px;
 	margin-top:15px;
 }
-#content .conten2_ul li a span
+#content #conten2_ul1 li a span,#conten2_ul2 li a span
 {
 	float:right;
 	margin-right:20px;

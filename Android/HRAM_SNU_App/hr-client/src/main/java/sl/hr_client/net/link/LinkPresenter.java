@@ -33,7 +33,7 @@ public class LinkPresenter {
 
                     @Override
                     public void onCompleted() {
-                        linkView.hideLoading();
+//                        linkView.hideLoading();
                     }
 
                     @Override

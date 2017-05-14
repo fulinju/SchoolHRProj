@@ -1,6 +1,7 @@
 package sl.hr_client.base;
 
 import android.app.Application;
+import android.content.pm.ActivityInfo;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.android.volley.toolbox.Volley;
@@ -38,6 +39,7 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
         instances = this;//单例模式
 
         createDir();

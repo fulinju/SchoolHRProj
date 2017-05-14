@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import sl.base.ui.edttext.NoMenuEditText;
 import sl.base.ui.loading.AVLoadingIndicatorView;
 import sl.base.utils.UtilsKeyBoard;
@@ -21,10 +25,12 @@ import sl.hr_client.base.BaseActivity;
 import sl.hr_client.data.DataUtils;
 import sl.hr_client.data.bean.UserBean;
 import sl.hr_client.data.GsonUtils;
+import sl.hr_client.event.TransferEvent;
 import sl.hr_client.main.MainActivity;
 import sl.hr_client.net.acc.login.LoginPresenter;
 import sl.hr_client.net.acc.login.LoginView;
 import sl.hr_client.utils.constant.ConstantData;
+import sl.hr_client.utils.constant.TransDefine;
 import sl.hr_client.utils.net.ResponseUtils;
 
 /**
@@ -158,7 +164,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
     @Override
     public void loginSuccessView(String str) {
-        UtilsLog.logE(UtilsLog.getSte(), str);
+//        UtilsLog.logE(UtilsLog.getSte(), str);
         UserBean login = GsonUtils.parseUser(str);
 
         UserBean had = DataUtils.getUserByUID(login.getUID());
@@ -188,7 +194,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
     @Override
     public void showError(String msg) {
-        UtilsLog.logE(UtilsLog.getSte(), msg);
+//        UtilsLog.logE(UtilsLog.getSte(), msg);
         ResponseUtils.showResponseOperate(ctx, msg);
         hideLoading(); //自行执行
     }

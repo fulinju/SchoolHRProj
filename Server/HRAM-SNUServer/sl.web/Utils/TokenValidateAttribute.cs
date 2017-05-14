@@ -14,9 +14,12 @@ using sl.model;
 using common.utils;
 using sl.web.ui;
 
+using System.Web.SessionState;//
+using sl.common;
+
 namespace sl.web
 {
-    public class TokenValidateAttribute : ActionFilterAttribute
+    public class TokenValidateAttribute : ActionFilterAttribute, IRequiresSessionState
     {
         public override void OnActionExecuting(HttpActionContext filterContext)
         {
@@ -28,13 +31,26 @@ namespace sl.web
 
                 string[] uIdList = filterContext.Request.Headers.GetValues("uID").ToArray();
                 string uID = uIdList[0];
-
+                
                 UserModel currentUser = HttpContext.Current.Session[uID.ToString()] as UserModel;
 
+                //string savedToken = Utils.GetCookie(uID);
 
 
-                // 判断uToken是否相等
-                if (currentUser.uToken.Equals(uToken))
+                foreach (var key in HttpContext.Current.Session.Keys)
+                {
+                    string keys = key.ToString();
+                    string session = HttpContext.Current.Session[key.ToString()].ToString();
+                    Console.WriteLine("key: " + keys);
+                    Console.WriteLine("value: " + session);
+                }
+
+
+                if (currentUser == null)
+                {
+                    filterContext.Response = JsonUtils.toJson(HttpStatusCode.PreconditionFailed, new JsonTip(ApiCode.TokenNotLoginErrorCode, ApiCode.TokenNotLoginErrorMessage));
+                }
+                else if (currentUser.uToken.Equals(uToken))                // 判断uToken是否相等
                 {
                     if (Convert.ToDateTime(currentUser.uTokenExpiredTime) > DateTime.Now)
                     {
@@ -59,6 +75,7 @@ namespace sl.web
 
             catch (Exception ex)
             {
+                ex.ToString();
                 filterContext.Response = JsonUtils.toJson(HttpStatusCode.Unauthorized, new JsonTip(ApiCode.TokenGetErrorCode, ApiCode.TokenGetErrorMessage));
             }
         }

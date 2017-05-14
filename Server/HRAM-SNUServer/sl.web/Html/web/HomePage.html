@@ -5,8 +5,6 @@
     <title>昆明人力资源和社会保障协会首页</title>
     <link rel="stylesheet" type="text/css" href="HomePage.css" />
 
-    <script src="js/base.js" type="text/javascript"> </script>
-    <script src="js/function.js" type="text/javascript"> </script>
     <!--引入MyFocus插件的库文件和风格文件-->
     <script src="js/myfocus-2.0.1.min.js" type="text/javascript"> </script>
     <script src="js/mf-pattern/mF_ladyQ.js" type="text/javascript"> </script>
@@ -14,6 +12,19 @@
     <script type="text/javascript">
         myFocus.set({ id: 'Slideshow' });
     </script>
+    
+    <script src="js/jquery-1.10.2.min.js"></script>
+   <!-- <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>-->
+    <script src="js/jQuery.js"></script>
+    <script src="js/PolicyReglations.js"></script>
+    <script src="js/AboutAssociation.js"></script>
+     <script src="js/Industry.js"></script>
+     <script src="js/func/member/member.js"></script>
+     
+    <script src="js/model.js"></script>
+   
+    
+    
 </head>
 
 <body>
@@ -50,13 +61,13 @@
                                 <li class="second2_li1">
                                     <a href="#"> 信息查询</a>
                                     <ul class="third1">
-                                        <li><a href="">养老保险</a></li>
-                                        <li><a href="">失业保险</a></li>
-                                        <li><a href="">工伤保险</a></li>
-                                        <li><a href="">生育保险</a></li>
-                                        <li><a href="">医疗保险</a></li>
-                                        <li><a href="">住房公积金</a></li>
-                                        <li><a href="">就业信息</a></li>
+                                        <li><a href="http://www.yn12333.gov.cn/Index.aspx?cid=49">养老保险</a></li>
+                                        <li><a href="http://www.yn12333.gov.cn/Index.aspx?cid=49">失业保险</a></li>
+                                        <li><a href="http://www.yn12333.gov.cn/Index.aspx?cid=49">工伤保险</a></li>
+                                        <li><a href="http://www.yn12333.gov.cn/Index.aspx?cid=49">生育保险</a></li>
+                                        <li><a href="http://www.yn12333.gov.cn/Index.aspx?cid=49">医疗保险</a></li>
+                                        <li><a href="http://zfgjj.km.gov.cn/website/index.html">住房公积金</a></li>
+                                        <li><a href="http://www.kmjy.gov.cn/">就业信息</a></li>
                                         <li><a href="http://www.100job.cn" target="_blank">人才信息</a></li>
                                         <li><a href="http://www.ynzp.com" target="_blank">招聘信息</a></li>
                                     </ul>
@@ -85,104 +96,59 @@
                     </ul>
                 </div>
                 <div id="nav_right">
-                    <form action="" method="post">
-                        <input type="text" class="search_text">
-                    </form>
-                    <span> 搜索</span>
+                  <form action="" method="post">
+                     <input type="text" class="search_text">
+                  </form>
+                  <span> <a id="searchBtn">搜索</a></span>
                 </div>
             </div> <!--nav导航结束-->
 
             <div id="color">
 
                 <div id="content">
+                    <div id="login">
+                        <h2><img src="images/close.png" alt="" class="close" />网站登录</h2>
+                        <table>
+                         <tr class="user">
+                            <td class="title">单位名称：</td><td><input type="text" name="user" class="text" /></td>
+                         </tr>
+                        <tr  class="pass">
+                            <td class="title">密<span>空格</span>码： </td><td><input type="password" name="pass" class="text" /></td>
+                        </tr>
+                        </table>
+                        <div class="button"><input type="button" class="submit" value="" id="btnLogin" /></div>
+                        <div class="other"><a href="Members.html">注册新用户</a> | <a href="#">忘记密码？</a></div>
+                    </div><!--login结束-->
                     <div id="inform">
-                        <h3>通知公告  <a href="#"> 更多&gt;&gt;</a></h3>
+                        <span>协会工作 <a href="AboutAssociation.html"> 更多&gt;&gt;</a></span>
 
                         <div id="inform_slide">
-                            <div id="moocbox">
                                 <ul id="con1">
-                                    <li><a href="#" target="_blank">关于昆明市人力资源和社会保障协会</a></li>
-                                    <li><a href="#" target="_blank">关于成党支部的请示   </a></li>
-                                    <li><a href="#" target="_blank">昆明市劳动和社会保障协会换届大会议程</a></li>
-                                    <li><a href="#" target="_blank">昆明市人力资源和社会保障协会2016年 </a></li>
-                                    <li><a href="#" target="_blank">昆明市人力资源和社会保障协会揭牌仪</a></li>
-                                    <li><a href="#" target="_blank">第四届全国高校毕业生（秋季）跨区域巡</a></li>
-                                    <li><a href="#" target="_blank">昆明市人力资源和社会保障协会2016年度</a></li>
-                                    <li><a href="#" target="_blank">昆明市人力资源和社会保障协会揭牌仪   </a></li>
-                                    <li><a href="#" target="_blank">关于成党支部的请示   </a></li>
-                                    <li><a href="#" target="_blank">关于昆明市人力资源和社会保障协会</a></li>
-                                    <li><a href="#" target="_blank">关于成党支部的请示   </a></li>
-                                    <li><a href="#" target="_blank">昆明市劳动和社会保障协会换届大会议程</a></li>
-                                    <li><a href="#" target="_blank">昆明市人力资源和社会保障协会2016年 </a></li>
-                                    <li><a href="#" target="_blank">昆明市人力资源和社会保障协会揭牌仪</a></li>
-                                    <li><a href="#" target="_blank">第四届全国高校毕业生（秋季）跨区域巡</a></li>
-                                    <li><a href="#" target="_blank">昆明市人力资源和社会保障协会2016年度</a></li>
-                                    <li><a href="#" target="_blank">昆明市人力资源和社会保障协会揭牌仪   </a></li>
-                                    <li><a href="#" target="_blank">关于成党支部的请示   </a></li>
-                                    <li><a href="#" target="_blank">关于昆明市人力资源和社会保障协会</a></li>
-                                    <li><a href="#" target="_blank">关于成党支部的请示   </a></li>
-                                    <li><a href="#" target="_blank">昆明市劳动和社会保障协会换届大会议程</a></li>
-                                    <li><a href="#" target="_blank">昆明市人力资源和社会保障协会2016年 </a></li>
-                                    <li><a href="#" target="_blank">昆明市人力资源和社会保障协会揭牌仪</a></li>
-                                    <li><a href="#" target="_blank">第四届全国高校毕业生（秋季）跨区域巡</a></li>
-                                    <li><a href="#" target="_blank">昆明市人力资源和社会保障协会2016年度</a></li>
-                                    <li><a href="#" target="_blank">昆明市人力资源和社会保障协会揭牌仪   </a></li>
-                                    <li><a href="#" target="_blank">关于成党支部的请示   </a></li>
-                                    <li><a href="#" target="_blank">关于昆明市人力资源和社会保障协会</a></li>
-                                    <li><a href="#" target="_blank">关于成党支部的请示   </a></li>
-                                    <li><a href="#" target="_blank">昆明市劳动和社会保障协会换届大会议程</a></li>
-                                    <li><a href="#" target="_blank">昆明市人力资源和社会保障协会2016年 </a></li>
-                                    <li><a href="#" target="_blank">昆明市人力资源和社会保障协会揭牌仪</a></li>
-                                    <li><a href="#" target="_blank">第四届全国高校毕业生（秋季）跨区域巡</a></li>
-                                    <li><a href="#" target="_blank">昆明市人力资源和社会保障协会2016年度</a></li>
-                                    <li><a href="#" target="_blank">昆明市人力资源和社会保障协会揭牌仪   </a></li>
-                                    <li><a href="#" target="_blank">关于成党支部的请示   </a></li>
-
+                                  <!--通知公告模块-->
+                                      
                                 </ul>
-                                <ul id="con2"></ul>
-
-                            </div>
-
-                            <script language="javascript">
-                                /*                var speed = 40
-                                                var demo = document.getElementById("demo");
-                                                var demo2 = document.getElementById("demo2");
-                                                var demo1 = document.getElementById("demo1");
-                                                demo2.innerHTML = demo1.innerHTML;
-                                                function Marquee() {
-                                                    if (demo2.offsetTop - demo.scrollTop <= 0)
-                                                        demo.scrollTop -= demo1.offsetHeight
-                                                    else {
-                                                        demo.scrollTop++
-                                                    }
-                                                }
-                                                var MyMar = setInterval(Marquee, speed)
-                                                demo.onmouseover = function () { clearInterval(MyMar) }
-                                                demo.onmouseout = function () { MyMar = setInterval(Marquee, speed) }
-                                                */
-
-                                var area = document.getElementById('moocbox');
-                                var con1 = document.getElementById('con1');
-                                var con2 = document.getElementById('con2');
-                                var time = 50;
-                                con2.innerHTML = con1.innerHTML;
-                                function scrollUp() {
-                                    if (area.scrollTop >= con1.offsetHeight) {
-                                        area.scrollTop = 0;
-                                    } else {
-                                        area.scrollTop++;
+                                <!--<ul id="con2"></ul>-->
+								<script language="javascript">
+                                    var area = document.getElementById('moocbox');
+                                    var con1 = document.getElementById('con1');
+                                    var con2 = document.getElementById('con2');
+                                    var time = 50;
+                                    con2.innerHTML = con1.innerHTML;
+                                    function scrollUp() {
+                                        if (area.scrollTop >= con1.offsetHeight) {
+                                            area.scrollTop = 0;
+                                        } else {
+                                            area.scrollTop++;
+                                        }
                                     }
-                                }
-                                var scrolls = setInterval(scrollUp, time);
-                                area.onmouseover = function () {
-                                    clearInterval(scrolls);
-                                }
-                                area.onmouseout = function () {
-                                    scrolls = setInterval(scrollUp, time);
-                                }
-
-
-                            </script>
+                                    var scrolls = setInterval(scrollUp, time);
+                                    area.onmouseover = function () {
+                                        clearInterval(scrolls);
+                                    }
+                                    area.onmouseout = function () {
+                                        scrolls = setInterval(scrollUp, time);
+                                    }
+                                </script>               
                         </div>
 
 
@@ -191,42 +157,29 @@
 
                     <div id="Slideshow">
                         <!--这些图片必须被一个类名为pic的div包含-->
-                        <div class="loading"><img src="images/loading.jpg" alt="图片加载中" /> style="width:40px ; height:40px;"> </div>
+                    <div class="loading"><img src="images/loading.jpg" alt="图片加载中" /> style="width:40px ; height:40px;"> </div>
                         <div class="pic">
-                            <ul>
-                                <li> <a href="#" target="_blank"> <img src="images/a.png"> </a></li>
-                                <li> <a href="#" target="_blank"> <img src="images/b.png"> </a></li>
-                                <li> <a href="#" target="_blank"> <img src="images/c.png"> </a></li>
-                                <li> <a href="#" target="_blank"> <img src="images/d.png"> </a></li>
+                             <ul>
+                                <li> <a href="file:///C:/Users/wzy/Desktop/zuzu/web/model.html?id=41" target="_blank"> <img src="images/a.png"> </a></li>
+                                <li> <a href="file:///C:/Users/wzy/Desktop/zuzu/web/model.html?id=41" target="_blank"> <img src="images/b.png"> </a></li>
+                                <li> <a href="file:///C:/Users/wzy/Desktop/zuzu/web/model.html?id=41" target="_blank"> <img src="images/c.png"> </a></li>
+                                <li> <a href="file:///C:/Users/wzy/Desktop/zuzu/web/model.html?id=41" target="_blank"> <img src="images/d.png"> </a></li>
                             </ul>
                         </div>
                     </div><!--Slideshow结束-->
+                    
                     <div id="news">
                         <ul id="news_ul">
                             <li class="news_bar" id="news_first1">
-                                <a id="news_bar_a" href="#" target="_blank"> 政策法规 </a>
+                                <a id="news_bar_a" href="PolicyReglations.html" target="_blank"> 政策法规 </a>
                                 <ul class="news_content" id="news_second1">
-                                    <li><a href="#" target="_blank">关于昆明市人力资源和社会保障协会</a></li>
-                                    <li><a href="#" target="_blank">关于成党支部的请示   </a></li>
-                                    <li><a href="#" target="_blank">昆明市劳动和社会保障协会换届大会议程</a></li>
-                                    <li><a href="#" target="_blank">昆明市人力资源和社会保障协会2016年度理   </a></li>
-                                    <li><a href="#" target="_blank">昆明市人力资源和社会保障协会揭牌仪</a></li>
-                                    <li><a href="#" target="_blank">第四届全国高校毕业生（秋季）跨区域巡</a></li>
-                                    <li><a href="#" target="_blank">昆明市人力资源和社会保障协会2016年度理   </a></li>
-                                    <li><a href="#" target="_blank">昆明市人力资源和社会保障协会揭牌仪   </a></li>
-                                    <li><a href="#" target="_blank">关于成党支部的请示   </a></li>
+                                   
                                 </ul>
                             </li>
                             <li class="news_bar" id="news_first2">
-                                <a id="news_bar_a" href="#" target="_blank"> 行业动态 </a>
+                                <a id="news_bar_a" href="Industry.html" target="_blank"> 行业动态 </a>
                                 <ul class="news_content" id="news_second2">
-                                    <li><a href="#" target="_blank">关于昆明市人力资源和社会保障协会</a></li>
-                                    <li><a href="#" target="_blank">关于成党支部的请示   </a></li>
-                                    <li><a href="#" target="_blank">昆明市劳动和社会保障协会换届大会议程</a></li>
-                                    <li><a href="#" target="_blank">昆明市人力资源和社会保障协会2016年度理   </a></li>
-                                    <li><a href="#" target="_blank">昆明市人力资源和社会保障协会揭牌仪</a></li>
-                                    <li><a href="#" target="_blank">第四届全国高校毕业生（秋季）跨区域巡</a></li>
-                                    <li><a href="#" target="_blank">昆明市人力资源和社会保障协会2016年度理   </a></li>
+                   
 
                                 </ul>
                             </li>
@@ -235,15 +188,6 @@
                 </div><!--主体内容content1结束-->
 
                 <div id="contents">
-
-                    <div id="login">
-                        <h2><img src="images/close.png" alt="" class="close" />网站登录</h2>
-                        <div class="user">&nbsp;&nbsp;&nbsp; 单位名称：<input type="text" name="user" class="text" /></div>
-                        <div class="pass">组织机构代码：<input type="password" name="pass" class="text" /></div>
-                        <div class="button"><input type="button" class="submit" value="" id="btnLogin" /></div>
-                        <div class="other">注册新用户 | 忘记密码？</div>
-                    </div><!--login结束-->
-
                     <div id="service_loby">
 
                         <div class="loby_bar">
@@ -251,19 +195,19 @@
                         </div>
                         <div id="search">
                             <ul>
-                                <li><a href="#" target="_blank">养老保险</a></li>
-                                <li><a href="#" target="_blank">生育保险</a></li>
-                                <li><a href="#" target="_blank">就业信息</a></li>
+                                <li><a href="http://www.yn12333.gov.cn/Index.aspx?cid=49" target="_blank">养老保险</a></li>
+                                <li><a href="http://www.yn12333.gov.cn/Index.aspx?cid=49" target="_blank">生育保险</a></li>
+                                <li><a href="http://www.kmjy.gov.cn/" target="_blank">就业信息</a></li>
                             </ul>
                             <ul>
-                                <li><a href="#" target="_blank">失业保险</a></li>
-                                <li><a href="#" target="_blank"> 医疗保险 </a></li>
-                                <li><a href="#" target="_blank"> 人才信息 </a></li>
+                                <li><a href="http://www.yn12333.gov.cn/Index.aspx?cid=49" target="_blank">失业保险</a></li>
+                                <li><a href="http://www.yn12333.gov.cn/Index.aspx?cid=49" target="_blank"> 医疗保险 </a></li>
+                                <li><a href="http://www.100job.cn/" target="_blank"> 人才信息 </a></li>
                             </ul>
                             <ul>
-                                <li><a href="#" target="_blank"> 工伤保险 </a></li>
-                                <li><a href="#" target="_blank"> 住房公积金 </a></li>
-                                <li><a href="#" target="_blank"> 招聘信息  </a></li>
+                                <li><a href="http://www.yn12333.gov.cn/Index.aspx?cid=49" target="_blank"> 工伤保险 </a></li>
+                                <li><a href="http://zfgjj.km.gov.cn/website/index.html" target="_blank"> 住房公积金 </a></li>
+                                <li><a href="http://www.ynzp.com/km/" target="_blank"> 招聘信息  </a></li>
                             </ul>
                         </div>  <!--search结束-->
 
@@ -272,27 +216,27 @@
                         </div>
                         <div id="service">
                             <ul>
-                                <li><a href="#" target="_blank">培训服务</a></li>
-                                <li><a href="#" target="_blank">档案服务</a></li>
+                                <li><a href="Service.html" target="_blank">培训服务</a></li>
+                                <li><a href="Service.html" target="_blank">档案服务</a></li>
                             </ul>
                             <ul>
-                                <li><a href="#" target="_blank">法律援助</a></li>
-                                <li><a href="#" target="_blank"> 档案管理 </a></li>
+                                <li><a href="Service.html" target="_blank">法律援助</a></li>
+                                <li><a href="Service.html" target="_blank"> 档案管理 </a></li>
                             </ul>
                             <ul>
-                                <li><a href="#" target="_blank"> 专家咨询 </a></li>
-                                <li><a href="#" target="_blank"> 系统管理 </a></li>
+                                <li><a href="Service.html" target="_blank"> 专家咨询 </a></li>
+                                <li><a href="Service.html" target="_blank"> 系统管理 </a></li>
                             </ul>
                         </div> <!--service结束-->
                     </div><!--service_loby结束-->
 
                     <div id="members">
                         <div id="members_bar">
-                            <h3> 会员单位 </h3>
+                            <span id="members_bar_span"> 会员单位 </span>
                         </div>
                         <div id="members_list">
-                            <ul>
-                                <li><a href="#" target="_blank">社会保险事业局 <span>2016/12/23</span> </a> </li>
+                            <ul id="homepage_members">
+                               <!-- <li><a href="#" target="_blank">社会保险事业局 <span>2016/12/23</span> </a> </li>
                                 <li><a href="#" target="_blank">人力资源开发局  <span>2016/12/23</span></a></li>
                                 <li><a href="#" target="_blank">农村社会养老保险局 <span>2016/12/23</span></a> </li>
                                 <li><a href="#" target="_blank">人事劳动仲裁院 <span>2016/12/23</span> </a></li>
@@ -301,7 +245,7 @@
                                 <li><a href="#" target="_blank">人事劳动保障信息中心 <span>2016/12/23</span> </a></li>
                                 <li><a href="#" target="_blank"> 创业小额贷款担保中心 <span>2016/12/23</span></a></li>
                                 <li> <a href="#" target="_blank">职业培训和技能鉴定管理中心 <span>2016/12/23</span></a></li>
-                                <li> <a href="#" target="_blank">自主择业军队转业干部管理办公室<span>2016/12/23</span> </a></li>
+                                <li> <a href="#" target="_blank">自主择业军队转业干部管理办公室<span>2016/12/23</span> </a></li>-->
                             </ul>
                         </div><!--members_list结束 -->
                     </div><!--members结束-->

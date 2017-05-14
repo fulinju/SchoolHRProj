@@ -18,6 +18,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import sl.base.ui.imageview.CircleImageView;
 import sl.base.utils.UtilsNet;
 import sl.base.utils.UtilsToast;
 import sl.hr_client.R;
@@ -31,6 +32,7 @@ import sl.hr_client.main.webview.WebViewFragment;
 import sl.hr_client.net.member.detail.MemberDetailPresenter;
 import sl.hr_client.net.member.detail.MemberDetailView;
 import sl.hr_client.utils.constant.TransDefine;
+import sl.hr_client.utils.net.ResponseUtils;
 import sl.hr_client.utils.net.VolleyUtils;
 
 /**
@@ -196,7 +198,8 @@ public class MemberDetailFragment extends BaseFragment implements View.OnClickLi
 
     @Override
     public void showError(String msg) {
-
+        ResponseUtils.showResponseOperate(ctx, msg);
+        hideLoading(); //自行执行
     }
 
     @Override

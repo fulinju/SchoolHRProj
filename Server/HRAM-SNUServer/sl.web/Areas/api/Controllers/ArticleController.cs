@@ -29,7 +29,7 @@ namespace sl.web.Areas.api.Controllers
         [HttpGet]
         public HttpResponseMessage GetPublishList(int pageIndex, int pageSize, string pmTypeID="%%")
         {
-            Page<PublishInfo> list = HRAMApiService.GetPublishs(pageIndex, pageSize,pmTypeID);
+            Page<PublishInfo> list = HRAMApiService.GetPublishs(pageIndex, pageSize,pmTypeID); 
 
             //return Json(new { total = list.TotalItems, rows = list.Items });
 

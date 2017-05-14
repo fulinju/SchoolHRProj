@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>关于协会</title>
-<link rel="stylesheet" type="text/css"  href="AboutAssociation.css" />
-<script src="js/base.js" type="text/javascript"> </script>
-<script src="js/function.js" type="text/javascript"> </script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>关于协会</title>
+    <link rel="stylesheet" type="text/css"  href="AboutAssociation.css" />
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jQuery.js"></script>
+    <script src="js/AboutAssociation.js"></script>
 </head>
 
 <body> 
@@ -38,13 +39,13 @@
                       <ul class="second2">
                          <li class="second2_li1" > <a href="#"> 信息查询</a>
                               <ul class="third1">
-                                  <li><a href="">养老保险</a></li>
-                                  <li><a href="">失业保险</a></li>
-                                  <li><a href="">工伤保险</a></li>
-                                  <li><a href="">生育保险</a></li>
-                                  <li><a href="">医疗保险</a></li>
-                                  <li><a href="">住房公积金</a></li>
-                                  <li><a href="">就业信息</a></li>
+                                  <li><a href="http://www.yn12333.gov.cn/Index.aspx?cid=49">养老保险</a></li>
+                                  <li><a href="http://www.yn12333.gov.cn/Index.aspx?cid=49">失业保险</a></li>
+                                  <li><a href="http://www.yn12333.gov.cn/Index.aspx?cid=49">工伤保险</a></li>
+                                  <li><a href="http://www.yn12333.gov.cn/Index.aspx?cid=49">生育保险</a></li>
+                                  <li><a href="http://www.yn12333.gov.cn/Index.aspx?cid=49">医疗保险</a></li>
+                                  <li><a href="http://zfgjj.km.gov.cn/website/index.html">住房公积金</a></li>
+                                  <li><a href="http://www.kmjy.gov.cn/">就业信息</a></li>
                                   <li><a href="http://www.100job.cn" target="_blank">人才信息</a></li>
                                   <li><a href="http://www.ynzp.com" target="_blank">招聘信息</a></li>      
                               </ul>
@@ -74,7 +75,7 @@
             <form action="" method="post">
                <input type="text" class="search_text">
             </form>
-            <span> 搜索</span>
+            <span> <a id="searchBtn">搜索</a></span>
         </div>
     </div> <!--nav导航结束-->
     <div id="UI">  
@@ -85,8 +86,8 @@
             <div id="work">
                  <div class="content_bar">
                     <h3> 协会工作</h3>
-                 <ul >
-                     <li><a href="#" target="_blank">关于昆明市人力资源和社会保障协会<span >2016/12/23</span></a></li>
+                    <ul id="con1">
+                      <!--  <li><a href="#" target="_blank">关于昆明市人力资源和社会保障协会<span >2016/12/23</span></a></li>
                      <li><a href="#" target="_blank">关于成党支部的请示<span >2016/12/23</span>   </a></li>
                      <li><a href="#" target="_blank">昆明市劳动和社会保障协会换届大会议程<span >2016/12/23</span></a></li> 
                      <li><a href="#" target="_blank">昆明市人力资源和社会保障协会2016年 <span >2016/12/23</span></a></li>
@@ -96,8 +97,9 @@
                      <li><a href="#" target="_blank">昆明市人力资源和社会保障协会揭牌仪<span >2016/12/23</span>   </a></li>
                      <li><a href="#" target="_blank">关于成党支部的请示   <span >2016/12/23</span></a></li>
                      <li><a href="#" target="_blank">第四届全国高校毕业生（秋季）跨区域巡<span >2016/12/23</span></a></li> 
-                     <li><a href="#" target="_blank">昆明市人力资源和社会保障协会2016年度<span >2016/12/23</span></a></li>
-                 </ul>
+                     <li><a href="#" target="_blank">昆明市人力资源和社会保障协会2016年度<span >2016/12/23</span></a></li>-->
+                 
+                    </ul>
                  </div><!--content_bar结束-->
             </div><!--work结束-->
             
@@ -142,12 +144,18 @@
         
         <div id="content_right">
             <div id="login">
-                <h2><img src="images/close.png" alt="" class="close" />网站登录</h2>
-                <div class="user">&nbsp;&nbsp;&nbsp; 单位名称：<input type="text" name="user" class="text" /></div>
-                <div class="pass">组织机构代码：<input type="password" name="pass" class="text" /></div>
-                <div class="button"><input type="button" class="submit" value="" /></div>
-                <div class="other">注册新用户 | 忘记密码？</div>
-            </div><!--登录结束-->
+                        <h2><img src="images/close.png" alt="" class="close" />网站登录</h2>
+                        <table>
+                         <tr class="user">
+                            <td class="title">单位名称：</td><td><input type="text" name="user" class="text" /></td>
+                         </tr>
+                        <tr  class="pass">
+                            <td class="title">密<span>空格</span>码： </td><td><input type="password" name="pass" class="text" /></td>
+                        </tr>
+                        </table>
+                        <div class="button"><input type="button" class="submit" value="" id="btnLogin" /></div>
+                        <div class="other"><a href="Members.html">注册新用户</a> | <a href="#">忘记密码？</a></div>
+                    </div><!--login结束-->
             <div id="content_member">
                   <h3 id="member_letter"  > <img src="images/letter.jpg">协会成员信箱 </h3>   
                   <ul id="content_list">

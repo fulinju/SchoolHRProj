@@ -55,7 +55,7 @@ namespace sl.web.Areas.Manager.Controllers
                 entity.isDeleted = true;
                 //搜索相关联的发布广告图片列表 直接删除吧
                 List<T_ADImgList> ads = HRAManagerService.GetPublishADIMGS(entity.pmADImgListID);
-                for (int i = 0; i < ads.Count;i++)
+                for (int i = 0; i < ads.Count; i++)
                 {
                     sl.common.Utils.DeleteFile(ads[i].pmADImgListURL); //删除对应图片 免得太占内存
                     flag = HRAManagerService.database.Delete(ads[i]);//可以考虑直接删除
@@ -96,11 +96,12 @@ namespace sl.web.Areas.Manager.Controllers
                         {
                             m.uLoginName = Utils.GetCookie(Key.MANAGER_NAME);
                         }
-                       
+
                         m.pmADImgListID = pmAD_HEAD + Utils.GetRamCode();
                         m.pmViews = 0; //初始化浏览次数
                         m.isDeleted = false;
                         object result = HRAManagerService.database.Insert(m);
+
                         return SaveMessage(result);
                     }
                     else
@@ -186,6 +187,8 @@ namespace sl.web.Areas.Manager.Controllers
                         m.pmADImgListID = aid;
 
                         HttpPostedFileBase fileBase = GetFileBase();
+                        long contentLength = fileBase.ContentLength;
+
                         if (fileBase == null || fileBase.FileName == "")
                         {
                             return ErrorMessage("请上传文件");
@@ -193,6 +196,10 @@ namespace sl.web.Areas.Manager.Controllers
                         else if (CheckUploadFile(fileBase))
                         {
                             return ErrorMessage("上传格式错误");
+                        }
+                        else if (contentLength >= 5 * 1024 * 1024)
+                        {
+                            return ErrorMessage("上传的图片大小不能超过5MB");
                         }
                         else
                         {
@@ -220,7 +227,7 @@ namespace sl.web.Areas.Manager.Controllers
 
                 if (Request.IsPost())
                 {
-              
+
                     if (TryUpdateModel(load) || m.pmADImgListNum == 0)
                     {
                         if (m.pmADImgListURL != null)
@@ -281,7 +288,7 @@ namespace sl.web.Areas.Manager.Controllers
 
         #endregion
 
-        #region 编辑发布信息
+        #region 编辑发布信息正文
         [ValidateInput(false)]
         public ActionResult EditPublishText(T_PublishManage m, string id = "0")
         {
@@ -297,13 +304,21 @@ namespace sl.web.Areas.Manager.Controllers
                 if (TryUpdateModel(load))
                 {
                     int success = HRAManagerService.database.Update(load);
+
+                    //发送推送
+                    string text = Utils.DropHTML(load.pmText);//删除HTML标记
+                    //string text = load.pmTitle;
+                    if (text.Length > 20)
+                    {
+                        text = text.Substring(0, 20);
+                    }
+                    PushNotificationUtils.PushNotificationToApp(load.pmTitle, text);
                     return SaveMessage(success);
                 }
             }
             return View("EditPublishText", load);
         }
         #endregion
-
 
         #region 上传图片
         private string UploadFile()
@@ -353,14 +368,14 @@ namespace sl.web.Areas.Manager.Controllers
         }
 
 
-        #region 检查上传文件
+        #region 检查上传文件格式
         public bool CheckUploadFile(HttpPostedFileBase fileBase)
         {
             if (Request.Files.Count > 0)
             {
                 if (fileBase != null && fileBase.FileName != "")
                 {
-                    string extension = Utils.GetFileExt(fileBase.FileName);
+                    string extension = Utils.GetFileExt(fileBase.FileName).ToLower();
 
                     if (extension == "jpg" || extension == "jpeg"
                    || extension == "png")
@@ -433,8 +448,6 @@ namespace sl.web.Areas.Manager.Controllers
 
             ExportToExcel(dt, "发布文章列表");
         }
-
-
 
 
         public void ExportToExcel(DataTable dt, string fileName = "")

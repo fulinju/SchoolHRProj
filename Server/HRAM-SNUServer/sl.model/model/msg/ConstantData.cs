@@ -23,7 +23,5 @@ namespace sl.model
 
         public static string All_TYPE_TEXT = "全部类型";
         public static string All_TYPE_VALUE = "";
-
-
     }
 }

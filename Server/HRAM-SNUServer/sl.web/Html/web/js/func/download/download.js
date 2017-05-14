@@ -8,7 +8,7 @@ function funcGetLeftDownload() {
     $.ajax({
         type: "get",
         dataType: "json",
-        url: 'http://123.57.26.127/api/Download/GetDownloadList?pageIndex=1&pageSize=20&dmTypeValue=政策法规下载',
+        url: '/api/Download/GetDownloadList?pageIndex=1&pageSize=20&dmTypeValue=政策法规下载',
         data: {},
         success: function (data) {
             funcInitLeftDownload(data)
@@ -31,7 +31,7 @@ function funcGetRightDownload() {
     $.ajax({
         type: "get",
         dataType: "json",
-        url: 'http://123.57.26.127/api/Download/GetDownloadList?pageIndex=1&pageSize=20&dmTypeValue=HR表格下载',
+        url: '/api/Download/GetDownloadList?pageIndex=1&pageSize=20&dmTypeValue=HR表格下载',
         data: {},
         success: function (data) {
             funcInitRightDownload(data)

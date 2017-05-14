@@ -8,6 +8,7 @@ import com.android.volley.toolbox.Volley;
 
 import rx.Observable;
 import rx.Subscriber;
+import sl.hr_client.utils.net.ResponseUtils;
 import sl.hr_client.utils.net.XStringRequest;
 import sl.hr_client.utils.net.VolleyUtils;
 
@@ -32,7 +33,7 @@ public class NewsDetailModel {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-
+                        subscriber.onError(new Exception(ResponseUtils.responseOperate(volleyError)));
                     }
                 }) {
 
